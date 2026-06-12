@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dérivation . Première spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#premieres">Première spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Première spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2019-2020</span></div>
+<h1 class="cours-titre-principal">Dérivation</h1>
+<p class="cours-sous-titre">Nombre dérivé, tangente, dérivées usuelles, sens de variation et Python</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Nombre dérivé et tangente</h2>
+
+<div class="definition"><div class="encadre-titre">Nombre dérivé</div>
+<p>$f'(a) = \lim_{h \to 0} \dfrac{f(a+h) - f(a)}{h}$</p>
+<p>C'est le coefficient directeur de la tangente en $x = a$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Équation de la tangente</div>
+$$y = f'(a)(x - a) + f(a)$$
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : tangente mobile</h4>
+<canvas id="canvasTang" width="600" height="350"></canvas>
+<div class="controls">
+<label>Fonction :</label>
+<select id="fTang"><option value="poly">x³ - 3x</option><option value="carre">x²</option><option value="sin">sin(x)</option></select>
+<label>x₀ =</label><input type="range" id="x0t" min="-30" max="30" value="10"><span id="x0tv">1.0</span>
+</div>
+<div class="result-text" id="resultTang"></div>
+</div>
+
+<h2>II. Dérivées usuelles et règles de calcul</h2>
+
+<div class="propriete"><div class="encadre-titre">Dérivées usuelles</div>
+<p>$(x^n)' = nx^{n-1}$, $(\sqrt{x})' = \dfrac{1}{2\sqrt{x}}$, $(1/x)' = -1/x^2$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Opérations</div>
+<ul><li>$(u+v)' = u'+v'$</li><li>$(\lambda u)' = \lambda u'$</li><li>$(uv)' = u'v + uv'$</li></ul>
+</div>
+
+<h2>III. Sens de variation</h2>
+
+<div class="theoreme"><div class="encadre-titre">Théorème</div>
+<ul><li>$f'(x) \geq 0$ sur $I$ $\iff$ $f$ croissante sur $I$</li><li>$f'(x) \leq 0$ sur $I$ $\iff$ $f$ décroissante sur $I$</li></ul>
+</div>
+
+<h2>IV. Python</h2>
+
+<div class="exemple"><div class="encadre-titre">Tracer la tangente en Python</div>
+<pre>
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x): return x**3 - 3*x
+def fp(x): return 3*x**2 - 3
+
+x = np.linspace(-3, 3, 200)
+x0 = 1
+tang = fp(x0) * (x - x0) + f(x0)
+
+plt.plot(x, f(x), 'b', label='f(x)')
+plt.plot(x, tang, 'r--', label=f'Tangente en x={x0}')
+plt.plot(x0, f(x0), 'ro')
+plt.legend(); plt.grid(alpha=0.3); plt.ylim(-5, 5)
+plt.show()
+</pre>
+</div>
+
+<h2>V. Exercices</h2>
+<h3>Exercice 1</h3>
+<p>Calculer la dérivée de : 1) $f(x) = 3x^4 - 2x^2 + x$. 2) $g(x) = (2x+1)(x-3)$. 3) $h(x) = \dfrac{x+1}{x-2}$.</p>
+
+<h3>Exercice 2</h3>
+<p>$f(x) = -x^3 + 3x^2 + 9x - 5$. Variations et extremums.</p>
+
+<h2>VI. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $f'(x) = 12x^3 - 4x + 1$.</p>
+<p><strong>2.</strong> $g'(x) = 2(x-3) + (2x+1) = 4x - 5$.</p>
+<p><strong>3.</strong> $h'(x) = \dfrac{(x-2) - (x+1)}{(x-2)^2} = \dfrac{-3}{(x-2)^2}$.</p>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p>$f'(x) = -3x^2 + 6x + 9 = -3(x^2 - 2x - 3) = -3(x-3)(x+1)$.</p>
+<p>$f'(x) = 0$ pour $x = -1$ et $x = 3$. $f'(x) > 0$ sur $]-1, 3[$.</p>
+<p>$f(-1) = 1+3-9-5 = -10$ (min). $f(3) = -27+27+27-5 = 22$ (max).</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="suites.html">&larr; Suites</a><a href="../../2020-2021/premiere-spe/probabilites.html">Probabilités &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+const tFuncs={poly:{f:x=>x*x*x-3*x,fp:x=>3*x*x-3},carre:{f:x=>x*x,fp:x=>2*x},sin:{f:x=>Math.sin(x),fp:x=>Math.cos(x)}};
+function drawTang(){
+  const c=document.getElementById('canvasTang');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.4,oy=h*0.5,sc=40;const x0=parseInt(document.getElementById('x0t').value)/10;
+  document.getElementById('x0tv').textContent=x0.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='#e8e8e8';ctx.lineWidth=0.5;for(let i=-10;i<=10;i++){let px=ox+i*sc;if(px>=0&&px<=w){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();}let py=oy-i*sc;if(py>=0&&py<=h){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();}}
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();
+  const sel=document.getElementById('fTang').value;const tf=tFuncs[sel];
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;ctx.beginPath();let s=false;
+  for(let px=0;px<w;px++){let x=(px-ox)/sc,y=tf.f(x);if(!isFinite(y)||Math.abs(y)>8){s=false;continue;}let py=oy-y*sc;if(!s){ctx.moveTo(px,py);s=true;}else ctx.lineTo(px,py);}ctx.stroke();
+  const y0=tf.f(x0),m=tf.fp(x0);
+  if(isFinite(y0)&&isFinite(m)){
+    ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([6,4]);ctx.beginPath();
+    for(let px=0;px<w;px++){let x=(px-ox)/sc;let yt=m*(x-x0)+y0;let py=oy-yt*sc;if(Math.abs(yt)>10)continue;px===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(ox+x0*sc,oy-y0*sc,5,0,Math.PI*2);ctx.fill();
+    document.getElementById('resultTang').textContent='f('+x0.toFixed(1)+')='+y0.toFixed(2)+'. f\'('+x0.toFixed(1)+')='+m.toFixed(2)+'. Tangente : y='+m.toFixed(2)+'(x-'+x0.toFixed(1)+')+'+y0.toFixed(2);
+  }
+}
+document.getElementById('fTang').addEventListener('change',drawTang);
+document.getElementById('x0t').addEventListener('input',drawTang);
+drawTang();
+</script>
+</body>
+</html>
