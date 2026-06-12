@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intégration . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Intégration</h1>
+    <p class="cours-sous-titre">Primitives, intégrale de Riemann et applications géométriques</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Primitives</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      On dit que $F$ est une <strong>primitive</strong> de $f$ sur un intervalle $I$ si $F$ est dérivable sur $I$ et $F' = f$.
+    </p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème d'existence</div>
+    <p>
+      Toute fonction continue sur un intervalle $I$ admet des primitives sur $I$.
+      Si $F$ est une primitive de $f$ sur $I$, alors toutes les primitives de $f$ sont de la forme $F + c$ où $c \in \mathbb{R}$.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Primitives usuelles</div>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="text-align:left; padding: 6px 8px;">$f(x)$</th>
+          <th style="text-align:left; padding: 6px 8px;">$F(x)$ (primitive)</th>
+          <th style="text-align:left; padding: 6px 8px;">Domaine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$a$ (constante)</td><td style="padding: 5px 8px;">$ax$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x^n$ ($n \neq -1$)</td><td style="padding: 5px 8px;">$\dfrac{x^{n+1}}{n+1}$</td><td style="padding: 5px 8px;">$\mathbb{R}$ ou $\mathbb{R}^*$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\dfrac{1}{x}$</td><td style="padding: 5px 8px;">$\ln|x|$</td><td style="padding: 5px 8px;">$\mathbb{R}^*$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\dfrac{1}{\sqrt{x}}$</td><td style="padding: 5px 8px;">$2\sqrt{x}$</td><td style="padding: 5px 8px;">$]0, +\infty[$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$e^x$</td><td style="padding: 5px 8px;">$e^x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\sin x$</td><td style="padding: 5px 8px;">$-\cos x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr><td style="padding: 5px 8px;">$\cos x$</td><td style="padding: 5px 8px;">$\sin x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Primitives de fonctions composées</div>
+    <ul>
+      <li>Primitive de $u' \cdot u^n$ : $\dfrac{u^{n+1}}{n+1}$ ($n \neq -1$)</li>
+      <li>Primitive de $\dfrac{u'}{u}$ : $\ln|u|$</li>
+      <li>Primitive de $\dfrac{u'}{2\sqrt{u}}$ : $\sqrt{u}$</li>
+      <li>Primitive de $u' e^u$ : $e^u$</li>
+      <li>Primitive de $u' \cos u$ : $\sin u$</li>
+      <li>Primitive de $u' \sin u$ : $-\cos u$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples</div>
+    <p><strong>1.</strong> Trouver une primitive de $f(x) = (2x+1)^4$.</p>
+    <p>On reconnaît $u' \cdot u^n$ avec $u = 2x+1$ et $u' = 2$. Il manque un facteur $2$.</p>
+    <p>$f(x) = \dfrac{1}{2} \times 2(2x+1)^4$, donc $F(x) = \dfrac{1}{2} \times \dfrac{(2x+1)^5}{5} = \dfrac{(2x+1)^5}{10}$.</p>
+    <p style="margin-top:0.75rem;"><strong>2.</strong> Trouver une primitive de $g(x) = \dfrac{3x^2}{x^3 + 1}$.</p>
+    <p>On reconnaît $\dfrac{u'}{u}$ avec $u = x^3+1$ et $u' = 3x^2$. Donc $G(x) = \ln|x^3+1|$.</p>
+    <p style="margin-top:0.75rem;"><strong>3.</strong> Trouver une primitive de $h(x) = 4x \cdot e^{2x^2 - 1}$.</p>
+    <p>On reconnaît $u' e^u$ avec $u = 2x^2-1$ et $u' = 4x$. Donc $H(x) = e^{2x^2-1}$.</p>
+  </div>
+
+  <h2>II. Intégrale d'une fonction continue</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Soit $f$ une fonction continue sur $[a, b]$ et $F$ une primitive de $f$ sur $[a, b]$.
+      On appelle <strong>intégrale de $f$ de $a$ à $b$</strong> le réel :
+      $$\int_a^b f(x)\, dx = \left[F(x)\right]_a^b = F(b) - F(a)$$
+    </p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Remarque</div>
+    <p>
+      La valeur de l'intégrale ne dépend pas du choix de la primitive $F$ : si on ajoute une constante $c$,
+      elle disparaît dans le calcul $F(b) + c - (F(a) + c) = F(b) - F(a)$.
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple de calcul</div>
+    <p>Calculer $\displaystyle\int_1^3 (2x^2 - 3x + 1)\, dx$.</p>
+    <p>Une primitive de $2x^2 - 3x + 1$ est $F(x) = \dfrac{2x^3}{3} - \dfrac{3x^2}{2} + x$.</p>
+    $$\int_1^3 (2x^2 - 3x + 1)\, dx = \left[\frac{2x^3}{3} - \frac{3x^2}{2} + x\right]_1^3$$
+    $$= \left(\frac{54}{3} - \frac{27}{2} + 3\right) - \left(\frac{2}{3} - \frac{3}{2} + 1\right)$$
+    $$= \left(18 - \frac{27}{2} + 3\right) - \left(\frac{2}{3} - \frac{3}{2} + 1\right)$$
+    $$= \frac{21}{2} - \frac{1}{6} = \frac{63}{6} - \frac{1}{6} = \frac{62}{6} = \frac{31}{3}$$
+  </div>
+
+  <h2>III. Propriétés de l'intégrale</h2>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés fondamentales</div>
+    <ul>
+      <li><strong>Linéarité :</strong> $\displaystyle\int_a^b (\lambda f + \mu g)\, dx = \lambda \int_a^b f\, dx + \mu \int_a^b g\, dx$</li>
+      <li><strong>Relation de Chasles :</strong> $\displaystyle\int_a^b f\, dx = \int_a^c f\, dx + \int_c^b f\, dx$ pour tout $c$</li>
+      <li><strong>Sens :</strong> $\displaystyle\int_a^b f\, dx = -\int_b^a f\, dx$</li>
+      <li><strong>Positivité :</strong> si $f \geq 0$ sur $[a, b]$ alors $\displaystyle\int_a^b f\, dx \geq 0$</li>
+      <li><strong>Comparaison :</strong> si $f \leq g$ sur $[a, b]$ alors $\displaystyle\int_a^b f\, dx \leq \int_a^b g\, dx$</li>
+    </ul>
+  </div>
+
+  <h2>IV. Interprétation géométrique</h2>
+
+  <h3>1. Aire sous une courbe</h3>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème</div>
+    <p>
+      Si $f \geq 0$ sur $[a, b]$, alors $\displaystyle\int_a^b f(x)\, dx$ est l'aire (en unités d'aire)
+      de la surface délimitée par la courbe de $f$, l'axe des abscisses et les droites $x = a$ et $x = b$.
+    </p>
+    <p>
+      Si $f$ change de signe sur $[a, b]$, on découpe l'intervalle en sous-intervalles de signe constant
+      et on additionne les valeurs absolues des intégrales.
+    </p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : aire entre deux courbes</div>
+    <p>
+      L'aire de la surface comprise entre les courbes de $f$ et $g$ sur $[a, b]$ est :
+      $$\mathcal{A} = \int_a^b |f(x) - g(x)|\, dx$$
+      Si $f \geq g$ sur $[a, b]$, on a simplement $\mathcal{A} = \displaystyle\int_a^b (f(x) - g(x))\, dx$.
+    </p>
+    <p><strong>Exemple.</strong> Calculer l'aire entre $f(x) = x^2$ et $g(x) = x$ sur $[0, 1]$.</p>
+    <p>Sur $[0, 1]$, $g(x) \geq f(x)$ car $x \geq x^2$. Donc :</p>
+    $$\mathcal{A} = \int_0^1 (x - x^2)\, dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6} \text{ u.a.}$$
+  </div>
+
+  <h3>2. Intégration par parties</h3>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Formule d'intégration par parties</div>
+    <p>Si $u$ et $v$ sont dérivables sur $[a, b]$ alors :</p>
+    $$\int_a^b u(x) v'(x)\, dx = \left[u(x)v(x)\right]_a^b - \int_a^b u'(x) v(x)\, dx$$
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode</div>
+    <p>On choisit $u$ et $v'$ de sorte que $u'v$ soit plus simple à intégrer que $uv'$.</p>
+    <p><strong>Exemple.</strong> Calculer $\displaystyle\int_0^1 x e^x\, dx$.</p>
+    <p>On pose $u = x$ et $v' = e^x$. Alors $u' = 1$ et $v = e^x$.</p>
+    $$\int_0^1 x e^x\, dx = \left[x e^x\right]_0^1 - \int_0^1 e^x\, dx = e - \left[e^x\right]_0^1 = e - (e - 1) = 1$$
+  </div>
+
+  <h2>V. Exercices</h2>
+
+  <h3>Exercice 1 : calcul de primitives</h3>
+  <p>Trouver une primitive de chaque fonction :</p>
+  <ol>
+    <li>$f(x) = 5x^3 - 3x + 2$</li>
+    <li>$g(x) = (4x - 1)^6$</li>
+    <li>$h(x) = \dfrac{2x}{x^2 + 3}$</li>
+    <li>$k(x) = (6x + 2)e^{3x^2 + 2x}$</li>
+    <li>$m(x) = \dfrac{x}{\sqrt{x^2 - 1}}$</li>
+  </ol>
+
+  <h3>Exercice 2 : calcul d'intégrales</h3>
+  <ol>
+    <li>$\displaystyle\int_0^2 (3x^2 - 2x + 1)\, dx$</li>
+    <li>$\displaystyle\int_1^4 \dfrac{1}{\sqrt{x}}\, dx$</li>
+    <li>$\displaystyle\int_0^{\pi} \sin x\, dx$</li>
+    <li>$\displaystyle\int_0^1 x e^{x^2}\, dx$</li>
+  </ol>
+
+  <h3>Exercice 3 : aire</h3>
+  <p>Calculer l'aire de la surface délimitée par la parabole $y = x^2 - 4$ et l'axe des abscisses.</p>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\left[x^3 - x^2 + x\right]_0^2 = (8 - 4 + 2) - 0 = 6$.</p>
+    <p><strong>2.</strong> $\left[2\sqrt{x}\right]_1^4 = 2\sqrt{4} - 2\sqrt{1} = 4 - 2 = 2$.</p>
+    <p><strong>3.</strong> $\left[-\cos x\right]_0^{\pi} = -\cos\pi + \cos 0 = 1 + 1 = 2$.</p>
+    <p><strong>4.</strong> On reconnaît $\frac{1}{2} \times 2x \cdot e^{x^2}$, primitive $e^{x^2}$.</p>
+    <p>$\dfrac{1}{2}\left[e^{x^2}\right]_0^1 = \dfrac{1}{2}(e - 1)$.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="derivation.html">&larr; Dérivation et applications</a>
+  <a href="probabilites.html">Probabilités et variables aléatoires &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
