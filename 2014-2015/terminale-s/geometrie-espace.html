@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Géométrie dans l'espace . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2014-2015</span>
+    </div>
+    <h1 class="cours-titre-principal">Géométrie dans l'espace</h1>
+    <p class="cours-sous-titre">Droites, plans, vecteurs, produit scalaire et équations dans l'espace</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Positions relatives de droites et de plans</h2>
+
+  <h3>1. Droites dans l'espace</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Positions relatives de deux droites</div>
+    <p>Deux droites de l'espace peuvent être :</p>
+    <ul>
+      <li><strong>Sécantes</strong> : elles ont un point commun et ne sont pas confondues.</li>
+      <li><strong>Parallèles</strong> : elles n'ont aucun point commun et sont coplanaires (ou confondues).</li>
+      <li><strong>Non coplanaires</strong> : elles ne sont ni sécantes ni parallèles. C'est une situation propre à l'espace, impossible dans le plan.</li>
+    </ul>
+  </div>
+
+  <h3>2. Droites et plans</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Positions relatives d'une droite et d'un plan</div>
+    <ul>
+      <li>La droite est <strong>incluse</strong> dans le plan : tous ses points appartiennent au plan.</li>
+      <li>La droite est <strong>sécante</strong> au plan : elle le coupe en un seul point.</li>
+      <li>La droite est <strong>parallèle</strong> au plan : elle n'a aucun point commun avec le plan.</li>
+    </ul>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Orthogonalité</div>
+    <p>
+      Une droite $d$ est <strong>orthogonale</strong> à un plan $\mathcal{P}$ si elle est perpendiculaire à toutes les droites de $\mathcal{P}$. En pratique, il suffit de montrer que $d$ est perpendiculaire à <strong>deux droites non parallèles</strong> de $\mathcal{P}$.
+    </p>
+  </div>
+
+  <h3>3. Plans dans l'espace</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Positions relatives de deux plans</div>
+    <ul>
+      <li><strong>Sécants</strong> : leur intersection est une droite.</li>
+      <li><strong>Parallèles</strong> : ils n'ont aucun point commun (ou sont confondus).</li>
+    </ul>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème du toit</div>
+    <p>
+      Si deux plans $\mathcal{P}_1$ et $\mathcal{P}_2$ sont sécants selon une droite $\Delta$, et si une droite $d_1 \subset \mathcal{P}_1$ et une droite $d_2 \subset \mathcal{P}_2$ sont toutes deux perpendiculaires à $\Delta$, alors $(d_1, d_2)$ est l'angle dièdre entre les deux plans.
+    </p>
+  </div>
+
+  <h2>II. Vecteurs de l'espace</h2>
+
+  <h3>1. Rappels et extension à l'espace</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Repère de l'espace</div>
+    <p>
+      Un repère de l'espace est constitué d'un point $O$ et de trois vecteurs $\vec{i}$, $\vec{j}$, $\vec{k}$ non coplanaires. Le repère est <strong>orthonormé</strong> si les trois vecteurs sont unitaires et deux à deux orthogonaux.
+    </p>
+    <p>Tout point $M$ de l'espace a des coordonnées $(x, y, z)$ telles que $\overrightarrow{OM} = x\vec{i} + y\vec{j} + z\vec{k}$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Opérations sur les vecteurs</div>
+    <p>Soient $\vec{u}(x, y, z)$ et $\vec{v}(x', y', z')$.</p>
+    <ul>
+      <li>$\vec{u} + \vec{v} = (x+x',\; y+y',\; z+z')$</li>
+      <li>$\lambda\vec{u} = (\lambda x,\; \lambda y,\; \lambda z)$</li>
+      <li>$\vec{u} = \vec{v} \iff x = x'$ et $y = y'$ et $z = z'$</li>
+      <li>$\vec{u}$ et $\vec{v}$ sont colinéaires $\iff$ il existe $\lambda$ tel que $\vec{u} = \lambda\vec{v}$</li>
+    </ul>
+  </div>
+
+  <h3>2. Coplanarité</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Vecteurs coplanaires</div>
+    <p>
+      Trois vecteurs $\vec{u}$, $\vec{v}$ et $\vec{w}$ sont <strong>coplanaires</strong> s'il existe des réels $\alpha$ et $\beta$ tels que $\vec{w} = \alpha\vec{u} + \beta\vec{v}$.
+    </p>
+    <p>
+      Quatre points $A$, $B$, $C$ et $D$ sont coplanaires si et seulement si $\overrightarrow{AB}$, $\overrightarrow{AC}$ et $\overrightarrow{AD}$ sont coplanaires.
+    </p>
+  </div>
+
+  <h2>III. Produit scalaire dans l'espace</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Le <strong>produit scalaire</strong> de $\vec{u}(x, y, z)$ et $\vec{v}(x', y', z')$ dans un repère orthonormé est :</p>
+    $$\vec{u} \cdot \vec{v} = xx' + yy' + zz'$$
+    <p>Autre formule : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>$\vec{u} \cdot \vec{v} = 0 \iff \vec{u} \perp \vec{v}$ (ou l'un des deux est nul)</li>
+      <li>$\vec{u} \cdot \vec{u} = \|\vec{u}\|^2 = x^2 + y^2 + z^2$</li>
+      <li>$\|\vec{u}\| = \sqrt{x^2 + y^2 + z^2}$</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Distance entre deux points</div>
+    <p>Si $A(x_A, y_A, z_A)$ et $B(x_B, y_B, z_B)$ :</p>
+    $$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2 + (z_B - z_A)^2}$$
+  </div>
+
+  <h2>IV. Équation cartésienne d'un plan</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème</div>
+    <p>Tout plan de l'espace admet une équation de la forme :</p>
+    $$ax + by + cz + d = 0 \quad (a, b, c) \neq (0, 0, 0)$$
+    <p>Le vecteur $\vec{n}(a, b, c)$ est un <strong>vecteur normal</strong> au plan : il est perpendiculaire à toutes les droites du plan.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : trouver l'équation d'un plan</div>
+    <p><strong>Cas 1 : on connaît un point et un vecteur normal.</strong></p>
+    <p>Le plan passant par $A(1, 2, -3)$ et de vecteur normal $\vec{n}(2, -1, 3)$ a pour équation :</p>
+    <p>$2(x-1) - 1(y-2) + 3(z+3) = 0$, soit $2x - y + 3z + 9 = 0$.</p>
+    <p style="margin-top:0.75rem;"><strong>Cas 2 : on connaît trois points.</strong></p>
+    <p>Le plan passant par $A$, $B$ et $C$ : on calcule deux vecteurs directeurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$, on cherche $\vec{n}$ orthogonal aux deux (système linéaire), puis on détermine $d$ avec un point.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple complet</div>
+    <p>Trouver l'équation du plan passant par $A(1, 0, 2)$, $B(3, 1, -1)$ et $C(0, 2, 1)$.</p>
+    <p>$\overrightarrow{AB} = (2, 1, -3)$ et $\overrightarrow{AC} = (-1, 2, -1)$.</p>
+    <p>On cherche $\vec{n}(a, b, c)$ tel que $\vec{n} \cdot \overrightarrow{AB} = 0$ et $\vec{n} \cdot \overrightarrow{AC} = 0$ :</p>
+    <p>$2a + b - 3c = 0$ et $-a + 2b - c = 0$.</p>
+    <p>De la deuxième équation : $a = 2b - c$. En remplaçant dans la première :</p>
+    <p>$2(2b-c) + b - 3c = 0$, soit $5b - 5c = 0$, soit $b = c$.</p>
+    <p>Avec $c = 1$ : $b = 1$ et $a = 2-1 = 1$. Donc $\vec{n}(1, 1, 1)$.</p>
+    <p>Équation : $1(x-1) + 1(y-0) + 1(z-2) = 0$, soit $x + y + z - 3 = 0$.</p>
+    <p>Vérification : $A$ : $1+0+2-3 = 0$. $B$ : $3+1-1-3 = 0$. $C$ : $0+2+1-3 = 0$. Correct.</p>
+  </div>
+
+  <h2>V. Représentation paramétrique d'une droite</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>La droite passant par $A(x_0, y_0, z_0)$ et de vecteur directeur $\vec{u}(\alpha, \beta, \gamma)$ admet la représentation paramétrique :</p>
+    $$\begin{cases} x = x_0 + \alpha t \\ y = y_0 + \beta t \\ z = z_0 + \gamma t \end{cases} \quad t \in \mathbb{R}$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>La droite passant par $A(1, -2, 3)$ et de vecteur directeur $\vec{u}(2, 1, -1)$ :</p>
+    $$\begin{cases} x = 1 + 2t \\ y = -2 + t \\ z = 3 - t \end{cases} \quad t \in \mathbb{R}$$
+  </div>
+
+  <h2>VI. Intersection et distance</h2>
+
+  <h3>1. Intersection d'une droite et d'un plan</h3>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode</div>
+    <p>On remplace $x$, $y$, $z$ de la représentation paramétrique de la droite dans l'équation du plan. On obtient une équation en $t$.</p>
+    <ul>
+      <li>Une solution unique : la droite coupe le plan en un point.</li>
+      <li>Aucune solution : la droite est parallèle au plan.</li>
+      <li>Infinité de solutions : la droite est contenue dans le plan.</li>
+    </ul>
+    <p><strong>Exemple.</strong> Droite $d$ : $\begin{cases} x = 1+2t \\ y = -2+t \\ z = 3-t \end{cases}$ et plan $\mathcal{P}$ : $x+y+z-3=0$.</p>
+    <p>$(1+2t) + (-2+t) + (3-t) - 3 = 0$, soit $-1 + 2t = 0$, donc $t = \dfrac{1}{2}$.</p>
+    <p>Point d'intersection : $x = 2$, $y = -\dfrac{3}{2}$, $z = \dfrac{5}{2}$. Soit $I\left(2,\; -\dfrac{3}{2},\; \dfrac{5}{2}\right)$.</p>
+  </div>
+
+  <h3>2. Distance d'un point à un plan</h3>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Formule</div>
+    <p>La distance du point $M(x_0, y_0, z_0)$ au plan $\mathcal{P}$ : $ax + by + cz + d = 0$ est :</p>
+    $$d(M, \mathcal{P}) = \frac{|ax_0 + by_0 + cz_0 + d|}{\sqrt{a^2 + b^2 + c^2}}$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Distance de $M(2, -1, 3)$ au plan $2x - y + 2z - 1 = 0$ :</p>
+    $$d = \frac{|2(2) - (-1) + 2(3) - 1|}{\sqrt{4+1+4}} = \frac{|4+1+6-1|}{3} = \frac{10}{3}$$
+  </div>
+
+  <h2>VII. Exercices</h2>
+
+  <h3>Exercice 1 : vecteurs et coordonnées</h3>
+  <p>Dans un repère orthonormé, on donne $A(1, 2, 3)$, $B(3, 0, 1)$, $C(2, 4, -1)$ et $D(0, 6, 1)$.</p>
+  <ol>
+    <li>Calculer $\overrightarrow{AB}$ et $\overrightarrow{CD}$. Les droites $(AB)$ et $(CD)$ sont-elles parallèles ?</li>
+    <li>Calculer $AB$ et $CD$.</li>
+    <li>Les points $A$, $B$, $C$ et $D$ sont-ils coplanaires ?</li>
+  </ol>
+
+  <h3>Exercice 2 : produit scalaire et orthogonalité</h3>
+  <p>Soient $\vec{u}(1, -2, 3)$ et $\vec{v}(4, 5, 2)$.</p>
+  <ol>
+    <li>Calculer $\vec{u} \cdot \vec{v}$.</li>
+    <li>Les vecteurs sont-ils orthogonaux ?</li>
+    <li>Calculer $\|\vec{u}\|$ et $\|\vec{v}\|$.</li>
+    <li>Calculer l'angle $(\vec{u}, \vec{v})$ en degrés.</li>
+  </ol>
+
+  <h3>Exercice 3 : plan et droite</h3>
+  <ol>
+    <li>Trouver l'équation du plan passant par $A(1, 1, 1)$ et de vecteur normal $\vec{n}(3, -2, 5)$.</li>
+    <li>La droite $d$ passe par $B(0, 3, -1)$ avec pour vecteur directeur $\vec{u}(1, 1, -1)$. Écrire sa représentation paramétrique.</li>
+    <li>Déterminer le point d'intersection de $d$ et du plan.</li>
+    <li>Calculer la distance du point $C(2, -1, 0)$ au plan.</li>
+  </ol>
+
+  <h3>Exercice 4 : problème de synthèse</h3>
+  <p>Un cube $ABCDEFGH$ a pour sommet $A$ l'origine, avec $B(1,0,0)$, $D(0,1,0)$ et $E(0,0,1)$.</p>
+  <ol>
+    <li>Déterminer les coordonnées de tous les sommets.</li>
+    <li>Trouver l'équation du plan $(BDG)$.</li>
+    <li>Calculer la distance de $A$ au plan $(BDG)$.</li>
+    <li>Montrer que la diagonale $[AG]$ est perpendiculaire au plan $(BDE)$.</li>
+  </ol>
+
+  <h2>VIII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\overrightarrow{AB} = (3-1,\; 0-2,\; 1-3) = (2, -2, -2)$.</p>
+    <p>$\overrightarrow{CD} = (0-2,\; 6-4,\; 1-(-1)) = (-2, 2, 2)$.</p>
+    <p>$\overrightarrow{CD} = -\overrightarrow{AB}$, donc $\overrightarrow{AB}$ et $\overrightarrow{CD}$ sont colinéaires. Les droites $(AB)$ et $(CD)$ sont <strong>parallèles</strong>.</p>
+    <p><strong>2.</strong> $AB = \sqrt{4+4+4} = 2\sqrt{3}$. $CD = \sqrt{4+4+4} = 2\sqrt{3}$. $AB = CD$.</p>
+    <p><strong>3.</strong> On vérifie si $\overrightarrow{AD}$ est combinaison linéaire de $\overrightarrow{AB}$ et $\overrightarrow{AC}$.</p>
+    <p>$\overrightarrow{AC} = (1, 2, -4)$ et $\overrightarrow{AD} = (-1, 4, -2)$.</p>
+    <p>On cherche $\alpha$ et $\beta$ tels que $\overrightarrow{AD} = \alpha\overrightarrow{AB} + \beta\overrightarrow{AC}$ :</p>
+    <p>$-1 = 2\alpha + \beta$, $4 = -2\alpha + 2\beta$, $-2 = -2\alpha - 4\beta$.</p>
+    <p>De la 1ère : $\beta = -1 - 2\alpha$. Dans la 2e : $4 = -2\alpha + 2(-1-2\alpha) = -6\alpha - 2$, donc $\alpha = -1$.</p>
+    <p>$\beta = -1-2(-1) = 1$. Vérification dans la 3e : $-2(-1) - 4(1) = 2 - 4 = -2$. Correct.</p>
+    <p>Les quatre points sont <strong>coplanaires</strong>.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\vec{u} \cdot \vec{v} = 1 \times 4 + (-2) \times 5 + 3 \times 2 = 4 - 10 + 6 = 0$.</p>
+    <p><strong>2.</strong> $\vec{u} \cdot \vec{v} = 0$, donc $\vec{u}$ et $\vec{v}$ sont <strong>orthogonaux</strong>.</p>
+    <p><strong>3.</strong> $\|\vec{u}\| = \sqrt{1+4+9} = \sqrt{14}$. $\|\vec{v}\| = \sqrt{16+25+4} = \sqrt{45} = 3\sqrt{5}$.</p>
+    <p><strong>4.</strong> $\cos(\vec{u}, \vec{v}) = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|} = \dfrac{0}{\sqrt{14} \times 3\sqrt{5}} = 0$. Donc l'angle est $\dfrac{\pi}{2}$, soit $90°$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Plan passant par $A(1,1,1)$ avec $\vec{n}(3,-2,5)$ :</p>
+    <p>$3(x-1) - 2(y-1) + 5(z-1) = 0$, soit $3x - 2y + 5z - 6 = 0$.</p>
+    <p><strong>2.</strong> Droite $d$ passant par $B(0,3,-1)$ avec $\vec{u}(1,1,-1)$ :</p>
+    <p>$\begin{cases} x = t \\ y = 3 + t \\ z = -1 - t \end{cases}$</p>
+    <p><strong>3.</strong> On remplace dans l'équation du plan :</p>
+    <p>$3t - 2(3+t) + 5(-1-t) - 6 = 0$</p>
+    <p>$3t - 6 - 2t - 5 - 5t - 6 = 0$</p>
+    <p>$-4t - 17 = 0$, donc $t = -\dfrac{17}{4}$.</p>
+    <p>$I\left(-\dfrac{17}{4},\; -\dfrac{5}{4},\; \dfrac{13}{4}\right)$.</p>
+    <p><strong>4.</strong> Distance de $C(2,-1,0)$ au plan $3x-2y+5z-6=0$ :</p>
+    <p>$d = \dfrac{|3(2) - 2(-1) + 5(0) - 6|}{\sqrt{9+4+25}} = \dfrac{|6+2+0-6|}{\sqrt{38}} = \dfrac{2}{\sqrt{38}} = \dfrac{2\sqrt{38}}{38} = \dfrac{\sqrt{38}}{19}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Sommets du cube :</p>
+    <p>$A(0,0,0)$, $B(1,0,0)$, $C(1,1,0)$, $D(0,1,0)$, $E(0,0,1)$, $F(1,0,1)$, $G(1,1,1)$, $H(0,1,1)$.</p>
+    <p><strong>2.</strong> Plan $(BDG)$ : $B(1,0,0)$, $D(0,1,0)$, $G(1,1,1)$.</p>
+    <p>$\overrightarrow{BD} = (-1,1,0)$ et $\overrightarrow{BG} = (0,1,1)$.</p>
+    <p>On cherche $\vec{n}(a,b,c)$ orthogonal aux deux :</p>
+    <p>$-a + b = 0$ et $b + c = 0$.</p>
+    <p>$a = b$ et $c = -b$. Avec $b = 1$ : $\vec{n}(1, 1, -1)$.</p>
+    <p>Équation : $1(x-1) + 1(y-0) - 1(z-0) = 0$, soit $x + y - z - 1 = 0$.</p>
+    <p>Vérification : $B$ : $1+0-0-1 = 0$. $D$ : $0+1-0-1 = 0$. $G$ : $1+1-1-1 = 0$. Correct.</p>
+    <p><strong>3.</strong> Distance de $A(0,0,0)$ au plan $x+y-z-1 = 0$ :</p>
+    <p>$d = \dfrac{|0+0-0-1|}{\sqrt{1+1+1}} = \dfrac{1}{\sqrt{3}} = \dfrac{\sqrt{3}}{3}$.</p>
+    <p><strong>4.</strong> $\overrightarrow{AG} = (1,1,1)$. Vecteurs du plan $(BDE)$ :</p>
+    <p>$\overrightarrow{BD} = (-1,1,0)$ et $\overrightarrow{BE} = (-1,0,1)$.</p>
+    <p>$\overrightarrow{AG} \cdot \overrightarrow{BD} = -1+1+0 = 0$. Orthogonal.</p>
+    <p>$\overrightarrow{AG} \cdot \overrightarrow{BE} = -1+0+1 = 0$. Orthogonal.</p>
+    <p>$\overrightarrow{AG}$ est orthogonal à deux vecteurs non colinéaires du plan $(BDE)$, donc $\overrightarrow{AG}$ est <strong>perpendiculaire au plan $(BDE)$</strong>.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="complexes.html">&larr; Nombres complexes</a>
+  <a href="../../2015-2016/terminale-s/suites.html">Suites numériques &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
