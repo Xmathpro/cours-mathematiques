@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonométrie . Première S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#premieres">Première S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Première S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2013-2014</span>
+    </div>
+    <h1 class="cours-titre-principal">Trigonométrie</h1>
+    <p class="cours-sous-titre">Cercle trigonométrique, radians, cosinus, sinus et équations</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Le cercle trigonométrique</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Le <strong>cercle trigonométrique</strong> est le cercle de centre $O$ et de rayon 1, orienté dans le sens inverse des aiguilles d'une montre (sens positif).</p>
+    <p>À chaque réel $x$ on associe un unique point $M$ sur le cercle, obtenu en "enroulant" la droite des réels autour du cercle à partir du point $(1, 0)$.</p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Radian</div>
+    <p>Le <strong>radian</strong> est l'unité de mesure des angles en mathématiques. Un tour complet correspond à $2\pi$ radians.</p>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="padding:5px 8px; text-align:left;">Degrés</th>
+          <th style="padding:5px 8px;">0°</th><th style="padding:5px 8px;">30°</th><th style="padding:5px 8px;">45°</th>
+          <th style="padding:5px 8px;">60°</th><th style="padding:5px 8px;">90°</th><th style="padding:5px 8px;">180°</th><th style="padding:5px 8px;">360°</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:5px 8px; font-weight:bold;">Radians</td>
+          <td style="padding:5px 8px;">$0$</td><td style="padding:5px 8px;">$\dfrac{\pi}{6}$</td><td style="padding:5px 8px;">$\dfrac{\pi}{4}$</td>
+          <td style="padding:5px 8px;">$\dfrac{\pi}{3}$</td><td style="padding:5px 8px;">$\dfrac{\pi}{2}$</td><td style="padding:5px 8px;">$\pi$</td><td style="padding:5px 8px;">$2\pi$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>II. Cosinus et sinus</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Soit $M$ le point du cercle trigonométrique associé au réel $x$. Les coordonnées de $M$ sont $(\cos x,\; \sin x)$.</p>
+    <ul>
+      <li>$\cos x$ est l'abscisse de $M$ (projection sur l'axe horizontal)</li>
+      <li>$\sin x$ est l'ordonnée de $M$ (projection sur l'axe vertical)</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Valeurs remarquables</div>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="padding:5px 8px; text-align:left;">$x$</th>
+          <th style="padding:5px 8px;">$0$</th><th style="padding:5px 8px;">$\dfrac{\pi}{6}$</th><th style="padding:5px 8px;">$\dfrac{\pi}{4}$</th>
+          <th style="padding:5px 8px;">$\dfrac{\pi}{3}$</th><th style="padding:5px 8px;">$\dfrac{\pi}{2}$</th><th style="padding:5px 8px;">$\pi$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #f0f0f0;">
+          <td style="padding:5px 8px; font-weight:bold;">$\cos x$</td>
+          <td style="padding:5px 8px;">$1$</td><td style="padding:5px 8px;">$\dfrac{\sqrt{3}}{2}$</td><td style="padding:5px 8px;">$\dfrac{\sqrt{2}}{2}$</td>
+          <td style="padding:5px 8px;">$\dfrac{1}{2}$</td><td style="padding:5px 8px;">$0$</td><td style="padding:5px 8px;">$-1$</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px; font-weight:bold;">$\sin x$</td>
+          <td style="padding:5px 8px;">$0$</td><td style="padding:5px 8px;">$\dfrac{1}{2}$</td><td style="padding:5px 8px;">$\dfrac{\sqrt{2}}{2}$</td>
+          <td style="padding:5px 8px;">$\dfrac{\sqrt{3}}{2}$</td><td style="padding:5px 8px;">$1$</td><td style="padding:5px 8px;">$0$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>III. Propriétés fondamentales</h2>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li><strong>Relation fondamentale :</strong> $\cos^2 x + \sin^2 x = 1$ pour tout $x$</li>
+      <li>$-1 \leq \cos x \leq 1$ et $-1 \leq \sin x \leq 1$</li>
+      <li><strong>Périodicité :</strong> $\cos(x + 2\pi) = \cos x$ et $\sin(x + 2\pi) = \sin x$</li>
+      <li><strong>Parité :</strong> $\cos(-x) = \cos x$ (paire) et $\sin(-x) = -\sin x$ (impaire)</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Formules de symétrie</div>
+    <ul>
+      <li>$\cos(\pi - x) = -\cos x$ et $\sin(\pi - x) = \sin x$</li>
+      <li>$\cos(\pi + x) = -\cos x$ et $\sin(\pi + x) = -\sin x$</li>
+      <li>$\cos\left(\dfrac{\pi}{2} - x\right) = \sin x$ et $\sin\left(\dfrac{\pi}{2} - x\right) = \cos x$</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Formules d'addition</div>
+    <ul>
+      <li>$\cos(a + b) = \cos a \cos b - \sin a \sin b$</li>
+      <li>$\cos(a - b) = \cos a \cos b + \sin a \sin b$</li>
+      <li>$\sin(a + b) = \sin a \cos b + \cos a \sin b$</li>
+      <li>$\sin(a - b) = \sin a \cos b - \cos a \sin b$</li>
+    </ul>
+    <p>En particulier (formules de duplication) :</p>
+    <ul>
+      <li>$\cos(2a) = \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a$</li>
+      <li>$\sin(2a) = 2\sin a \cos a$</li>
+    </ul>
+  </div>
+
+  <h2>IV. Équations trigonométriques</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre $\cos x = \cos a$</div>
+    <p>$\cos x = \cos a \iff x = a + 2k\pi$ ou $x = -a + 2k\pi$ ($k \in \mathbb{Z}$).</p>
+    <p><strong>Exemple.</strong> Résoudre $\cos x = \dfrac{1}{2}$ sur $[0, 2\pi[$.</p>
+    <p>$\cos x = \cos\dfrac{\pi}{3}$, donc $x = \dfrac{\pi}{3}$ ou $x = -\dfrac{\pi}{3} + 2\pi = \dfrac{5\pi}{3}$.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre $\sin x = \sin a$</div>
+    <p>$\sin x = \sin a \iff x = a + 2k\pi$ ou $x = \pi - a + 2k\pi$ ($k \in \mathbb{Z}$).</p>
+    <p><strong>Exemple.</strong> Résoudre $\sin x = \dfrac{\sqrt{2}}{2}$ sur $[0, 2\pi[$.</p>
+    <p>$\sin x = \sin\dfrac{\pi}{4}$, donc $x = \dfrac{\pi}{4}$ ou $x = \pi - \dfrac{\pi}{4} = \dfrac{3\pi}{4}$.</p>
+  </div>
+
+  <h2>V. Exercices</h2>
+
+  <h3>Exercice 1 : valeurs</h3>
+  <p>Calculer les valeurs exactes de :</p>
+  <ol>
+    <li>$\cos\dfrac{5\pi}{6}$ et $\sin\dfrac{5\pi}{6}$</li>
+    <li>$\cos\dfrac{7\pi}{4}$ et $\sin\dfrac{7\pi}{4}$</li>
+    <li>$\cos\dfrac{2\pi}{3}$ et $\sin\dfrac{2\pi}{3}$</li>
+  </ol>
+
+  <h3>Exercice 2 : équations</h3>
+  <p>Résoudre sur $[0, 2\pi[$ :</p>
+  <ol>
+    <li>$\cos x = -\dfrac{\sqrt{3}}{2}$</li>
+    <li>$\sin x = -\dfrac{1}{2}$</li>
+    <li>$2\cos^2 x - 1 = 0$</li>
+    <li>$\sin(2x) = 0$ sur $[0, \pi[$</li>
+  </ol>
+
+  <h3>Exercice 3 : formules</h3>
+  <ol>
+    <li>Calculer $\cos\dfrac{\pi}{12}$ en utilisant $\dfrac{\pi}{12} = \dfrac{\pi}{3} - \dfrac{\pi}{4}$.</li>
+    <li>Simplifier $\cos^2 x - \sin^2 x + 2\sin x \cos x$.</li>
+  </ol>
+
+  <h2>VI. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}$.</p>
+    <p>$\cos\dfrac{5\pi}{6} = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$ et $\sin\dfrac{5\pi}{6} = \sin\dfrac{\pi}{6} = \dfrac{1}{2}$.</p>
+    <p><strong>2.</strong> $\dfrac{7\pi}{4} = 2\pi - \dfrac{\pi}{4} = -\dfrac{\pi}{4} + 2\pi$.</p>
+    <p>$\cos\dfrac{7\pi}{4} = \cos\dfrac{\pi}{4} = \dfrac{\sqrt{2}}{2}$ et $\sin\dfrac{7\pi}{4} = -\sin\dfrac{\pi}{4} = -\dfrac{\sqrt{2}}{2}$.</p>
+    <p><strong>3.</strong> $\dfrac{2\pi}{3} = \pi - \dfrac{\pi}{3}$.</p>
+    <p>$\cos\dfrac{2\pi}{3} = -\cos\dfrac{\pi}{3} = -\dfrac{1}{2}$ et $\sin\dfrac{2\pi}{3} = \sin\dfrac{\pi}{3} = \dfrac{\sqrt{3}}{2}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\cos x = -\dfrac{\sqrt{3}}{2} = \cos\dfrac{5\pi}{6}$.</p>
+    <p>$x = \dfrac{5\pi}{6}$ ou $x = -\dfrac{5\pi}{6} + 2\pi = \dfrac{7\pi}{6}$.</p>
+    <p><strong>2.</strong> $\sin x = -\dfrac{1}{2} = \sin\left(-\dfrac{\pi}{6}\right)$.</p>
+    <p>$x = -\dfrac{\pi}{6} + 2\pi = \dfrac{11\pi}{6}$ ou $x = \pi + \dfrac{\pi}{6} = \dfrac{7\pi}{6}$.</p>
+    <p><strong>3.</strong> $2\cos^2 x - 1 = 0 \iff \cos^2 x = \dfrac{1}{2} \iff \cos x = \pm\dfrac{\sqrt{2}}{2}$.</p>
+    <p>$x = \dfrac{\pi}{4}$ ou $x = \dfrac{3\pi}{4}$ ou $x = \dfrac{5\pi}{4}$ ou $x = \dfrac{7\pi}{4}$.</p>
+    <p><strong>4.</strong> $\sin(2x) = 0 \iff 2x = k\pi \iff x = \dfrac{k\pi}{2}$ ($k \in \mathbb{Z}$).</p>
+    <p>Sur $[0, \pi[$ : $x = 0$ ou $x = \dfrac{\pi}{2}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\cos\dfrac{\pi}{12} = \cos\left(\dfrac{\pi}{3} - \dfrac{\pi}{4}\right) = \cos\dfrac{\pi}{3}\cos\dfrac{\pi}{4} + \sin\dfrac{\pi}{3}\sin\dfrac{\pi}{4}$</p>
+    <p>$= \dfrac{1}{2} \times \dfrac{\sqrt{2}}{2} + \dfrac{\sqrt{3}}{2} \times \dfrac{\sqrt{2}}{2} = \dfrac{\sqrt{2}}{4} + \dfrac{\sqrt{6}}{4} = \dfrac{\sqrt{2} + \sqrt{6}}{4}$.</p>
+    <p><strong>2.</strong> $\cos^2 x - \sin^2 x + 2\sin x \cos x = \cos(2x) + \sin(2x)$.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2012-2013/premiere-s/derivation.html">&larr; Dérivation</a>
+  <a href="probabilites.html">Probabilités conditionnelles &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
