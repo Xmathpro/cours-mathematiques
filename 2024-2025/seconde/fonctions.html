@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonctions : programme 2026 . Seconde</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin: 1.5rem 0; }
+  .interactive-box h4 { font-family: Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #2a5298; margin-bottom: 0.75rem; }
+  canvas { display: block; margin: 0 auto; border: 1px solid #e8e8e8; border-radius: 4px; max-width: 100%; }
+  .controls { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.75rem; font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; }
+  .controls label { font-weight: bold; }
+  .controls input[type="range"] { width: 120px; cursor: pointer; }
+  .controls select { padding: 3px 8px; border: 1px solid #ccc; border-radius: 3px; font-size: 0.85rem; cursor: pointer; }
+  .controls button { background: #2a5298; color: #fff; border: none; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .controls button:hover { background: #1e3d72; }
+  .result-text { font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; margin-top: 0.5rem; min-height: 1.2em; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#secondes">Seconde</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Seconde</span>
+      <span>Nouveaux programmes 2026</span>
+      <span>Maurice . 2024-2025</span>
+    </div>
+    <h1 class="cours-titre-principal">Fonctions : programme 2026</h1>
+    <p class="cours-sous-titre">Modélisation, automatismes et nouvelles attentes du programme</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Ce qui change en 2026</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Évolutions du programme</div>
+    <p>Les nouveaux programmes de 2026 renforcent trois axes :</p>
+    <ul>
+      <li><strong>Les automatismes :</strong> calcul mental, reconnaître instantanément une forme factorisée ou développée, identifier une fonction de référence à partir de sa courbe.</li>
+      <li><strong>La modélisation :</strong> utiliser les fonctions pour décrire des phénomènes réels (croissance, décroissance, optimisation).</li>
+      <li><strong>L'interdisciplinarité :</strong> lien avec la physique, la SVT et l'économie dans les exemples et exercices.</li>
+    </ul>
+    <p>Le contenu mathématique reste proche du programme 2019. Les fonctions de référence, les variations et la résolution d'équations sont toujours au programme. L'algorithmique en Python reste présente.</p>
+  </div>
+
+  <h2>II. Automatismes : les fonctions de référence</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Reconnaître une fonction à partir de sa courbe</div>
+    <p>Un automatisme fondamental du nouveau programme : savoir identifier instantanément quelle fonction de référence correspond à une courbe donnée.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Quiz : reconnaître la fonction</h4>
+    <canvas id="canvasQuiz" width="600" height="350"></canvas>
+    <div class="controls">
+      <button onclick="quizAnswer('carre')">x²</button>
+      <button onclick="quizAnswer('cube')">x³</button>
+      <button onclick="quizAnswer('inverse')">1/x</button>
+      <button onclick="quizAnswer('racine')">√x</button>
+      <button onclick="quizAnswer('abs')">|x|</button>
+      <button onclick="quizAnswer('affine')">ax + b</button>
+      <button onclick="newQuiz()" style="background:#27ae60">Nouvelle question</button>
+    </div>
+    <div class="result-text" id="resultQuiz">Identifiez la fonction représentée.</div>
+  </div>
+
+  <h2>III. Modélisation : les fonctions dans la vie réelle</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Pourquoi modéliser ?</div>
+    <p>
+      Modéliser, c'est traduire une situation réelle en langage mathématique. Une fonction peut décrire la trajectoire d'un ballon, l'évolution d'une population, le coût d'un abonnement ou la température au cours d'une journée. L'enjeu est de choisir la bonne fonction (linéaire, quadratique, inverse...) pour représenter la réalité le plus fidèlement possible.
+    </p>
+  </div>
+
+  <h3>1. Modèle linéaire (fonction affine)</h3>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple : tarification</div>
+    <p>Un opérateur téléphonique propose un forfait à 15 euros par mois plus 0,05 euro par SMS envoyé.</p>
+    <p>$C(n) = 0{,}05n + 15$ où $n$ est le nombre de SMS.</p>
+    <p>C'est un modèle linéaire : le coût augmente proportionnellement au nombre de SMS.</p>
+  </div>
+
+  <h3>2. Modèle quadratique (fonction carré)</h3>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple : aire et distance de freinage</div>
+    <p>La distance de freinage d'une voiture est proportionnelle au carré de sa vitesse :</p>
+    <p>$d(v) = 0{,}006 \times v^2$ (en mètres, $v$ en km/h).</p>
+    <p>À 50 km/h : $d = 15$ m. À 100 km/h : $d = 60$ m. Doubler la vitesse quadruple la distance de freinage.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : distance de freinage</h4>
+    <canvas id="canvasFreinage" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Vitesse (km/h) :</label>
+      <input type="range" id="vitesseSlider" min="0" max="150" value="50">
+      <span id="vitesseVal">50</span>
+    </div>
+    <div class="result-text" id="resultFreinage"></div>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Les panneaux de limitation de vitesse sont fixés en tenant compte de la distance de freinage. Passer de 80 km/h à 90 km/h (+ 12,5% de vitesse) augmente la distance de freinage de 27%. Les chiffres semblent proches, mais les conséquences en cas d'accident ne le sont pas. C'est la différence entre la perception linéaire ("10 km/h de plus") et la réalité quadratique.
+    </p>
+  </div>
+
+  <h3>3. Modèle avec la fonction inverse</h3>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple : partage</div>
+    <p>On partage 120 euros entre $n$ personnes. Chacun reçoit $f(n) = \dfrac{120}{n}$ euros.</p>
+    <p>Pour 2 personnes : 60 euros. Pour 10 : 12 euros. Pour 100 : 1,20 euro.</p>
+  </div>
+
+  <h3>4. Comparaison de modèles</h3>
+
+  <div class="interactive-box">
+    <h4>Explorer : comparer deux offres</h4>
+    <canvas id="canvasOffres" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Offre A : fixe =</label>
+      <input type="range" id="fixeA" min="0" max="40" value="20">
+      <span id="fixeAval">20</span>
+      <label>+ variable/unité =</label>
+      <input type="range" id="varA" min="0" max="20" value="5">
+      <span id="varAval">0.5</span>
+    </div>
+    <div class="controls">
+      <label>Offre B : fixe =</label>
+      <input type="range" id="fixeB" min="0" max="40" value="5">
+      <span id="fixeBval">5</span>
+      <label>+ variable/unité =</label>
+      <input type="range" id="varB" min="0" max="20" value="10">
+      <span id="varBval">1.0</span>
+    </div>
+    <div class="result-text" id="resultOffres"></div>
+  </div>
+
+  <h2>IV. Python et modélisation</h2>
+
+  <div class="exemple">
+    <div class="encadre-titre">Modéliser la distance de freinage en Python</div>
+<pre>
+import matplotlib.pyplot as plt
+
+vitesses = list(range(0, 151, 10))
+distances = [0.006 * v**2 for v in vitesses]
+
+plt.plot(vitesses, distances, 'b-o', markersize=4)
+plt.xlabel("Vitesse (km/h)")
+plt.ylabel("Distance de freinage (m)")
+plt.title("Distance de freinage en fonction de la vitesse")
+plt.grid(True, alpha=0.3)
+
+# Marquer les limitations
+for v in [30, 50, 80, 130]:
+    d = 0.006 * v**2
+    plt.plot(v, d, 'ro', markersize=8)
+    plt.annotate(str(v) + " km/h : " + str(d) + " m",
+                 xy=(v, d), xytext=(v+5, d+10),
+                 fontsize=8)
+
+plt.show()
+</pre>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Comparer deux offres en Python</div>
+<pre>
+def offre_a(n):
+    return 20 + 0.5 * n  # 20 euros fixes + 0.50 par unité
+
+def offre_b(n):
+    return 5 + 1.0 * n   # 5 euros fixes + 1.00 par unité
+
+# Trouver le seuil de rentabilité
+n = 0
+while offre_a(n) >= offre_b(n):
+    n += 1
+
+print("L'offre A devient avantageuse à partir de", n, "unités")
+print("Offre A :", offre_a(n), "euros")
+print("Offre B :", offre_b(n), "euros")
+</pre>
+  </div>
+
+  <h2>V. Exercices</h2>
+
+  <h3>Exercice 1 : automatismes</h3>
+  <p>Sans calculatrice, répondre :</p>
+  <ol>
+    <li>$f(x) = x^2$. Quel est le signe de $f(-7)$ ?</li>
+    <li>$g(x) = x^3$. Comparer $g(-2)$ et $g(-5)$.</li>
+    <li>$h(x) = \dfrac{1}{x}$. Comparer $h(3)$ et $h(10)$.</li>
+    <li>Une fonction a une courbe en forme de V avec sommet en $(0, 0)$. Quelle est cette fonction ?</li>
+    <li>Une courbe passe par $(-1, -1)$, $(0, 0)$ et $(1, 1)$ en faisant un S. Quelle est cette fonction ?</li>
+  </ol>
+
+  <h3>Exercice 2 : modélisation</h3>
+  <p>La hauteur $h$ (en mètres) d'un ballon lancé verticalement est donnée par $h(t) = -5t^2 + 20t + 1{,}5$ où $t$ est le temps en secondes.</p>
+  <ol>
+    <li>Quelle est la hauteur initiale du ballon ($t = 0$) ?</li>
+    <li>À quel moment le ballon atteint-il sa hauteur maximale ?</li>
+    <li>Quelle est cette hauteur maximale ?</li>
+    <li>À quel moment le ballon touche-t-il le sol ?</li>
+  </ol>
+
+  <h3>Exercice 3 : comparaison d'offres</h3>
+  <p>Deux salles de sport proposent :</p>
+  <ul>
+    <li>Salle A : abonnement 50 euros/mois, chaque séance gratuite.</li>
+    <li>Salle B : pas d'abonnement, 8 euros par séance.</li>
+  </ul>
+  <ol>
+    <li>Exprimer le coût mensuel de chaque salle en fonction du nombre de séances $n$.</li>
+    <li>À partir de combien de séances la salle A est-elle plus avantageuse ?</li>
+    <li>Écrire un programme Python qui affiche le coût des deux salles pour $n$ allant de 0 à 15.</li>
+  </ol>
+
+  <h2>VI. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f(-7) = (-7)^2 = 49 > 0$. Un carré est toujours positif.</p>
+    <p><strong>2.</strong> $-5 < -2$ et la fonction cube est croissante, donc $g(-5) < g(-2)$, soit $-125 < -8$.</p>
+    <p><strong>3.</strong> $3 < 10$ et la fonction inverse est décroissante sur $]0, +\infty[$, donc $h(3) > h(10)$, soit $\dfrac{1}{3} > \dfrac{1}{10}$.</p>
+    <p><strong>4.</strong> La fonction valeur absolue $f(x) = |x|$.</p>
+    <p><strong>5.</strong> La fonction cube $f(x) = x^3$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $h(0) = 0 + 0 + 1{,}5 = 1{,}5$ m. Le ballon part de 1,5 m de hauteur (hauteur du lanceur).</p>
+    <p><strong>2.</strong> $h(t) = -5t^2 + 20t + 1{,}5 = -5(t^2 - 4t) + 1{,}5 = -5(t - 2)^2 + 20 + 1{,}5 = -5(t-2)^2 + 21{,}5$.</p>
+    <p>Le maximum est atteint en $t = 2$ secondes (sommet de la parabole).</p>
+    <p><strong>3.</strong> $h(2) = -5(0) + 21{,}5 = 21{,}5$ m.</p>
+    <p><strong>4.</strong> $h(t) = 0 \iff -5t^2 + 20t + 1{,}5 = 0$. $\Delta = 400 + 30 = 430$.</p>
+    <p>$t = \dfrac{-20 \pm \sqrt{430}}{-10} = \dfrac{-20 \pm 20{,}74}{-10}$.</p>
+    <p>$t_1 = \dfrac{-20 - 20{,}74}{-10} \approx 4{,}07$ s (solution positive, physiquement valide).</p>
+    <p>$t_2 = \dfrac{-20 + 20{,}74}{-10} \approx -0{,}07$ s (négatif, pas de sens physique).</p>
+    <p>Le ballon touche le sol au bout d'environ 4,1 secondes.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Salle A : $C_A(n) = 50$ (fixe). Salle B : $C_B(n) = 8n$.</p>
+    <p><strong>2.</strong> $C_A < C_B \iff 50 < 8n \iff n > 6{,}25$. À partir de <strong>7 séances</strong> par mois.</p>
+    <p><strong>3.</strong></p>
+<pre>
+for n in range(0, 16):
+    ca = 50
+    cb = 8 * n
+    mieux = "A" if ca < cb else "B" if cb < ca else "="
+    print("n =", n, "| A :", ca, "euros | B :", cb, "euros |", mieux, "moins cher")
+</pre>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2019-2020/seconde/fonctions.html">&larr; Fonctions : nouveau programme 2019</a>
+  <a href="../../index.html">Retour à l'accueil &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2026
+</footer>
+
+<script>
+// === UTILITAIRES ===
+function drawGrid(ctx, w, h, ox, oy, sc) {
+  ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+  for (let i = -20; i <= 20; i++) {
+    let px = ox + i * sc; if (px >= 0 && px <= w) { ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, h); ctx.stroke(); }
+    let py = oy - i * sc; if (py >= 0 && py <= h) { ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(w, py); ctx.stroke(); }
+  }
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke();
+}
+
+// === QUIZ ===
+const quizFuncs = [
+  { name: 'carre', f: x=>x*x, label: 'x²' },
+  { name: 'cube', f: x=>x*x*x, label: 'x³' },
+  { name: 'inverse', f: x=>x===0?NaN:1/x, label: '1/x' },
+  { name: 'racine', f: x=>x<0?NaN:Math.sqrt(x), label: '√x' },
+  { name: 'abs', f: x=>Math.abs(x), label: '|x|' },
+  { name: 'affine', f: null, label: 'ax + b' }
+];
+let currentQuiz = null;
+let quizScore = 0, quizTotal = 0;
+
+function newQuiz() {
+  const c = document.getElementById('canvasQuiz');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w/2, oy = h/2, sc = 45;
+  ctx.clearRect(0,0,w,h); drawGrid(ctx,w,h,ox,oy,sc);
+  // Random function (excluding affine for simplicity unless picked)
+  const choices = quizFuncs.filter(q => q.name !== 'affine');
+  const pick = choices[Math.floor(Math.random() * choices.length)];
+  currentQuiz = pick.name;
+  // Random color
+  const colors = ['#2a5298','#c0392b','#27ae60','#8e44ad','#e67e22'];
+  const color = colors[Math.floor(Math.random()*colors.length)];
+  ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.beginPath(); let s = false;
+  for (let px = 0; px < w; px++) {
+    let x = (px-ox)/sc, y = pick.f(x);
+    if (!isFinite(y)||Math.abs(y)>8) { s=false; continue; }
+    let py = oy-y*sc;
+    if (!s) { ctx.moveTo(px,py); s=true; } else ctx.lineTo(px,py);
+  } ctx.stroke();
+  document.getElementById('resultQuiz').textContent = 'Quelle est cette fonction ? (' + quizScore + '/' + quizTotal + ' bonnes réponses)';
+}
+
+function quizAnswer(name) {
+  if (!currentQuiz) { newQuiz(); return; }
+  quizTotal++;
+  if (name === currentQuiz) {
+    quizScore++;
+    document.getElementById('resultQuiz').innerHTML = '<span style="color:#27ae60; font-weight:bold">Correct !</span> C\'est bien f(x) = ' + quizFuncs.find(q=>q.name===currentQuiz).label + '. Score : ' + quizScore + '/' + quizTotal;
+  } else {
+    document.getElementById('resultQuiz').innerHTML = '<span style="color:#c0392b; font-weight:bold">Faux.</span> C\'était f(x) = ' + quizFuncs.find(q=>q.name===currentQuiz).label + '. Score : ' + quizScore + '/' + quizTotal;
+  }
+  currentQuiz = null;
+  setTimeout(newQuiz, 1500);
+}
+newQuiz();
+
+// === FREINAGE ===
+function drawFreinage() {
+  const c = document.getElementById('canvasFreinage');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const v = parseInt(document.getElementById('vitesseSlider').value);
+  document.getElementById('vitesseVal').textContent = v;
+  const d = 0.006 * v * v;
+  ctx.clearRect(0,0,w,h);
+  const margin = { l: 60, r: 30, t: 30, b: 50 };
+  const plotW = w-margin.l-margin.r, plotH = h-margin.t-margin.b;
+  const maxV = 150, maxD = 0.006 * maxV * maxV;
+  // Axes
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, h-margin.b); ctx.lineTo(w-margin.r, h-margin.b); ctx.stroke();
+  ctx.fillStyle = '#666'; ctx.font = '11px Arial';
+  ctx.fillText('Vitesse (km/h)', w/2 - 40, h - 8);
+  ctx.save(); ctx.translate(15, h/2); ctx.rotate(-Math.PI/2); ctx.fillText('Distance (m)', -30, 0); ctx.restore();
+  // Graduations
+  for (let vv = 0; vv <= maxV; vv += 30) {
+    let px = margin.l + (vv/maxV)*plotW;
+    ctx.fillText(vv, px-5, h-margin.b+15);
+    ctx.strokeStyle = '#eee'; ctx.beginPath(); ctx.moveTo(px, margin.t); ctx.lineTo(px, h-margin.b); ctx.stroke();
+  }
+  // Courbe
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2.5; ctx.beginPath();
+  for (let vv = 0; vv <= maxV; vv++) {
+    let px = margin.l + (vv/maxV)*plotW;
+    let dd = 0.006*vv*vv;
+    let py = h - margin.b - (dd/maxD)*plotH;
+    vv === 0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  } ctx.stroke();
+  // Point actuel
+  let px = margin.l + (v/maxV)*plotW;
+  let py = h - margin.b - (d/maxD)*plotH;
+  ctx.fillStyle = '#c0392b'; ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI*2); ctx.fill();
+  ctx.setLineDash([4,4]); ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, h-margin.b); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(margin.l, py); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#c0392b'; ctx.font = 'bold 12px Arial';
+  ctx.fillText(d.toFixed(1) + ' m', margin.l + 5, py - 5);
+  // Limitations
+  [30,50,80,130].forEach(lim => {
+    let lpx = margin.l + (lim/maxV)*plotW;
+    let ld = 0.006*lim*lim;
+    let lpy = h - margin.b - (ld/maxD)*plotH;
+    ctx.fillStyle = 'rgba(39,174,96,0.6)'; ctx.beginPath(); ctx.arc(lpx, lpy, 4, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#27ae60'; ctx.font = '9px Arial';
+    ctx.fillText(lim+'km/h:'+ld.toFixed(0)+'m', lpx-15, lpy-8);
+  });
+  document.getElementById('resultFreinage').textContent =
+    'À ' + v + ' km/h, la distance de freinage est de ' + d.toFixed(1) + ' m. ' +
+    'À ' + (v*2) + ' km/h, elle serait de ' + (0.006*v*v*4).toFixed(1) + ' m (×4).';
+}
+document.getElementById('vitesseSlider').addEventListener('input', drawFreinage);
+drawFreinage();
+
+// === OFFRES ===
+function drawOffres() {
+  const c = document.getElementById('canvasOffres');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const fA = parseInt(document.getElementById('fixeA').value);
+  const vA = parseInt(document.getElementById('varA').value)/10;
+  const fB = parseInt(document.getElementById('fixeB').value);
+  const vB = parseInt(document.getElementById('varB').value)/10;
+  document.getElementById('fixeAval').textContent = fA;
+  document.getElementById('varAval').textContent = vA.toFixed(1);
+  document.getElementById('fixeBval').textContent = fB;
+  document.getElementById('varBval').textContent = vB.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  const margin = { l: 50, r: 20, t: 20, b: 50 };
+  const plotW = w-margin.l-margin.r, plotH = h-margin.t-margin.b;
+  const maxN = 60;
+  const maxC = Math.max(fA + vA*maxN, fB + vB*maxN, 10);
+  // Axes
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, h-margin.b); ctx.lineTo(w-margin.r, h-margin.b); ctx.stroke();
+  ctx.fillStyle = '#666'; ctx.font = '11px Arial';
+  ctx.fillText('Nombre d\'unités', w/2 - 40, h - 8);
+  // Offre A
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2.5; ctx.beginPath();
+  for (let n = 0; n <= maxN; n++) {
+    let px = margin.l + (n/maxN)*plotW;
+    let py = h - margin.b - ((fA + vA*n)/maxC)*plotH;
+    n === 0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  } ctx.stroke();
+  // Offre B
+  ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 2.5; ctx.beginPath();
+  for (let n = 0; n <= maxN; n++) {
+    let px = margin.l + (n/maxN)*plotW;
+    let py = h - margin.b - ((fB + vB*n)/maxC)*plotH;
+    n === 0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  } ctx.stroke();
+  // Labels
+  ctx.font = 'bold 12px Arial';
+  ctx.fillStyle = '#2a5298'; ctx.fillText('Offre A : ' + fA + ' + ' + vA.toFixed(1) + '/unité', margin.l + 10, margin.t + 18);
+  ctx.fillStyle = '#c0392b'; ctx.fillText('Offre B : ' + fB + ' + ' + vB.toFixed(1) + '/unité', margin.l + 10, margin.t + 36);
+  // Intersection
+  if (vA !== vB) {
+    const nSeuil = (fA - fB) / (vB - vA);
+    if (nSeuil > 0 && nSeuil < maxN) {
+      const cSeuil = fA + vA * nSeuil;
+      let px = margin.l + (nSeuil/maxN)*plotW;
+      let py = h - margin.b - (cSeuil/maxC)*plotH;
+      ctx.fillStyle = '#27ae60'; ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI*2); ctx.fill();
+      ctx.setLineDash([3,3]); ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, h-margin.b); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = '11px Arial'; ctx.fillStyle = '#27ae60';
+      ctx.fillText('Seuil : n = ' + nSeuil.toFixed(1), px - 25, py - 10);
+      document.getElementById('resultOffres').textContent =
+        'Les deux offres sont équivalentes à n = ' + nSeuil.toFixed(1) + ' unités (' + cSeuil.toFixed(1) + ' euros). ' +
+        (vA < vB ? 'L\'offre A est meilleure au-delà.' : 'L\'offre B est meilleure au-delà.');
+    } else {
+      document.getElementById('resultOffres').textContent = 'Les deux offres ne se croisent pas dans cet intervalle.';
+    }
+  } else {
+    document.getElementById('resultOffres').textContent = 'Même coût variable : l\'offre avec le fixe le plus bas est toujours meilleure.';
+  }
+}
+['fixeA','varA','fixeB','varB'].forEach(id => document.getElementById(id).addEventListener('input', drawOffres));
+drawOffres();
+</script>
+
+</body>
+</html>
