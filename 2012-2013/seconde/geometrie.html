@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Géométrie et vecteurs . Seconde</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  .interactive-box h4 {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #2a5298;
+    margin-bottom: 0.75rem;
+  }
+  canvas {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    max-width: 100%;
+  }
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0.75rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #444;
+  }
+  .controls label { font-weight: bold; }
+  .controls input[type="range"] { width: 120px; cursor: pointer; }
+  .controls button {
+    background: #2a5298;
+    color: #fff;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
+  }
+  .controls button:hover { background: #1e3d72; }
+  .result-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#secondes">Seconde</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Seconde</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Géométrie et vecteurs</h1>
+    <p class="cours-sous-titre">Translation, vecteurs, coordonnées, colinéarité et équations de droites</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Translation et vecteurs</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition de la translation</div>
+    <p>
+      La <strong>translation</strong> qui transforme un point $A$ en un point $B$ déplace tous les points du plan dans la même direction, le même sens et la même distance que pour aller de $A$ à $B$.
+    </p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition d'un vecteur</div>
+    <p>
+      Un <strong>vecteur</strong> $\overrightarrow{AB}$ est défini par trois caractéristiques :
+    </p>
+    <ul>
+      <li>une <strong>direction</strong> (la droite $(AB)$)</li>
+      <li>un <strong>sens</strong> (de $A$ vers $B$)</li>
+      <li>une <strong>norme</strong> (la longueur $AB$)</li>
+    </ul>
+    <p>On le représente par une flèche allant de $A$ vers $B$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : translation d'un point</h4>
+    <canvas id="canvasTranslation" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>Vecteur x :</label>
+      <input type="range" id="vecX" min="-50" max="50" value="30">
+      <span id="vecXval">3</span>
+      <label>Vecteur y :</label>
+      <input type="range" id="vecY" min="-50" max="50" value="20">
+      <span id="vecYval">2</span>
+    </div>
+    <div class="result-text" id="resultTranslation"></div>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Égalité de vecteurs</div>
+    <p>
+      Deux vecteurs $\overrightarrow{AB}$ et $\overrightarrow{CD}$ sont <strong>égaux</strong> s'ils ont la même direction, le même sens et la même norme.
+    </p>
+    <p>
+      Cela signifie que le quadrilatère $ABDC$ est un <strong>parallélogramme</strong>.
+    </p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : vecteurs égaux et parallélogramme</h4>
+    <canvas id="canvasEgalite" width="600" height="400"></canvas>
+    <div class="controls">
+      <button onclick="randomParallelogram()">Nouveau parallélogramme</button>
+    </div>
+    <div class="result-text" id="resultEgalite"></div>
+  </div>
+
+  <h2>II. Coordonnées d'un vecteur</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Dans un repère $(O, \vec{i}, \vec{j})$, si $A(x_A, y_A)$ et $B(x_B, y_B)$, les <strong>coordonnées</strong> du vecteur $\overrightarrow{AB}$ sont :
+    </p>
+    $$\overrightarrow{AB} \begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}$$
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Norme d'un vecteur</div>
+    <p>Si $\vec{u} \begin{pmatrix} x \\ y \end{pmatrix}$, alors :</p>
+    $$\|\vec{u}\| = \sqrt{x^2 + y^2}$$
+    <p>C'est la longueur du vecteur, autrement dit la distance $AB$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : coordonnées d'un vecteur</h4>
+    <canvas id="canvasCoord" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>A : x =</label>
+      <input type="range" id="axCoord" min="-40" max="40" value="-20">
+      <span id="axVal">-2</span>
+      <label>y =</label>
+      <input type="range" id="ayCoord" min="-40" max="40" value="-10">
+      <span id="ayVal">-1</span>
+      <label>B : x =</label>
+      <input type="range" id="bxCoord" min="-40" max="40" value="30">
+      <span id="bxVal">3</span>
+      <label>y =</label>
+      <input type="range" id="byCoord" min="-40" max="40" value="20">
+      <span id="byVal">2</span>
+    </div>
+    <div class="result-text" id="resultCoord"></div>
+  </div>
+
+  <h2>III. Opérations sur les vecteurs</h2>
+
+  <h3>1. Somme de vecteurs</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Relation de Chasles</div>
+    <p>Pour tous points $A$, $B$ et $C$ :</p>
+    $$\overrightarrow{AC} = \overrightarrow{AB} + \overrightarrow{BC}$$
+    <p>On "enchaîne" les vecteurs bout à bout.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Somme en coordonnées</div>
+    <p>Si $\vec{u} \begin{pmatrix} x \\ y \end{pmatrix}$ et $\vec{v} \begin{pmatrix} x' \\ y' \end{pmatrix}$, alors :</p>
+    $$\vec{u} + \vec{v} = \begin{pmatrix} x + x' \\ y + y' \end{pmatrix}$$
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : somme de deux vecteurs (règle du parallélogramme)</h4>
+    <canvas id="canvasSomme" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>u : x =</label>
+      <input type="range" id="ux" min="-40" max="40" value="30">
+      <span id="uxVal">3</span>
+      <label>y =</label>
+      <input type="range" id="uy" min="-40" max="40" value="10">
+      <span id="uyVal">1</span>
+      <label>v : x =</label>
+      <input type="range" id="vx" min="-40" max="40" value="10">
+      <span id="vxVal">1</span>
+      <label>y =</label>
+      <input type="range" id="vy" min="-40" max="40" value="30">
+      <span id="vyVal">3</span>
+    </div>
+    <div class="result-text" id="resultSomme"></div>
+  </div>
+
+  <h3>2. Produit par un scalaire</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Si $\vec{u} \begin{pmatrix} x \\ y \end{pmatrix}$ et $k \in \mathbb{R}$, alors :</p>
+    $$k\vec{u} = \begin{pmatrix} kx \\ ky \end{pmatrix}$$
+    <ul>
+      <li>Si $k > 0$ : même sens que $\vec{u}$, longueur multipliée par $k$.</li>
+      <li>Si $k < 0$ : sens opposé à $\vec{u}$, longueur multipliée par $|k|$.</li>
+      <li>Si $k = 0$ : vecteur nul $\vec{0}$.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : multiplication d'un vecteur par un scalaire</h4>
+    <canvas id="canvasScalaire" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>k =</label>
+      <input type="range" id="kSlider" min="-30" max="30" value="10">
+      <span id="kVal">1.0</span>
+    </div>
+    <div class="result-text" id="resultScalaire"></div>
+  </div>
+
+  <h2>IV. Milieu d'un segment</h2>
+
+  <div class="propriete">
+    <div class="encadre-titre">Coordonnées du milieu</div>
+    <p>Le milieu $M$ du segment $[AB]$ avec $A(x_A, y_A)$ et $B(x_B, y_B)$ a pour coordonnées :</p>
+    $$M\left(\frac{x_A + x_B}{2} ;\; \frac{y_A + y_B}{2}\right)$$
+    <p>C'est la moyenne des coordonnées de $A$ et $B$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : milieu d'un segment</h4>
+    <canvas id="canvasMilieu" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>A : x =</label>
+      <input type="range" id="axM" min="-50" max="50" value="-30">
+      <span id="axMval">-3</span>
+      <label>y =</label>
+      <input type="range" id="ayM" min="-50" max="50" value="-20">
+      <span id="ayMval">-2</span>
+      <label>B : x =</label>
+      <input type="range" id="bxM" min="-50" max="50" value="40">
+      <span id="bxMval">4</span>
+      <label>y =</label>
+      <input type="range" id="byM" min="-50" max="50" value="20">
+      <span id="byMval">2</span>
+    </div>
+    <div class="result-text" id="resultMilieu"></div>
+  </div>
+
+  <h2>V. Colinéarité</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Deux vecteurs $\vec{u}$ et $\vec{v}$ sont <strong>colinéaires</strong> s'il existe un réel $k$ tel que $\vec{v} = k\vec{u}$ (ou si l'un des deux est nul).</p>
+    <p>Géométriquement, cela signifie qu'ils ont la <strong>même direction</strong> (parallèles).</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Critère de colinéarité (déterminant)</div>
+    <p>$\vec{u} \begin{pmatrix} x \\ y \end{pmatrix}$ et $\vec{v} \begin{pmatrix} x' \\ y' \end{pmatrix}$ sont colinéaires si et seulement si :</p>
+    $$xy' - yx' = 0$$
+    <p>Ce nombre $xy' - yx'$ s'appelle le <strong>déterminant</strong> de $\vec{u}$ et $\vec{v}$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Applications de la colinéarité</div>
+    <ul>
+      <li>Trois points $A$, $B$, $C$ sont <strong>alignés</strong> si et seulement si $\overrightarrow{AB}$ et $\overrightarrow{AC}$ sont colinéaires.</li>
+      <li>Deux droites sont <strong>parallèles</strong> si et seulement si leurs vecteurs directeurs sont colinéaires.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : colinéarité de deux vecteurs</h4>
+    <canvas id="canvasCol" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>u : x =</label>
+      <input type="range" id="cux" min="-40" max="40" value="20">
+      <span id="cuxVal">2</span>
+      <label>y =</label>
+      <input type="range" id="cuy" min="-40" max="40" value="10">
+      <span id="cuyVal">1</span>
+      <label>v : x =</label>
+      <input type="range" id="cvx" min="-40" max="40" value="40">
+      <span id="cvxVal">4</span>
+      <label>y =</label>
+      <input type="range" id="cvy" min="-40" max="40" value="20">
+      <span id="cvyVal">2</span>
+    </div>
+    <div class="result-text" id="resultCol"></div>
+  </div>
+
+  <h2>VI. Équations de droites</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Équation cartésienne</div>
+    <p>Toute droite du plan admet une équation de la forme $ax + by + c = 0$ avec $(a, b) \neq (0, 0)$.</p>
+    <p>Le vecteur $\vec{n}(a, b)$ est un <strong>vecteur normal</strong> à la droite (perpendiculaire).</p>
+    <p>Le vecteur $\vec{u}(-b, a)$ est un <strong>vecteur directeur</strong> de la droite.</p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Équation réduite</div>
+    <p>Si la droite n'est pas verticale, elle s'écrit sous la forme :</p>
+    $$y = mx + p$$
+    <p>$m$ est le <strong>coefficient directeur</strong> (pente) et $p$ l'<strong>ordonnée à l'origine</strong>.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Coefficient directeur</div>
+    <p>Si $A(x_A, y_A)$ et $B(x_B, y_B)$ sont deux points de la droite avec $x_A \neq x_B$ :</p>
+    $$m = \frac{y_B - y_A}{x_B - x_A}$$
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : équation de droite y = mx + p</h4>
+    <canvas id="canvasDroite" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>m =</label>
+      <input type="range" id="mSlider" min="-30" max="30" value="10">
+      <span id="mVal">1.0</span>
+      <label>p =</label>
+      <input type="range" id="pSlider" min="-40" max="40" value="0">
+      <span id="pVal">0.0</span>
+    </div>
+    <div class="result-text" id="resultDroite"></div>
+  </div>
+
+  <h2>VII. Exercices</h2>
+
+  <h3>Exercice 1 : coordonnées de vecteurs</h3>
+  <p>Soient $A(1, 3)$, $B(4, -1)$ et $C(-2, 5)$.</p>
+  <ol>
+    <li>Calculer les coordonnées de $\overrightarrow{AB}$ et $\overrightarrow{AC}$.</li>
+    <li>Calculer $\|\overrightarrow{AB}\|$ et $\|\overrightarrow{AC}\|$.</li>
+    <li>Calculer les coordonnées de $\overrightarrow{AB} + \overrightarrow{AC}$.</li>
+    <li>Déterminer les coordonnées du point $D$ tel que $ABDC$ soit un parallélogramme.</li>
+  </ol>
+
+  <h3>Exercice 2 : milieu et alignement</h3>
+  <p>Soient $A(-3, 2)$, $B(5, -2)$ et $C(1, 0)$.</p>
+  <ol>
+    <li>Calculer les coordonnées du milieu $M$ de $[AB]$.</li>
+    <li>$C$ est-il le milieu de $[AB]$ ?</li>
+    <li>Les points $A$, $B$ et $C$ sont-ils alignés ?</li>
+  </ol>
+
+  <h3>Exercice 3 : colinéarité</h3>
+  <ol>
+    <li>Les vecteurs $\vec{u}(3, -6)$ et $\vec{v}(-2, 4)$ sont-ils colinéaires ?</li>
+    <li>Les points $A(1, 2)$, $B(3, 5)$ et $C(7, 11)$ sont-ils alignés ?</li>
+    <li>Déterminer $k$ pour que $\vec{u}(2, k)$ et $\vec{v}(6, 9)$ soient colinéaires.</li>
+  </ol>
+
+  <h3>Exercice 4 : équations de droites</h3>
+  <ol>
+    <li>Déterminer l'équation réduite de la droite passant par $A(1, 3)$ et $B(4, -3)$.</li>
+    <li>Les droites $y = 2x + 1$ et $y = 2x - 5$ sont-elles parallèles ?</li>
+    <li>Trouver le point d'intersection des droites $y = 3x - 1$ et $y = -x + 7$.</li>
+  </ol>
+
+  <h2>VIII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\overrightarrow{AB} = \begin{pmatrix} 4-1 \\ -1-3 \end{pmatrix} = \begin{pmatrix} 3 \\ -4 \end{pmatrix}$. $\overrightarrow{AC} = \begin{pmatrix} -2-1 \\ 5-3 \end{pmatrix} = \begin{pmatrix} -3 \\ 2 \end{pmatrix}$.</p>
+    <p><strong>2.</strong> $\|\overrightarrow{AB}\| = \sqrt{9+16} = \sqrt{25} = 5$. $\|\overrightarrow{AC}\| = \sqrt{9+4} = \sqrt{13}$.</p>
+    <p><strong>3.</strong> $\overrightarrow{AB} + \overrightarrow{AC} = \begin{pmatrix} 3+(-3) \\ -4+2 \end{pmatrix} = \begin{pmatrix} 0 \\ -2 \end{pmatrix}$.</p>
+    <p><strong>4.</strong> $ABDC$ parallélogramme $\iff$ $\overrightarrow{AB} = \overrightarrow{CD}$.</p>
+    <p>$\overrightarrow{CD} = \begin{pmatrix} x_D - (-2) \\ y_D - 5 \end{pmatrix} = \begin{pmatrix} x_D + 2 \\ y_D - 5 \end{pmatrix} = \begin{pmatrix} 3 \\ -4 \end{pmatrix}$.</p>
+    <p>$x_D + 2 = 3$ donc $x_D = 1$. $y_D - 5 = -4$ donc $y_D = 1$. $D(1, 1)$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $M = \left(\dfrac{-3+5}{2} ;\; \dfrac{2+(-2)}{2}\right) = (1, 0)$.</p>
+    <p><strong>2.</strong> $C(1, 0) = M(1, 0)$. Oui, $C$ est exactement le milieu de $[AB]$.</p>
+    <p><strong>3.</strong> $\overrightarrow{AB} = \begin{pmatrix} 8 \\ -4 \end{pmatrix}$ et $\overrightarrow{AC} = \begin{pmatrix} 4 \\ -2 \end{pmatrix}$.</p>
+    <p>Déterminant : $8 \times (-2) - (-4) \times 4 = -16 + 16 = 0$.</p>
+    <p>Les vecteurs sont colinéaires donc $A$, $B$ et $C$ sont <strong>alignés</strong>.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Déterminant : $3 \times 4 - (-6) \times (-2) = 12 - 12 = 0$. <strong>Colinéaires</strong>.</p>
+    <p>(On vérifie : $\vec{v} = -\dfrac{2}{3}\vec{u}$.)</p>
+    <p><strong>2.</strong> $\overrightarrow{AB} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$ et $\overrightarrow{AC} = \begin{pmatrix} 6 \\ 9 \end{pmatrix}$.</p>
+    <p>Déterminant : $2 \times 9 - 3 \times 6 = 18 - 18 = 0$. <strong>Alignés</strong>.</p>
+    <p>(On vérifie : $\overrightarrow{AC} = 3\overrightarrow{AB}$.)</p>
+    <p><strong>3.</strong> Colinéaires $\iff$ $2 \times 9 - k \times 6 = 0 \iff 18 - 6k = 0 \iff k = 3$.</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $m = \dfrac{-3-3}{4-1} = \dfrac{-6}{3} = -2$.</p>
+    <p>$y = -2x + p$. On remplace avec $A(1, 3)$ : $3 = -2 + p$, donc $p = 5$.</p>
+    <p>Équation : $y = -2x + 5$.</p>
+    <p><strong>2.</strong> Même coefficient directeur $m = 2$ mais ordonnées à l'origine différentes. Droites <strong>parallèles</strong>.</p>
+    <p><strong>3.</strong> $3x - 1 = -x + 7 \iff 4x = 8 \iff x = 2$. $y = 3(2) - 1 = 5$.</p>
+    <p>Point d'intersection : $(2, 5)$.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="fonctions.html">&larr; Fonctions : généralités</a>
+  <a href="../../2013-2014/seconde/statistiques.html">Statistiques et probabilités &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+<script>
+// === UTILITAIRES ===
+function drawGrid(ctx, w, h, ox, oy, sc) {
+  ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+  for (let i = -20; i <= 20; i++) {
+    let px = ox + i * sc;
+    if (px >= 0 && px <= w) { ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, h); ctx.stroke(); }
+    let py = oy - i * sc;
+    if (py >= 0 && py <= h) { ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(w, py); ctx.stroke(); }
+  }
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke();
+  ctx.fillStyle = '#999'; ctx.font = '10px Arial';
+  for (let i = -10; i <= 10; i++) {
+    if (i === 0) continue;
+    let px = ox + i * sc, py = oy - i * sc;
+    if (px > 10 && px < w - 10) ctx.fillText(i, px - 3, oy + 13);
+    if (py > 10 && py < h - 10) ctx.fillText(i, ox + 5, py + 3);
+  }
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, lw) {
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 2;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const hl = 10;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - hl * Math.cos(angle - 0.35), y2 - hl * Math.sin(angle - 0.35));
+  ctx.lineTo(x2 - hl * Math.cos(angle + 0.35), y2 - hl * Math.sin(angle + 0.35));
+  ctx.closePath(); ctx.fill();
+}
+
+function drawPoint(ctx, x, y, label, color) {
+  ctx.fillStyle = color || '#c0392b';
+  ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
+  if (label) { ctx.font = 'bold 13px Arial'; ctx.fillText(label, x + 7, y - 7); }
+}
+
+// === 1. TRANSLATION ===
+function drawTranslation() {
+  const c = document.getElementById('canvasTranslation');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w * 0.3, oy = h * 0.65, sc = 35;
+  const vx = parseInt(document.getElementById('vecX').value) / 10;
+  const vy = parseInt(document.getElementById('vecY').value) / 10;
+  document.getElementById('vecXval').textContent = vx.toFixed(0);
+  document.getElementById('vecYval').textContent = vy.toFixed(0);
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  // Triangle original
+  const tri = [[1, 1], [3, 1], [2, 3]];
+  ctx.strokeStyle = '#2a5298'; ctx.fillStyle = 'rgba(42,82,152,0.15)'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  tri.forEach((p, i) => { let px = ox + p[0]*sc, py = oy - p[1]*sc; i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); });
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  tri.forEach((p, i) => drawPoint(ctx, ox + p[0]*sc, oy - p[1]*sc, String.fromCharCode(65+i), '#2a5298'));
+  // Triangle translaté
+  ctx.strokeStyle = '#c0392b'; ctx.fillStyle = 'rgba(192,57,43,0.15)'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  tri.forEach((p, i) => { let px = ox + (p[0]+vx)*sc, py = oy - (p[1]+vy)*sc; i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); });
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  tri.forEach((p, i) => drawPoint(ctx, ox + (p[0]+vx)*sc, oy - (p[1]+vy)*sc, String.fromCharCode(65+i)+"'", '#c0392b'));
+  // Vecteur
+  tri.forEach(p => {
+    ctx.setLineDash([4,4]); ctx.strokeStyle = '#888'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(ox+p[0]*sc, oy-p[1]*sc); ctx.lineTo(ox+(p[0]+vx)*sc, oy-(p[1]+vy)*sc); ctx.stroke();
+    ctx.setLineDash([]);
+  });
+  drawArrow(ctx, ox + 0.5*sc, oy + 1*sc, ox + (0.5+vx)*sc, oy - (-1+vy)*sc - 2*sc, '#27ae60', 2.5);
+  ctx.fillStyle = '#27ae60'; ctx.font = 'bold 13px Arial';
+  ctx.fillText('vecteur (' + vx.toFixed(0) + ', ' + vy.toFixed(0) + ')', ox + (0.5+vx/2)*sc - 20, oy - (vy/2 - 1)*sc + 20);
+  document.getElementById('resultTranslation').textContent =
+    'La translation de vecteur (' + vx.toFixed(0) + ', ' + vy.toFixed(0) + ') déplace chaque point de ' + vx.toFixed(0) + ' unités horizontalement et ' + vy.toFixed(0) + ' unités verticalement.';
+}
+['vecX', 'vecY'].forEach(id => document.getElementById(id).addEventListener('input', drawTranslation));
+drawTranslation();
+
+// === 2. PARALLÉLOGRAMME ===
+function randomParallelogram() {
+  const c = document.getElementById('canvasEgalite');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 35;
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  const ax = Math.floor(Math.random()*6) - 3, ay = Math.floor(Math.random()*4) - 1;
+  const vx = Math.floor(Math.random()*4) + 1, vy = Math.floor(Math.random()*4) + 1;
+  const bx = ax + vx, by = ay + vy;
+  const cx = ax + Math.floor(Math.random()*3) + 1, cy = ay - Math.floor(Math.random()*3) - 1;
+  const dx = cx + vx, dy = cy + vy;
+  const pts = [{x:ax,y:ay,l:'A'},{x:bx,y:by,l:'B'},{x:cx,y:cy,l:'C'},{x:dx,y:dy,l:'D'}];
+  // Parallélogramme
+  ctx.strokeStyle = '#ddd'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(ox+ax*sc, oy-ay*sc); ctx.lineTo(ox+bx*sc, oy-by*sc);
+  ctx.lineTo(ox+dx*sc, oy-dy*sc); ctx.lineTo(ox+cx*sc, oy-cy*sc);
+  ctx.closePath(); ctx.stroke();
+  // Vecteur AB
+  drawArrow(ctx, ox+ax*sc, oy-ay*sc, ox+bx*sc, oy-by*sc, '#2a5298', 2.5);
+  // Vecteur CD
+  drawArrow(ctx, ox+cx*sc, oy-cy*sc, ox+dx*sc, oy-dy*sc, '#c0392b', 2.5);
+  pts.forEach(p => drawPoint(ctx, ox+p.x*sc, oy-p.y*sc, p.l, '#333'));
+  document.getElementById('resultEgalite').innerHTML =
+    '<span style="color:#2a5298; font-weight:bold;">AB</span>(' + vx + ', ' + vy + ') = ' +
+    '<span style="color:#c0392b; font-weight:bold;">CD</span>(' + vx + ', ' + vy + '). ' +
+    'Les vecteurs sont égaux : ABDC est un parallélogramme.';
+}
+randomParallelogram();
+
+// === 3. COORDONNÉES D'UN VECTEUR ===
+function drawCoord() {
+  const c = document.getElementById('canvasCoord');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 35;
+  const ax = parseInt(document.getElementById('axCoord').value)/10;
+  const ay = parseInt(document.getElementById('ayCoord').value)/10;
+  const bx = parseInt(document.getElementById('bxCoord').value)/10;
+  const by = parseInt(document.getElementById('byCoord').value)/10;
+  ['axVal','ayVal','bxVal','byVal'].forEach((id,i) => {
+    document.getElementById(id).textContent = [ax,ay,bx,by][i].toFixed(0);
+  });
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  drawArrow(ctx, ox+ax*sc, oy-ay*sc, ox+bx*sc, oy-by*sc, '#2a5298', 2.5);
+  drawPoint(ctx, ox+ax*sc, oy-ay*sc, 'A('+ax.toFixed(0)+','+ay.toFixed(0)+')', '#2a5298');
+  drawPoint(ctx, ox+bx*sc, oy-by*sc, 'B('+bx.toFixed(0)+','+by.toFixed(0)+')', '#c0392b');
+  // composantes
+  ctx.setLineDash([4,4]); ctx.strokeStyle = '#e67e22'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(ox+ax*sc, oy-ay*sc); ctx.lineTo(ox+bx*sc, oy-ay*sc); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox+bx*sc, oy-ay*sc); ctx.lineTo(ox+bx*sc, oy-by*sc); ctx.stroke();
+  ctx.setLineDash([]);
+  const dx = bx-ax, dy = by-ay;
+  const norme = Math.sqrt(dx*dx+dy*dy);
+  document.getElementById('resultCoord').innerHTML =
+    'AB(' + dx.toFixed(0) + ', ' + dy.toFixed(0) + '). Norme ||AB|| = √(' + (dx*dx).toFixed(0) + ' + ' + (dy*dy).toFixed(0) + ') = ' + norme.toFixed(2);
+}
+['axCoord','ayCoord','bxCoord','byCoord'].forEach(id => document.getElementById(id).addEventListener('input', drawCoord));
+drawCoord();
+
+// === 4. SOMME DE VECTEURS ===
+function drawSomme() {
+  const c = document.getElementById('canvasSomme');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w * 0.3, oy = h * 0.6, sc = 35;
+  const ux = parseInt(document.getElementById('ux').value)/10;
+  const uy = parseInt(document.getElementById('uy').value)/10;
+  const vx = parseInt(document.getElementById('vx').value)/10;
+  const vy = parseInt(document.getElementById('vy').value)/10;
+  ['uxVal','uyVal','vxVal','vyVal'].forEach((id,i) => {
+    document.getElementById(id).textContent = [ux,uy,vx,vy][i].toFixed(0);
+  });
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  const sx = ux+vx, sy = uy+vy;
+  // Parallélogramme en pointillés
+  ctx.setLineDash([4,4]); ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(ox+ux*sc, oy-uy*sc); ctx.lineTo(ox+sx*sc, oy-sy*sc);
+  ctx.moveTo(ox+vx*sc, oy-vy*sc); ctx.lineTo(ox+sx*sc, oy-sy*sc);
+  ctx.stroke(); ctx.setLineDash([]);
+  drawArrow(ctx, ox, oy, ox+ux*sc, oy-uy*sc, '#2a5298', 2.5);
+  drawArrow(ctx, ox, oy, ox+vx*sc, oy-vy*sc, '#27ae60', 2.5);
+  drawArrow(ctx, ox, oy, ox+sx*sc, oy-sy*sc, '#c0392b', 3);
+  ctx.font = 'bold 13px Arial';
+  ctx.fillStyle = '#2a5298'; ctx.fillText('u', ox+ux*sc/2-15, oy-uy*sc/2);
+  ctx.fillStyle = '#27ae60'; ctx.fillText('v', ox+vx*sc/2+8, oy-vy*sc/2);
+  ctx.fillStyle = '#c0392b'; ctx.fillText('u+v', ox+sx*sc/2+8, oy-sy*sc/2-5);
+  document.getElementById('resultSomme').innerHTML =
+    '<span style="color:#2a5298">u(' + ux.toFixed(0) + ', ' + uy.toFixed(0) + ')</span> + ' +
+    '<span style="color:#27ae60">v(' + vx.toFixed(0) + ', ' + vy.toFixed(0) + ')</span> = ' +
+    '<span style="color:#c0392b; font-weight:bold">u+v(' + sx.toFixed(0) + ', ' + sy.toFixed(0) + ')</span>';
+}
+['ux','uy','vx','vy'].forEach(id => document.getElementById(id).addEventListener('input', drawSomme));
+drawSomme();
+
+// === 5. SCALAIRE ===
+function drawScalaire() {
+  const c = document.getElementById('canvasScalaire');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 35;
+  const k = parseInt(document.getElementById('kSlider').value) / 10;
+  document.getElementById('kVal').textContent = k.toFixed(1);
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  const ux = 2, uy = 1;
+  drawArrow(ctx, ox, oy, ox+ux*sc, oy-uy*sc, '#2a5298', 2);
+  drawArrow(ctx, ox, oy, ox+k*ux*sc, oy-k*uy*sc, '#c0392b', 2.5);
+  ctx.font = 'bold 13px Arial';
+  ctx.fillStyle = '#2a5298'; ctx.fillText('u(2, 1)', ox+ux*sc+5, oy-uy*sc);
+  ctx.fillStyle = '#c0392b'; ctx.fillText(k.toFixed(1)+'u(' + (k*ux).toFixed(1) + ', ' + (k*uy).toFixed(1) + ')', ox+k*ux*sc+5, oy-k*uy*sc-5);
+  let desc = k > 0 ? 'Même sens que u' : k < 0 ? 'Sens opposé à u' : 'Vecteur nul';
+  desc += '. Norme : ' + (Math.abs(k) * Math.sqrt(5)).toFixed(2);
+  document.getElementById('resultScalaire').textContent = k.toFixed(1) + ' × u = (' + (k*ux).toFixed(1) + ', ' + (k*uy).toFixed(1) + '). ' + desc + '.';
+}
+document.getElementById('kSlider').addEventListener('input', drawScalaire);
+drawScalaire();
+
+// === 6. MILIEU ===
+function drawMilieu() {
+  const c = document.getElementById('canvasMilieu');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 30;
+  const ax = parseInt(document.getElementById('axM').value)/10;
+  const ay = parseInt(document.getElementById('ayM').value)/10;
+  const bx = parseInt(document.getElementById('bxM').value)/10;
+  const by = parseInt(document.getElementById('byM').value)/10;
+  ['axMval','ayMval','bxMval','byMval'].forEach((id,i) => {
+    document.getElementById(id).textContent = [ax,ay,bx,by][i].toFixed(0);
+  });
+  const mx = (ax+bx)/2, my = (ay+by)/2;
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(ox+ax*sc, oy-ay*sc); ctx.lineTo(ox+bx*sc, oy-by*sc); ctx.stroke();
+  drawPoint(ctx, ox+ax*sc, oy-ay*sc, 'A('+ax.toFixed(0)+','+ay.toFixed(0)+')', '#2a5298');
+  drawPoint(ctx, ox+bx*sc, oy-by*sc, 'B('+bx.toFixed(0)+','+by.toFixed(0)+')', '#2a5298');
+  drawPoint(ctx, ox+mx*sc, oy-my*sc, 'M('+mx.toFixed(1)+','+my.toFixed(1)+')', '#c0392b');
+  // distances
+  const d1 = Math.sqrt((mx-ax)**2 + (my-ay)**2);
+  const d2 = Math.sqrt((bx-mx)**2 + (by-my)**2);
+  document.getElementById('resultMilieu').textContent =
+    'Milieu M = ((' + ax.toFixed(0) + '+' + bx.toFixed(0) + ')/2, (' + ay.toFixed(0) + '+' + by.toFixed(0) + ')/2) = (' + mx.toFixed(1) + ', ' + my.toFixed(1) + '). AM = MB = ' + d1.toFixed(2);
+}
+['axM','ayM','bxM','byM'].forEach(id => document.getElementById(id).addEventListener('input', drawMilieu));
+drawMilieu();
+
+// === 7. COLINÉARITÉ ===
+function drawCol() {
+  const c = document.getElementById('canvasCol');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 35;
+  const ux = parseInt(document.getElementById('cux').value)/10;
+  const uy = parseInt(document.getElementById('cuy').value)/10;
+  const vx = parseInt(document.getElementById('cvx').value)/10;
+  const vy = parseInt(document.getElementById('cvy').value)/10;
+  ['cuxVal','cuyVal','cvxVal','cvyVal'].forEach((id,i) => {
+    document.getElementById(id).textContent = [ux,uy,vx,vy][i].toFixed(0);
+  });
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  drawArrow(ctx, ox, oy, ox+ux*sc, oy-uy*sc, '#2a5298', 2.5);
+  drawArrow(ctx, ox, oy, ox+vx*sc, oy-vy*sc, '#27ae60', 2.5);
+  ctx.font = 'bold 13px Arial';
+  ctx.fillStyle = '#2a5298'; ctx.fillText('u('+ux.toFixed(0)+','+uy.toFixed(0)+')', ox+ux*sc+5, oy-uy*sc);
+  ctx.fillStyle = '#27ae60'; ctx.fillText('v('+vx.toFixed(0)+','+vy.toFixed(0)+')', ox+vx*sc+5, oy-vy*sc);
+  const det = ux*vy - uy*vx;
+  const col = det === 0;
+  ctx.fillStyle = col ? '#27ae60' : '#c0392b';
+  ctx.font = 'bold 14px Arial';
+  ctx.fillText(col ? 'COLINÉAIRES' : 'NON COLINÉAIRES', 10, 25);
+  document.getElementById('resultCol').innerHTML =
+    'Déterminant = ' + ux.toFixed(0) + ' × ' + vy.toFixed(0) + ' - ' + uy.toFixed(0) + ' × ' + vx.toFixed(0) + ' = ' + det.toFixed(0) + '. ' +
+    (col ? '<strong style="color:#27ae60">Vecteurs colinéaires (même direction).</strong>' : '<strong style="color:#c0392b">Vecteurs non colinéaires (directions différentes).</strong>');
+}
+['cux','cuy','cvx','cvy'].forEach(id => document.getElementById(id).addEventListener('input', drawCol));
+drawCol();
+
+// === 8. DROITE ===
+function drawDroite() {
+  const c = document.getElementById('canvasDroite');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, sc = 35;
+  const m = parseInt(document.getElementById('mSlider').value) / 10;
+  const p = parseInt(document.getElementById('pSlider').value) / 10;
+  document.getElementById('mVal').textContent = m.toFixed(1);
+  document.getElementById('pVal').textContent = p.toFixed(1);
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, ox, oy, sc);
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  for (let px = 0; px < w; px++) {
+    let x = (px - ox) / sc;
+    let y = m * x + p;
+    let py = oy - y * sc;
+    if (py < -100 || py > h + 100) continue;
+    px === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  // Ordonnée à l'origine
+  drawPoint(ctx, ox, oy - p * sc, 'p=' + p.toFixed(1), '#c0392b');
+  // Triangle de pente
+  if (Math.abs(m) > 0.05) {
+    const x1 = 1, y1 = m + p, x0 = 0, y0 = p;
+    ctx.setLineDash([3,3]); ctx.strokeStyle = '#e67e22'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(ox, oy-p*sc); ctx.lineTo(ox+sc, oy-p*sc); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox+sc, oy-p*sc); ctx.lineTo(ox+sc, oy-y1*sc); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#e67e22'; ctx.font = '11px Arial';
+    ctx.fillText('1', ox + sc/2 - 3, oy - p*sc + 14);
+    ctx.fillText('m=' + m.toFixed(1), ox + sc + 4, oy - (p + m/2)*sc);
+  }
+  let desc = 'y = ' + m.toFixed(1) + 'x + ' + p.toFixed(1) + '. ';
+  if (m > 0) desc += 'Droite croissante (m > 0).';
+  else if (m < 0) desc += 'Droite décroissante (m < 0).';
+  else desc += 'Droite horizontale (m = 0).';
+  document.getElementById('resultDroite').textContent = desc;
+}
+['mSlider','pSlider'].forEach(id => document.getElementById(id).addEventListener('input', drawDroite));
+drawDroite();
+</script>
+
+</body>
+</html>
