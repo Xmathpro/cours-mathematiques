@@ -1,0 +1,91 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --noir: #1a1a1a;
+  --gris-fonce: #444;
+  --gris: #888;
+  --gris-clair: #e8e8e8;
+  --fond: #fafafa;
+  --blanc: #ffffff;
+  --accent: #2a5298;
+  --accent-clair: #eef2fb;
+  --police-texte: 'Georgia', serif;
+  --police-ui: Arial, sans-serif;
+  --police-code: 'Courier New', monospace;
+  --largeur: 720px;
+  --ligne: 1.8;
+}
+
+html { font-size: 16px; }
+body { font-family: var(--police-texte); color: var(--noir); background: var(--fond); line-height: var(--ligne); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header { border-bottom: 1px solid var(--gris-clair); background: var(--blanc); }
+.site-header-inner { max-width: var(--largeur); margin: 0 auto; padding: 1.25rem 1rem; display: flex; align-items: baseline; gap: 2rem; flex-wrap: wrap; }
+.site-titre { font-size: 1rem; font-weight: normal; color: var(--noir); }
+.site-titre span { color: var(--accent); font-style: italic; }
+.site-nav { display: flex; gap: 1.5rem; }
+.site-nav a { font-size: 0.85rem; color: var(--gris-fonce); font-family: var(--police-ui); }
+.site-nav a:hover { color: var(--accent); text-decoration: none; }
+
+.hero { max-width: var(--largeur); margin: 4rem auto 3rem; padding: 0 1rem 0 1.75rem; border-left: 2px solid var(--accent); }
+.hero h1 { font-size: 1.55rem; font-weight: normal; line-height: 1.4; margin-bottom: 0.75rem; }
+.hero p { font-size: 0.95rem; color: var(--gris-fonce); max-width: 520px; line-height: 1.7; }
+
+.section { max-width: var(--largeur); margin: 0 auto 3rem; padding: 0 1rem; }
+.section-titre { font-size: 0.73rem; font-family: var(--police-ui); letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--gris-clair); }
+.cours-liste { list-style: none; }
+.cours-item { display: grid; grid-template-columns: 80px 1fr 80px; align-items: baseline; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--gris-clair); }
+.cours-item:last-child { border-bottom: none; }
+.cours-annee { font-family: var(--police-ui); font-size: 0.78rem; color: var(--gris); }
+.cours-titre-lien { color: var(--noir); font-size: 0.9rem; }
+.cours-titre-lien:hover { color: var(--accent); text-decoration: none; }
+.cours-badge { font-family: var(--police-ui); font-size: 0.72rem; color: var(--blanc); background: var(--accent); padding: 2px 7px; border-radius: 2px; text-align: center; }
+
+.cours-header { background: var(--blanc); border-bottom: 1px solid var(--gris-clair); }
+.cours-header-inner { max-width: var(--largeur); margin: 0 auto; padding: 2.5rem 1rem 2rem; }
+.cours-meta { font-family: var(--police-ui); font-size: 0.78rem; color: var(--gris); margin-bottom: 0.75rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.cours-titre-principal { font-size: 1.75rem; font-weight: normal; line-height: 1.3; margin-bottom: 0.4rem; }
+.cours-sous-titre { font-size: 0.95rem; color: var(--gris-fonce); font-style: italic; }
+
+.cours-corps { max-width: var(--largeur); margin: 2.5rem auto 4rem; padding: 0 1rem; }
+.cours-corps h2 { font-size: 1.1rem; font-weight: normal; color: var(--accent); margin: 2.5rem 0 0.75rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--accent-clair); }
+.cours-corps h3 { font-size: 1rem; font-weight: bold; color: var(--noir); margin: 1.75rem 0 0.5rem; }
+.cours-corps p { margin-bottom: 1rem; font-size: 0.95rem; }
+.cours-corps ul, .cours-corps ol { margin: 0.5rem 0 1rem 1.5rem; font-size: 0.95rem; }
+.cours-corps li { margin-bottom: 0.3rem; }
+
+.definition, .theoreme, .propriete, .exemple, .remarque, .methode {
+  margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 3px solid;
+}
+.definition { border-color: var(--accent); background: var(--accent-clair); }
+.theoreme { border-color: #c0392b; background: #fdf3f2; }
+.propriete { border-color: #27ae60; background: #f2faf5; }
+.exemple { border-color: #888; background: var(--blanc); border: 1px solid var(--gris-clair); border-left: 3px solid #888; }
+.remarque { border-color: #e67e22; background: #fef9f2; }
+.methode { border-color: #8e44ad; background: #f9f5fd; }
+
+.encadre-titre { font-family: var(--police-ui); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: bold; }
+.definition .encadre-titre { color: var(--accent); }
+.theoreme .encadre-titre { color: #c0392b; }
+.propriete .encadre-titre { color: #27ae60; }
+.exemple .encadre-titre { color: var(--gris-fonce); }
+.remarque .encadre-titre { color: #e67e22; }
+.methode .encadre-titre { color: #8e44ad; }
+
+pre, code { font-family: var(--police-code); font-size: 0.85rem; }
+pre { background: #f4f4f4; border: 1px solid var(--gris-clair); padding: 1rem 1.25rem; overflow-x: auto; margin: 1rem 0; line-height: 1.6; }
+code { background: #f4f4f4; padding: 1px 4px; border-radius: 2px; }
+
+.cours-nav { max-width: var(--largeur); margin: 0 auto; padding: 1.5rem 1rem; display: flex; justify-content: space-between; border-top: 1px solid var(--gris-clair); font-family: var(--police-ui); font-size: 0.85rem; }
+.cours-nav a { color: var(--gris-fonce); }
+.cours-nav a:hover { color: var(--accent); text-decoration: none; }
+
+.site-footer { border-top: 1px solid var(--gris-clair); padding: 1.5rem 1rem; text-align: center; font-family: var(--police-ui); font-size: 0.78rem; color: var(--gris); margin-top: 3rem; }
+
+@media (max-width: 600px) {
+  .cours-item { grid-template-columns: 60px 1fr; }
+  .cours-badge { display: none; }
+  .site-nav { gap: 0.75rem; }
+}
