@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistiques et probabilités . Seconde</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin: 1.5rem 0; }
+  .interactive-box h4 { font-family: Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #2a5298; margin-bottom: 0.75rem; }
+  canvas { display: block; margin: 0 auto; border: 1px solid #e8e8e8; border-radius: 4px; max-width: 100%; }
+  .controls { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.75rem; font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; }
+  .controls label { font-weight: bold; }
+  .controls input[type="range"] { width: 120px; cursor: pointer; }
+  .controls input[type="number"] { width: 50px; padding: 3px; border: 1px solid #ccc; border-radius: 3px; font-size: 0.85rem; }
+  .controls button { background: #2a5298; color: #fff; border: none; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .controls button:hover { background: #1e3d72; }
+  .result-text { font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; margin-top: 0.5rem; min-height: 1.2em; line-height: 1.7; }
+  .data-input { font-family: 'Courier New', monospace; font-size: 0.9rem; width: 100%; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#secondes">Seconde</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Seconde</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2013-2014</span>
+    </div>
+    <h1 class="cours-titre-principal">Statistiques et probabilités</h1>
+    <p class="cours-sous-titre">Moyenne, médiane, quartiles, diagrammes et probabilités</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Statistiques descriptives</h2>
+
+  <h3>1. Vocabulaire</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définitions</div>
+    <ul>
+      <li><strong>Population :</strong> l'ensemble des individus étudiés.</li>
+      <li><strong>Caractère :</strong> la propriété étudiée (quantitative si c'est un nombre, qualitative sinon).</li>
+      <li><strong>Effectif :</strong> le nombre d'individus ayant une valeur donnée.</li>
+      <li><strong>Fréquence :</strong> effectif divisé par l'effectif total.</li>
+    </ul>
+  </div>
+
+  <h3>2. Indicateurs de position</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Moyenne</div>
+    <p>La <strong>moyenne</strong> d'une série de $n$ valeurs $x_1, x_2, \ldots, x_n$ est :</p>
+    $$\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+    <p>La moyenne est sensible aux valeurs extrêmes.</p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Médiane</div>
+    <p>La <strong>médiane</strong> $M_e$ est la valeur qui partage la série ordonnée en deux groupes de même effectif.</p>
+    <ul>
+      <li>Si $n$ est impair : la médiane est la valeur centrale (celle de rang $\frac{n+1}{2}$).</li>
+      <li>Si $n$ est pair : la médiane est la moyenne des deux valeurs centrales (rangs $\frac{n}{2}$ et $\frac{n}{2}+1$).</li>
+    </ul>
+    <p>La médiane n'est pas sensible aux valeurs extrêmes.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : moyenne et médiane</h4>
+    <p style="font-family: Arial, sans-serif; font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">Entrez vos valeurs séparées par des virgules :</p>
+    <input type="text" class="data-input" id="dataInput" value="12, 8, 15, 7, 20, 11, 9, 14, 6, 18">
+    <canvas id="canvasMoyMed" width="600" height="250"></canvas>
+    <div class="controls">
+      <button onclick="updateStats()">Calculer</button>
+      <button onclick="addOutlier()">Ajouter une valeur extrême</button>
+      <button onclick="resetData()">Réinitialiser</button>
+    </div>
+    <div class="result-text" id="resultStats"></div>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Quand on dit "le salaire moyen est de 2500 euros", cela ne signifie pas que la plupart des gens gagnent autour de 2500 euros. Quelques très hauts salaires tirent la moyenne vers le haut. La médiane est souvent plus représentative de la situation "typique". En France, le salaire médian est inférieur au salaire moyen. Quel indicateur un journaliste choisit de publier n'est jamais un choix neutre.
+    </p>
+  </div>
+
+  <h3>3. Quartiles et étendue</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définitions</div>
+    <ul>
+      <li><strong>Premier quartile $Q_1$ :</strong> au moins 25% des valeurs sont inférieures ou égales à $Q_1$.</li>
+      <li><strong>Troisième quartile $Q_3$ :</strong> au moins 75% des valeurs sont inférieures ou égales à $Q_3$.</li>
+      <li><strong>Écart interquartile :</strong> $Q_3 - Q_1$. Il contient 50% des valeurs centrales.</li>
+      <li><strong>Étendue :</strong> Max $-$ Min.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : boîte à moustaches (box plot)</h4>
+    <canvas id="canvasBoxplot" width="600" height="200"></canvas>
+    <div class="result-text" id="resultBoxplot"></div>
+  </div>
+
+  <h3>4. Écart-type</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>L'<strong>écart-type</strong> $\sigma$ mesure la dispersion des valeurs autour de la moyenne :</p>
+    $$\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2}$$
+    <p>Plus l'écart-type est grand, plus les valeurs sont dispersées. Un écart-type de 0 signifie que toutes les valeurs sont identiques.</p>
+  </div>
+
+  <h2>II. Diagrammes</h2>
+
+  <div class="interactive-box">
+    <h4>Explorer : histogramme des données</h4>
+    <canvas id="canvasHisto" width="600" height="280"></canvas>
+    <div class="result-text" id="resultHisto"></div>
+  </div>
+
+  <h2>III. Probabilités</h2>
+
+  <h3>1. Vocabulaire</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définitions</div>
+    <ul>
+      <li><strong>Expérience aléatoire :</strong> expérience dont on ne peut pas prévoir le résultat (lancer un dé, tirer une carte).</li>
+      <li><strong>Univers $\Omega$ :</strong> ensemble de toutes les issues possibles.</li>
+      <li><strong>Événement :</strong> sous-ensemble de $\Omega$. Un événement est <strong>réalisé</strong> si l'issue obtenue lui appartient.</li>
+      <li><strong>Événement certain :</strong> $\Omega$ (se réalise toujours).</li>
+      <li><strong>Événement impossible :</strong> $\emptyset$ (ne se réalise jamais).</li>
+      <li><strong>Événement contraire :</strong> $\bar{A}$ : "A ne se réalise pas".</li>
+    </ul>
+  </div>
+
+  <h3>2. Probabilité d'un événement</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>La <strong>probabilité</strong> d'un événement $A$ est un nombre $P(A)$ compris entre 0 et 1 :</p>
+    <ul>
+      <li>$P(A) = 0$ : événement impossible.</li>
+      <li>$P(A) = 1$ : événement certain.</li>
+      <li>$P(\Omega) = 1$.</li>
+      <li>$P(\bar{A}) = 1 - P(A)$.</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Situation d'équiprobabilité</div>
+    <p>Si toutes les issues ont la même probabilité (dé non truqué, pièce équilibrée) :</p>
+    $$P(A) = \frac{\text{nombre d'issues favorables}}{\text{nombre total d'issues}}$$
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : lancer de dés</h4>
+    <canvas id="canvasDes" width="600" height="300"></canvas>
+    <div class="controls">
+      <label>Nombre de lancers :</label>
+      <button onclick="lancerDes(10)">10</button>
+      <button onclick="lancerDes(100)">100</button>
+      <button onclick="lancerDes(1000)">1 000</button>
+      <button onclick="lancerDes(10000)">10 000</button>
+      <button onclick="lancerDes(0)">Réinitialiser</button>
+    </div>
+    <div class="result-text" id="resultDes"></div>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Plus on lance le dé, plus les fréquences se rapprochent de $\frac{1}{6} \approx 16{,}7\%$ pour chaque face. C'est la <strong>loi des grands nombres</strong>. Avec 10 lancers, une face peut apparaître 0 fois ou 4 fois sans que le dé soit truqué. Avec 10 000 lancers, un écart significatif par rapport à $\frac{1}{6}$ serait suspect. C'est ainsi qu'on détecte si un dé (ou un processus) est biaisé : on observe beaucoup et on compare les fréquences observées aux fréquences théoriques.
+    </p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : probabilité d'un événement (pièce de monnaie)</h4>
+    <canvas id="canvasPiece" width="600" height="250"></canvas>
+    <div class="controls">
+      <label>Nombre de lancers :</label>
+      <button onclick="lancerPieces(10)">10</button>
+      <button onclick="lancerPieces(100)">100</button>
+      <button onclick="lancerPieces(1000)">1 000</button>
+      <button onclick="lancerPieces(0)">Réinitialiser</button>
+    </div>
+    <div class="result-text" id="resultPiece"></div>
+  </div>
+
+  <h3>3. Opérations sur les événements</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Réunion et intersection</div>
+    <ul>
+      <li>$A \cup B$ ("A ou B") : au moins l'un des deux se réalise.</li>
+      <li>$A \cap B$ ("A et B") : les deux se réalisent simultanément.</li>
+      <li><strong>Formule :</strong> $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.</li>
+      <li>Si $A$ et $B$ sont <strong>incompatibles</strong> ($A \cap B = \emptyset$) : $P(A \cup B) = P(A) + P(B)$.</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>On tire une carte dans un jeu de 52 cartes. $A$ : "obtenir un as". $B$ : "obtenir un coeur".</p>
+    <p>$P(A) = \dfrac{4}{52}$, $P(B) = \dfrac{13}{52}$, $P(A \cap B) = \dfrac{1}{52}$ (l'as de coeur).</p>
+    <p>$P(A \cup B) = \dfrac{4}{52} + \dfrac{13}{52} - \dfrac{1}{52} = \dfrac{16}{52} = \dfrac{4}{13}$.</p>
+  </div>
+
+  <h2>IV. Exercices</h2>
+
+  <h3>Exercice 1 : statistiques</h3>
+  <p>Les notes d'un contrôle de 10 élèves sont : 8, 12, 15, 9, 14, 11, 7, 16, 13, 10.</p>
+  <ol>
+    <li>Calculer la moyenne.</li>
+    <li>Ordonner les valeurs et déterminer la médiane.</li>
+    <li>Déterminer les quartiles $Q_1$ et $Q_3$.</li>
+    <li>Calculer l'étendue et l'écart interquartile.</li>
+  </ol>
+
+  <h3>Exercice 2 : influence d'une valeur extrême</h3>
+  <p>On ajoute un 11e élève qui a obtenu 2 au contrôle.</p>
+  <ol>
+    <li>Recalculer la moyenne. Comment a-t-elle changé ?</li>
+    <li>Recalculer la médiane. Comment a-t-elle changé ?</li>
+    <li>Quel indicateur est le plus "résistant" aux valeurs extrêmes ?</li>
+  </ol>
+
+  <h3>Exercice 3 : probabilités</h3>
+  <p>On lance deux dés et on additionne les résultats.</p>
+  <ol>
+    <li>Combien y a-t-il d'issues possibles au total ?</li>
+    <li>Calculer $P(\text{somme} = 7)$.</li>
+    <li>Calculer $P(\text{somme} \geq 10)$.</li>
+    <li>Quel est l'événement le plus probable : "somme = 6" ou "somme = 12" ?</li>
+  </ol>
+
+  <h3>Exercice 4 : cartes</h3>
+  <p>On tire une carte au hasard dans un jeu de 52 cartes.</p>
+  <ol>
+    <li>$P(\text{roi}) = $ ?</li>
+    <li>$P(\text{carreau}) = $ ?</li>
+    <li>$P(\text{roi ou carreau}) = $ ?</li>
+    <li>$P(\text{ni roi ni carreau}) = $ ?</li>
+  </ol>
+
+  <h2>V. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\bar{x} = \dfrac{8+12+15+9+14+11+7+16+13+10}{10} = \dfrac{115}{10} = 11{,}5$.</p>
+    <p><strong>2.</strong> Valeurs ordonnées : 7, 8, 9, 10, 11, 12, 13, 14, 15, 16.</p>
+    <p>$n = 10$ (pair). Médiane $= \dfrac{11 + 12}{2} = 11{,}5$.</p>
+    <p><strong>3.</strong> $Q_1$ : valeur de rang $\dfrac{10}{4} = 2{,}5$, soit la 3e valeur : $Q_1 = 9$.</p>
+    <p>$Q_3$ : valeur de rang $\dfrac{3 \times 10}{4} = 7{,}5$, soit la 8e valeur : $Q_3 = 14$.</p>
+    <p><strong>4.</strong> Étendue $= 16 - 7 = 9$. Écart interquartile $= Q_3 - Q_1 = 14 - 9 = 5$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Nouvelle moyenne $= \dfrac{115 + 2}{11} = \dfrac{117}{11} \approx 10{,}64$. La moyenne a baissé de $11{,}5$ à $10{,}64$ (presque 1 point de moins).</p>
+    <p><strong>2.</strong> Valeurs ordonnées : 2, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16. $n = 11$ (impair). Médiane $=$ valeur de rang 6 $= 11$. La médiane n'a presque pas bougé (de 11,5 à 11).</p>
+    <p><strong>3.</strong> La <strong>médiane</strong> est plus résistante aux valeurs extrêmes. Un seul élève à 2 fait chuter la moyenne de presque 1 point mais la médiane ne bouge presque pas.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $6 \times 6 = 36$ issues possibles.</p>
+    <p><strong>2.</strong> Somme = 7 : (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 issues. $P = \dfrac{6}{36} = \dfrac{1}{6}$.</p>
+    <p><strong>3.</strong> Somme $\geq 10$ : 10 = 3 issues (4,6)(5,5)(6,4), 11 = 2 issues (5,6)(6,5), 12 = 1 issue (6,6). Total = 6. $P = \dfrac{6}{36} = \dfrac{1}{6}$.</p>
+    <p><strong>4.</strong> Somme = 6 : (1,5)(2,4)(3,3)(4,2)(5,1) = 5 issues. $P = \dfrac{5}{36}$.</p>
+    <p>Somme = 12 : (6,6) = 1 issue. $P = \dfrac{1}{36}$.</p>
+    <p>"Somme = 6" est <strong>5 fois plus probable</strong> que "somme = 12".</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $P(\text{roi}) = \dfrac{4}{52} = \dfrac{1}{13}$.</p>
+    <p><strong>2.</strong> $P(\text{carreau}) = \dfrac{13}{52} = \dfrac{1}{4}$.</p>
+    <p><strong>3.</strong> $P(\text{roi ou carreau}) = P(\text{roi}) + P(\text{carreau}) - P(\text{roi de carreau}) = \dfrac{4}{52} + \dfrac{13}{52} - \dfrac{1}{52} = \dfrac{16}{52} = \dfrac{4}{13}$.</p>
+    <p><strong>4.</strong> $P(\text{ni roi ni carreau}) = 1 - P(\text{roi ou carreau}) = 1 - \dfrac{4}{13} = \dfrac{9}{13}$.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2012-2013/seconde/geometrie.html">&larr; Géométrie et vecteurs</a>
+  <a href="../../index.html">Retour à l'accueil &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+<script>
+// === STATISTIQUES : MOYENNE, MÉDIANE, BOXPLOT ===
+let currentData = [12, 8, 15, 7, 20, 11, 9, 14, 6, 18];
+
+function parseData() {
+  const raw = document.getElementById('dataInput').value;
+  return raw.split(',').map(s => parseFloat(s.trim())).filter(n => !isNaN(n));
+}
+
+function stats(arr) {
+  const sorted = [...arr].sort((a,b) => a - b);
+  const n = sorted.length;
+  const mean = arr.reduce((a,b) => a+b, 0) / n;
+  let median;
+  if (n % 2 === 1) median = sorted[Math.floor(n/2)];
+  else median = (sorted[n/2 - 1] + sorted[n/2]) / 2;
+  const q1 = sorted[Math.floor(n * 0.25)];
+  const q3 = sorted[Math.floor(n * 0.75)];
+  const min = sorted[0], max = sorted[n-1];
+  const variance = arr.reduce((s, x) => s + (x - mean) ** 2, 0) / n;
+  const stddev = Math.sqrt(variance);
+  return { sorted, mean, median, q1, q3, min, max, stddev, n };
+}
+
+function updateStats() {
+  currentData = parseData();
+  drawStatsViz();
+}
+
+function addOutlier() {
+  const outlier = Math.round(Math.random() * 50 + 80);
+  document.getElementById('dataInput').value += ', ' + outlier;
+  updateStats();
+}
+
+function resetData() {
+  document.getElementById('dataInput').value = '12, 8, 15, 7, 20, 11, 9, 14, 6, 18';
+  updateStats();
+}
+
+function drawStatsViz() {
+  const data = parseData();
+  if (data.length < 2) return;
+  const s = stats(data);
+
+  // Histogramme
+  const ch = document.getElementById('canvasHisto');
+  const ctxH = ch.getContext('2d');
+  const wh = ch.width, hh = ch.height;
+  ctxH.clearRect(0, 0, wh, hh);
+  const sorted = s.sorted;
+  const minV = s.min, maxV = s.max;
+  const range = maxV - minV || 1;
+  const bins = 8;
+  const binW = range / bins;
+  const counts = new Array(bins).fill(0);
+  sorted.forEach(v => { let b = Math.min(Math.floor((v - minV) / binW), bins - 1); counts[b]++; });
+  const maxCount = Math.max(...counts);
+  const margin = { l: 50, r: 20, t: 20, b: 40 };
+  const plotW = wh - margin.l - margin.r;
+  const plotH = hh - margin.t - margin.b;
+  const barW = plotW / bins;
+  ctxH.strokeStyle = '#aaa'; ctxH.lineWidth = 1;
+  ctxH.beginPath(); ctxH.moveTo(margin.l, margin.t); ctxH.lineTo(margin.l, hh - margin.b); ctxH.lineTo(wh - margin.r, hh - margin.b); ctxH.stroke();
+  counts.forEach((c, i) => {
+    const barH = maxCount > 0 ? (c / maxCount) * plotH : 0;
+    const x = margin.l + i * barW;
+    const y = hh - margin.b - barH;
+    ctxH.fillStyle = 'rgba(42,82,152,0.6)';
+    ctxH.fillRect(x + 1, y, barW - 2, barH);
+    ctxH.strokeStyle = '#2a5298'; ctxH.lineWidth = 1;
+    ctxH.strokeRect(x + 1, y, barW - 2, barH);
+    ctxH.fillStyle = '#444'; ctxH.font = '10px Arial';
+    const label = (minV + i * binW).toFixed(0) + '-' + (minV + (i+1) * binW).toFixed(0);
+    ctxH.fillText(label, x + barW/2 - 12, hh - margin.b + 14);
+    if (c > 0) ctxH.fillText(c, x + barW/2 - 3, y - 4);
+  });
+  document.getElementById('resultHisto').textContent = 'Histogramme de ' + data.length + ' valeurs en ' + bins + ' classes.';
+
+  // Moyenne / Médiane viz
+  const cm = document.getElementById('canvasMoyMed');
+  const ctxM = cm.getContext('2d');
+  const wm = cm.width, hm = cm.height;
+  ctxM.clearRect(0, 0, wm, hm);
+  const ml = 40, mr = 40;
+  const pw = wm - ml - mr;
+  const scaleX = pw / (range || 1);
+  const yLine = hm * 0.5;
+  ctxM.strokeStyle = '#ccc'; ctxM.lineWidth = 1;
+  ctxM.beginPath(); ctxM.moveTo(ml, yLine); ctxM.lineTo(wm - mr, yLine); ctxM.stroke();
+  // Points
+  sorted.forEach(v => {
+    const x = ml + (v - minV) * scaleX;
+    ctxM.fillStyle = 'rgba(42,82,152,0.6)';
+    ctxM.beginPath(); ctxM.arc(x, yLine, 6, 0, Math.PI * 2); ctxM.fill();
+    ctxM.fillStyle = '#333'; ctxM.font = '10px Arial'; ctxM.fillText(v.toFixed(0), x - 4, yLine + 20);
+  });
+  // Moyenne
+  const xMean = ml + (s.mean - minV) * scaleX;
+  ctxM.strokeStyle = '#c0392b'; ctxM.lineWidth = 2;
+  ctxM.beginPath(); ctxM.moveTo(xMean, yLine - 40); ctxM.lineTo(xMean, yLine + 30); ctxM.stroke();
+  ctxM.fillStyle = '#c0392b'; ctxM.font = 'bold 12px Arial';
+  ctxM.fillText('Moy=' + s.mean.toFixed(1), xMean - 20, yLine - 45);
+  // Médiane
+  const xMed = ml + (s.median - minV) * scaleX;
+  ctxM.strokeStyle = '#27ae60'; ctxM.lineWidth = 2;
+  ctxM.beginPath(); ctxM.moveTo(xMed, yLine - 30); ctxM.lineTo(xMed, yLine + 40); ctxM.stroke();
+  ctxM.fillStyle = '#27ae60'; ctxM.font = 'bold 12px Arial';
+  ctxM.fillText('Méd=' + s.median.toFixed(1), xMed - 20, yLine + 55);
+
+  document.getElementById('resultStats').innerHTML =
+    'Effectif : ' + s.n + ' | Moyenne : <span style="color:#c0392b; font-weight:bold;">' + s.mean.toFixed(2) + '</span>' +
+    ' | Médiane : <span style="color:#27ae60; font-weight:bold;">' + s.median.toFixed(1) + '</span>' +
+    ' | Écart-type : ' + s.stddev.toFixed(2) +
+    ' | Min : ' + s.min + ' | Max : ' + s.max;
+
+  // Boxplot
+  const cb = document.getElementById('canvasBoxplot');
+  const ctxB = cb.getContext('2d');
+  const wb = cb.width, hb = cb.height;
+  ctxB.clearRect(0, 0, wb, hb);
+  const mbL = 50, mbR = 50;
+  const bpW = wb - mbL - mbR;
+  const bpScale = bpW / (range || 1);
+  const yC = hb / 2;
+  const boxH = 40;
+  const xMin = mbL, xMax = mbL + bpW;
+  const xQ1 = mbL + (s.q1 - s.min) * bpScale;
+  const xQ3 = mbL + (s.q3 - s.min) * bpScale;
+  const xMed2 = mbL + (s.median - s.min) * bpScale;
+  // Moustaches
+  ctxB.strokeStyle = '#2a5298'; ctxB.lineWidth = 2;
+  ctxB.beginPath(); ctxB.moveTo(xMin, yC); ctxB.lineTo(xQ1, yC); ctxB.stroke();
+  ctxB.beginPath(); ctxB.moveTo(xQ3, yC); ctxB.lineTo(xMax, yC); ctxB.stroke();
+  // Barres min/max
+  ctxB.beginPath(); ctxB.moveTo(xMin, yC - 15); ctxB.lineTo(xMin, yC + 15); ctxB.stroke();
+  ctxB.beginPath(); ctxB.moveTo(xMax, yC - 15); ctxB.lineTo(xMax, yC + 15); ctxB.stroke();
+  // Boîte
+  ctxB.fillStyle = 'rgba(42,82,152,0.15)';
+  ctxB.fillRect(xQ1, yC - boxH/2, xQ3 - xQ1, boxH);
+  ctxB.strokeRect(xQ1, yC - boxH/2, xQ3 - xQ1, boxH);
+  // Médiane
+  ctxB.strokeStyle = '#c0392b'; ctxB.lineWidth = 2.5;
+  ctxB.beginPath(); ctxB.moveTo(xMed2, yC - boxH/2); ctxB.lineTo(xMed2, yC + boxH/2); ctxB.stroke();
+  // Labels
+  ctxB.fillStyle = '#444'; ctxB.font = '11px Arial';
+  ctxB.fillText(s.min, xMin - 5, yC + boxH/2 + 18);
+  ctxB.fillText('Q₁=' + s.q1, xQ1 - 10, yC - boxH/2 - 8);
+  ctxB.fillStyle = '#c0392b';
+  ctxB.fillText('Méd=' + s.median.toFixed(1), xMed2 - 15, yC - boxH/2 - 8);
+  ctxB.fillStyle = '#444';
+  ctxB.fillText('Q₃=' + s.q3, xQ3 - 10, yC + boxH/2 + 18);
+  ctxB.fillText(s.max, xMax - 5, yC - boxH/2 - 8);
+
+  document.getElementById('resultBoxplot').textContent =
+    'Q₁ = ' + s.q1 + ' | Médiane = ' + s.median.toFixed(1) + ' | Q₃ = ' + s.q3 + ' | Écart interquartile = ' + (s.q3 - s.q1);
+}
+updateStats();
+
+// === DÉS ===
+let desResults = [0, 0, 0, 0, 0, 0];
+let desTotalLancers = 0;
+
+function lancerDes(n) {
+  if (n === 0) { desResults = [0,0,0,0,0,0]; desTotalLancers = 0; }
+  else {
+    for (let i = 0; i < n; i++) { desResults[Math.floor(Math.random() * 6)]++; desTotalLancers++; }
+  }
+  drawDes();
+}
+
+function drawDes() {
+  const c = document.getElementById('canvasDes');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  ctx.clearRect(0, 0, w, h);
+  const margin = { l: 60, r: 20, t: 30, b: 40 };
+  const plotW = w - margin.l - margin.r;
+  const plotH = h - margin.t - margin.b;
+  const barW = plotW / 6;
+  const maxFreq = desTotalLancers > 0 ? Math.max(...desResults) : 1;
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, h - margin.b); ctx.lineTo(w - margin.r, h - margin.b); ctx.stroke();
+  // Ligne théorique 1/6
+  if (desTotalLancers > 0) {
+    const theo = desTotalLancers / 6;
+    const yTheo = h - margin.b - (theo / maxFreq) * plotH;
+    ctx.setLineDash([5, 3]); ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(margin.l, yTheo); ctx.lineTo(w - margin.r, yTheo); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c0392b'; ctx.font = '10px Arial';
+    ctx.fillText('théorique: 1/6', w - margin.r - 70, yTheo - 5);
+  }
+  for (let i = 0; i < 6; i++) {
+    const barH = maxFreq > 0 ? (desResults[i] / maxFreq) * plotH : 0;
+    const x = margin.l + i * barW;
+    const y = h - margin.b - barH;
+    ctx.fillStyle = 'rgba(42,82,152,0.7)'; ctx.fillRect(x + 4, y, barW - 8, barH);
+    ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 1; ctx.strokeRect(x + 4, y, barW - 8, barH);
+    ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial';
+    ctx.fillText(i + 1, x + barW/2 - 5, h - margin.b + 18);
+    if (desTotalLancers > 0) {
+      ctx.font = '11px Arial'; ctx.fillStyle = '#2a5298';
+      const freq = (desResults[i] / desTotalLancers * 100).toFixed(1);
+      ctx.fillText(freq + '%', x + barW/2 - 14, y - 5);
+    }
+  }
+  ctx.fillStyle = '#666'; ctx.font = '11px Arial';
+  ctx.fillText('Total : ' + desTotalLancers + ' lancers', margin.l, margin.t - 8);
+  document.getElementById('resultDes').textContent = desTotalLancers > 0
+    ? 'Fréquences observées après ' + desTotalLancers + ' lancers. Théorique : 16,7% par face.'
+    : 'Cliquez sur un bouton pour lancer les dés.';
+}
+drawDes();
+
+// === PIÈCE ===
+let pieceP = 0, pieceF = 0;
+
+function lancerPieces(n) {
+  if (n === 0) { pieceP = 0; pieceF = 0; }
+  else { for (let i = 0; i < n; i++) { Math.random() < 0.5 ? pieceP++ : pieceF++; } }
+  drawPiece();
+}
+
+function drawPiece() {
+  const c = document.getElementById('canvasPiece');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  ctx.clearRect(0, 0, w, h);
+  const total = pieceP + pieceF;
+  const margin = { l: 60, r: 20, t: 30, b: 40 };
+  const plotW = w - margin.l - margin.r;
+  const plotH = h - margin.t - margin.b;
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, h-margin.b); ctx.lineTo(w-margin.r, h-margin.b); ctx.stroke();
+  if (total > 0) {
+    const maxV = Math.max(pieceP, pieceF);
+    const barW = plotW / 3;
+    // Pile
+    let bh = (pieceP / maxV) * plotH;
+    ctx.fillStyle = 'rgba(42,82,152,0.7)'; ctx.fillRect(margin.l + barW * 0.3, h - margin.b - bh, barW * 0.6, bh);
+    ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial';
+    ctx.fillText('PILE', margin.l + barW * 0.45, h - margin.b + 20);
+    ctx.font = '12px Arial'; ctx.fillStyle = '#2a5298';
+    ctx.fillText(pieceP + ' (' + (pieceP/total*100).toFixed(1) + '%)', margin.l + barW * 0.3, h - margin.b - bh - 8);
+    // Face
+    bh = (pieceF / maxV) * plotH;
+    ctx.fillStyle = 'rgba(192,57,43,0.7)'; ctx.fillRect(margin.l + barW * 1.7, h - margin.b - bh, barW * 0.6, bh);
+    ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial';
+    ctx.fillText('FACE', margin.l + barW * 1.85, h - margin.b + 20);
+    ctx.font = '12px Arial'; ctx.fillStyle = '#c0392b';
+    ctx.fillText(pieceF + ' (' + (pieceF/total*100).toFixed(1) + '%)', margin.l + barW * 1.7, h - margin.b - bh - 8);
+    // Ligne 50%
+    const y50 = h - margin.b - (total / 2 / maxV) * plotH;
+    ctx.setLineDash([4,3]); ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(margin.l, y50); ctx.lineTo(w-margin.r, y50); ctx.stroke();
+    ctx.setLineDash([]); ctx.fillStyle = '#27ae60'; ctx.font = '10px Arial';
+    ctx.fillText('50%', w - margin.r - 25, y50 - 4);
+  }
+  ctx.fillStyle = '#666'; ctx.font = '11px Arial';
+  ctx.fillText('Total : ' + total + ' lancers', margin.l, margin.t - 8);
+  document.getElementById('resultPiece').textContent = total > 0
+    ? 'Pile : ' + (pieceP/total*100).toFixed(1) + '% | Face : ' + (pieceF/total*100).toFixed(1) + '%. Plus on lance, plus on se rapproche de 50/50.'
+    : 'Cliquez sur un bouton pour lancer des pièces.';
+}
+drawPiece();
+</script>
+
+</body>
+</html>
