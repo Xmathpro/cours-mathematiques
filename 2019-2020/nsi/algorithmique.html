@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Algorithmique . NSI</title>
 <link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 .interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
 .interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
@@ -759,7 +761,7 @@ function drawSel(){
   const mm={l:40,r:20,t:35,b:40};const pw=w-mm.l-mm.r,ph=h-mm.t-mm.b;
   const mx=Math.max(...d)*1.1;const bw=pw/n;
   ctx.fillStyle='#444';ctx.font='bold 13px Arial';
-  ctx.fillText('Tri par sélection: étape '+selS.i+'/'+n+(selS.done?' ✓ trié !':''),20,22);
+  ctx.fillText('Tri par sélection : étape '+selS.i+'/'+n+(selS.done?' ✓ trié !':''),20,22);
   d.forEach((v,i)=>{
     const x=mm.l+i*bw;const bh=(v/mx)*ph;const y=h-mm.b-bh;
     ctx.fillStyle=i<selS.i?'#27ae60':i===selS.i&&!selS.done?'#c0392b':'#2a5298';
@@ -792,7 +794,7 @@ function drawBul(){
   const mm={l:40,r:20,t:35,b:40};const pw=w-mm.l-mm.r,ph=h-mm.t-mm.b;
   const mx=Math.max(...d)*1.1;const bw=pw/n;
   ctx.fillStyle='#444';ctx.font='bold 13px Arial';
-  ctx.fillText('Tri à bulles: passe '+(bulS.pass+1)+(bulS.done?' ✓ trié !':''),20,22);
+  ctx.fillText('Tri à bulles : passe '+(bulS.pass+1)+(bulS.done?' ✓ trié !':''),20,22);
   d.forEach((v,i)=>{
     const x=mm.l+i*bw;const bh=(v/mx)*ph;const y=h-mm.b-bh;
     const sorted=i>=n-bulS.pass;
