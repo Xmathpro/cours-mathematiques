@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perpendiculaires et parallèles . 6ème</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type="range"]{width:120px;cursor:pointer}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}
+.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6ème</span><span>Géométrie</span><span>Chaîne 3, leçon 2</span></div>
+<h1 class="cours-titre-principal">Perpendiculaires et parallèles</h1>
+<p class="cours-sous-titre">Reconnaître, tracer et utiliser la propriété fondamentale</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="lecon-path">
+<span>Géométrie</span> <span>6ème</span> <span>Leçon 2</span>
+</div>
+
+<h2>I. Droites perpendiculaires</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Deux droites sont <strong>perpendiculaires</strong> si elles se coupent en formant un <strong>angle droit</strong> (90°). On note $d_1 \perp d_2$.</p>
+<p>On reconnaît l'angle droit grâce au petit <strong>carré</strong> dessiné dans le coin.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : l'angle entre deux droites</h4>
+<canvas id="canvasPerp" width="600" height="350"></canvas>
+<div class="controls">
+<label>Angle de la droite bleue :</label>
+<input type="range" id="angleSlider" min="0" max="180" value="90">
+<span id="angleVal">90</span>°
+</div>
+<div class="result-text" id="resultPerp"></div>
+</div>
+
+<div class="methode"><div class="encadre-titre">Tracer une perpendiculaire avec l'équerre</div>
+<ol>
+<li>Placer un côté de l'angle droit de l'équerre le long de la droite $d$.</li>
+<li>Faire glisser l'équerre jusqu'au point voulu.</li>
+<li>Tracer le long de l'autre côté de l'angle droit.</li>
+</ol>
+</div>
+
+<h2>II. Droites parallèles</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Deux droites sont <strong>parallèles</strong> si elles ne se coupent jamais, même prolongées à l'infini. Elles gardent toujours le même écart. On note $d_1 // d_2$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : parallèles vs sécantes</h4>
+<canvas id="canvasPara" width="600" height="350"></canvas>
+<div class="controls">
+<label>Écart entre les droites :</label>
+<input type="range" id="ecartSlider" min="0" max="100" value="50">
+<span id="ecartVal">50</span>
+</div>
+<div class="result-text" id="resultPara"></div>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Comment vérifier si deux droites sont parallèles ?</div>
+<p>On utilise la règle et l'équerre : si la distance entre les deux droites est la même partout, elles sont parallèles. On peut aussi tracer une perpendiculaire à l'une et vérifier qu'elle est aussi perpendiculaire à l'autre.</p>
+</div>
+
+<h2>III. La propriété fondamentale</h2>
+
+<div class="theoreme"><div class="encadre-titre">Propriété</div>
+<p>Si deux droites sont <strong>perpendiculaires à une même troisième droite</strong>, alors elles sont <strong>parallèles</strong> entre elles.</p>
+<p style="text-align:center; margin:.75rem 0; font-size:1rem;">
+$d_1 \perp d_3$ et $d_2 \perp d_3$ $\implies$ $d_1 // d_2$
+</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : la propriété fondamentale</h4>
+<canvas id="canvasPropriete" width="600" height="320"></canvas>
+<div class="result-text" id="resultPropriete">Si d₁ ⊥ d₃ et d₂ ⊥ d₃, alors d₁ // d₂.</div>
+</div>
+
+<h2>IV. Reconnaître sur une figure</h2>
+
+<div class="interactive-box">
+<h4>Quiz : perpendiculaires ou parallèles ?</h4>
+<canvas id="canvasQuiz" width="600" height="280"></canvas>
+<div class="controls">
+<button onclick="quizAnswer('perp')">⊥ Perpendiculaires</button>
+<button onclick="quizAnswer('para')">// Parallèles</button>
+<button onclick="quizAnswer('rien')">Ni l'un ni l'autre</button>
+<button onclick="newQuiz()" style="background:#27ae60">Nouvelle question</button>
+</div>
+<div class="result-text" id="resultQuiz">Regardez les deux droites rouges. Quelle est leur relation ?</div>
+</div>
+
+<h2>V. Exercices</h2>
+
+<ol>
+<li>Donner la définition de deux droites perpendiculaires.</li>
+<li>Donner la définition de deux droites parallèles.</li>
+<li>$d_1 \perp d_3$ et $d_2 \perp d_3$. Que peut-on dire de $d_1$ et $d_2$ ?</li>
+<li>Sur un quadrillage, les lignes horizontales sont-elles parallèles entre elles ? Sont-elles perpendiculaires aux lignes verticales ?</li>
+<li>Dans la lettre "H", citer deux segments parallèles et deux segments perpendiculaires.</li>
+</ol>
+
+<h2>VI. Corrigés</h2>
+
+<div class="exemple"><div class="encadre-titre">Corrigés</div>
+<p><strong>1.</strong> Deux droites perpendiculaires se coupent en formant un angle droit (90°).</p>
+<p><strong>2.</strong> Deux droites parallèles ne se coupent jamais. Elles gardent le même écart.</p>
+<p><strong>3.</strong> $d_1$ et $d_2$ sont parallèles (propriété fondamentale).</p>
+<p><strong>4.</strong> Oui, les lignes horizontales sont parallèles entre elles. Oui, elles sont perpendiculaires aux lignes verticales.</p>
+<p><strong>5.</strong> Les deux barres verticales du H sont parallèles. Chaque barre verticale est perpendiculaire à la barre horizontale.</p>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="droites-segments.html">&larr; Droites et segments</a>
+<a href="symetrie-axiale.html">Symétrie axiale &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+// ====== PERPENDICULAIRES ======
+function drawPerp(){
+  const c=document.getElementById('canvasPerp');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const angle=parseInt(document.getElementById('angleSlider').value);
+  document.getElementById('angleVal').textContent=angle;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;const len=200;
+  // Droite fixe (horizontale)
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.stroke();
+  ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='left';ctx.fillText('d₁',cx+len+5,cy+5);
+  // Droite mobile
+  const rad=angle*Math.PI/180;
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(cx-len*Math.cos(rad),cy+len*Math.sin(rad));ctx.lineTo(cx+len*Math.cos(rad),cy-len*Math.sin(rad));ctx.stroke();
+  ctx.fillStyle='#2a5298';ctx.fillText('d₂',cx+len*Math.cos(rad)+5,cy-len*Math.sin(rad));
+  // Point d'intersection
+  ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fill();
+  // Angle droit si 90°
+  const isPerp=Math.abs(angle-90)<=2;
+  if(isPerp){
+    const sq=15;
+    ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(cx+sq,cy);ctx.lineTo(cx+sq,cy-sq);ctx.lineTo(cx,cy-sq);ctx.stroke();
+    ctx.fillStyle='#27ae60';ctx.font='bold 16px Arial';ctx.textAlign='center';
+    ctx.fillText('✓ PERPENDICULAIRES',cx,30);
+    ctx.fillText('90°',cx+25,cy-20);
+  } else {
+    ctx.fillStyle='#888';ctx.font='12px Arial';ctx.textAlign='center';
+    ctx.fillText(angle+'°',cx+30,cy-15);
+    if(Math.abs(angle-90)>2){
+      ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';
+      ctx.fillText('Pas perpendiculaires',cx,30);
+    }
+  }
+  // Arc d'angle
+  ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.arc(cx,cy,35,0,-rad,true);ctx.stroke();
+  ctx.textAlign='left';
+  document.getElementById('resultPerp').textContent=isPerp?'d₁ ⊥ d₂ : les droites forment un angle droit (90°). Le petit carré confirme.':'L\'angle est de '+angle+'°. Pour être perpendiculaires, il faudrait exactement 90°.';
+}
+document.getElementById('angleSlider').addEventListener('input',drawPerp);
+drawPerp();
+
+// ====== PARALLÈLES ======
+function drawPara(){
+  const c=document.getElementById('canvasPara');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ecart=parseInt(document.getElementById('ecartSlider').value);
+  document.getElementById('ecartVal').textContent=ecart;
+  ctx.clearRect(0,0,w,h);
+  const cy=h/2;
+  const isPara=ecart>10;
+  // Droite 1
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(20,cy-ecart);ctx.lineTo(w-20,cy-ecart);ctx.stroke();
+  ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='left';ctx.fillText('d₁',w-15,cy-ecart-8);
+  // Droite 2
+  if(ecart<=10){
+    // Les droites se confondent ou se coupent
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(20,cy+ecart);ctx.lineTo(w-20,cy+ecart);ctx.stroke();
+    ctx.fillStyle='#2a5298';ctx.fillText('d₂ = d₁ ?',w-60,cy+ecart+18);
+  } else {
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(20,cy+ecart);ctx.lineTo(w-20,cy+ecart);ctx.stroke();
+    ctx.fillStyle='#2a5298';ctx.fillText('d₂',w-15,cy+ecart+18);
+    // Marquer l'écart
+    ctx.setLineDash([4,4]);ctx.strokeStyle='#888';ctx.lineWidth=1;
+    [100,300,500].forEach(x=>{
+      ctx.beginPath();ctx.moveTo(x,cy-ecart);ctx.lineTo(x,cy+ecart);ctx.stroke();
+      ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';
+      ctx.fillText(ecart*2+'',x,cy+5);
+    });
+    ctx.setLineDash([]);
+    // Symbole //
+    if(isPara){
+      ctx.fillStyle='#27ae60';ctx.font='bold 16px Arial';ctx.textAlign='center';
+      ctx.fillText('d₁ // d₂ : PARALLÈLES',w/2,30);
+      ctx.fillStyle='#27ae60';ctx.font='12px Arial';
+      ctx.fillText('même écart partout →',w/2,50);
+    }
+  }
+  ctx.textAlign='left';
+  document.getElementById('resultPara').textContent=isPara?'d₁ // d₂ : les droites ne se coupent jamais. L\'écart est constant ('+ecart*2+' unités partout).':'Les droites sont très proches. Quand l\'écart est 0, les droites sont confondues.';
+}
+document.getElementById('ecartSlider').addEventListener('input',drawPara);
+drawPara();
+
+// ====== PROPRIÉTÉ FONDAMENTALE ======
+(function(){
+  const c=document.getElementById('canvasPropriete');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  // d3 verticale
+  ctx.strokeStyle='#888';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(w/2,20);ctx.lineTo(w/2,h-20);ctx.stroke();
+  ctx.fillStyle='#888';ctx.font='bold 13px Arial';ctx.textAlign='left';ctx.fillText('d₃',w/2+8,30);
+  // d1 horizontale en haut
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(50,100);ctx.lineTo(w-50,100);ctx.stroke();
+  ctx.fillStyle='#c0392b';ctx.fillText('d₁',w-45,95);
+  // d2 horizontale en bas
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(50,220);ctx.lineTo(w-50,220);ctx.stroke();
+  ctx.fillStyle='#2a5298';ctx.fillText('d₂',w-45,215);
+  // Angles droits
+  const sq=12;
+  ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(w/2+sq,100);ctx.lineTo(w/2+sq,100-sq);ctx.lineTo(w/2,100-sq);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(w/2+sq,220);ctx.lineTo(w/2+sq,220-sq);ctx.lineTo(w/2,220-sq);ctx.stroke();
+  // Labels
+  ctx.fillStyle='#27ae60';ctx.font='11px Arial';ctx.fillText('d₁ ⊥ d₃',w/2+20,90);ctx.fillText('d₂ ⊥ d₃',w/2+20,210);
+  // Flèches parallèles
+  ctx.fillStyle='#e67e22';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('donc d₁ // d₂',w/2,h-10);
+  // Symbole //
+  ctx.strokeStyle='#e67e22';ctx.lineWidth=2;ctx.setLineDash([8,5]);
+  ctx.beginPath();ctx.moveTo(100,100);ctx.lineTo(100,220);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(w-100,100);ctx.lineTo(w-100,220);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#e67e22';ctx.font='10px Arial';
+  ctx.fillText('même écart',105,165);
+  ctx.textAlign='left';
+})();
+
+// ====== QUIZ ======
+let quizType='';let quizAngle1=0,quizAngle2=0;
+function newQuiz(){
+  const r=Math.random();
+  if(r<0.33){quizType='perp';quizAngle1=Math.random()*60-30;quizAngle2=quizAngle1+90;}
+  else if(r<0.66){quizType='para';quizAngle1=Math.random()*60-30;quizAngle2=quizAngle1;}
+  else{quizType='rien';quizAngle1=Math.random()*60-30;quizAngle2=quizAngle1+40+Math.random()*30;}
+  drawQuiz();
+  document.getElementById('resultQuiz').textContent='Regardez les deux droites rouges. Quelle est leur relation ?';
+  document.getElementById('resultQuiz').style.color='#444';
+}
+function drawQuiz(){
+  const c=document.getElementById('canvasQuiz');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;const len=200;
+  const r1=quizAngle1*Math.PI/180,r2=quizAngle2*Math.PI/180;
+  // Droite 1
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(cx-len*Math.cos(r1),cy+len*Math.sin(r1));ctx.lineTo(cx+len*Math.cos(r1),cy-len*Math.sin(r1));ctx.stroke();
+  // Droite 2
+  if(quizType==='para'){
+    const offset=40;
+    ctx.beginPath();ctx.moveTo(cx-len*Math.cos(r2)+offset*Math.sin(r2),cy+len*Math.sin(r2)+offset*Math.cos(r2));
+    ctx.lineTo(cx+len*Math.cos(r2)+offset*Math.sin(r2),cy-len*Math.sin(r2)+offset*Math.cos(r2));ctx.stroke();
+  } else {
+    ctx.beginPath();ctx.moveTo(cx-len*Math.cos(r2),cy+len*Math.sin(r2));ctx.lineTo(cx+len*Math.cos(r2),cy-len*Math.sin(r2));ctx.stroke();
+  }
+}
+function quizAnswer(answer){
+  const correct=answer===quizType;
+  const el=document.getElementById('resultQuiz');
+  const names={perp:'perpendiculaires (angle droit)',para:'parallèles (même direction, jamais sécantes)',rien:'ni perpendiculaires ni parallèles'};
+  if(correct){el.textContent='✓ Correct ! Les droites sont '+names[quizType]+'.';el.style.color='#27ae60';}
+  else{el.textContent='✗ Faux. Les droites sont '+names[quizType]+'.';el.style.color='#c0392b';}
+}
+newQuiz();
+</script>
+</body>
+</html>

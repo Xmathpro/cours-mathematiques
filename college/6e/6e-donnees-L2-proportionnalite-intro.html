@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proportionnalite : introduction . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Donnees</span><span>Chaine 6, lecon 2</span></div>
+<h1 class="cours-titre-principal">Proportionnalite : introduction</h1>
+<p class="cours-sous-titre">Reconnaitre, coefficient de proportionnalite et quatrieme proportionnelle</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Donnees</span> <span>6eme</span> <span>Lecon 2</span></div>
+
+<h2>I. Reconnaitre la proportionnalite</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux grandeurs sont <strong>proportionnelles</strong> si on passe de l'une a l'autre en <strong>multipliant toujours par le meme nombre</strong>. Ce nombre s'appelle le <strong>coefficient de proportionnalite</strong>.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple : prix des pommes</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:.5rem 0;text-align:center">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Masse (kg)</td><td>1</td><td>2</td><td>3</td><td>5</td></tr>
+<tr style="border-bottom:1px solid #eee"><td style="padding:5px;font-weight:bold">Prix (euros)</td><td>2,50</td><td>5,00</td><td>7,50</td><td>12,50</td></tr>
+</table>
+<p>$\dfrac{5,00}{2} = 2,50$ et $\dfrac{7,50}{3} = 2,50$ et $\dfrac{12,50}{5} = 2,50$. Le rapport est constant : c'est proportionnel. Coefficient = 2,50 euros/kg.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Tester : ce tableau est-il proportionnel ?</h4>
+<canvas id="canvasPropTest" width="600" height="280"></canvas>
+<div class="controls">
+<label>Coefficient :</label>
+<input type="range" id="coefSlider" min="10" max="50" value="25"><span id="coefVal">2.5</span>
+</div>
+<div class="result-text" id="resultPropTest"></div>
+</div>
+
+<h2>II. Coefficient de proportionnalite</h2>
+
+<div class="propriete"><div class="encadre-titre">Formule</div>
+<p>Si les grandeurs $x$ et $y$ sont proportionnelles, le coefficient est :</p>
+$$k = \frac{y}{x}$$
+<p>et on a toujours $y = k \times x$.</p>
+</div>
+
+<h2>III. Quatrieme proportionnelle (produit en croix)</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Si on connait 3 valeurs dans un tableau de proportionnalite, on peut trouver la 4eme :</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0;text-align:center">
+<tr style="background:#f0f0f0"><td style="padding:8px">$a$</td><td style="padding:8px">$b$</td></tr>
+<tr><td style="padding:8px">$c$</td><td style="padding:8px;font-weight:bold;color:#c0392b">$x = ?$</td></tr>
+</table>
+$$x = \frac{b \times c}{a}$$
+</div>
+
+<div class="interactive-box">
+<h4>Calculateur de quatrieme proportionnelle</h4>
+<canvas id="canvasCroix" width="600" height="280"></canvas>
+<div class="controls">
+<label>a :</label><input type="range" id="croixA" min="1" max="20" value="3"><span id="croixAval">3</span>
+<label>b :</label><input type="range" id="croixB" min="1" max="20" value="7"><span id="croixBval">7</span>
+<label>c :</label><input type="range" id="croixC" min="1" max="30" value="12"><span id="croixCval">12</span>
+</div>
+<div class="result-text" id="resultCroix"></div>
+</div>
+
+<h2>IV. Exercices</h2>
+<ol>
+<li>1 kg de riz coute 3,20 euros. Combien coutent 5 kg ?</li>
+<li>Un robinet remplit 6 litres en 2 minutes. Combien en 7 minutes ?</li>
+<li>Le tableau suivant est-il proportionnel ? Justifier. Nombre de cahiers : 3, 5, 8. Prix : 4,50 ; 7,50 ; 12.</li>
+<li>Sur une carte a l'echelle 1/50 000, deux villes sont separees par 4 cm. Quelle est la distance reelle ?</li>
+</ol>
+
+<h2>V. Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> $5 \times 3{,}20 = 16{,}00$ euros.</p>
+<p><strong>2.</strong> $x = \dfrac{6 \times 7}{2} = 21$ litres.</p>
+<p><strong>3.</strong> $\dfrac{4,50}{3} = 1,50$ et $\dfrac{7,50}{5} = 1,50$ et $\dfrac{12}{8} = 1,50$. Oui, c'est proportionnel (coefficient 1,50 euros/cahier).</p>
+<p><strong>4.</strong> $4 \times 50\,000 = 200\,000$ cm $= 2\,000$ m $= 2$ km.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="tableaux-diagrammes.html">&larr; Tableaux et diagrammes</a><a href="../5e/relatifs-reperage.html">5eme : Nombres relatifs &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+// TEST PROPORTIONNALITE
+function drawPropTest(){
+  const c=document.getElementById('canvasPropTest');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const coef=parseInt(document.getElementById('coefSlider').value)/10;
+  document.getElementById('coefVal').textContent=coef.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  const xs=[1,2,3,4,5];const ys=xs.map(x=>x*coef);
+
+  // Tableau
+  const tx=30,ty=20,cw=80,ch=35;
+  ctx.fillStyle='#2a5298';ctx.fillRect(tx,ty,cw,ch);
+  ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('x',tx+cw/2,ty+22);
+  xs.forEach((x,i)=>{
+    ctx.fillStyle=i%2===0?'#f8f9fa':'#fff';ctx.fillRect(tx+(i+1)*cw,ty,cw,ch);
+    ctx.fillStyle='#333';ctx.font='12px Arial';ctx.fillText(x,tx+(i+1)*cw+cw/2,ty+22);
+  });
+  ctx.fillStyle='#27ae60';ctx.fillRect(tx,ty+ch,cw,ch);
+  ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.fillText('y',tx+cw/2,ty+ch+22);
+  xs.forEach((x,i)=>{
+    ctx.fillStyle=i%2===0?'#f0fff0':'#fff';ctx.fillRect(tx+(i+1)*cw,ty+ch,cw,ch);
+    ctx.fillStyle='#333';ctx.font='12px Arial';ctx.fillText(ys[i].toFixed(1),tx+(i+1)*cw+cw/2,ty+ch+22);
+  });
+
+  // Fleches x coef
+  ctx.fillStyle='#c0392b';ctx.font='bold 11px Arial';ctx.textAlign='center';
+  xs.forEach((x,i)=>{
+    ctx.fillText('x'+coef.toFixed(1),tx+(i+1)*cw+cw/2,ty+ch*2+20);
+  });
+
+  // Graphique
+  const gx=40,gy=130,gw=250,gh=120;
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(gx,gy);ctx.lineTo(gx,gy+gh);ctx.lineTo(gx+gw,gy+gh);ctx.stroke();
+  const maxY=Math.max(...ys)*1.2;
+  // Points et droite
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.beginPath();
+  xs.forEach((x,i)=>{
+    const px=gx+(x/5)*gw*0.9;const py=gy+gh-(ys[i]/maxY)*gh;
+    if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+    ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();
+  });
+  ctx.stroke();
+
+  // Label
+  ctx.fillStyle='#2a5298';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Graphique : une droite passant par l\'origine',gx,gy-5);
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('y = '+coef.toFixed(1)+' x x',gx+gw+15,gy+gh/2);
+
+  document.getElementById('resultPropTest').textContent='Coefficient k = '+coef.toFixed(1)+'. y = k x x. Le graphique est une droite passant par l\'origine : c\'est bien proportionnel.';
+}
+document.getElementById('coefSlider').addEventListener('input',drawPropTest);
+drawPropTest();
+
+// PRODUIT EN CROIX
+function drawCroix(){
+  const c=document.getElementById('canvasCroix');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('croixA').value);
+  const b=parseInt(document.getElementById('croixB').value);
+  const cv=parseInt(document.getElementById('croixC').value);
+  document.getElementById('croixAval').textContent=a;document.getElementById('croixBval').textContent=b;document.getElementById('croixCval').textContent=cv;
+  ctx.clearRect(0,0,w,h);
+  const x=(b*cv/a);
+
+  // Tableau
+  const tx=50,ty=40,cw=100,ch=50;
+  ctx.fillStyle='#f8f9fa';ctx.strokeStyle='#ddd';ctx.lineWidth=1;
+  ctx.fillRect(tx,ty,cw,ch);ctx.strokeRect(tx,ty,cw,ch);
+  ctx.fillRect(tx+cw,ty,cw,ch);ctx.strokeRect(tx+cw,ty,cw,ch);
+  ctx.fillRect(tx,ty+ch,cw,ch);ctx.strokeRect(tx,ty+ch,cw,ch);
+  ctx.fillStyle='rgba(192,57,43,0.1)';ctx.fillRect(tx+cw,ty+ch,cw,ch);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.strokeRect(tx+cw,ty+ch,cw,ch);
+
+  ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(a,tx+cw/2,ty+ch/2+6);ctx.fillText(b,tx+cw+cw/2,ty+ch/2+6);
+  ctx.fillText(cv,tx+cw/2,ty+ch+ch/2+6);
+  ctx.fillStyle='#c0392b';ctx.fillText('x = ?',tx+cw+cw/2,ty+ch+ch/2+6);
+
+  // Croix
+  ctx.strokeStyle='#e67e22';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(tx+cw/2,ty+ch/2);ctx.lineTo(tx+cw+cw/2,ty+ch+ch/2);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(tx+cw+cw/2,ty+ch/2);ctx.lineTo(tx+cw/2,ty+ch+ch/2);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Calcul a droite
+  const rx=320;
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('Produit en croix',rx,60);
+  ctx.font='13px Arial';ctx.fillStyle='#555';
+  ctx.fillText('x = (b x c) / a',rx,90);
+  ctx.fillText('x = ('+b+' x '+cv+') / '+a,rx,115);
+  ctx.fillText('x = '+(b*cv)+' / '+a,rx,140);
+  ctx.fillStyle='#c0392b';ctx.font='bold 18px Arial';
+  ctx.fillText('x = '+x.toFixed(x%1===0?0:1),rx,170);
+
+  // Verification
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('Verification : '+a+' x '+x.toFixed(1)+' = '+(a*x).toFixed(1),rx,200);
+  ctx.fillText('et '+b+' x '+cv+' = '+(b*cv),rx,220);
+  ctx.fillText((a*x).toFixed(1)+' = '+(b*cv)+' ? '+(Math.abs(a*x-b*cv)<0.01?'OUI':'OUI (arrondi)'),rx,240);
+
+  document.getElementById('resultCroix').textContent='x = ('+b+' x '+cv+') / '+a+' = '+x.toFixed(x%1===0?0:1)+'. On multiplie en diagonale et on divise par le nombre restant.';
+}
+['croixA','croixB','croixC'].forEach(id=>document.getElementById(id).addEventListener('input',drawCroix));
+drawCroix();
+</script>
+</body>
+</html>
