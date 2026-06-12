@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structures de données . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.controls button:hover{background:#1e3d72}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}pre.code{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem 1.2rem;border-radius:6px;margin:1rem 0;line-height:1.8;overflow-x:auto;white-space:pre}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#nsi">NSI</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>NSI . Terminale</span><span>Programme 2019</span><span>2020-2021</span></div>
+<h1 class="cours-titre-principal">Structures de données</h1>
+<p class="cours-sous-titre">Piles, files, dictionnaires et listes chaînées</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. La pile (stack)</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une <strong>pile</strong> fonctionne comme une pile d'assiettes : on ne peut ajouter ou retirer que par le <strong>sommet</strong>. C'est le principe <strong>LIFO</strong> : Last In, First Out (dernier entré, premier sorti).</p>
+<p>Deux opérations fondamentales : <code>empiler</code> (push) et <code>depiler</code> (pop).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : la pile d'assiettes</h4>
+<canvas id="canvasPile" width="600" height="300"></canvas>
+<div class="controls">
+<button onclick="pushPile()">Empiler</button>
+<button onclick="popPile()">Dépiler</button>
+<button onclick="resetPile()">Vider</button>
+</div>
+<div class="result-text" id="resultPile">LIFO : le dernier empilé sera le premier dépilé.</div>
+</div>
+
+<pre class="code">
+class Pile:
+    def __init__(self):
+        self.elements = []
+
+    def empiler(self, valeur):
+        """Ajoute un élément au sommet."""
+        self.elements.append(valeur)
+
+    def depiler(self):
+        """Retire et retourne l'élément du sommet."""
+        if self.est_vide():
+            raise IndexError("Pile vide")
+        return self.elements.pop()
+
+    def sommet(self):
+        """Retourne le sommet sans le retirer."""
+        return self.elements[-1]
+
+    def est_vide(self):
+        return len(self.elements) == 0
+
+    def taille(self):
+        return len(self.elements)
+
+
+# Exemple : vérifier les parenthèses
+def parentheses_valides(expression):
+    p = Pile()
+    for car in expression:
+        if car == '(':
+            p.empiler(car)
+        elif car == ')':
+            if p.est_vide():
+                return False
+            p.depiler()
+    return p.est_vide()
+
+print(parentheses_valides("((a+b)*(c-d))"))  # True
+print(parentheses_valides("((a+b)"))          # False
+</pre>
+
+<h2>II. La file (queue)</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une <strong>file</strong> fonctionne comme une file d'attente : le premier arrivé est le premier servi. C'est le principe <strong>FIFO</strong> : First In, First Out.</p>
+<p>Deux opérations : <code>enfiler</code> (enqueue) et <code>defiler</code> (dequeue).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : la file d'attente</h4>
+<canvas id="canvasFile" width="600" height="200"></canvas>
+<div class="controls">
+<button onclick="pushFile()">Enfiler</button>
+<button onclick="popFile()">Défiler</button>
+<button onclick="resetFile()">Vider</button>
+</div>
+<div class="result-text" id="resultFile">FIFO : le premier enfilé sera le premier défilé.</div>
+</div>
+
+<pre class="code">
+class File:
+    def __init__(self):
+        self.elements = []
+
+    def enfiler(self, valeur):
+        """Ajoute un élément à la fin."""
+        self.elements.append(valeur)
+
+    def defiler(self):
+        """Retire et retourne le premier élément."""
+        if self.est_vide():
+            raise IndexError("File vide")
+        return self.elements.pop(0)
+
+    def est_vide(self):
+        return len(self.elements) == 0
+</pre>
+
+<h2>III. Le dictionnaire</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Un <strong>dictionnaire</strong> associe des <strong>clés</strong> à des <strong>valeurs</strong>. Chaque clé est unique. L'accès par clé est très rapide : $O(1)$ en moyenne.</p>
+</div>
+
+<pre class="code">
+# Créer un dictionnaire
+eleve = {
+    "prenom": "Alice",
+    "age": 16,
+    "classe": "1ère NSI",
+    "notes": [15, 12, 18, 14]
+}
+
+# Accéder à une valeur
+print(eleve["prenom"])     # Alice
+print(eleve["age"])        # 16
+
+# Modifier
+eleve["age"] = 17
+
+# Ajouter
+eleve["email"] = "alice@mail.com"
+
+# Parcourir
+for cle, valeur in eleve.items():
+    print(f"{cle} : {valeur}")
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : le dictionnaire (table de hachage)</h4>
+<canvas id="canvasDict" width="600" height="280"></canvas>
+<div class="controls">
+<button onclick="addDict()">Ajouter une entrée</button>
+<button onclick="resetDict()">Réinitialiser</button>
+</div>
+<div class="result-text" id="resultDict">Chaque clé est transformée en indice par une fonction de hachage. L'accès est instantané.</div>
+</div>
+
+<h2>IV. La liste chaînée</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une <strong>liste chaînée</strong> est une suite de maillons. Chaque maillon contient une <strong>valeur</strong> et un <strong>pointeur</strong> vers le maillon suivant. Le dernier maillon pointe vers <code>None</code>.</p>
+<p>Contrairement à un tableau, les éléments ne sont pas côte à côte en mémoire.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : la liste chaînée</h4>
+<canvas id="canvasChaine" width="600" height="180"></canvas>
+<div class="controls">
+<button onclick="addChaine()">Ajouter en tête</button>
+<button onclick="removeChaine()">Supprimer la tête</button>
+<button onclick="resetChaine()">Réinitialiser</button>
+</div>
+<div class="result-text" id="resultChaine">Chaque maillon pointe vers le suivant. L'ajout et la suppression en tête sont en O(1).</div>
+</div>
+
+<pre class="code">
+class Maillon:
+    def __init__(self, valeur, suivant=None):
+        self.valeur = valeur
+        self.suivant = suivant
+
+
+class ListeChainee:
+    def __init__(self):
+        self.tete = None
+
+    def ajouter_en_tete(self, valeur):
+        self.tete = Maillon(valeur, self.tete)
+
+    def afficher(self):
+        maillon = self.tete
+        while maillon is not None:
+            print(maillon.valeur, end=" -> ")
+            maillon = maillon.suivant
+        print("None")
+
+
+# Exemple
+lst = ListeChainee()
+lst.ajouter_en_tete("C")
+lst.ajouter_en_tete("B")
+lst.ajouter_en_tete("A")
+lst.afficher()   # A -> B -> C -> None
+</pre>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1 : pile</h3>
+<ol>
+<li>Écrire une fonction qui inverse une chaîne de caractères en utilisant une pile.</li>
+<li>Implémenter une fonction qui évalue une expression en notation polonaise inversée (ex: "3 4 + 2 *" = 14).</li>
+</ol>
+
+<h3>Exercice 2 : dictionnaire</h3>
+<ol>
+<li>Écrire une fonction <code>compter_lettres(mot)</code> qui retourne un dictionnaire avec le nombre d'occurrences de chaque lettre.</li>
+<li>Écrire une fonction <code>mot_le_plus_frequent(texte)</code> qui retourne le mot le plus fréquent.</li>
+</ol>
+
+<h2>VI. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+def inverser_chaine(chaine):
+    p = Pile()
+    for car in chaine:
+        p.empiler(car)
+
+    resultat = ""
+    while not p.est_vide():
+        resultat += p.depiler()
+
+    return resultat
+
+print(inverser_chaine("bonjour"))  # ruojnob
+
+
+def evaluer_npi(expression):
+    p = Pile()
+    for token in expression.split():
+        if token in "+-*/":
+            b = p.depiler()
+            a = p.depiler()
+            if token == '+': p.empiler(a + b)
+            elif token == '-': p.empiler(a - b)
+            elif token == '*': p.empiler(a * b)
+            elif token == '/': p.empiler(a / b)
+        else:
+            p.empiler(float(token))
+    return p.depiler()
+
+print(evaluer_npi("3 4 + 2 *"))  # 14.0
+</pre>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+def compter_lettres(mot):
+    compteur = {}
+    for lettre in mot.lower():
+        if lettre in compteur:
+            compteur[lettre] += 1
+        else:
+            compteur[lettre] = 1
+    return compteur
+
+print(compter_lettres("algorithme"))
+# {'a': 1, 'l': 1, 'g': 1, 'o': 1, 'r': 1,
+#  'i': 1, 't': 1, 'h': 1, 'm': 1, 'e': 1}
+
+print(compter_lettres("ananas"))
+# {'a': 3, 'n': 2, 's': 1}
+</pre>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="sql.html">&larr; SQL</a><a href="../../2021-2022/nsi/recursivite.html">Récursivité &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+const colors=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085','#d35400','#2980b9'];
+// PILE
+let pileData=['A','B','C'];let pileN=3;
+function pushPile(){pileData.push(String.fromCharCode(65+pileN));pileN++;drawPile();}
+function popPile(){if(pileData.length>0){const v=pileData.pop();document.getElementById('resultPile').textContent='Dépilé : '+v+'. Sommet actuel : '+(pileData.length>0?pileData[pileData.length-1]:'(vide)');}drawPile();}
+function resetPile(){pileData=[];pileN=0;drawPile();}
+function drawPile(){
+  const c=document.getElementById('canvasPile');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const bw=100,bh=35;const cx=w/2;const base=h-30;
+  ctx.strokeStyle='#888';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx-bw/2-5,base);ctx.lineTo(cx-bw/2-5,40);ctx.stroke();ctx.beginPath();ctx.moveTo(cx+bw/2+5,base);ctx.lineTo(cx+bw/2+5,40);ctx.stroke();ctx.beginPath();ctx.moveTo(cx-bw/2-5,base);ctx.lineTo(cx+bw/2+5,base);ctx.stroke();
+  pileData.forEach((v,i)=>{
+    const y=base-bh*(i+1);
+    ctx.fillStyle=colors[i%colors.length];ctx.beginPath();ctx.roundRect(cx-bw/2,y,bw,bh-2,3);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText(v,cx,y+22);
+  });
+  if(pileData.length>0){ctx.fillStyle='#c0392b';ctx.font='bold 11px Arial';ctx.textAlign='left';ctx.fillText('← sommet',cx+bw/2+12,base-bh*pileData.length+20);}
+  ctx.fillStyle='#888';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText('base',cx,base+16);
+  ctx.textAlign='left';ctx.fillText('Taille : '+pileData.length,20,25);
+  document.getElementById('resultPile').textContent='Pile : ['+pileData.join(', ')+'] (sommet à droite). LIFO : Last In, First Out.';
+}
+drawPile();
+// FILE
+let fileData=['A','B','C'];let fileN=3;
+function pushFile(){fileData.push(String.fromCharCode(65+fileN));fileN++;drawFile();}
+function popFile(){if(fileData.length>0){const v=fileData.shift();document.getElementById('resultFile').textContent='Défilé : '+v+'.';}drawFile();}
+function resetFile(){fileData=[];fileN=0;drawFile();}
+function drawFile(){
+  const c=document.getElementById('canvasFile');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const bw=60,bh=60;const y=h/2-bh/2;const startX=30;
+  fileData.forEach((v,i)=>{
+    const x=startX+i*(bw+8);
+    ctx.fillStyle=colors[i%colors.length];ctx.beginPath();ctx.roundRect(x,y,bw,bh,5);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 16px Arial';ctx.textAlign='center';ctx.fillText(v,x+bw/2,y+bh/2+6);
+    if(i<fileData.length-1){ctx.fillStyle='#888';ctx.font='14px Arial';ctx.fillText('→',x+bw+4,y+bh/2+5);}
+  });
+  if(fileData.length>0){
+    ctx.fillStyle='#27ae60';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('SORTIE ←',startX+bw/2,y-10);
+    ctx.fillStyle='#c0392b';ctx.fillText('→ ENTRÉE',startX+(fileData.length-1)*(bw+8)+bw/2,y-10);
+  }
+  ctx.textAlign='left';
+  document.getElementById('resultFile').textContent='File : ['+fileData.join(' → ')+'] FIFO : le premier entré ('+( fileData[0]||'-')+') sortira en premier.';
+}
+drawFile();
+// DICT
+let dictData={prenom:'Alice',age:'16',classe:'NSI'};const dictExtras=[['email','alice@mail.com'],['ville','Paris'],['sport','natation']];let dictIdx=0;
+function addDict(){if(dictIdx<dictExtras.length){dictData[dictExtras[dictIdx][0]]=dictExtras[dictIdx][1];dictIdx++;}drawDict();}
+function resetDict(){dictData={prenom:'Alice',age:'16',classe:'NSI'};dictIdx=0;drawDict();}
+function drawDict(){
+  const c=document.getElementById('canvasDict');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const entries=Object.entries(dictData);const n=entries.length;
+  const bw=Math.min(120,(w-40)/n-8);const bh=120;const y=60;
+  ctx.fillStyle='#444';ctx.font='bold 13px Arial';ctx.fillText('eleve = { ... }',20,25);
+  entries.forEach(([k,v],i)=>{
+    const x=20+i*(bw+6);
+    ctx.fillStyle='#2a5298';ctx.beginPath();ctx.roundRect(x,y,bw,40,{upperLeft:5,upperRight:5,lowerLeft:0,lowerRight:0});ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 10px Courier New';ctx.textAlign='center';ctx.fillText('"'+k+'"',x+bw/2,y+25);
+    ctx.fillStyle='#f8f9fa';ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x,y+40,bw,40,{upperLeft:0,upperRight:0,lowerLeft:5,lowerRight:5});ctx.fill();ctx.stroke();
+    ctx.fillStyle='#c0392b';ctx.font='12px Courier New';ctx.fillText(v,x+bw/2,y+65);
+    ctx.fillStyle='#888';ctx.font='8px Arial';ctx.fillText('clé',x+bw/2,y+12);ctx.fillText('valeur',x+bw/2,y+52);
+  });
+  ctx.textAlign='left';
+  document.getElementById('resultDict').textContent=n+' paire(s) clé:valeur. Accès en O(1) par clé.';
+}
+drawDict();
+// LISTE CHAÎNÉE
+let chaineData=['A','B','C'];
+function addChaine(){chaineData.unshift(String.fromCharCode(65+chaineData.length));drawChaine();}
+function removeChaine(){if(chaineData.length>0)chaineData.shift();drawChaine();}
+function resetChaine(){chaineData=['A','B','C'];drawChaine();}
+function drawChaine(){
+  const c=document.getElementById('canvasChaine');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const bw=65,bh=50;const y=h/2-bh/2;const startX=20;
+  ctx.fillStyle='#888';ctx.font='bold 11px Arial';ctx.fillText('tête',startX+bw/2-10,y-10);
+  chaineData.forEach((v,i)=>{
+    const x=startX+i*(bw+35);
+    // Value box
+    ctx.fillStyle=colors[i%colors.length];ctx.beginPath();ctx.roundRect(x,y,bw*0.6,bh,{upperLeft:5,upperRight:0,lowerLeft:5,lowerRight:0});ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 16px Arial';ctx.textAlign='center';ctx.fillText(v,x+bw*0.3,y+bh/2+6);
+    // Pointer box
+    ctx.fillStyle='rgba(0,0,0,0.1)';ctx.beginPath();ctx.roundRect(x+bw*0.6,y,bw*0.4,bh,{upperLeft:0,upperRight:5,lowerLeft:0,lowerRight:5});ctx.fill();
+    ctx.strokeStyle='#999';ctx.lineWidth=1;ctx.strokeRect(x+bw*0.6,y,bw*0.4,bh);
+    // Arrow to next
+    if(i<chaineData.length-1){
+      ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+bw,y+bh/2);ctx.lineTo(x+bw+30,y+bh/2);ctx.stroke();
+      ctx.fillStyle='#c0392b';ctx.beginPath();ctx.moveTo(x+bw+30,y+bh/2);ctx.lineTo(x+bw+22,y+bh/2-5);ctx.lineTo(x+bw+22,y+bh/2+5);ctx.closePath();ctx.fill();
+    } else {
+      ctx.fillStyle='#c0392b';ctx.font='10px Courier New';ctx.textAlign='center';ctx.fillText('None',x+bw*0.8,y+bh/2+4);
+    }
+  });
+  ctx.textAlign='left';
+  document.getElementById('resultChaine').textContent=chaineData.join(' → ')+' → None. Taille : '+chaineData.length+'. Ajout/suppression en tête : O(1).';
+}
+drawChaine();
+</script>
+</body>
+</html>
