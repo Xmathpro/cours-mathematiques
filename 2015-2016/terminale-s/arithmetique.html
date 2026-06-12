@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmétique . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2015-2016</span>
+    </div>
+    <h1 class="cours-titre-principal">Arithmétique</h1>
+    <p class="cours-sous-titre">Divisibilité, PGCD, nombres premiers et théorème de Bézout</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Divisibilité dans $\mathbb{Z}$</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Soient $a$ et $b$ deux entiers avec $b \neq 0$. On dit que $b$ <strong>divise</strong> $a$ (noté $b \mid a$) s'il existe un entier $k$ tel que $a = kb$.
+    </p>
+    <p>On dit aussi que $a$ est un <strong>multiple</strong> de $b$ ou que $b$ est un <strong>diviseur</strong> de $a$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés de la divisibilité</div>
+    <ul>
+      <li>Si $a \mid b$ et $b \mid c$ alors $a \mid c$ (transitivité)</li>
+      <li>Si $a \mid b$ et $a \mid c$ alors $a \mid (b + c)$ et $a \mid (b - c)$</li>
+      <li>Si $a \mid b$ alors $a \mid kb$ pour tout entier $k$</li>
+      <li>Si $a \mid b$ et $b \mid a$ alors $a = \pm b$</li>
+    </ul>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Division euclidienne</div>
+    <p>
+      Pour tout entier $a$ et tout entier $b > 0$, il existe un unique couple $(q, r)$ d'entiers tels que :
+      $$a = bq + r \quad \text{avec} \quad 0 \leq r < b$$
+      $q$ est le <strong>quotient</strong> et $r$ est le <strong>reste</strong> de la division euclidienne de $a$ par $b$.
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Division euclidienne de 157 par 12 :</p>
+    <p>$157 = 12 \times 13 + 1$. Le quotient est 13 et le reste est 1.</p>
+    <p>Donc 12 ne divise pas 157 (car $r = 1 \neq 0$).</p>
+  </div>
+
+  <h2>II. PGCD</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Le <strong>PGCD</strong> (plus grand commun diviseur) de deux entiers $a$ et $b$ non tous les deux nuls est le plus grand entier qui divise à la fois $a$ et $b$.
+    </p>
+    <p>Si $\text{PGCD}(a, b) = 1$, on dit que $a$ et $b$ sont <strong>premiers entre eux</strong>.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Algorithme d'Euclide</div>
+    <p>Pour calculer $\text{PGCD}(a, b)$ avec $a > b > 0$ :</p>
+    <p>On effectue des divisions euclidiennes successives. Le PGCD est le dernier reste non nul.</p>
+    <p><strong>Exemple.</strong> $\text{PGCD}(252, 198)$.</p>
+    <p>$252 = 198 \times 1 + 54$</p>
+    <p>$198 = 54 \times 3 + 36$</p>
+    <p>$54 = 36 \times 1 + 18$</p>
+    <p>$36 = 18 \times 2 + 0$</p>
+    <p>Le dernier reste non nul est 18. Donc $\text{PGCD}(252, 198) = 18$.</p>
+  </div>
+
+  <h2>III. Théorème de Bézout</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème de Bézout</div>
+    <p>
+      Soient $a$ et $b$ deux entiers non tous les deux nuls, et $d = \text{PGCD}(a, b)$. Il existe des entiers $u$ et $v$ tels que :
+      $$au + bv = d$$
+      En particulier, $a$ et $b$ sont premiers entre eux si et seulement s'il existe $u, v \in \mathbb{Z}$ tels que $au + bv = 1$.
+    </p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : trouver les coefficients de Bézout</div>
+    <p>On remonte l'algorithme d'Euclide.</p>
+    <p><strong>Exemple.</strong> Trouver $u$ et $v$ tels que $252u + 198v = 18$.</p>
+    <p>De l'algorithme d'Euclide :</p>
+    <p>$18 = 54 - 36 \times 1$</p>
+    <p>$36 = 198 - 54 \times 3$, donc $18 = 54 - (198 - 54 \times 3) = 4 \times 54 - 198$</p>
+    <p>$54 = 252 - 198$, donc $18 = 4(252 - 198) - 198 = 4 \times 252 - 5 \times 198$.</p>
+    <p>Donc $u = 4$ et $v = -5$ : $252 \times 4 + 198 \times (-5) = 1008 - 990 = 18$. Vérifié.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème de Gauss</div>
+    <p>Si $a \mid bc$ et $\text{PGCD}(a, b) = 1$, alors $a \mid c$.</p>
+    <p>Autrement dit : si $a$ divise un produit et est premier avec l'un des facteurs, alors il divise l'autre facteur.</p>
+  </div>
+
+  <h2>IV. Nombres premiers</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Un entier $p \geq 2$ est <strong>premier</strong> s'il admet exactement deux diviseurs positifs : 1 et lui-même.
+    </p>
+    <p>Les premiers nombres premiers sont : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47.</p>
+    <p>2 est le seul nombre premier pair.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème fondamental de l'arithmétique</div>
+    <p>
+      Tout entier $n \geq 2$ se décompose de manière unique en produit de facteurs premiers (à l'ordre près) :
+      $$n = p_1^{\alpha_1} \times p_2^{\alpha_2} \times \cdots \times p_k^{\alpha_k}$$
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples de décomposition</div>
+    <p>$360 = 2^3 \times 3^2 \times 5$</p>
+    <p>$2310 = 2 \times 3 \times 5 \times 7 \times 11$</p>
+    <p>$1001 = 7 \times 11 \times 13$</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : tester la primalité</div>
+    <p>
+      Pour vérifier si $n$ est premier, il suffit de tester la divisibilité par tous les nombres premiers $p$ tels que $p \leq \sqrt{n}$.
+    </p>
+    <p><strong>Exemple.</strong> $97$ est-il premier ?</p>
+    <p>$\sqrt{97} \approx 9{,}85$. On teste 2, 3, 5, 7.</p>
+    <p>$97/2 = 48{,}5$, $97/3 = 32{,}3...$, $97/5 = 19{,}4$, $97/7 = 13{,}9...$</p>
+    <p>Aucun ne divise 97. Donc 97 est premier.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Infinité des nombres premiers</div>
+    <p>
+      Il existe une infinité de nombres premiers (théorème d'Euclide).
+    </p>
+    <p>
+      Démonstration par l'absurde : supposons qu'il n'y a qu'un nombre fini de nombres premiers $p_1, p_2, \ldots, p_k$. Le nombre $N = p_1 \times p_2 \times \cdots \times p_k + 1$ n'est divisible par aucun des $p_i$ (car la division par $p_i$ donne toujours un reste de 1). Donc $N$ est soit premier, soit divisible par un nombre premier non listé. Contradiction.
+    </p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Les nombres premiers sont au fondement de la cryptographie moderne. Le chiffrement RSA, utilisé dans toutes les transactions bancaires en ligne, repose sur le fait qu'il est facile de multiplier deux grands nombres premiers entre eux mais extrêmement difficile de retrouver ces facteurs à partir du produit. Quand vous payez en ligne, la sécurité de votre transaction repose sur un problème d'arithmétique que les meilleurs ordinateurs du monde ne savent pas résoudre efficacement.
+    </p>
+  </div>
+
+  <h2>V. Congruences</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      On dit que $a$ est <strong>congru</strong> à $b$ modulo $n$ (noté $a \equiv b \pmod{n}$) si $n$ divise $a - b$.
+      Autrement dit : $a$ et $b$ ont le même reste dans la division euclidienne par $n$.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés des congruences</div>
+    <p>Si $a \equiv b \pmod{n}$ et $c \equiv d \pmod{n}$, alors :</p>
+    <ul>
+      <li>$a + c \equiv b + d \pmod{n}$</li>
+      <li>$a \times c \equiv b \times d \pmod{n}$</li>
+      <li>$a^k \equiv b^k \pmod{n}$ pour tout $k \geq 1$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Quel est le reste de la division de $3^{100}$ par 7 ?</p>
+    <p>On calcule les puissances de 3 modulo 7 :</p>
+    <p>$3^1 \equiv 3 \pmod{7}$</p>
+    <p>$3^2 \equiv 9 \equiv 2 \pmod{7}$</p>
+    <p>$3^3 \equiv 6 \equiv -1 \pmod{7}$</p>
+    <p>$3^6 \equiv (-1)^2 \equiv 1 \pmod{7}$</p>
+    <p>Le cycle est de longueur 6. $100 = 6 \times 16 + 4$.</p>
+    <p>$3^{100} = (3^6)^{16} \times 3^4 \equiv 1^{16} \times 3^4 \equiv 81 \equiv 81 - 11 \times 7 \equiv 81 - 77 \equiv 4 \pmod{7}$.</p>
+    <p>Le reste est 4.</p>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : divisibilité et PGCD</h3>
+  <ol>
+    <li>Calculer $\text{PGCD}(420, 168)$ par l'algorithme d'Euclide.</li>
+    <li>Trouver $u$ et $v$ tels que $420u + 168v = \text{PGCD}(420, 168)$.</li>
+    <li>Simplifier la fraction $\dfrac{168}{420}$.</li>
+  </ol>
+
+  <h3>Exercice 2 : nombres premiers</h3>
+  <ol>
+    <li>Décomposer 2520 en produit de facteurs premiers.</li>
+    <li>En déduire le nombre de diviseurs positifs de 2520.</li>
+    <li>Calculer $\text{PGCD}(2520, 1080)$ et $\text{PPCM}(2520, 1080)$ à l'aide des décompositions.</li>
+  </ol>
+
+  <h3>Exercice 3 : Bézout et Gauss</h3>
+  <ol>
+    <li>Montrer que 17 et 23 sont premiers entre eux.</li>
+    <li>Trouver $u$ et $v$ tels que $17u + 23v = 1$.</li>
+    <li>En déduire les solutions entières de $17x + 23y = 5$.</li>
+  </ol>
+
+  <h3>Exercice 4 : congruences</h3>
+  <ol>
+    <li>Quel est le reste de $2^{50}$ dans la division par 7 ?</li>
+    <li>Montrer que $n^3 - n$ est divisible par 6 pour tout entier $n$.</li>
+    <li>Quel est le chiffre des unités de $7^{2024}$ ?</li>
+  </ol>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Algorithme d'Euclide :</p>
+    <p>$420 = 168 \times 2 + 84$</p>
+    <p>$168 = 84 \times 2 + 0$</p>
+    <p>$\text{PGCD}(420, 168) = 84$.</p>
+    <p><strong>2.</strong> De la première ligne : $84 = 420 - 168 \times 2$.</p>
+    <p>Donc $420 \times 1 + 168 \times (-2) = 84$. $u = 1$ et $v = -2$.</p>
+    <p><strong>3.</strong> $\dfrac{168}{420} = \dfrac{168 / 84}{420 / 84} = \dfrac{2}{5}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $2520 = 2^3 \times 3^2 \times 5 \times 7$.</p>
+    <p>(Vérification : $8 \times 9 \times 5 \times 7 = 72 \times 35 = 2520$. Correct.)</p>
+    <p><strong>2.</strong> Le nombre de diviseurs est $(3+1)(2+1)(1+1)(1+1) = 4 \times 3 \times 2 \times 2 = 48$.</p>
+    <p><strong>3.</strong> $1080 = 2^3 \times 3^3 \times 5$.</p>
+    <p>$\text{PGCD} = 2^3 \times 3^2 \times 5 = 8 \times 9 \times 5 = 360$.</p>
+    <p>$\text{PPCM} = 2^3 \times 3^3 \times 5 \times 7 = 8 \times 27 \times 5 \times 7 = 7560$.</p>
+    <p>Vérification : $\text{PGCD} \times \text{PPCM} = 360 \times 7560 = 2\,721\,600 = 2520 \times 1080$. Correct.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> 17 est premier. 23 est premier. Deux nombres premiers distincts sont premiers entre eux.</p>
+    <p>Ou par Euclide : $23 = 17 \times 1 + 6$, $17 = 6 \times 2 + 5$, $6 = 5 \times 1 + 1$, $5 = 1 \times 5 + 0$. PGCD = 1.</p>
+    <p><strong>2.</strong> On remonte :</p>
+    <p>$1 = 6 - 5$</p>
+    <p>$5 = 17 - 6 \times 2$, donc $1 = 6 - (17 - 6 \times 2) = 3 \times 6 - 17$</p>
+    <p>$6 = 23 - 17$, donc $1 = 3(23 - 17) - 17 = 3 \times 23 - 4 \times 17$</p>
+    <p>Donc $17 \times (-4) + 23 \times 3 = 1$. $u = -4$ et $v = 3$.</p>
+    <p>Vérification : $-68 + 69 = 1$. Correct.</p>
+    <p><strong>3.</strong> On multiplie par 5 : $17 \times (-20) + 23 \times 15 = 5$.</p>
+    <p>Une solution particulière est $x_0 = -20$ et $y_0 = 15$.</p>
+    <p>La solution générale est : $x = -20 + 23k$ et $y = 15 - 17k$ pour $k \in \mathbb{Z}$.</p>
+    <p>Vérification avec $k = 1$ : $x = 3$, $y = -2$. $17 \times 3 + 23 \times (-2) = 51 - 46 = 5$. Correct.</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Puissances de 2 modulo 7 :</p>
+    <p>$2^1 \equiv 2$, $2^2 \equiv 4$, $2^3 \equiv 1 \pmod{7}$.</p>
+    <p>Cycle de longueur 3. $50 = 3 \times 16 + 2$.</p>
+    <p>$2^{50} \equiv (2^3)^{16} \times 2^2 \equiv 1 \times 4 \equiv 4 \pmod{7}$. Le reste est <strong>4</strong>.</p>
+    <p><strong>2.</strong> $n^3 - n = n(n^2 - 1) = (n-1)n(n+1)$.</p>
+    <p>C'est le produit de trois entiers consécutifs. Parmi trois consécutifs :</p>
+    <p>L'un au moins est divisible par 2 et l'un au moins est divisible par 3.</p>
+    <p>Donc $(n-1)n(n+1)$ est divisible par $2 \times 3 = 6$.</p>
+    <p><strong>3.</strong> Les chiffres des unités des puissances de 7 :</p>
+    <p>$7^1 = 7$, $7^2 = 49$ (unité 9), $7^3 = 343$ (unité 3), $7^4 = 2401$ (unité 1), $7^5$ (unité 7), etc.</p>
+    <p>Cycle de longueur 4 : $7, 9, 3, 1, 7, 9, 3, 1, \ldots$</p>
+    <p>$2024 = 4 \times 506$, donc $7^{2024}$ a la même unité que $7^4$. Le chiffre des unités est <strong>1</strong>.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="suites.html">&larr; Suites numériques</a>
+  <a href="../../index.html">Retour à l'accueil &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
