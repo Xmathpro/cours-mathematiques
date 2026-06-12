@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dérivation et applications . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Dérivation et applications</h1>
+    <p class="cours-sous-titre">Dérivées usuelles, règles de calcul, sens de variation et optimisation</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Rappels de première</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Le <strong>nombre dérivé</strong> de $f$ en $a$ est la limite, si elle existe, du taux de variation de $f$ en $a$ :
+      $$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$$
+      Géométriquement, $f'(a)$ est le coefficient directeur de la tangente à la courbe de $f$ au point d'abscisse $a$.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Dérivées usuelles à connaître</div>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="text-align:left; padding: 6px 8px; font-weight: bold;">$f(x)$</th>
+          <th style="text-align:left; padding: 6px 8px; font-weight: bold;">$f'(x)$</th>
+          <th style="text-align:left; padding: 6px 8px; font-weight: bold;">Domaine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$c$ (constante)</td><td style="padding: 5px 8px;">$0$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x$</td><td style="padding: 5px 8px;">$1$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x^n$ ($n \in \mathbb{Z}$)</td><td style="padding: 5px 8px;">$nx^{n-1}$</td><td style="padding: 5px 8px;">$\mathbb{R}$ ou $\mathbb{R}^*$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\sqrt{x}$</td><td style="padding: 5px 8px;">$\dfrac{1}{2\sqrt{x}}$</td><td style="padding: 5px 8px;">$]0, +\infty[$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\sin x$</td><td style="padding: 5px 8px;">$\cos x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\cos x$</td><td style="padding: 5px 8px;">$-\sin x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+        <tr><td style="padding: 5px 8px;">$e^x$</td><td style="padding: 5px 8px;">$e^x$</td><td style="padding: 5px 8px;">$\mathbb{R}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>II. Règles de calcul des dérivées</h2>
+
+  <h3>1. Opérations algébriques</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriété</div>
+    <p>Soient $u$ et $v$ deux fonctions dérivables et $\lambda$ un réel. Alors :</p>
+    <ul>
+      <li>$(\lambda u)' = \lambda u'$</li>
+      <li>$(u + v)' = u' + v'$</li>
+      <li>$(uv)' = u'v + uv'$</li>
+      <li>$\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$ quand $v \neq 0$</li>
+      <li>$\left(\dfrac{1}{v}\right)' = \dfrac{-v'}{v^2}$ quand $v \neq 0$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples</div>
+    <p><strong>Produit.</strong> Soit $f(x) = (2x+1)(x^2 - 3)$. On pose $u = 2x+1$ et $v = x^2-3$.</p>
+    <p>$u' = 2$ et $v' = 2x$, donc $f'(x) = 2(x^2-3) + (2x+1)(2x) = 2x^2 - 6 + 4x^2 + 2x = 6x^2 + 2x - 6$.</p>
+    <p style="margin-top: 0.75rem;"><strong>Quotient.</strong> Soit $g(x) = \dfrac{x^2+1}{x-2}$ sur $\mathbb{R} \setminus \{2\}$.</p>
+    <p>$u = x^2+1$, $u' = 2x$, $v = x-2$, $v' = 1$.</p>
+    <p>$g'(x) = \dfrac{2x(x-2) - (x^2+1)(1)}{(x-2)^2} = \dfrac{2x^2-4x-x^2-1}{(x-2)^2} = \dfrac{x^2-4x-1}{(x-2)^2}$.</p>
+  </div>
+
+  <h3>2. Dérivée d'une composée</h3>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème</div>
+    <p>Si $g$ est dérivable en $a$ et $f$ est dérivable en $g(a)$, alors $f \circ g$ est dérivable en $a$ et :</p>
+    $$\left(f(g(x))\right)' = g'(x) \times f'(g(x))$$
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Cas particuliers importants</div>
+    <ul>
+      <li>$(u^n)' = nu' \cdot u^{n-1}$</li>
+      <li>$(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$</li>
+      <li>$(e^u)' = u' e^u$</li>
+      <li>$(\sin u)' = u' \cos u$</li>
+      <li>$(\cos u)' = -u' \sin u$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples</div>
+    <p><strong>1.</strong> $f(x) = (3x^2 + 1)^5$. On a $u = 3x^2+1$ et $u' = 6x$.</p>
+    <p>$f'(x) = 5 \times 6x \times (3x^2+1)^4 = 30x(3x^2+1)^4$.</p>
+    <p style="margin-top:0.75rem;"><strong>2.</strong> $g(x) = \sqrt{2x^2 - 5}$. On a $u = 2x^2-5$ et $u' = 4x$.</p>
+    <p>$g'(x) = \dfrac{4x}{2\sqrt{2x^2-5}} = \dfrac{2x}{\sqrt{2x^2-5}}$.</p>
+    <p style="margin-top:0.75rem;"><strong>3.</strong> $h(x) = e^{x^2 + 3x}$. On a $u = x^2+3x$ et $u' = 2x+3$.</p>
+    <p>$h'(x) = (2x+3)e^{x^2+3x}$.</p>
+  </div>
+
+  <h2>III. Applications de la dérivée</h2>
+
+  <h3>1. Sens de variation</h3>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème fondamental</div>
+    <p>Soit $f$ dérivable sur un intervalle $I$.</p>
+    <ul>
+      <li>$f$ est <strong>croissante</strong> sur $I$ si et seulement si $f'(x) \geq 0$ sur $I$.</li>
+      <li>$f$ est <strong>décroissante</strong> sur $I$ si et seulement si $f'(x) \leq 0$ sur $I$.</li>
+      <li>$f$ est <strong>constante</strong> sur $I$ si et seulement si $f'(x) = 0$ sur $I$.</li>
+    </ul>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : dresser un tableau de variations</div>
+    <p>Soit $f(x) = 2x^3 - 9x^2 + 12x - 4$.</p>
+    <p><strong>Étape 1.</strong> Calculer $f'(x)$.</p>
+    <p>$f'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x-1)(x-2)$.</p>
+    <p><strong>Étape 2.</strong> Étudier le signe de $f'(x)$.</p>
+    <p>$f'(x) = 0$ pour $x = 1$ et $x = 2$. Tableau de signes :</p>
+    <ul>
+      <li>Sur $]-\infty, 1[$ : $f'(x) > 0$ donc $f$ croissante.</li>
+      <li>Sur $]1, 2[$ : $f'(x) < 0$ donc $f$ décroissante.</li>
+      <li>Sur $]2, +\infty[$ : $f'(x) > 0$ donc $f$ croissante.</li>
+    </ul>
+    <p><strong>Étape 3.</strong> Calculer les valeurs remarquables.</p>
+    <p>$f(1) = 2 - 9 + 12 - 4 = 1$ (maximum local) et $f(2) = 16 - 36 + 24 - 4 = 0$ (minimum local).</p>
+  </div>
+
+  <h3>2. Extremums et problèmes d'optimisation</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      On dit que $f$ admet un <strong>maximum local</strong> en $a$ si $f(a) \geq f(x)$ pour tout $x$ proche de $a$.
+      De même pour un <strong>minimum local</strong>.
+    </p>
+    <p>
+      Si $f'(a) = 0$ et que $f'$ change de signe en $a$, alors $f$ admet un extremum local en $a$.
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple type bac : problème d'optimisation</div>
+    <p>
+      Un agriculteur dispose de 200 mètres de clôture pour délimiter un terrain rectangulaire
+      adossé à un mur (le mur constitue un des côtés). Quelle dimension doit-il choisir
+      pour maximiser l'aire du terrain ?
+    </p>
+    <p>
+      On note $x$ la longueur du côté perpendiculaire au mur. Le côté parallèle au mur mesure
+      $200 - 2x$ mètres. L'aire vaut $A(x) = x(200-2x) = 200x - 2x^2$ avec $x \in ]0, 100[$.
+    </p>
+    <p>$A'(x) = 200 - 4x$. $A'(x) = 0$ pour $x = 50$.</p>
+    <p>$A'(x) > 0$ sur $]0, 50[$ et $A'(x) < 0$ sur $]50, 100[$, donc $A$ est maximale en $x = 50$.</p>
+    <p>Le terrain optimal mesure $50 \times 100$ mètres, soit une aire de $5000$ m².</p>
+  </div>
+
+  <h3>3. Convexité</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      $f$ est <strong>convexe</strong> sur $I$ si $f''(x) \geq 0$ sur $I$ (la courbe est au-dessus de ses tangentes).
+      $f$ est <strong>concave</strong> sur $I$ si $f''(x) \leq 0$ sur $I$.
+      Un <strong>point d'inflexion</strong> est un point où $f''$ change de signe.
+    </p>
+  </div>
+
+  <h2>IV. Exercices</h2>
+
+  <h3>Exercice 1 : calcul de dérivées</h3>
+  <p>Calculer la dérivée de chaque fonction et préciser son domaine de dérivabilité :</p>
+  <ol>
+    <li>$f(x) = 3x^4 - 5x^2 + 2x - 7$</li>
+    <li>$g(x) = (x^2 + 3x - 1)(2x - 5)$</li>
+    <li>$h(x) = \dfrac{x^2 - 1}{x + 3}$</li>
+    <li>$k(x) = \sqrt{x^2 + 4x + 1}$</li>
+    <li>$m(x) = e^{3x^2 - 2x}$</li>
+    <li>$p(x) = \sin(2x + 1)$</li>
+  </ol>
+
+  <h3>Exercice 2 : étude de fonction</h3>
+  <p>Soit $f(x) = x^3 - 3x^2 - 9x + 5$ définie sur $\mathbb{R}$.</p>
+  <ol>
+    <li>Calculer $f'(x)$ et déterminer ses racines.</li>
+    <li>Dresser le tableau de variations de $f$.</li>
+    <li>Déterminer les extremums locaux de $f$.</li>
+    <li>Calculer $f''(x)$ et trouver le point d'inflexion.</li>
+  </ol>
+
+  <h3>Exercice 3 : optimisation</h3>
+  <p>
+    On veut fabriquer une boite cylindrique sans couvercle de volume $V = 500$ cm³.
+    On note $r$ le rayon de la base et $h$ la hauteur.
+  </p>
+  <ol>
+    <li>Exprimer $h$ en fonction de $r$ et $V$.</li>
+    <li>Exprimer l'aire totale $A$ (base + côté latéral) en fonction de $r$ uniquement.</li>
+    <li>Déterminer la valeur de $r$ qui minimise $A$.</li>
+  </ol>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f'(x) = 12x^3 - 10x + 2$, sur $\mathbb{R}$.</p>
+    <p><strong>2.</strong> $u = x^2+3x-1$, $u' = 2x+3$, $v = 2x-5$, $v' = 2$.</p>
+    <p>$g'(x) = (2x+3)(2x-5) + (x^2+3x-1)(2) = 4x^2-4x-15 + 2x^2+6x-2 = 6x^2+2x-17$.</p>
+    <p><strong>3.</strong> $u = x^2-1$, $u' = 2x$, $v = x+3$, $v' = 1$.</p>
+    <p>$h'(x) = \dfrac{2x(x+3) - (x^2-1)}{(x+3)^2} = \dfrac{x^2+6x+1}{(x+3)^2}$, sur $\mathbb{R} \setminus \{-3\}$.</p>
+    <p><strong>4.</strong> $u = x^2+4x+1$, $u' = 2x+4$.</p>
+    <p>$k'(x) = \dfrac{2x+4}{2\sqrt{x^2+4x+1}} = \dfrac{x+2}{\sqrt{x^2+4x+1}}$, là où $x^2+4x+1 > 0$.</p>
+    <p><strong>5.</strong> $u = 3x^2-2x$, $u' = 6x-2$. $m'(x) = (6x-2)e^{3x^2-2x}$, sur $\mathbb{R}$.</p>
+    <p><strong>6.</strong> $u = 2x+1$, $u' = 2$. $p'(x) = 2\cos(2x+1)$, sur $\mathbb{R}$.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="limites.html">&larr; Limites de suites et de fonctions</a>
+  <a href="integration.html">Intégration &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
