@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dérivation . Première S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#premieres">Première S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Première S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Dérivation</h1>
+    <p class="cours-sous-titre">Nombre dérivé, tangente, dérivées usuelles et sens de variation</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Nombre dérivé et tangente</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Taux de variation</div>
+    <p>Le <strong>taux de variation</strong> de $f$ entre $a$ et $a+h$ est :</p>
+    $$\frac{f(a+h) - f(a)}{h}$$
+    <p>Géométriquement, c'est le coefficient directeur de la sécante passant par les points $(a, f(a))$ et $(a+h, f(a+h))$.</p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Nombre dérivé</div>
+    <p>Le <strong>nombre dérivé</strong> de $f$ en $a$, noté $f'(a)$, est la limite du taux de variation quand $h$ tend vers 0 :</p>
+    $$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$$
+    <p>$f'(a)$ est le coefficient directeur de la <strong>tangente</strong> à la courbe au point d'abscisse $a$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Équation de la tangente</div>
+    <p>La tangente à la courbe de $f$ au point d'abscisse $a$ a pour équation :</p>
+    $$y = f'(a)(x - a) + f(a)$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>$f(x) = x^2$. Calculons $f'(3)$ par la définition.</p>
+    <p>$\dfrac{f(3+h) - f(3)}{h} = \dfrac{(3+h)^2 - 9}{h} = \dfrac{9 + 6h + h^2 - 9}{h} = \dfrac{6h + h^2}{h} = 6 + h$.</p>
+    <p>Quand $h \to 0$ : $f'(3) = 6$.</p>
+    <p>Tangente en $x = 3$ : $y = 6(x-3) + 9 = 6x - 9$.</p>
+  </div>
+
+  <h2>II. Fonction dérivée</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Si $f$ est dérivable en tout point de son ensemble de définition, la <strong>fonction dérivée</strong> $f'$ associe à chaque $x$ le nombre dérivé $f'(x)$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Dérivées usuelles</div>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="text-align:left; padding: 6px 8px;">$f(x)$</th>
+          <th style="text-align:left; padding: 6px 8px;">$f'(x)$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$c$ (constante)</td><td style="padding: 5px 8px;">$0$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x$</td><td style="padding: 5px 8px;">$1$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x^2$</td><td style="padding: 5px 8px;">$2x$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x^3$</td><td style="padding: 5px 8px;">$3x^2$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$x^n$</td><td style="padding: 5px 8px;">$nx^{n-1}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding: 5px 8px;">$\dfrac{1}{x}$</td><td style="padding: 5px 8px;">$-\dfrac{1}{x^2}$</td></tr>
+        <tr><td style="padding: 5px 8px;">$\sqrt{x}$</td><td style="padding: 5px 8px;">$\dfrac{1}{2\sqrt{x}}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Opérations</div>
+    <ul>
+      <li>$(u + v)' = u' + v'$</li>
+      <li>$(\lambda u)' = \lambda u'$</li>
+      <li>$(uv)' = u'v + uv'$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples</div>
+    <p><strong>1.</strong> $f(x) = 3x^2 - 5x + 2$. $f'(x) = 6x - 5$.</p>
+    <p><strong>2.</strong> $g(x) = x^3 - 4x^2 + x$. $g'(x) = 3x^2 - 8x + 1$.</p>
+    <p><strong>3.</strong> $h(x) = (2x+1)(x-3)$. Produit : $h'(x) = 2(x-3) + (2x+1)(1) = 2x - 6 + 2x + 1 = 4x - 5$.</p>
+  </div>
+
+  <h2>III. Sens de variation</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Lien dérivée / variations</div>
+    <p>Sur un intervalle $I$ :</p>
+    <ul>
+      <li>$f'(x) \geq 0$ sur $I$ $\iff$ $f$ est croissante sur $I$</li>
+      <li>$f'(x) \leq 0$ sur $I$ $\iff$ $f$ est décroissante sur $I$</li>
+      <li>$f'(x) = 0$ en un point et change de signe $\implies$ extremum local</li>
+    </ul>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : tableau de variations</div>
+    <p>$f(x) = -x^3 + 3x + 1$.</p>
+    <p><strong>1.</strong> $f'(x) = -3x^2 + 3 = -3(x^2 - 1) = -3(x-1)(x+1)$.</p>
+    <p><strong>2.</strong> $f'(x) = 0$ pour $x = -1$ et $x = 1$.</p>
+    <p><strong>3.</strong> Signe de $f'$ :</p>
+    <ul>
+      <li>Sur $]-\infty, -1[$ : $f'(x) < 0$, $f$ décroissante.</li>
+      <li>Sur $]-1, 1[$ : $f'(x) > 0$, $f$ croissante.</li>
+      <li>Sur $]1, +\infty[$ : $f'(x) < 0$, $f$ décroissante.</li>
+    </ul>
+    <p><strong>4.</strong> $f(-1) = 1 - 3 + 1 = -1$ (minimum local). $f(1) = -1 + 3 + 1 = 3$ (maximum local).</p>
+  </div>
+
+  <h2>IV. Exercices</h2>
+
+  <h3>Exercice 1 : dérivées</h3>
+  <p>Calculer la dérivée de chaque fonction :</p>
+  <ol>
+    <li>$f(x) = 4x^3 - 2x^2 + 7x - 1$</li>
+    <li>$g(x) = (x+2)(3x-1)$</li>
+    <li>$h(x) = 5x^4 - \dfrac{3}{x}$</li>
+  </ol>
+
+  <h3>Exercice 2 : tangente</h3>
+  <p>Soit $f(x) = x^2 - 4x + 3$.</p>
+  <ol>
+    <li>Calculer $f'(x)$.</li>
+    <li>Déterminer l'équation de la tangente en $x = 1$.</li>
+    <li>Déterminer l'équation de la tangente en $x = 3$.</li>
+    <li>Pour quelle valeur de $x$ la tangente est-elle horizontale ?</li>
+  </ol>
+
+  <h3>Exercice 3 : variations</h3>
+  <p>Soit $f(x) = 2x^3 - 3x^2 - 12x + 5$.</p>
+  <ol>
+    <li>Calculer $f'(x)$ et résoudre $f'(x) = 0$.</li>
+    <li>Dresser le tableau de variations de $f$.</li>
+    <li>Déterminer les extremums locaux de $f$.</li>
+  </ol>
+
+  <h2>V. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f'(x) = 12x^2 - 4x + 7$.</p>
+    <p><strong>2.</strong> $g(x) = 3x^2 - x + 6x - 2 = 3x^2 + 5x - 2$. $g'(x) = 6x + 5$.</p>
+    <p>Ou par le produit : $g'(x) = 1 \times (3x-1) + (x+2) \times 3 = 3x - 1 + 3x + 6 = 6x + 5$.</p>
+    <p><strong>3.</strong> $h(x) = 5x^4 - 3x^{-1}$. $h'(x) = 20x^3 + 3x^{-2} = 20x^3 + \dfrac{3}{x^2}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f'(x) = 2x - 4$.</p>
+    <p><strong>2.</strong> $f'(1) = -2$ et $f(1) = 1 - 4 + 3 = 0$. Tangente : $y = -2(x-1) + 0 = -2x + 2$.</p>
+    <p><strong>3.</strong> $f'(3) = 2$ et $f(3) = 9 - 12 + 3 = 0$. Tangente : $y = 2(x-3) + 0 = 2x - 6$.</p>
+    <p><strong>4.</strong> Tangente horizontale $\iff$ $f'(x) = 0 \iff 2x - 4 = 0 \iff x = 2$. En $x = 2$, $f(2) = 4 - 8 + 3 = -1$. La tangente est $y = -1$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f'(x) = 6x^2 - 6x - 12 = 6(x^2 - x - 2) = 6(x-2)(x+1)$.</p>
+    <p>$f'(x) = 0$ pour $x = -1$ et $x = 2$.</p>
+    <p><strong>2.</strong> Signe de $f'$ : $f'(x) > 0$ sur $]-\infty, -1[$ et $]2, +\infty[$. $f'(x) < 0$ sur $]-1, 2[$.</p>
+    <p>$f$ croissante sur $]-\infty, -1[$, décroissante sur $]-1, 2[$, croissante sur $]2, +\infty[$.</p>
+    <p><strong>3.</strong> $f(-1) = -2 - 3 + 12 + 5 = 12$ : maximum local.</p>
+    <p>$f(2) = 16 - 12 - 24 + 5 = -15$ : minimum local.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="suites.html">&larr; Suites numériques</a>
+  <a href="../../2013-2014/premiere-s/trigonometrie.html">Trigonométrie &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
