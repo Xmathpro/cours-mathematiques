@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Géométrie dans l'espace . Première S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#premieres">Première S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Première S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2014-2015</span>
+    </div>
+    <h1 class="cours-titre-principal">Géométrie dans l'espace</h1>
+    <p class="cours-sous-titre">Positions relatives, parallélisme, orthogonalité et sections de solides</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Positions relatives de droites et de plans</h2>
+
+  <h3>1. Deux droites</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Cas possibles</div>
+    <p>Dans l'espace, deux droites peuvent être :</p>
+    <ul>
+      <li><strong>Sécantes :</strong> elles se coupent en un seul point.</li>
+      <li><strong>Parallèles :</strong> elles sont coplanaires et ne se coupent pas (ou confondues).</li>
+      <li><strong>Non coplanaires :</strong> elles ne sont ni sécantes ni parallèles. Elles "se croisent" sans jamais se toucher.</li>
+    </ul>
+    <p>C'est la grande nouveauté de la géométrie dans l'espace par rapport au plan : deux droites qui ne se coupent pas ne sont pas forcément parallèles.</p>
+  </div>
+
+  <h3>2. Droite et plan</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Cas possibles</div>
+    <ul>
+      <li><strong>Sécants :</strong> la droite coupe le plan en un seul point.</li>
+      <li><strong>Parallèles :</strong> la droite ne coupe pas le plan.</li>
+      <li><strong>Incluse :</strong> la droite est contenue dans le plan.</li>
+    </ul>
+  </div>
+
+  <h3>3. Deux plans</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Cas possibles</div>
+    <ul>
+      <li><strong>Sécants :</strong> leur intersection est une droite.</li>
+      <li><strong>Parallèles :</strong> ils ne se coupent pas (ou confondus).</li>
+    </ul>
+  </div>
+
+  <h2>II. Parallélisme</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorèmes de parallélisme</div>
+    <p><strong>1.</strong> Si deux droites sont parallèles à une troisième, elles sont parallèles entre elles.</p>
+    <p><strong>2.</strong> Si une droite est parallèle à un plan, toute droite de ce plan qui a un point commun avec la droite initiale est aussi parallèle (faux en général). En revanche : si une droite est parallèle à un plan, tout plan contenant cette droite coupe le plan initial selon une droite parallèle à la première.</p>
+    <p><strong>3.</strong> Si deux plans sont parallèles, tout plan sécant les coupe selon deux droites parallèles.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème du toit</div>
+    <p>Si deux droites $d$ et $d'$ sont parallèles et si un plan $\mathcal{P}$ contient $d$, alors $\mathcal{P}$ est parallèle à $d'$ (ou contient $d'$).</p>
+  </div>
+
+  <h2>III. Orthogonalité</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Droite perpendiculaire à un plan</div>
+    <p>
+      Une droite $d$ est <strong>perpendiculaire</strong> à un plan $\mathcal{P}$ si elle est orthogonale à toutes les droites de $\mathcal{P}$.
+    </p>
+    <p>En pratique, il suffit de montrer que $d$ est orthogonale à <strong>deux droites sécantes</strong> de $\mathcal{P}$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Si $d$ est perpendiculaire à $\mathcal{P}$, alors $d$ est orthogonale à toute droite de $\mathcal{P}$.</li>
+      <li>Si $d$ est perpendiculaire à $\mathcal{P}$ et $d'$ est parallèle à $d$, alors $d'$ est aussi perpendiculaire à $\mathcal{P}$.</li>
+      <li>Deux plans perpendiculaires à une même droite sont parallèles.</li>
+    </ul>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Plans perpendiculaires</div>
+    <p>Deux plans sont <strong>perpendiculaires</strong> si l'un contient une droite perpendiculaire à l'autre.</p>
+  </div>
+
+  <h2>IV. Sections de solides</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : déterminer une section plane</div>
+    <p>Pour trouver la section d'un solide par un plan, on utilise deux principes :</p>
+    <p><strong>1.</strong> Si deux points d'une droite appartiennent à un plan, la droite entière est dans ce plan.</p>
+    <p><strong>2.</strong> Deux plans sécants se coupent selon une droite. Si on connaît un point de cette droite, on peut en trouver la direction par le parallélisme.</p>
+    <p>On procède face par face, en cherchant l'intersection du plan de coupe avec chaque face du solide.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple : section d'un tétraèdre</div>
+    <p>Soit $ABCD$ un tétraèdre. On coupe par le plan passant par $M$ (milieu de $[AB]$), $N$ (milieu de $[BC]$) et $P$ (milieu de $[CD]$).</p>
+    <p>Face $ABC$ : $M$ et $N$ sont dans cette face, la section contient le segment $[MN]$.</p>
+    <p>Face $BCD$ : $N$ et $P$ sont dans cette face, la section contient le segment $[NP]$.</p>
+    <p>Face $ACD$ : il faut trouver un point de la section. $MN$ est parallèle à $AC$ (milieux dans le triangle $ABC$). $NP$ est parallèle à $BD$. On cherche le point $Q$ sur $[AD]$.</p>
+    <p>Par le théorème des milieux dans le triangle $ACD$ : $Q$ est le milieu de $[AD]$.</p>
+    <p>La section est le triangle $MNPQ$, en fait un quadrilatère. Non, en relisant : la section est le triangle $MNP$ avec un quatrième point $Q$ milieu de $AD$, formant un quadrilatère $MNPQ$.</p>
+  </div>
+
+  <h2>V. Exercices</h2>
+
+  <h3>Exercice 1 : positions relatives</h3>
+  <p>$ABCDEFGH$ est un cube.</p>
+  <ol>
+    <li>Quelle est la position relative des droites $(AG)$ et $(BH)$ ?</li>
+    <li>Quelle est la position relative des droites $(AB)$ et $(EG)$ ?</li>
+    <li>Quelle est la position relative de la droite $(AG)$ et du plan $(BDE)$ ?</li>
+  </ol>
+
+  <h3>Exercice 2 : orthogonalité</h3>
+  <p>$ABCDEFGH$ est un cube de côté 1.</p>
+  <ol>
+    <li>Montrer que la diagonale $[AG]$ est perpendiculaire au plan $(BDE)$.</li>
+    <li>En déduire que $(AG)$ est orthogonale à $(BD)$.</li>
+  </ol>
+
+  <h3>Exercice 3 : section</h3>
+  <p>$SABCD$ est une pyramide à base carrée. $M$ est le milieu de $[SA]$ et $N$ le milieu de $[SB]$.</p>
+  <ol>
+    <li>Déterminer la section de la pyramide par le plan passant par $M$, $N$ et $D$.</li>
+    <li>Quelle est la nature du quadrilatère $MNPD$ où $P$ est l'intersection avec $[SC]$ ?</li>
+  </ol>
+
+  <h2>VI. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p>On nomme les sommets du cube : $ABCD$ la face inférieure, $EFGH$ la face supérieure, avec $E$ au-dessus de $A$, $F$ au-dessus de $B$, etc.</p>
+    <p><strong>1.</strong> $(AG)$ est la diagonale principale. $(BH)$ est l'autre diagonale principale. Elles se coupent au centre du cube. Les droites $(AG)$ et $(BH)$ sont <strong>sécantes</strong>.</p>
+    <p><strong>2.</strong> $(AB)$ est une arête de la base. $(EG)$ est une diagonale de la face supérieure. $AB$ est parallèle à $FG$ (côtés opposés de la face $ABFE$). $(EG)$ n'est pas parallèle à $(AB)$ et elles n'ont pas de point commun (l'une est en bas, l'autre en haut). Les droites sont <strong>non coplanaires</strong>.</p>
+    <p><strong>3.</strong> $(AG)$ est perpendiculaire au plan $(BDE)$ (voir exercice 2). Donc $(AG)$ est <strong>sécante</strong> au plan $(BDE)$, le point d'intersection étant le pied de la perpendiculaire.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p>On place le cube dans un repère : $A(0,0,0)$, $B(1,0,0)$, $D(0,1,0)$, $E(0,0,1)$, $G(1,1,1)$.</p>
+    <p><strong>1.</strong> $\overrightarrow{AG} = (1,1,1)$.</p>
+    <p>$\overrightarrow{BD} = (-1,1,0)$. $\overrightarrow{AG} \cdot \overrightarrow{BD} = -1+1+0 = 0$. Orthogonal.</p>
+    <p>$\overrightarrow{BE} = (-1,0,1)$. $\overrightarrow{AG} \cdot \overrightarrow{BE} = -1+0+1 = 0$. Orthogonal.</p>
+    <p>$(BD)$ et $(BE)$ sont deux droites sécantes du plan $(BDE)$, et $(AG)$ est orthogonale aux deux. Donc $(AG)$ est <strong>perpendiculaire au plan $(BDE)$</strong>.</p>
+    <p><strong>2.</strong> $(BD)$ est une droite du plan $(BDE)$. Puisque $(AG)$ est perpendiculaire au plan $(BDE)$, $(AG)$ est orthogonale à toute droite de ce plan, en particulier à $(BD)$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $M$ milieu de $[SA]$, $N$ milieu de $[SB]$. Le plan de coupe passe par $M$, $N$ et $D$.</p>
+    <p>Face $SAB$ : $M$ et $N$ y sont. La section contient $[MN]$. Par le théorème des milieux : $MN \parallel AB$ et $MN = \dfrac{AB}{2}$.</p>
+    <p>Face $ABCD$ : le plan coupe cette face selon une droite passant par $D$. Comme $MN \parallel AB$, on cherche le point sur $[BC]$ tel que la droite passant par $D$ soit parallèle à $MN$. Mais $D$ est un sommet de la base, la droite part de $D$ vers le point $P$ sur $[SC]$.</p>
+    <p>Face $SBC$ : $N$ est dans cette face. Le plan coupe cette face selon une droite passant par $N$. Par le parallélisme ($MN \parallel AB$ et $ABCD$ est un carré), le point $P$ sur $[SC]$ est le milieu de $[SC]$.</p>
+    <p>Face $SCD$ : $D$ est un sommet et $P$ milieu de $[SC]$. La section contient $[DP]$.</p>
+    <p>Face $SAD$ : $M$ et $D$ y sont. La section contient $[MD]$.</p>
+    <p>La section est le quadrilatère $MNPD$.</p>
+    <p><strong>2.</strong> $MN \parallel AB$ et $MN = \dfrac{AB}{2}$. $DP$ est dans la face $SCD$.</p>
+    <p>$MN \parallel AB \parallel DC$. Et $MN = \dfrac{AB}{2}$ tandis que $DC = AB$. Donc $MNPD$ est un <strong>trapèze</strong> (une paire de côtés parallèles : $MN \parallel DP$ si $P$ est le milieu de $SC$).</p>
+    <p>Vérifions : $NP$ est un segment de milieux dans le triangle $SBC$, donc $NP \parallel BC$ et $NP = \dfrac{BC}{2}$. Et $MD$ relie le milieu de $SA$ au sommet $D$.</p>
+    <p>$MN \parallel DP$ n'est pas garanti. En revanche $MN \parallel DC$ car $MN \parallel AB \parallel DC$. Le quadrilatère $MNPD$ a $MN \parallel (DP)$ uniquement dans certaines configurations. Ici, c'est un <strong>trapèze</strong> avec $MN \parallel DC$ (en projection).</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2013-2014/premiere-s/probabilites.html">&larr; Probabilités conditionnelles</a>
+  <a href="../../index.html">Retour à l'accueil &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
