@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suites numériques . Première S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#premieres">Première S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Première S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Suites numériques</h1>
+    <p class="cours-sous-titre">Introduction, suites arithmétiques et géométriques, sens de variation</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Notion de suite</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Une <strong>suite numérique</strong> est une liste ordonnée de nombres réels. Chaque nombre est un <strong>terme</strong> de la suite, repéré par son rang $n$. On note $(u_n)$ la suite et $u_n$ le terme de rang $n$.</p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Deux façons de définir une suite</div>
+    <p><strong>Forme explicite :</strong> $u_n$ est donné directement en fonction de $n$.</p>
+    <p>Exemple : $u_n = 2n + 1$. On calcule $u_0 = 1$, $u_1 = 3$, $u_2 = 5$, $u_3 = 7$.</p>
+    <p><strong>Forme récurrente :</strong> on donne $u_0$ (ou $u_1$) et une relation qui permet de calculer chaque terme à partir du précédent.</p>
+    <p>Exemple : $u_0 = 3$ et $u_{n+1} = u_n + 5$. On calcule $u_1 = 8$, $u_2 = 13$, $u_3 = 18$.</p>
+  </div>
+
+  <h3>Sens de variation</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <ul>
+      <li>$(u_n)$ est <strong>croissante</strong> si pour tout $n$ : $u_{n+1} \geq u_n$, soit $u_{n+1} - u_n \geq 0$.</li>
+      <li>$(u_n)$ est <strong>décroissante</strong> si pour tout $n$ : $u_{n+1} \leq u_n$, soit $u_{n+1} - u_n \leq 0$.</li>
+    </ul>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : étudier le sens de variation</div>
+    <p>Soit $u_n = n^2 - 4n$. On calcule $u_{n+1} - u_n$ :</p>
+    <p>$u_{n+1} - u_n = (n+1)^2 - 4(n+1) - n^2 + 4n = n^2 + 2n + 1 - 4n - 4 - n^2 + 4n = 2n - 3$.</p>
+    <p>$u_{n+1} - u_n \geq 0 \iff 2n - 3 \geq 0 \iff n \geq 1{,}5$.</p>
+    <p>Donc $(u_n)$ est décroissante pour $n = 0$ et $n = 1$, puis croissante à partir de $n = 2$.</p>
+  </div>
+
+  <h2>II. Suites arithmétiques</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>$(u_n)$ est <strong>arithmétique</strong> de raison $r$ si pour tout $n$ : $u_{n+1} = u_n + r$.</p>
+    <p>On passe d'un terme au suivant en <strong>ajoutant</strong> toujours le même nombre $r$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Terme général</div>
+    $$u_n = u_0 + nr$$
+    <p>Plus généralement, si on connaît $u_p$ : $u_n = u_p + (n-p)r$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Somme des termes</div>
+    $$u_0 + u_1 + \cdots + u_n = (n+1) \times \frac{u_0 + u_n}{2}$$
+    <p>Nombre de termes $\times$ moyenne du premier et du dernier.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Un salarié gagne 1500 euros le premier mois et reçoit une augmentation de 50 euros chaque mois.</p>
+    <p>$u_0 = 1500$, $r = 50$. $u_n = 1500 + 50n$.</p>
+    <p>Au bout de 12 mois ($n = 11$) : $u_{11} = 1500 + 550 = 2050$ euros.</p>
+    <p>Total gagné la première année : $S = 12 \times \dfrac{1500 + 2050}{2} = 12 \times 1775 = 21\,300$ euros.</p>
+  </div>
+
+  <h2>III. Suites géométriques</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>$(u_n)$ est <strong>géométrique</strong> de raison $q$ ($q \neq 0$) si pour tout $n$ : $u_{n+1} = u_n \times q$.</p>
+    <p>On passe d'un terme au suivant en <strong>multipliant</strong> toujours par le même nombre $q$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Terme général</div>
+    $$u_n = u_0 \times q^n$$
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Somme des termes ($q \neq 1$)</div>
+    $$u_0 + u_1 + \cdots + u_n = u_0 \times \frac{1 - q^{n+1}}{1 - q}$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>On place 1000 euros à un taux annuel de 4%. Le capital au bout de $n$ années est :</p>
+    <p>$u_n = 1000 \times 1{,}04^n$. C'est une suite géométrique de raison $1{,}04$.</p>
+    <p>$u_5 = 1000 \times 1{,}04^5 \approx 1216{,}65$ euros.</p>
+    <p>$u_{20} = 1000 \times 1{,}04^{20} \approx 2191{,}12$ euros.</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Quand on vous annonce un "taux de croissance annuel de 3%", demandez-vous : 3% de quoi ? Un prix qui augmente de 3% par an pendant 25 ans est multiplié par $1{,}03^{25} \approx 2{,}09$. Il a plus que doublé. Pourtant, intuitivement, "3% par an pendant 25 ans" ne semble pas impressionnant. C'est la différence entre la perception linéaire (3% × 25 = 75%) et la réalité géométrique (109%).
+    </p>
+  </div>
+
+  <h2>IV. Exercices</h2>
+
+  <h3>Exercice 1</h3>
+  <ol>
+    <li>$(u_n)$ est arithmétique avec $u_2 = 7$ et $u_5 = 16$. Déterminer $r$ et $u_0$.</li>
+    <li>Calculer $u_{10}$ et la somme $u_0 + u_1 + \cdots + u_{10}$.</li>
+  </ol>
+
+  <h3>Exercice 2</h3>
+  <ol>
+    <li>$(v_n)$ est géométrique avec $v_0 = 2$ et $v_2 = 18$. Déterminer $q$ (deux solutions possibles).</li>
+    <li>Pour chaque valeur de $q$, calculer $v_5$.</li>
+  </ol>
+
+  <h3>Exercice 3</h3>
+  <p>La population d'une ville est de 50 000 habitants. Elle augmente de 2% par an.</p>
+  <ol>
+    <li>Exprimer la population $P_n$ au bout de $n$ années.</li>
+    <li>Au bout de combien d'années la population dépassera-t-elle 60 000 habitants ?</li>
+  </ol>
+
+  <h2>V. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $u_5 = u_2 + 3r$. $16 = 7 + 3r$. $r = 3$.</p>
+    <p>$u_0 = u_2 - 2r = 7 - 6 = 1$.</p>
+    <p><strong>2.</strong> $u_{10} = 1 + 10 \times 3 = 31$.</p>
+    <p>$S = 11 \times \dfrac{1 + 31}{2} = 11 \times 16 = 176$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $v_2 = v_0 \times q^2$. $18 = 2q^2$. $q^2 = 9$. $q = 3$ ou $q = -3$.</p>
+    <p><strong>2.</strong> Si $q = 3$ : $v_5 = 2 \times 3^5 = 2 \times 243 = 486$.</p>
+    <p>Si $q = -3$ : $v_5 = 2 \times (-3)^5 = 2 \times (-243) = -486$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $P_n = 50\,000 \times 1{,}02^n$.</p>
+    <p><strong>2.</strong> $50\,000 \times 1{,}02^n > 60\,000$. $1{,}02^n > 1{,}2$.</p>
+    <p>On teste : $1{,}02^9 \approx 1{,}195$ et $1{,}02^{10} \approx 1{,}219$.</p>
+    <p>La population dépasse 60 000 au bout de <strong>10 ans</strong>.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../index.html">&larr; Accueil</a>
+  <a href="derivation.html">Dérivation &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
