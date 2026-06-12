@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probabilités conditionnelles . Première S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#premieres">Première S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Première S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2013-2014</span>
+    </div>
+    <h1 class="cours-titre-principal">Probabilités conditionnelles</h1>
+    <p class="cours-sous-titre">Probabilités conditionnelles, arbres pondérés et indépendance</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Rappels de probabilités</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Vocabulaire</div>
+    <ul>
+      <li><strong>Expérience aléatoire :</strong> expérience dont on ne peut pas prévoir le résultat.</li>
+      <li><strong>Univers $\Omega$ :</strong> ensemble de toutes les issues possibles.</li>
+      <li><strong>Événement :</strong> sous-ensemble de $\Omega$. Noté par une lettre majuscule ($A$, $B$, etc.).</li>
+      <li><strong>Événement contraire :</strong> $\bar{A}$ : "A ne se réalise pas". $P(\bar{A}) = 1 - P(A)$.</li>
+      <li><strong>Événements incompatibles :</strong> $A \cap B = \emptyset$, ils ne peuvent pas se réaliser simultanément.</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Formule de la réunion</div>
+    $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+    <p>Si $A$ et $B$ sont incompatibles : $P(A \cup B) = P(A) + P(B)$.</p>
+  </div>
+
+  <h2>II. Probabilité conditionnelle</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>La <strong>probabilité de $A$ sachant $B$</strong>, notée $P_B(A)$ ou $P(A|B)$, est la probabilité que $A$ se réalise sachant que $B$ s'est déjà réalisé :</p>
+    $$P_B(A) = \frac{P(A \cap B)}{P(B)} \quad \text{(quand } P(B) \neq 0\text{)}$$
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Ce que cela signifie</div>
+    <p>Sachant qu'un événement $B$ s'est produit, l'univers se réduit à $B$. La probabilité de $A$ dans ce nouvel univers est la proportion de $A$ dans $B$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Conséquence : probabilité de l'intersection</div>
+    $$P(A \cap B) = P(B) \times P_B(A) = P(A) \times P_A(B)$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Dans un lycée, 60% des élèves sont des filles. Parmi les filles, 30% font du sport. Quelle est la probabilité qu'un élève pris au hasard soit une fille sportive ?</p>
+    <p>$P(F) = 0{,}6$ et $P_F(S) = 0{,}3$.</p>
+    <p>$P(F \cap S) = P(F) \times P_F(S) = 0{,}6 \times 0{,}3 = 0{,}18$.</p>
+    <p>18% des élèves sont des filles sportives.</p>
+  </div>
+
+  <h2>III. Arbres pondérés</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Règles de l'arbre pondéré</div>
+    <p><strong>Règle 1 :</strong> la somme des probabilités sur les branches partant d'un même noeud vaut 1.</p>
+    <p><strong>Règle 2 :</strong> la probabilité d'un chemin est le produit des probabilités des branches qui le composent.</p>
+    <p><strong>Règle 3 :</strong> la probabilité d'un événement est la somme des probabilités de tous les chemins qui y mènent.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple complet</div>
+    <p>Un test de dépistage a les caractéristiques suivantes :</p>
+    <ul>
+      <li>2% de la population est malade ($M$)</li>
+      <li>Si la personne est malade, le test est positif dans 95% des cas (sensibilité)</li>
+      <li>Si la personne est saine, le test est négatif dans 90% des cas (spécificité)</li>
+    </ul>
+    <p>On note $T^+$ l'événement "le test est positif".</p>
+    <p>L'arbre donne :</p>
+    <p>$P(M \cap T^+) = 0{,}02 \times 0{,}95 = 0{,}019$</p>
+    <p>$P(M \cap T^-) = 0{,}02 \times 0{,}05 = 0{,}001$</p>
+    <p>$P(\bar{M} \cap T^+) = 0{,}98 \times 0{,}10 = 0{,}098$</p>
+    <p>$P(\bar{M} \cap T^-) = 0{,}98 \times 0{,}90 = 0{,}882$</p>
+  </div>
+
+  <h2>IV. Formule des probabilités totales</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème</div>
+    <p>Si $B$ et $\bar{B}$ forment une partition de $\Omega$ :</p>
+    $$P(A) = P(B) \times P_B(A) + P(\bar{B}) \times P_{\bar{B}}(A)$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Suite de l'exemple</div>
+    <p>$P(T^+) = P(M) \times P_M(T^+) + P(\bar{M}) \times P_{\bar{M}}(T^+) = 0{,}019 + 0{,}098 = 0{,}117$.</p>
+    <p>11,7% de la population aura un test positif.</p>
+    <p style="margin-top:0.75rem;"><strong>Question clé :</strong> si une personne a un test positif, quelle est la probabilité qu'elle soit réellement malade ?</p>
+    $$P_{T^+}(M) = \frac{P(M \cap T^+)}{P(T^+)} = \frac{0{,}019}{0{,}117} \approx 0{,}162$$
+    <p>Seulement 16,2% des personnes ayant un test positif sont réellement malades.</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Ce résultat surprend presque toujours. Un test "fiable à 95%" donne un résultat positif, mais la probabilité d'être réellement malade n'est que de 16%. Pourquoi ? Parce que la maladie est rare (2%). Les faux positifs parmi les 98% de personnes saines sont bien plus nombreux que les vrais positifs parmi les 2% de malades. Ce raisonnement s'applique à tout système de détection : tests médicaux, contrôles de sécurité, algorithmes de fraude. Comprendre cela change la façon dont on interprète les résultats.
+    </p>
+  </div>
+
+  <h2>V. Indépendance</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Deux événements $A$ et $B$ sont <strong>indépendants</strong> si :</p>
+    $$P(A \cap B) = P(A) \times P(B)$$
+    <p>Cela équivaut à $P_B(A) = P(A)$ : savoir que $B$ s'est produit ne change pas la probabilité de $A$.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>On lance un dé et une pièce. $A$ : "le dé donne 6". $B$ : "la pièce donne pile".</p>
+    <p>$P(A) = \dfrac{1}{6}$, $P(B) = \dfrac{1}{2}$, $P(A \cap B) = \dfrac{1}{12} = \dfrac{1}{6} \times \dfrac{1}{2}$.</p>
+    <p>$A$ et $B$ sont indépendants : le résultat du dé n'influence pas celui de la pièce.</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Attention</div>
+    <p>Indépendant $\neq$ incompatible. Deux événements incompatibles ne sont jamais indépendants (sauf si l'un a une probabilité nulle), car si $A$ se réalise, $B$ ne peut pas se réaliser.</p>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : probabilité conditionnelle</h3>
+  <p>Dans un sac il y a 5 boules rouges et 3 boules bleues. On tire deux boules successivement sans remise.</p>
+  <ol>
+    <li>Construire l'arbre pondéré.</li>
+    <li>Calculer la probabilité d'obtenir deux boules rouges.</li>
+    <li>Calculer la probabilité d'obtenir exactement une boule rouge.</li>
+  </ol>
+
+  <h3>Exercice 2 : formule des probabilités totales</h3>
+  <p>Un magasin vend des produits de deux fournisseurs : A (70%) et B (30%). Le taux de défaut est de 5% pour A et 8% pour B.</p>
+  <ol>
+    <li>Calculer la probabilité qu'un produit soit défectueux.</li>
+    <li>Un produit est défectueux : probabilité qu'il vienne du fournisseur B ?</li>
+  </ol>
+
+  <h3>Exercice 3 : indépendance</h3>
+  <p>On lance deux dés. $A$ : "la somme vaut 7". $B$ : "le premier dé donne 3".</p>
+  <ol>
+    <li>Calculer $P(A)$, $P(B)$ et $P(A \cap B)$.</li>
+    <li>$A$ et $B$ sont-ils indépendants ?</li>
+  </ol>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Premier tirage : $P(R_1) = \dfrac{5}{8}$ et $P(B_1) = \dfrac{3}{8}$.</p>
+    <p>Deuxième tirage (sans remise) :</p>
+    <p>Si $R_1$ : $P(R_2) = \dfrac{4}{7}$ et $P(B_2) = \dfrac{3}{7}$.</p>
+    <p>Si $B_1$ : $P(R_2) = \dfrac{5}{7}$ et $P(B_2) = \dfrac{2}{7}$.</p>
+    <p><strong>2.</strong> $P(R_1 \cap R_2) = \dfrac{5}{8} \times \dfrac{4}{7} = \dfrac{20}{56} = \dfrac{5}{14}$.</p>
+    <p><strong>3.</strong> Exactement une rouge : chemin $R_1B_2$ ou chemin $B_1R_2$.</p>
+    <p>$P = \dfrac{5}{8} \times \dfrac{3}{7} + \dfrac{3}{8} \times \dfrac{5}{7} = \dfrac{15}{56} + \dfrac{15}{56} = \dfrac{30}{56} = \dfrac{15}{28}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $P(D) = P(A) \times P_A(D) + P(B) \times P_B(D) = 0{,}7 \times 0{,}05 + 0{,}3 \times 0{,}08 = 0{,}035 + 0{,}024 = 0{,}059$.</p>
+    <p>Le taux global de défaut est 5,9%.</p>
+    <p><strong>2.</strong> $P_D(B) = \dfrac{P(B \cap D)}{P(D)} = \dfrac{0{,}024}{0{,}059} \approx 0{,}407$.</p>
+    <p>Un produit défectueux a environ 40,7% de chances de venir du fournisseur B, alors que B ne représente que 30% de la production.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $P(A) = \dfrac{6}{36} = \dfrac{1}{6}$ (les couples (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)).</p>
+    <p>$P(B) = \dfrac{6}{36} = \dfrac{1}{6}$ (le premier dé donne 3).</p>
+    <p>$A \cap B$ : "la somme vaut 7 et le premier dé donne 3", c'est le couple $(3, 4)$.</p>
+    <p>$P(A \cap B) = \dfrac{1}{36}$.</p>
+    <p><strong>2.</strong> $P(A) \times P(B) = \dfrac{1}{6} \times \dfrac{1}{6} = \dfrac{1}{36} = P(A \cap B)$.</p>
+    <p>$A$ et $B$ sont <strong>indépendants</strong>. Savoir que le premier dé donne 3 ne change pas la probabilité que la somme vaille 7.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="trigonometrie.html">&larr; Trigonométrie</a>
+  <a href="../../2014-2015/premiere-s/geometrie-espace.html">Géométrie dans l'espace &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
