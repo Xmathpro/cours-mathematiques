@@ -759,7 +759,7 @@ function drawSel(){
   const mm={l:40,r:20,t:35,b:40};const pw=w-mm.l-mm.r,ph=h-mm.t-mm.b;
   const mx=Math.max(...d)*1.1;const bw=pw/n;
   ctx.fillStyle='#444';ctx.font='bold 13px Arial';
-  ctx.fillText('Tri par sélection — étape '+selS.i+'/'+n+(selS.done?' ✓ trié !':''),20,22);
+  ctx.fillText('Tri par sélection: étape '+selS.i+'/'+n+(selS.done?' ✓ trié !':''),20,22);
   d.forEach((v,i)=>{
     const x=mm.l+i*bw;const bh=(v/mx)*ph;const y=h-mm.b-bh;
     ctx.fillStyle=i<selS.i?'#27ae60':i===selS.i&&!selS.done?'#c0392b':'#2a5298';
@@ -792,7 +792,7 @@ function drawBul(){
   const mm={l:40,r:20,t:35,b:40};const pw=w-mm.l-mm.r,ph=h-mm.t-mm.b;
   const mx=Math.max(...d)*1.1;const bw=pw/n;
   ctx.fillStyle='#444';ctx.font='bold 13px Arial';
-  ctx.fillText('Tri à bulles — passe '+(bulS.pass+1)+(bulS.done?' ✓ trié !':''),20,22);
+  ctx.fillText('Tri à bulles: passe '+(bulS.pass+1)+(bulS.done?' ✓ trié !':''),20,22);
   d.forEach((v,i)=>{
     const x=mm.l+i*bw;const bh=(v/mx)*ph;const y=h-mm.b-bh;
     const sorted=i>=n-bulS.pass;
