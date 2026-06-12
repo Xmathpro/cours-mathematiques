@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Récursivité . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}pre.code{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem 1.2rem;border-radius:6px;margin:1rem 0;line-height:1.8;overflow-x:auto;white-space:pre}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#nsi">NSI</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>NSI . Terminale</span><span>Programme 2019</span><span>2021-2022</span></div>
+<h1 class="cours-titre-principal">Récursivité</h1>
+<p class="cours-sous-titre">Fonctions récursives, pile d'appels, cas de base et exemples classiques</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Le principe de récursivité</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une fonction est <strong>récursive</strong> si elle <strong>s'appelle elle-même</strong>. Pour fonctionner, elle a besoin de :</p>
+<ul>
+<li>Un <strong>cas de base</strong> : la condition d'arrêt, qui empêche la fonction de s'appeler indéfiniment.</li>
+<li>Un <strong>appel récursif</strong> : la fonction se rappelle avec un problème <strong>plus petit</strong>.</li>
+</ul>
+</div>
+
+<div class="remarque"><div class="encadre-titre">L'image des poupées russes</div>
+<p>Imagine des poupées russes (matriochkas). Pour ouvrir la plus grande, tu trouves une plus petite à l'intérieur. Tu l'ouvres aussi, et tu trouves encore une plus petite. Tu continues jusqu'à la plus petite poupée (le cas de base) qui ne contient rien. Ensuite, tu refermes chaque poupée dans l'ordre inverse.</p>
+</div>
+
+<h3>1. La factorielle</h3>
+
+<pre class="code">
+def factorielle(n):
+    """
+    Calcule n! = n × (n-1) × ... × 2 × 1
+    Cas de base : 0! = 1
+    Appel récursif : n! = n × (n-1)!
+    """
+    if n == 0:               # cas de base
+        return 1
+    else:
+        return n * factorielle(n - 1)   # appel récursif
+
+
+print(factorielle(5))   # 120
+# 5! = 5 × 4! = 5 × 4 × 3! = 5 × 4 × 3 × 2! = 5 × 4 × 3 × 2 × 1! = 120
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : la pile d'appels de factorielle(n)</h4>
+<canvas id="canvasFact" width="600" height="400"></canvas>
+<div class="controls">
+<label>n =</label>
+<input type="range" id="factN" min="1" max="7" value="5">
+<span id="factNval">5</span>
+<button onclick="animFact()">▶ Animer</button>
+<button onclick="resetFact()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultFact"></div>
+</div>
+
+<h3>2. Fibonacci</h3>
+
+<pre class="code">
+def fibonacci(n):
+    """
+    Suite de Fibonacci : 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+    Chaque terme est la somme des deux précédents.
+    """
+    if n <= 1:               # cas de base
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+for i in range(10):
+    print(fibonacci(i), end=" ")
+# 0 1 1 2 3 5 8 13 21 34
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : l'arbre d'appels de fibonacci(n)</h4>
+<canvas id="canvasFibo" width="600" height="350"></canvas>
+<div class="controls">
+<label>n =</label>
+<input type="range" id="fiboN" min="1" max="6" value="5">
+<span id="fiboNval">5</span>
+</div>
+<div class="result-text" id="resultFibo"></div>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Attention à la complexité !</div>
+<p>La version récursive naïve de Fibonacci a une complexité $O(2^n)$ car elle recalcule les mêmes valeurs des dizaines de fois. Pour <code>fibonacci(30)</code>, il y a plus d'un milliard d'appels ! La solution : la <strong>mémoïsation</strong> (stocker les résultats déjà calculés).</p>
+</div>
+
+<pre class="code">
+# Version optimisée avec mémoïsation
+def fibonacci_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+
+    memo[n] = fibonacci_memo(n - 1, memo) + fibonacci_memo(n - 2, memo)
+    return memo[n]
+
+print(fibonacci_memo(100))
+# 354224848179261915075 (instantané !)
+</pre>
+
+<h2>II. Exemples classiques</h2>
+
+<h3>1. Puissance rapide</h3>
+
+<pre class="code">
+def puissance(x, n):
+    """
+    Calcule x^n de manière récursive.
+    Complexité : O(log n) au lieu de O(n) !
+    """
+    if n == 0:
+        return 1
+
+    if n % 2 == 0:
+        demi = puissance(x, n // 2)
+        return demi * demi
+    else:
+        return x * puissance(x, n - 1)
+
+
+print(puissance(2, 10))   # 1024
+print(puissance(3, 5))    # 243
+</pre>
+
+<h3>2. Tours de Hanoï</h3>
+
+<pre class="code">
+def hanoi(n, source, destination, auxiliaire):
+    """
+    Déplace n disques de 'source' vers 'destination'
+    en utilisant 'auxiliaire' comme intermédiaire.
+
+    Règle : un grand disque ne peut jamais être
+    posé sur un plus petit.
+    """
+    if n == 1:
+        print(f"Déplacer disque 1 de {source} vers {destination}")
+        return
+
+    hanoi(n - 1, source, auxiliaire, destination)
+    print(f"Déplacer disque {n} de {source} vers {destination}")
+    hanoi(n - 1, auxiliaire, destination, source)
+
+
+hanoi(3, "A", "C", "B")
+# 7 mouvements pour 3 disques (2^n - 1 en général)
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : les Tours de Hanoï</h4>
+<canvas id="canvasHanoi" width="600" height="300"></canvas>
+<div class="controls">
+<label>Disques :</label>
+<input type="range" id="hanoiN" min="2" max="5" value="3">
+<span id="hanoiNval">3</span>
+<button onclick="stepHanoi()">▶ Étape suivante</button>
+<button onclick="resetHanoi()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultHanoi"></div>
+</div>
+
+<h2>III. Exercices</h2>
+
+<h3>Exercice 1 : écrire des fonctions récursives</h3>
+<ol>
+<li>Écrire une fonction récursive <code>somme(n)</code> qui calcule $1 + 2 + \cdots + n$.</li>
+<li>Écrire une fonction récursive <code>inverser(chaine)</code> qui inverse une chaîne.</li>
+<li>Écrire une fonction récursive <code>pgcd(a, b)</code> (algorithme d'Euclide).</li>
+</ol>
+
+<h3>Exercice 2 : analyser</h3>
+<ol>
+<li>Combien d'appels fait <code>factorielle(6)</code> ?</li>
+<li>Combien d'appels fait <code>fibonacci(6)</code> (version naïve) ?</li>
+<li>Pourquoi chaque fonction récursive a-t-elle besoin d'un cas de base ?</li>
+</ol>
+
+<h2>IV. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+def somme(n):
+    if n == 0:
+        return 0
+    return n + somme(n - 1)
+
+print(somme(100))   # 5050
+
+
+def inverser(chaine):
+    if len(chaine) <= 1:
+        return chaine
+    return chaine[-1] + inverser(chaine[:-1])
+
+print(inverser("python"))   # nohtyp
+
+
+def pgcd(a, b):
+    if b == 0:
+        return a
+    return pgcd(b, a % b)
+
+print(pgcd(48, 18))   # 6
+</pre>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> <code>factorielle(6)</code> fait 7 appels : f(6), f(5), f(4), f(3), f(2), f(1), f(0).</p>
+<p><strong>2.</strong> <code>fibonacci(6)</code> fait 25 appels (l'arbre explose). C'est pour cela que la version naïve est $O(2^n)$.</p>
+<p><strong>3.</strong> Sans cas de base, la fonction s'appelle indéfiniment et Python lève une erreur <code>RecursionError: maximum recursion depth exceeded</code>. Le cas de base est l'ancre qui empêche la récursion infinie.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="../../2020-2021/nsi/structures-donnees.html">&larr; Structures de données</a><a href="graphes.html">Graphes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+const clrs=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085','#d35400','#2980b9'];
+// FACTORIELLE
+let factSteps=[];let factIdx=0;
+function genFact(n){
+  factSteps=[];for(let i=n;i>=0;i--)factSteps.push({call:'factorielle('+i+')',phase:'appel',depth:n-i});
+  for(let i=0;i<=n;i++){let val=1;for(let j=2;j<=i;j++)val*=j;factSteps.push({call:'factorielle('+i+') = '+val,phase:'retour',depth:n-i});}
+}
+function resetFact(){const n=parseInt(document.getElementById('factN').value);document.getElementById('factNval').textContent=n;genFact(n);factIdx=0;drawFact();}
+function animFact(){if(factIdx<factSteps.length){factIdx++;drawFact();setTimeout(animFact,500);}}
+function drawFact(){
+  const c=document.getElementById('canvasFact');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const n=parseInt(document.getElementById('factN').value);ctx.clearRect(0,0,w,h);
+  const bw=140,bh=32;const cx=w/2;
+  ctx.fillStyle='#444';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText('Pile d\'appels',cx,20);
+  const totalSteps=2*(n+1);const appels=Math.min(factIdx,n+1);const retours=Math.max(0,factIdx-(n+1));
+  const stackSize=appels-retours;
+  for(let i=0;i<stackSize;i++){
+    const y=h-60-i*(bh+4);const depth=i;
+    ctx.fillStyle=clrs[depth%clrs.length];ctx.beginPath();ctx.roundRect(cx-bw/2,y,bw,bh,4);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 12px Courier New';ctx.textAlign='center';
+    ctx.fillText('fact('+(n-depth)+')',cx,y+20);
+  }
+  if(retours>0&&retours<=n+1){
+    const lastReturn=retours-1;let val=1;for(let j=2;j<=lastReturn;j++)val*=j;
+    ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';ctx.textAlign='left';
+    ctx.fillText('↳ retourne '+val,cx+bw/2+15,h-60-(stackSize)*(bh+4)+20);
+  }
+  ctx.textAlign='left';
+  let fact=1;for(let i=2;i<=n;i++)fact*=i;
+  document.getElementById('resultFact').textContent=factIdx>=totalSteps?n+'! = '+fact+'. La pile se remplit ('+( n+1)+' appels) puis se vide (retours successifs).':'Étape '+factIdx+'/'+totalSteps+'. '+(factIdx<=n+1?'Phase d\'appels.':'Phase de retours.');
+}
+resetFact();
+document.getElementById('factN').addEventListener('input',resetFact);
+
+// FIBONACCI TREE
+function drawFiboTree(){
+  const c=document.getElementById('canvasFibo');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const n=parseInt(document.getElementById('fiboN').value);document.getElementById('fiboNval').textContent=n;
+  ctx.clearRect(0,0,w,h);
+  let count=0;
+  function fib(val){if(val<=1)return 1;return 1+fib(val-1)+fib(val-2);}
+  const total=fib(n);
+  function drawNode(x,y,val,spread,depth){
+    count++;const r=15;
+    const isBase=val<=1;
+    ctx.fillStyle=isBase?'#27ae60':clrs[depth%clrs.length];
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('f('+val+')',x,y+4);
+    if(val>1){
+      const nextY=y+55;const sp=spread*0.55;
+      ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(x,y+r);ctx.lineTo(x-sp,nextY-r);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(x,y+r);ctx.lineTo(x+sp,nextY-r);ctx.stroke();
+      drawNode(x-sp,nextY,val-1,sp,depth+1);
+      drawNode(x+sp,nextY,val-2,sp,depth+1);
+    }
+  }
+  drawNode(w/2,35,n,w*0.28,0);
+  ctx.textAlign='left';
+  const fibVals=[0,1,1,2,3,5,8,13,21];
+  document.getElementById('resultFibo').textContent='fibonacci('+n+') = '+fibVals[n]+'. Nombre d\'appels : '+count+'. Beaucoup de calculs redondants !';
+}
+document.getElementById('fiboN').addEventListener('input',drawFiboTree);
+drawFiboTree();
+
+// HANOI
+let hanoiMoves=[];let hanoiIdx=0;let hanoiTowers=[[],[],[]];
+function genHanoiMoves(n,from,to,aux){
+  if(n===1){hanoiMoves.push([from,to,1]);return;}
+  genHanoiMoves(n-1,from,aux,to);hanoiMoves.push([from,to,n]);genHanoiMoves(n-1,aux,to,from);
+}
+function resetHanoi(){
+  const n=parseInt(document.getElementById('hanoiN').value);document.getElementById('hanoiNval').textContent=n;
+  hanoiMoves=[];genHanoiMoves(n,0,2,1);hanoiIdx=0;
+  hanoiTowers=[[],[],[]];for(let i=n;i>=1;i--)hanoiTowers[0].push(i);
+  drawHanoi();
+}
+function stepHanoi(){
+  if(hanoiIdx>=hanoiMoves.length)return;
+  const [from,to]=hanoiMoves[hanoiIdx];
+  const disk=hanoiTowers[from].pop();hanoiTowers[to].push(disk);hanoiIdx++;drawHanoi();
+}
+function drawHanoi(){
+  const c=document.getElementById('canvasHanoi');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const n=parseInt(document.getElementById('hanoiN').value);
+  const towerW=w/3;const base=h-40;const poleH=n*28+20;
+  ['A','B','C'].forEach((label,t)=>{
+    const cx=towerW*t+towerW/2;
+    // Base
+    ctx.fillStyle='#8B7355';ctx.fillRect(cx-60,base,120,8);
+    // Pole
+    ctx.fillStyle='#A0926B';ctx.fillRect(cx-3,base-poleH,6,poleH);
+    ctx.fillStyle='#444';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText(label,cx,base+25);
+    // Disks
+    hanoiTowers[t].forEach((disk,i)=>{
+      const dw=25+disk*18;const dy=base-8-(i+1)*26;
+      ctx.fillStyle=clrs[(disk-1)%clrs.length];ctx.beginPath();ctx.roundRect(cx-dw/2,dy,dw,24,4);ctx.fill();
+      ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.fillText(disk,cx,dy+16);
+    });
+  });
+  ctx.textAlign='left';
+  const done=hanoiIdx>=hanoiMoves.length;
+  document.getElementById('resultHanoi').textContent=done?'Terminé en '+hanoiMoves.length+' mouvements (formule : 2^n - 1 = '+(Math.pow(2,n)-1)+').':'Mouvement '+ hanoiIdx+'/'+hanoiMoves.length+'. '+(hanoiIdx>0?'Dernier : disque '+hanoiMoves[hanoiIdx-1][2]+' de '+['A','B','C'][hanoiMoves[hanoiIdx-1][0]]+' vers '+['A','B','C'][hanoiMoves[hanoiIdx-1][1]]+'.':'Cliquez pour commencer.');
+}
+resetHanoi();
+document.getElementById('hanoiN').addEventListener('input',resetHanoi);
+</script>
+</body>
+</html>
