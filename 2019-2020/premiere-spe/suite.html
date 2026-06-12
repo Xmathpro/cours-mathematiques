@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suites numériques . Première spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#premieres">Première spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Première spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2019-2020</span></div>
+<h1 class="cours-titre-principal">Suites numériques</h1>
+<p class="cours-sous-titre">Suites arithmétiques, géométriques, sens de variation et modélisation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Modes de génération</h2>
+
+<div class="definition"><div class="encadre-titre">Définitions</div>
+<p><strong>Forme explicite :</strong> $u_n = f(n)$. Exemple : $u_n = 3n + 2$.</p>
+<p><strong>Forme récurrente :</strong> $u_{n+1} = g(u_n)$ avec $u_0$ donné. Exemple : $u_0 = 1$, $u_{n+1} = 2u_n + 3$.</p>
+</div>
+
+<h2>II. Suites arithmétiques</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriétés</div>
+<p>$u_{n+1} = u_n + r$ (raison $r$). $u_n = u_0 + nr$.</p>
+<p>Somme : $S = (n+1) \times \dfrac{u_0 + u_n}{2}$.</p>
+</div>
+
+<h2>III. Suites géométriques</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriétés</div>
+<p>$u_{n+1} = u_n \times q$ (raison $q$). $u_n = u_0 \times q^n$.</p>
+<p>Somme ($q \neq 1$) : $S = u_0 \times \dfrac{1 - q^{n+1}}{1 - q}$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : suite arithmétique vs géométrique</h4>
+<canvas id="canvasComp" width="600" height="350"></canvas>
+<div class="controls">
+<label>u₀ =</label><input type="range" id="u0c" min="1" max="20" value="5"><span id="u0cv">5</span>
+<label>r =</label><input type="range" id="rc" min="1" max="10" value="3"><span id="rcv">3</span>
+<label>q =</label><input type="range" id="qc" min="10" max="25" value="12"><span id="qcv">1.2</span>
+</div>
+<div class="result-text" id="resultComp"></div>
+</div>
+
+<h2>IV. Sens de variation</h2>
+
+<div class="methode"><div class="encadre-titre">Méthode</div>
+<p>Calculer $u_{n+1} - u_n$ et étudier son signe. Ou calculer $\dfrac{u_{n+1}}{u_n}$ et comparer à 1 (si $u_n > 0$).</p>
+</div>
+
+<h2>V. Modélisation</h2>
+
+<div class="exemple"><div class="encadre-titre">Intérêts simples vs composés</div>
+<p>Capital initial : 1000 euros. Taux annuel : 5%.</p>
+<p><strong>Intérêts simples</strong> (suite arithmétique) : $C_n = 1000 + 50n$. Au bout de 10 ans : 1500 euros.</p>
+<p><strong>Intérêts composés</strong> (suite géométrique) : $C_n = 1000 \times 1{,}05^n$. Au bout de 10 ans : 1629 euros.</p>
+</div>
+
+<h2>VI. Python</h2>
+
+<div class="exemple"><div class="encadre-titre">Calculer les termes d'une suite</div>
+<pre>
+# Suite arithmétique
+def arithmetique(u0, r, n):
+    return [u0 + i * r for i in range(n + 1)]
+
+# Suite géométrique
+def geometrique(u0, q, n):
+    return [u0 * q**i for i in range(n + 1)]
+
+print("Arithmétique :", arithmetique(5, 3, 10))
+print("Géométrique :", geometrique(5, 1.2, 10))
+</pre>
+</div>
+
+<h2>VII. Exercices</h2>
+<h3>Exercice 1</h3>
+<ol><li>$(u_n)$ arithmétique, $u_3 = 14$ et $u_8 = 29$. Calculer $r$ et $u_0$.</li><li>Calculer $\sum_{k=0}^{20} u_k$.</li></ol>
+
+<h3>Exercice 2</h3>
+<p>Un capital de 2000 euros est placé à 3% par an (intérêts composés).</p>
+<ol><li>Exprimer $C_n$.</li><li>Au bout de combien d'années le capital dépasse-t-il 3000 euros ?</li></ol>
+
+<h2>VIII. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $u_8 - u_3 = 5r = 15$, donc $r = 3$. $u_0 = u_3 - 3r = 14 - 9 = 5$.</p>
+<p><strong>2.</strong> $u_{20} = 5 + 60 = 65$. $S = 21 \times \dfrac{5+65}{2} = 21 \times 35 = 735$.</p>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $C_n = 2000 \times 1{,}03^n$.</p>
+<p><strong>2.</strong> $2000 \times 1{,}03^n > 3000 \iff 1{,}03^n > 1{,}5 \iff n > \dfrac{\ln 1{,}5}{\ln 1{,}03} \approx \dfrac{0{,}405}{0{,}0296} \approx 13{,}7$. Soit <strong>14 ans</strong>.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="../../index.html">&larr; Accueil</a><a href="derivation.html">Dérivation &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function drawComp(){
+  const c=document.getElementById('canvasComp');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const u0=parseInt(document.getElementById('u0c').value);
+  const r=parseInt(document.getElementById('rc').value);
+  const q=parseInt(document.getElementById('qc').value)/10;
+  document.getElementById('u0cv').textContent=u0;document.getElementById('rcv').textContent=r;document.getElementById('qcv').textContent=q.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  const m={l:50,r:20,t:20,b:40};const pw=w-m.l-m.r,ph=h-m.t-m.b;const N=15;
+  const arith=[],geom=[];for(let i=0;i<=N;i++){arith.push(u0+i*r);geom.push(u0*Math.pow(q,i));}
+  const yMax=Math.max(...arith,...geom)*1.1;
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(m.l,m.t);ctx.lineTo(m.l,h-m.b);ctx.lineTo(w-m.r,h-m.b);ctx.stroke();
+  // Arithmétique
+  arith.forEach((v,i)=>{let px=m.l+(i/N)*pw,py=h-m.b-(v/yMax)*ph;ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();
+    if(i>0){let ppx=m.l+((i-1)/N)*pw,ppy=h-m.b-(arith[i-1]/yMax)*ph;ctx.strokeStyle='rgba(42,82,152,0.4)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ppx,ppy);ctx.lineTo(px,py);ctx.stroke();}});
+  // Géométrique
+  geom.forEach((v,i)=>{let px=m.l+(i/N)*pw,py=h-m.b-(Math.min(v,yMax)/yMax)*ph;ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();
+    if(i>0){let ppx=m.l+((i-1)/N)*pw,ppy=h-m.b-(Math.min(geom[i-1],yMax)/yMax)*ph;ctx.strokeStyle='rgba(192,57,43,0.4)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ppx,ppy);ctx.lineTo(px,py);ctx.stroke();}});
+  ctx.font='bold 12px Arial';ctx.fillStyle='#2a5298';ctx.fillText('Arithmétique (r='+r+')',m.l+10,m.t+15);
+  ctx.fillStyle='#c0392b';ctx.fillText('Géométrique (q='+q.toFixed(1)+')',m.l+10,m.t+32);
+  document.getElementById('resultComp').textContent='u₀='+u0+'. Arithmétique : croissance linéaire. Géométrique : croissance exponentielle. La géométrique finit toujours par dominer si q > 1.';
+}
+['u0c','rc','qc'].forEach(id=>document.getElementById(id).addEventListener('input',drawComp));
+drawComp();
+</script>
+</body>
+</html>
