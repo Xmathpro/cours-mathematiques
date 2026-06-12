@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphes . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.controls button:hover{background:#1e3d72}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}pre.code{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem 1.2rem;border-radius:6px;margin:1rem 0;line-height:1.8;overflow-x:auto;white-space:pre}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#nsi">NSI</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>NSI . Terminale</span><span>Programme 2019</span><span>2021-2022</span></div>
+<h1 class="cours-titre-principal">Graphes</h1>
+<p class="cours-sous-titre">Définitions, représentation, parcours en largeur et en profondeur</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Qu'est-ce qu'un graphe ?</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Un <strong>graphe</strong> est un ensemble de <strong>sommets</strong> reliés par des <strong>arêtes</strong> (graphe non orienté) ou des <strong>arcs</strong> (graphe orienté).</p>
+<ul>
+<li><strong>Graphe non orienté</strong> : les arêtes n'ont pas de sens (une route à double sens).</li>
+<li><strong>Graphe orienté</strong> : les arcs ont un sens (une rue à sens unique).</li>
+<li><strong>Graphe pondéré</strong> : chaque arête a un poids (la distance entre deux villes).</li>
+</ul>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Où trouve-t-on des graphes ?</div>
+<p>Les graphes sont partout : réseau social (sommets = personnes, arêtes = amitié), réseau routier (sommets = villes, arêtes = routes), Internet (sommets = sites, arcs = liens hypertexte), réseau électrique, structure d'une molécule...</p>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : un graphe interactif</h4>
+<canvas id="canvasGraph" width="600" height="380"></canvas>
+<div class="controls">
+<label>Type :</label>
+<select id="graphType">
+<option value="social">Réseau social</option>
+<option value="villes">Réseau routier</option>
+<option value="web">Liens Web (orienté)</option>
+</select>
+</div>
+<div class="result-text" id="resultGraph"></div>
+</div>
+
+<h2>II. Représentation en Python</h2>
+
+<h3>1. Matrice d'adjacence</h3>
+
+<pre class="code">
+# Matrice d'adjacence : une grille n × n
+# matrice[i][j] = 1 si i et j sont reliés, 0 sinon
+
+matrice = [
+    #  A  B  C  D  E
+    [0, 1, 1, 0, 0],   # A
+    [1, 0, 1, 1, 0],   # B
+    [1, 1, 0, 0, 1],   # C
+    [0, 1, 0, 0, 1],   # D
+    [0, 0, 1, 1, 0],   # E
+]
+
+# A est relié à B ?
+print(matrice[0][1])   # 1 → oui
+
+# Nombre de voisins de B (degré de B) :
+print(sum(matrice[1]))   # 3
+</pre>
+
+<h3>2. Dictionnaire d'adjacence (liste de voisins)</h3>
+
+<pre class="code">
+# Plus pratique pour la plupart des algorithmes
+
+graphe = {
+    "A": ["B", "C"],
+    "B": ["A", "C", "D"],
+    "C": ["A", "B", "E"],
+    "D": ["B", "E"],
+    "E": ["C", "D"],
+}
+
+# Voisins de B :
+print(graphe["B"])     # ['A', 'C', 'D']
+
+# A est-il relié à D ?
+print("D" in graphe["A"])   # False
+
+# Degré de B :
+print(len(graphe["B"]))     # 3
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : matrice d'adjacence</h4>
+<canvas id="canvasMatrice" width="600" height="300"></canvas>
+<div class="result-text" id="resultMatrice">La case (i, j) est colorée si le sommet i est relié au sommet j.</div>
+</div>
+
+<h2>III. Parcours de graphes</h2>
+
+<h3>1. Parcours en largeur (BFS : Breadth First Search)</h3>
+
+<div class="definition"><div class="encadre-titre">Principe</div>
+<p>On explore le graphe <strong>couche par couche</strong>, en visitant d'abord tous les voisins directs, puis les voisins des voisins, etc. On utilise une <strong>file</strong> (FIFO).</p>
+</div>
+
+<pre class="code">
+from collections import deque
+
+def parcours_largeur(graphe, depart):
+    """
+    Parcourt le graphe en largeur depuis 'depart'.
+    Retourne la liste des sommets visités dans l'ordre.
+    """
+    visites = []
+    file = deque([depart])
+    vus = {depart}
+
+    while file:
+        sommet = file.popleft()       # défiler
+        visites.append(sommet)
+
+        for voisin in graphe[sommet]:
+            if voisin not in vus:
+                vus.add(voisin)
+                file.append(voisin)   # enfiler
+
+    return visites
+
+
+print(parcours_largeur(graphe, "A"))
+# ['A', 'B', 'C', 'D', 'E']
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : parcours en largeur (BFS)</h4>
+<canvas id="canvasBFS" width="600" height="380"></canvas>
+<div class="controls">
+<button onclick="stepBFS()">▶ Étape suivante</button>
+<button onclick="resetBFS()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultBFS">Le BFS explore couche par couche, comme des cercles concentriques.</div>
+</div>
+
+<h3>2. Parcours en profondeur (DFS : Depth First Search)</h3>
+
+<div class="definition"><div class="encadre-titre">Principe</div>
+<p>On explore le graphe en allant le <strong>plus loin possible</strong> dans une direction avant de revenir en arrière. On utilise une <strong>pile</strong> (LIFO) ou la récursivité.</p>
+</div>
+
+<pre class="code">
+def parcours_profondeur(graphe, depart):
+    """
+    Parcourt le graphe en profondeur depuis 'depart'.
+    Version récursive.
+    """
+    visites = []
+
+    def dfs(sommet, vus):
+        vus.add(sommet)
+        visites.append(sommet)
+
+        for voisin in graphe[sommet]:
+            if voisin not in vus:
+                dfs(voisin, vus)
+
+    dfs(depart, set())
+    return visites
+
+
+print(parcours_profondeur(graphe, "A"))
+# ['A', 'B', 'C', 'E', 'D']
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : parcours en profondeur (DFS)</h4>
+<canvas id="canvasDFS" width="600" height="380"></canvas>
+<div class="controls">
+<button onclick="stepDFS()">▶ Étape suivante</button>
+<button onclick="resetDFS()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultDFS">Le DFS va le plus loin possible avant de revenir en arrière (backtracking).</div>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<ol>
+<li>Dessiner le graphe défini par : <code>{"A":["B","C"], "B":["A","D"], "C":["A","D","E"], "D":["B","C"], "E":["C"]}</code></li>
+<li>Écrire la matrice d'adjacence de ce graphe.</li>
+<li>Quel est le degré de chaque sommet ?</li>
+</ol>
+
+<h3>Exercice 2</h3>
+<ol>
+<li>Donner l'ordre de visite BFS depuis A pour le graphe de l'exercice 1.</li>
+<li>Donner l'ordre de visite DFS depuis A pour le même graphe.</li>
+<li>Écrire une fonction Python <code>chemin_existe(graphe, depart, arrivee)</code> qui retourne True si un chemin existe.</li>
+</ol>
+
+<h2>V. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>3.</strong> Degré(A) = 2, Degré(B) = 2, Degré(C) = 3, Degré(D) = 2, Degré(E) = 1.</p>
+<p>E est un sommet "pendant" (une seule connexion). C est le sommet le plus connecté.</p>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> BFS depuis A : A → B, C (voisins de A) → D (voisin de B non visité) → E (voisin de C non visité). Ordre : [A, B, C, D, E].</p>
+<p><strong>2.</strong> DFS depuis A : A → B → D → C → E. On va le plus loin possible dans chaque branche.</p>
+<pre class="code">
+def chemin_existe(graphe, depart, arrivee):
+    """
+    Retourne True si un chemin existe entre
+    depart et arrivee dans le graphe.
+    """
+    vus = set()
+
+    def dfs(sommet):
+        if sommet == arrivee:
+            return True
+
+        vus.add(sommet)
+
+        for voisin in graphe[sommet]:
+            if voisin not in vus:
+                if dfs(voisin):
+                    return True
+
+        return False
+
+    return dfs(depart)
+
+
+print(chemin_existe(graphe, "A", "E"))   # True
+print(chemin_existe(graphe, "A", "Z"))   # KeyError ou False
+</pre>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="recursivite.html">&larr; Récursivité</a><a href="../../index.html">Retour à l'accueil &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+const clrs=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085'];
+const G={A:['B','C'],B:['A','C','D'],C:['A','B','E'],D:['B','E'],E:['C','D']};
+const pos={A:{x:100,y:180},B:{x:250,y:80},C:{x:250,y:280},D:{x:420,y:80},E:{x:420,y:280}};
+const nodes=Object.keys(G);
+
+function drawGraphBase(ctx,w,h,visited,current,edgesHighlight){
+  ctx.clearRect(0,0,w,h);
+  // Edges
+  const drawn=new Set();
+  nodes.forEach(n=>{G[n].forEach(v=>{const key=[n,v].sort().join('-');if(!drawn.has(key)){drawn.add(key);
+    const hl=edgesHighlight&&edgesHighlight.has(key);
+    ctx.strokeStyle=hl?'#c0392b':'#ddd';ctx.lineWidth=hl?3:1.5;
+    ctx.beginPath();ctx.moveTo(pos[n].x,pos[n].y);ctx.lineTo(pos[v].x,pos[v].y);ctx.stroke();}});});
+  // Nodes
+  nodes.forEach((n,i)=>{
+    const vis=visited&&visited.has(n);const cur=current===n;
+    ctx.fillStyle=cur?'#c0392b':vis?'#27ae60':'#2a5298';
+    ctx.beginPath();ctx.arc(pos[n].x,pos[n].y,22,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText(n,pos[n].x,pos[n].y+5);
+  });
+  ctx.textAlign='left';
+}
+
+// GRAPH DISPLAY
+function drawGraph(){
+  const c=document.getElementById('canvasGraph');const ctx=c.getContext('2d');
+  const sel=document.getElementById('graphType').value;
+  const configs={
+    social:{nodes:{Alice:{x:100,y:190},Bob:{x:250,y:80},Clara:{x:400,y:120},David:{x:250,y:280},Emma:{x:450,y:260}},edges:[['Alice','Bob'],['Alice','David'],['Bob','Clara'],['Bob','David'],['Clara','Emma'],['David','Emma']],desc:'Réseau social : 5 personnes, 6 relations d\'amitié. Non orienté.'},
+    villes:{nodes:{Paris:{x:300,y:60},Lyon:{x:400,y:180},Marseille:{x:380,y:310},Bordeaux:{x:120,y:250},Nantes:{x:100,y:120}},edges:[['Paris','Lyon'],['Paris','Nantes'],['Lyon','Marseille'],['Bordeaux','Nantes'],['Bordeaux','Marseille'],['Paris','Bordeaux']],desc:'Réseau routier : 5 villes, 6 routes. Non orienté, pourrait être pondéré (distances).'},
+    web:{nodes:{Google:{x:300,y:60},Wiki:{x:150,y:180},YouTube:{x:450,y:180},Reddit:{x:200,y:310},GitHub:{x:400,y:310}},edges:[['Google','Wiki'],['Google','YouTube'],['Wiki','Reddit'],['YouTube','GitHub'],['Reddit','GitHub']],desc:'Liens Web : orienté (un lien va dans un sens). Google pointe vers Wiki et YouTube.'}
+  };
+  const cfg=configs[sel];const w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
+  const oriented=sel==='web';
+  cfg.edges.forEach(([a,b])=>{
+    const pa=cfg.nodes[a],pb=cfg.nodes[b];
+    ctx.strokeStyle='#ccc';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);ctx.stroke();
+    if(oriented){const ang=Math.atan2(pb.y-pa.y,pb.x-pa.x);const ax=pb.x-22*Math.cos(ang),ay=pb.y-22*Math.sin(ang);
+      ctx.fillStyle='#888';ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax-10*Math.cos(ang-.4),ay-10*Math.sin(ang-.4));ctx.lineTo(ax-10*Math.cos(ang+.4),ay-10*Math.sin(ang+.4));ctx.closePath();ctx.fill();}
+  });
+  Object.entries(cfg.nodes).forEach(([name,p],i)=>{
+    ctx.fillStyle=clrs[i%clrs.length];ctx.beginPath();ctx.arc(p.x,p.y,22,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText(name,p.x,p.y+4);
+  });
+  ctx.textAlign='left';
+  document.getElementById('resultGraph').textContent=cfg.desc;
+}
+document.getElementById('graphType').addEventListener('change',drawGraph);
+drawGraph();
+
+// MATRICE
+(function(){
+  const c=document.getElementById('canvasMatrice');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const n=nodes.length;const cs=40;const ox=80,oy=30;
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';ctx.textAlign='center';
+  nodes.forEach((nd,i)=>{ctx.fillText(nd,ox+i*cs+cs/2,oy+15);ctx.fillText(nd,ox-20,oy+30+i*cs+cs/2+4);});
+  nodes.forEach((nd,i)=>{nodes.forEach((nd2,j)=>{
+    const connected=G[nd].includes(nd2);
+    ctx.fillStyle=connected?'rgba(42,82,152,0.7)':'#f0f0f0';
+    ctx.fillRect(ox+j*cs+1,oy+30+i*cs+1,cs-2,cs-2);
+    ctx.fillStyle=connected?'#fff':'#ccc';ctx.font='bold 13px Arial';
+    ctx.fillText(connected?'1':'0',ox+j*cs+cs/2,oy+30+i*cs+cs/2+5);
+  });});
+  ctx.textAlign='left';ctx.fillStyle='#444';ctx.font='12px Arial';
+  ctx.fillText('La matrice est symétrique car le graphe est non orienté.',ox,oy+30+n*cs+25);
+})();
+
+// BFS
+let bfsVisited=new Set();let bfsQueue=['A'];let bfsOrder=[];let bfsEdges=new Set();
+function resetBFS(){bfsVisited=new Set();bfsQueue=['A'];bfsVisited.add('A');bfsOrder=[];bfsEdges=new Set();
+  drawGraphBase(document.getElementById('canvasBFS').getContext('2d'),600,380,bfsVisited,'A',bfsEdges);
+  document.getElementById('resultBFS').textContent='BFS depuis A. File : [A]. Cliquez pour explorer.';}
+function stepBFS(){
+  if(bfsQueue.length===0){document.getElementById('resultBFS').textContent='BFS terminé. Ordre : ['+bfsOrder.join(', ')+'].';return;}
+  const current=bfsQueue.shift();bfsOrder.push(current);
+  G[current].forEach(v=>{if(!bfsVisited.has(v)){bfsVisited.add(v);bfsQueue.push(v);bfsEdges.add([current,v].sort().join('-'));}});
+  drawGraphBase(document.getElementById('canvasBFS').getContext('2d'),600,380,bfsVisited,current,bfsEdges);
+  document.getElementById('resultBFS').textContent='Visite : '+current+'. File : ['+bfsQueue.join(', ')+'].  Ordre : ['+bfsOrder.join(', ')+'].';
+}
+resetBFS();
+
+// DFS
+let dfsVisited=new Set();let dfsStack=['A'];let dfsOrder=[];let dfsEdges=new Set();
+function resetDFS(){dfsVisited=new Set();dfsStack=['A'];dfsOrder=[];dfsEdges=new Set();
+  drawGraphBase(document.getElementById('canvasDFS').getContext('2d'),600,380,dfsVisited,'A',dfsEdges);
+  document.getElementById('resultDFS').textContent='DFS depuis A. Pile : [A]. Cliquez pour explorer.';}
+function stepDFS(){
+  if(dfsStack.length===0){document.getElementById('resultDFS').textContent='DFS terminé. Ordre : ['+dfsOrder.join(', ')+'].';return;}
+  const current=dfsStack.pop();
+  if(dfsVisited.has(current)){stepDFS();return;}
+  dfsVisited.add(current);dfsOrder.push(current);
+  const voisins=[...G[current]].reverse();
+  voisins.forEach(v=>{if(!dfsVisited.has(v)){dfsStack.push(v);dfsEdges.add([current,v].sort().join('-'));}});
+  drawGraphBase(document.getElementById('canvasDFS').getContext('2d'),600,380,dfsVisited,current,dfsEdges);
+  document.getElementById('resultDFS').textContent='Visite : '+current+'. Pile : ['+dfsStack.join(', ')+'].  Ordre : ['+dfsOrder.join(', ')+'].';
+}
+resetDFS();
+</script>
+</body>
+</html>
