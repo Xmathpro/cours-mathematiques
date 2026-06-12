@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonctions : nouveau programme . Seconde</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin: 1.5rem 0; }
+  .interactive-box h4 { font-family: Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #2a5298; margin-bottom: 0.75rem; }
+  canvas { display: block; margin: 0 auto; border: 1px solid #e8e8e8; border-radius: 4px; max-width: 100%; }
+  .controls { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.75rem; font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; }
+  .controls label { font-weight: bold; }
+  .controls input[type="range"] { width: 120px; cursor: pointer; }
+  .controls select { padding: 3px 8px; border: 1px solid #ccc; border-radius: 3px; font-size: 0.85rem; cursor: pointer; }
+  .controls button { background: #2a5298; color: #fff; border: none; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .controls button:hover { background: #1e3d72; }
+  .result-text { font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; margin-top: 0.5rem; min-height: 1.2em; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#secondes">Seconde</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Seconde</span>
+      <span>Programme 2019-2026 (réforme Blanquer)</span>
+      <span>Luxembourg . 2019-2020</span>
+    </div>
+    <h1 class="cours-titre-principal">Fonctions : nouveau programme</h1>
+    <p class="cours-sous-titre">Fonctions de référence, résolution d'équations, inéquations et introduction à Python</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Ce qui change avec le nouveau programme</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Nouveautés 2019</div>
+    <p>Le programme de Seconde a été refondu en 2019. Les grandes nouveautés pour les fonctions :</p>
+    <ul>
+      <li>Introduction de l'<strong>algorithmique et de Python</strong> dans l'étude des fonctions.</li>
+      <li>Accent mis sur la <strong>résolution graphique</strong> et la <strong>modélisation</strong>.</li>
+      <li>Étude plus poussée des <strong>fonctions de référence</strong> (carré, inverse, racine, cube).</li>
+      <li>Introduction de la notion d'<strong>ensemble de définition</strong> plus tôt dans le parcours.</li>
+    </ul>
+  </div>
+
+  <h2>II. Fonctions de référence</h2>
+
+  <h3>1. Fonction carré</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">$f(x) = x^2$</div>
+    <ul>
+      <li>Définie sur $\mathbb{R}$. Ensemble image : $[0, +\infty[$.</li>
+      <li>Décroissante sur $]-\infty, 0]$, croissante sur $[0, +\infty[$.</li>
+      <li>Minimum : $f(0) = 0$.</li>
+      <li>Parité : $f(-x) = f(x)$ (symétrie par rapport à l'axe des ordonnées).</li>
+    </ul>
+  </div>
+
+  <h3>2. Fonction cube</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">$f(x) = x^3$</div>
+    <ul>
+      <li>Définie sur $\mathbb{R}$. Ensemble image : $\mathbb{R}$.</li>
+      <li>Strictement croissante sur $\mathbb{R}$.</li>
+      <li>Imparité : $f(-x) = -f(x)$ (symétrie par rapport à l'origine).</li>
+    </ul>
+  </div>
+
+  <h3>3. Fonction inverse</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">$f(x) = \dfrac{1}{x}$</div>
+    <ul>
+      <li>Définie sur $\mathbb{R} \setminus \{0\}$.</li>
+      <li>Strictement décroissante sur $]-\infty, 0[$ et sur $]0, +\infty[$.</li>
+      <li>Attention : on ne dit PAS "décroissante sur $\mathbb{R}^*$" car $f(-1) = -1 < 1 = f(1)$.</li>
+      <li>Imparité : $f(-x) = -f(x)$.</li>
+    </ul>
+  </div>
+
+  <h3>4. Fonction racine carrée</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">$f(x) = \sqrt{x}$</div>
+    <ul>
+      <li>Définie sur $[0, +\infty[$.</li>
+      <li>Strictement croissante sur $[0, +\infty[$.</li>
+      <li>La croissance ralentit : la courbe "s'aplatit" progressivement.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Comparer les fonctions de référence</h4>
+    <canvas id="canvasCompare" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>Intervalle x :</label>
+      <input type="range" id="zoomSlider" min="10" max="60" value="30">
+      <span id="zoomVal">3</span>
+      <label>Afficher :</label>
+      <select id="compareSelect" onchange="drawCompare()">
+        <option value="all">Toutes</option>
+        <option value="carre_cube">x² vs x³</option>
+        <option value="carre_racine">x² vs √x</option>
+        <option value="inverse_racine">1/x vs √x</option>
+      </select>
+    </div>
+    <div class="result-text" id="resultCompare"></div>
+  </div>
+
+  <h2>III. Résolution d'équations et d'inéquations</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre $f(x) = g(x)$</div>
+    <p>On ramène à $f(x) - g(x) = 0$ et on factorise ou on utilise le discriminant.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre une inéquation avec un tableau de signes</div>
+    <p><strong>Exemple.</strong> Résoudre $(2x-1)(x+3) \leq 0$.</p>
+    <p>Les racines sont $x = \dfrac{1}{2}$ et $x = -3$.</p>
+    <ul>
+      <li>Sur $]-\infty, -3[$ : $(2x-1) < 0$ et $(x+3) < 0$, produit $> 0$.</li>
+      <li>Sur $]-3, \dfrac{1}{2}[$ : $(2x-1) < 0$ et $(x+3) > 0$, produit $< 0$.</li>
+      <li>Sur $]\dfrac{1}{2}, +\infty[$ : $(2x-1) > 0$ et $(x+3) > 0$, produit $> 0$.</li>
+    </ul>
+    <p>Solution : $x \in [-3, \dfrac{1}{2}]$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : tableau de signes interactif</h4>
+    <canvas id="canvasSignes" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>a =</label>
+      <input type="range" id="sigA" min="-30" max="30" value="20">
+      <span id="sigAval">2</span>
+      <label>b =</label>
+      <input type="range" id="sigB" min="-30" max="30" value="-10">
+      <span id="sigBval">-1</span>
+      <label>c =</label>
+      <input type="range" id="sigC" min="-30" max="30" value="10">
+      <span id="sigCval">1</span>
+      <label>d =</label>
+      <input type="range" id="sigD" min="-30" max="30" value="30">
+      <span id="sigDval">3</span>
+    </div>
+    <div class="result-text" id="resultSignes">Produit $(ax+b)(cx+d)$ : les zones négatives sont en rouge, les positives en bleu.</div>
+  </div>
+
+  <h2>IV. Algorithmique et Python</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Nouveauté du programme 2019</div>
+    <p>Python est désormais l'outil officiel pour explorer les fonctions en classe de Seconde. On l'utilise pour calculer des images, tracer des courbes et résoudre des problèmes par balayage.</p>
+  </div>
+
+  <h3>1. Calculer des images avec Python</h3>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+<pre>
+def f(x):
+    return x**2 - 3*x + 2
+
+# Calculer des images
+print(f(0))    # affiche 2
+print(f(1))    # affiche 0
+print(f(5))    # affiche 12
+
+# Table de valeurs
+for x in range(-5, 6):
+    print("f(", x, ") =", f(x))
+</pre>
+  </div>
+
+  <h3>2. Tracer une courbe avec Python</h3>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+<pre>
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-5, 5, 200)
+y = x**2 - 3*x + 2
+
+plt.plot(x, y, color='blue')
+plt.axhline(y=0, color='gray', linewidth=0.5)
+plt.axvline(x=0, color='gray', linewidth=0.5)
+plt.grid(True, alpha=0.3)
+plt.title("f(x) = x² - 3x + 2")
+plt.show()
+</pre>
+  </div>
+
+  <h3>3. Résolution par balayage</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe du balayage</div>
+    <p>
+      Pour trouver une solution approchée de $f(x) = 0$, on parcourt un intervalle en testant les valeurs de $f$ pas à pas.
+      Quand $f$ change de signe entre deux valeurs consécutives, la solution est entre les deux.
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple : trouver $\sqrt{2}$ par balayage</div>
+<pre>
+# On cherche x tel que x² = 2, soit x² - 2 = 0
+def f(x):
+    return x**2 - 2
+
+# Balayage entre 1 et 2 avec un pas de 0.001
+x = 1.0
+while f(x) < 0:
+    x = x + 0.001
+
+print("sqrt(2) ≈", round(x, 3))
+# Affiche : sqrt(2) ≈ 1.415
+</pre>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : résolution par balayage</h4>
+    <canvas id="canvasBalayage" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Précision :</label>
+      <select id="precisionSelect">
+        <option value="0.1">0.1</option>
+        <option value="0.01" selected>0.01</option>
+        <option value="0.001">0.001</option>
+        <option value="0.0001">0.0001</option>
+      </select>
+      <button onclick="runBalayage()">Lancer le balayage</button>
+    </div>
+    <div class="result-text" id="resultBalayage">Recherche de la solution de x² - 2 = 0 entre 1 et 2 par balayage.</div>
+  </div>
+
+  <h3>4. Générer un tableau de valeurs</h3>
+
+  <div class="interactive-box">
+    <h4>Explorer : tableau de valeurs interactif</h4>
+    <canvas id="canvasTableau" width="600" height="300"></canvas>
+    <div class="controls">
+      <label>Fonction :</label>
+      <select id="funcTableau">
+        <option value="carre">f(x) = x²</option>
+        <option value="cube">f(x) = x³</option>
+        <option value="poly">f(x) = x² - 3x + 2</option>
+        <option value="inverse">f(x) = 1/x</option>
+        <option value="racine">f(x) = √x</option>
+      </select>
+      <label>De x =</label>
+      <input type="range" id="tableStart" min="-50" max="0" value="-30">
+      <span id="tableStartVal">-3</span>
+      <label>à x =</label>
+      <input type="range" id="tableEnd" min="0" max="50" value="30">
+      <span id="tableEndVal">3</span>
+    </div>
+    <div class="result-text" id="resultTableau"></div>
+  </div>
+
+  <h2>V. Exercices</h2>
+
+  <h3>Exercice 1 : fonctions de référence</h3>
+  <ol>
+    <li>Comparer sans calculatrice : $\sqrt{5}$ et $\sqrt{7}$. Justifier en utilisant la monotonie de la fonction racine.</li>
+    <li>Comparer $(-3)^2$ et $(-5)^2$. Justifier en utilisant la monotonie de la fonction carré.</li>
+    <li>Comparer $\dfrac{1}{3}$ et $\dfrac{1}{7}$. Justifier en utilisant la monotonie de la fonction inverse.</li>
+  </ol>
+
+  <h3>Exercice 2 : inéquations</h3>
+  <p>Résoudre :</p>
+  <ol>
+    <li>$(x-2)(x+5) > 0$</li>
+    <li>$\dfrac{x+1}{x-3} \leq 0$</li>
+    <li>$x^2 - 4x + 3 < 0$</li>
+  </ol>
+
+  <h3>Exercice 3 : Python</h3>
+  <p>Écrire un programme Python qui :</p>
+  <ol>
+    <li>Affiche la table de valeurs de $f(x) = x^2 - 5x + 4$ pour $x$ allant de $-2$ à $7$.</li>
+    <li>Trouve par balayage les solutions de $f(x) = 0$ avec une précision de $0{,}01$.</li>
+  </ol>
+
+  <h2>VI. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $5 < 7$ et la fonction racine est croissante sur $[0, +\infty[$, donc $\sqrt{5} < \sqrt{7}$.</p>
+    <p><strong>2.</strong> On compare $|-3| = 3$ et $|-5| = 5$. Comme $3 < 5$ et que la fonction carré est croissante sur $[0, +\infty[$ : $3^2 < 5^2$, soit $(-3)^2 < (-5)^2$, soit $9 < 25$.</p>
+    <p><strong>3.</strong> $3 < 7$ et la fonction inverse est décroissante sur $]0, +\infty[$, donc $\dfrac{1}{3} > \dfrac{1}{7}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Racines : $x = 2$ et $x = -5$. Tableau de signes :</p>
+    <p>$(x-2)(x+5) > 0$ sur $]-\infty, -5[ \cup ]2, +\infty[$.</p>
+    <p><strong>2.</strong> Racine du numérateur : $x = -1$. Valeur interdite : $x = 3$.</p>
+    <p>$\dfrac{x+1}{x-3} \leq 0$ sur $[-1, 3[$.</p>
+    <p><strong>3.</strong> $x^2 - 4x + 3 = (x-1)(x-3)$. Racines : $x = 1$ et $x = 3$.</p>
+    <p>$(x-1)(x-3) < 0$ sur $]1, 3[$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+<pre>
+# 1. Table de valeurs
+def f(x):
+    return x**2 - 5*x + 4
+
+for x in range(-2, 8):
+    print("f(", x, ") =", f(x))
+
+# 2. Balayage
+x = -2.0
+while x <= 7:
+    if abs(f(x)) < 0.01:
+        print("Solution approchée :", round(x, 2))
+    x += 0.01
+# Trouve x ≈ 1.00 et x ≈ 4.00
+# Vérification : f(x) = (x-1)(x-4), racines 1 et 4.
+</pre>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2013-2014/seconde/statistiques.html">&larr; Statistiques et probabilités</a>
+  <a href="../../2024-2025/seconde/fonctions.html">Fonctions : programme 2026 &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2026
+</footer>
+
+<script>
+// === UTILITAIRES ===
+function drawGrid(ctx, w, h, ox, oy, sc) {
+  ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+  for (let i = -20; i <= 20; i++) {
+    let px = ox + i * sc; if (px >= 0 && px <= w) { ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, h); ctx.stroke(); }
+    let py = oy - i * sc; if (py >= 0 && py <= h) { ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(w, py); ctx.stroke(); }
+  }
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke();
+  ctx.fillStyle = '#999'; ctx.font = '10px Arial';
+  for (let i = -10; i <= 10; i++) { if (i === 0) continue;
+    let px = ox + i * sc, py = oy - i * sc;
+    if (px > 10 && px < w - 10) ctx.fillText(i, px - 3, oy + 13);
+    if (py > 10 && py < h - 10) ctx.fillText(i, ox + 5, py + 3);
+  }
+}
+function plotF(ctx, f, ox, oy, sc, w, color, lw) {
+  ctx.strokeStyle = color; ctx.lineWidth = lw || 2; ctx.beginPath(); let s = false;
+  for (let px = 0; px < w; px++) { let x = (px-ox)/sc, y = f(x);
+    if (!isFinite(y)||Math.abs(y)>50) { s=false; continue; } let py = oy-y*sc;
+    if (!s) { ctx.moveTo(px,py); s=true; } else ctx.lineTo(px,py);
+  } ctx.stroke();
+}
+
+// === COMPARAISON ===
+const refF = {
+  carre: { f: x=>x*x, c:'#2a5298', n:'x²' },
+  cube: { f: x=>x*x*x, c:'#27ae60', n:'x³' },
+  inverse: { f: x=>x===0?NaN:1/x, c:'#c0392b', n:'1/x' },
+  racine: { f: x=>x<0?NaN:Math.sqrt(x), c:'#8e44ad', n:'√x' }
+};
+function drawCompare() {
+  const c = document.getElementById('canvasCompare');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const sc = parseInt(document.getElementById('zoomSlider').value);
+  document.getElementById('zoomVal').textContent = (sc/10).toFixed(0);
+  const ox = w/2, oy = h/2;
+  ctx.clearRect(0,0,w,h); drawGrid(ctx,w,h,ox,oy,sc*3);
+  const sel = document.getElementById('compareSelect').value;
+  let show = [];
+  if (sel === 'all') show = ['carre','cube','inverse','racine'];
+  else if (sel === 'carre_cube') show = ['carre','cube'];
+  else if (sel === 'carre_racine') show = ['carre','racine'];
+  else show = ['inverse','racine'];
+  let legend = [];
+  show.forEach(k => { plotF(ctx, refF[k].f, ox, oy, sc*3, w, refF[k].c, 2.5);
+    legend.push('<span style="color:'+refF[k].c+'; font-weight:bold">'+refF[k].n+'</span>');
+  });
+  document.getElementById('resultCompare').innerHTML = legend.join(' &emsp; ');
+}
+document.getElementById('zoomSlider').addEventListener('input', drawCompare);
+drawCompare();
+
+// === TABLEAU DE SIGNES ===
+function drawSignes() {
+  const c = document.getElementById('canvasSignes');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w/2, oy = h*0.6, sc = 40;
+  const a = parseInt(document.getElementById('sigA').value)/10;
+  const b = parseInt(document.getElementById('sigB').value)/10;
+  const cc = parseInt(document.getElementById('sigC').value)/10;
+  const d = parseInt(document.getElementById('sigD').value)/10;
+  ['sigAval','sigBval','sigCval','sigDval'].forEach((id,i) => {
+    document.getElementById(id).textContent = [a,b,cc,d][i].toFixed(0);
+  });
+  ctx.clearRect(0,0,w,h); drawGrid(ctx,w,h,ox,oy,sc);
+  const f = x => (a*x+b)*(cc*x+d);
+  // Zones positive/negative
+  for (let px = 0; px < w; px++) {
+    let x = (px-ox)/sc, y = f(x);
+    if (!isFinite(y) || Math.abs(y) > 50) continue;
+    let py = oy - y * sc;
+    ctx.fillStyle = y >= 0 ? 'rgba(42,82,152,0.08)' : 'rgba(192,57,43,0.08)';
+    if (y >= 0) ctx.fillRect(px, py, 1, oy - py);
+    else ctx.fillRect(px, oy, 1, py - oy);
+  }
+  plotF(ctx, f, ox, oy, sc, w, '#333', 2.5);
+  // Racines
+  if (a !== 0) {
+    const r1 = -b/a; const px1 = ox + r1*sc;
+    ctx.fillStyle = '#c0392b'; ctx.beginPath(); ctx.arc(px1, oy, 5, 0, Math.PI*2); ctx.fill();
+    ctx.font = '11px Arial'; ctx.fillText('x=' + r1.toFixed(1), px1 - 10, oy + 18);
+  }
+  if (cc !== 0) {
+    const r2 = -d/cc; const px2 = ox + r2*sc;
+    ctx.fillStyle = '#c0392b'; ctx.beginPath(); ctx.arc(px2, oy, 5, 0, Math.PI*2); ctx.fill();
+    ctx.font = '11px Arial'; ctx.fillText('x=' + r2.toFixed(1), px2 - 10, oy + 18);
+  }
+  let eq = '(' + a.toFixed(0) + 'x + ' + b.toFixed(0) + ')(' + cc.toFixed(0) + 'x + ' + d.toFixed(0) + ')';
+  document.getElementById('resultSignes').innerHTML = 'Produit ' + eq + '. <span style="color:#2a5298">Bleu = positif</span>, <span style="color:#c0392b">rouge = négatif</span>.';
+}
+['sigA','sigB','sigC','sigD'].forEach(id => document.getElementById(id).addEventListener('input', drawSignes));
+drawSignes();
+
+// === BALAYAGE ===
+function runBalayage() {
+  const c = document.getElementById('canvasBalayage');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const ox = w*0.15, oy = h*0.7, sc = 100;
+  const prec = parseFloat(document.getElementById('precisionSelect').value);
+  ctx.clearRect(0,0,w,h);
+  // Axes
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(ox, 20); ctx.lineTo(ox, h-30); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox-10, oy); ctx.lineTo(w-20, oy); ctx.stroke();
+  // Courbe f(x) = x² - 2
+  const f = x => x*x - 2;
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2; ctx.beginPath();
+  for (let px = ox; px < w - 20; px++) {
+    let x = (px - ox) / sc + 1; let y = f(x); let py = oy - y * sc;
+    px === ox ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  } ctx.stroke();
+  // Balayage animé
+  let x = 1.0, steps = 0, found = false;
+  while (x <= 2 && !found) {
+    let y = f(x);
+    let px = ox + (x - 1) * sc, py = oy - y * sc;
+    if (y >= 0) {
+      found = true;
+      ctx.fillStyle = '#27ae60'; ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI*2); ctx.fill();
+      ctx.setLineDash([3,3]); ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, oy); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = 'bold 12px Arial'; ctx.fillStyle = '#27ae60';
+      ctx.fillText('√2 ≈ ' + x.toFixed(String(prec).length - 2), px - 20, oy + 18);
+    } else {
+      if (steps % Math.max(1, Math.floor(1/(prec*10))) === 0) {
+        ctx.fillStyle = 'rgba(192,57,43,0.3)'; ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2); ctx.fill();
+      }
+    }
+    x += prec; steps++;
+  }
+  // Labels
+  ctx.fillStyle = '#444'; ctx.font = '11px Arial';
+  ctx.fillText('1', ox - 3, oy + 15); ctx.fillText('2', ox + sc - 3, oy + 15);
+  ctx.fillText('f(x) = x² - 2', w - 120, 30);
+  ctx.fillText('y = 0', ox - 30, oy + 3);
+  document.getElementById('resultBalayage').textContent =
+    'Balayage terminé en ' + steps + ' étapes (pas = ' + prec + '). √2 ≈ ' + (found ? (x - prec).toFixed(String(prec).length - 2) : '?');
+}
+runBalayage();
+
+// === TABLEAU DE VALEURS ===
+const tableFuncs = {
+  carre: { f: x=>x*x, n:'x²' },
+  cube: { f: x=>x*x*x, n:'x³' },
+  poly: { f: x=>x*x-3*x+2, n:'x²-3x+2' },
+  inverse: { f: x=>x===0?NaN:1/x, n:'1/x' },
+  racine: { f: x=>x<0?NaN:Math.sqrt(x), n:'√x' }
+};
+function drawTableau() {
+  const c = document.getElementById('canvasTableau');
+  const ctx = c.getContext('2d'); const w = c.width, h = c.height;
+  const start = parseInt(document.getElementById('tableStart').value) / 10;
+  const end = parseInt(document.getElementById('tableEnd').value) / 10;
+  document.getElementById('tableStartVal').textContent = start.toFixed(0);
+  document.getElementById('tableEndVal').textContent = end.toFixed(0);
+  const sel = document.getElementById('funcTableau').value;
+  const tf = tableFuncs[sel];
+  ctx.clearRect(0, 0, w, h);
+  const values = [];
+  for (let x = Math.round(start); x <= Math.round(end); x++) values.push({ x, y: tf.f(x) });
+  const cols = values.length;
+  if (cols === 0) return;
+  const colW = Math.min(70, (w - 60) / cols);
+  const startX = 60;
+  // Header
+  ctx.fillStyle = '#2a5298'; ctx.font = 'bold 13px Arial';
+  ctx.fillText('x', 20, 50);
+  ctx.fillText('f(x)', 12, 90);
+  // Grid
+  ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(startX - 5, 30); ctx.lineTo(startX + cols * colW + 5, 30); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(startX - 5, 65); ctx.lineTo(startX + cols * colW + 5, 65); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(startX - 5, 105); ctx.lineTo(startX + cols * colW + 5, 105); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(50, 30); ctx.lineTo(50, 105); ctx.stroke();
+  values.forEach((v, i) => {
+    const x = startX + i * colW + colW / 2;
+    ctx.fillStyle = '#333'; ctx.font = '12px Arial';
+    ctx.fillText(v.x, x - 5, 50);
+    ctx.fillStyle = isFinite(v.y) ? '#2a5298' : '#c0392b'; ctx.font = '12px Arial';
+    ctx.fillText(isFinite(v.y) ? v.y.toFixed(1) : '—', x - 10, 90);
+    if (i > 0) { ctx.strokeStyle = '#eee'; ctx.beginPath(); ctx.moveTo(startX + i * colW, 30); ctx.lineTo(startX + i * colW, 105); ctx.stroke(); }
+  });
+  // Courbe en dessous
+  const margin = { l: 60, r: 20, t: 120, b: 20 };
+  const plotW = w - margin.l - margin.r;
+  const plotH = h - margin.t - margin.b;
+  const xMin = Math.round(start), xMax = Math.round(end);
+  const xRange = xMax - xMin || 1;
+  let yMin = Infinity, yMax = -Infinity;
+  values.forEach(v => { if (isFinite(v.y)) { yMin = Math.min(yMin, v.y); yMax = Math.max(yMax, v.y); } });
+  if (yMin === yMax) { yMin -= 1; yMax += 1; }
+  const yRange = yMax - yMin || 1;
+  const pad = yRange * 0.1;
+  ctx.strokeStyle = '#aaa'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, h - margin.b); ctx.lineTo(w - margin.r, h - margin.b); ctx.stroke();
+  ctx.strokeStyle = '#2a5298'; ctx.lineWidth = 2; ctx.beginPath(); let started = false;
+  for (let px = 0; px < plotW; px++) {
+    let x = xMin + (px / plotW) * xRange;
+    let y = tf.f(x);
+    if (!isFinite(y)) { started = false; continue; }
+    let py = margin.t + plotH - ((y - yMin + pad) / (yRange + 2*pad)) * plotH;
+    if (!started) { ctx.moveTo(margin.l + px, py); started = true; } else ctx.lineTo(margin.l + px, py);
+  } ctx.stroke();
+  // Points
+  values.forEach(v => {
+    if (!isFinite(v.y)) return;
+    let px = margin.l + ((v.x - xMin) / xRange) * plotW;
+    let py = margin.t + plotH - ((v.y - yMin + pad) / (yRange + 2*pad)) * plotH;
+    ctx.fillStyle = '#c0392b'; ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI*2); ctx.fill();
+  });
+  document.getElementById('resultTableau').textContent = 'f(x) = ' + tf.n + '. Table de ' + xMin + ' à ' + xMax + '.';
+}
+['funcTableau','tableStart','tableEnd'].forEach(id => document.getElementById(id).addEventListener('input', drawTableau));
+document.getElementById('funcTableau').addEventListener('change', drawTableau);
+drawTableau();
+</script>
+
+</body>
+</html>
