@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probabilités et variables aléatoires . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2013-2014</span>
+    </div>
+    <h1 class="cours-titre-principal">Probabilités et variables aléatoires</h1>
+    <p class="cours-sous-titre">Lois discrètes, espérance, variance et loi binomiale</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Rappels de probabilités</h2>
+
+  <h3>1. Vocabulaire</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définitions</div>
+    <p>
+      Une <strong>expérience aléatoire</strong> est une expérience dont on ne peut pas prévoir le résultat avec certitude.
+      L'ensemble de tous les résultats possibles est l'<strong>univers</strong>, noté $\Omega$.
+      Un <strong>événement</strong> est un sous-ensemble de $\Omega$.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Axiomes de Kolmogorov</div>
+    <ul>
+      <li>Pour tout événement $A$ : $0 \leq P(A) \leq 1$</li>
+      <li>$P(\Omega) = 1$</li>
+      <li>Si $A$ et $B$ sont incompatibles ($A \cap B = \emptyset$) : $P(A \cup B) = P(A) + P(B)$</li>
+    </ul>
+  </div>
+
+  <h3>2. Probabilités conditionnelles</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      La <strong>probabilité de $A$ sachant $B$</strong> est définie par :
+      $$P_B(A) = P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{quand } P(B) \neq 0$$
+    </p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Formule des probabilités totales</div>
+    <p>
+      Si $B_1, B_2, \ldots, B_n$ forment une partition de $\Omega$ (événements incompatibles dont la réunion est $\Omega$), alors pour tout événement $A$ :
+      $$P(A) = P(A \cap B_1) + P(A \cap B_2) + \cdots + P(A \cap B_n)$$
+      $$= P(B_1) \cdot P_{B_1}(A) + P(B_2) \cdot P_{B_2}(A) + \cdots + P(B_n) \cdot P_{B_n}(A)$$
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple . Arbre pondéré</div>
+    <p>
+      Un laboratoire produit des médicaments sur deux chaînes de fabrication. La chaîne 1 produit 60% de la production totale, la chaîne 2 produit 40%. Le taux de défaut est de 3% sur la chaîne 1 et de 5% sur la chaîne 2.
+    </p>
+    <p>On note $C_1$ l'événement "provient de la chaîne 1", $C_2$ l'événement "provient de la chaîne 2" et $D$ l'événement "le produit est défectueux".</p>
+    <p>Quelle est la probabilité qu'un produit pris au hasard soit défectueux ?</p>
+    <p>Par la formule des probabilités totales :</p>
+    $$P(D) = P(C_1) \cdot P_{C_1}(D) + P(C_2) \cdot P_{C_2}(D) = 0{,}6 \times 0{,}03 + 0{,}4 \times 0{,}05 = 0{,}018 + 0{,}02 = 0{,}038$$
+    <p>La probabilité qu'un produit soit défectueux est de 3,8%.</p>
+    <p style="margin-top: 0.75rem;">
+      <strong>Question complémentaire.</strong> Un produit est défectueux : quelle est la probabilité qu'il provienne de la chaîne 2 ?
+    </p>
+    $$P_D(C_2) = \frac{P(C_2 \cap D)}{P(D)} = \frac{0{,}02}{0{,}038} \approx 0{,}526$$
+    <p>Un produit défectueux a environ 52,6% de chances de provenir de la chaîne 2.</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      Cet exemple invite à la réflexion. Le taux de défaut de la chaîne 2 (5%) est plus élevé que celui de la chaîne 1 (3%). Pourtant, si on ne regarde que les chiffres bruts sans distinguer les chaînes, la différence paraît faible. Qui finance l'étude qui détermine les taux de défaut, comment les seuils d'acceptabilité sont-ils fixés, quels sont les critères pour qualifier un produit de "défectueux" : autant de questions que les mathématiques seules ne tranchent pas.
+    </p>
+  </div>
+
+  <h3>3. Indépendance</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Deux événements $A$ et $B$ sont <strong>indépendants</strong> si et seulement si :
+      $$P(A \cap B) = P(A) \times P(B)$$
+      Cela signifie que la réalisation de l'un n'influence pas la probabilité de l'autre.
+    </p>
+  </div>
+
+  <h2>II. Variables aléatoires</h2>
+
+  <h3>1. Définition</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Une <strong>variable aléatoire</strong> $X$ est une fonction qui associe à chaque issue de l'univers $\Omega$ un nombre réel. On note $P(X = x_i)$ la probabilité que $X$ prenne la valeur $x_i$.
+    </p>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Loi de probabilité</div>
+    <p>
+      La <strong>loi de probabilité</strong> de $X$ est le tableau qui donne toutes les valeurs prises par $X$ avec leurs probabilités. La somme de toutes les probabilités vaut toujours $1$.
+    </p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>On lance deux dés. $X$ est la somme des deux résultats. $X$ prend ses valeurs dans $\{2, 3, \ldots, 12\}$.</p>
+    <p>Il y a 36 issues possibles (6 faces par dé). On compte les combinaisons pour chaque somme :</p>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.75rem 0;">
+      <tr style="border-bottom: 1px solid #e8e8e8;">
+        <td style="padding:4px 6px; font-weight:bold;">$x_i$</td>
+        <td style="padding:4px 6px;">2</td><td style="padding:4px 6px;">3</td><td style="padding:4px 6px;">4</td>
+        <td style="padding:4px 6px;">5</td><td style="padding:4px 6px;">6</td><td style="padding:4px 6px;">7</td>
+        <td style="padding:4px 6px;">8</td><td style="padding:4px 6px;">9</td><td style="padding:4px 6px;">10</td>
+        <td style="padding:4px 6px;">11</td><td style="padding:4px 6px;">12</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 6px; font-weight:bold;">$P(X=x_i)$</td>
+        <td style="padding:4px 6px;">$\frac{1}{36}$</td><td style="padding:4px 6px;">$\frac{2}{36}$</td>
+        <td style="padding:4px 6px;">$\frac{3}{36}$</td><td style="padding:4px 6px;">$\frac{4}{36}$</td>
+        <td style="padding:4px 6px;">$\frac{5}{36}$</td><td style="padding:4px 6px;">$\frac{6}{36}$</td>
+        <td style="padding:4px 6px;">$\frac{5}{36}$</td><td style="padding:4px 6px;">$\frac{4}{36}$</td>
+        <td style="padding:4px 6px;">$\frac{3}{36}$</td><td style="padding:4px 6px;">$\frac{2}{36}$</td>
+        <td style="padding:4px 6px;">$\frac{1}{36}$</td>
+      </tr>
+    </table>
+    <p>La somme 7 est la plus probable avec une probabilité de $\frac{6}{36} = \frac{1}{6}$.</p>
+  </div>
+
+  <h3>2. Espérance, variance et écart-type</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définitions</div>
+    <p><strong>Espérance</strong> (valeur moyenne attendue) :</p>
+    $$E(X) = \sum_{i} x_i \cdot P(X = x_i)$$
+    <p><strong>Variance</strong> (mesure de la dispersion) :</p>
+    $$V(X) = E(X^2) - \left(E(X)\right)^2 = \sum_{i} x_i^2 \cdot P(X = x_i) - \left(E(X)\right)^2$$
+    <p><strong>Écart-type</strong> :</p>
+    $$\sigma(X) = \sqrt{V(X)}$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Pour les deux dés :</p>
+    $$E(X) = 2 \times \frac{1}{36} + 3 \times \frac{2}{36} + 4 \times \frac{3}{36} + \cdots + 12 \times \frac{1}{36} = 7$$
+    <p>En moyenne, la somme de deux dés vaut 7. C'est cohérent avec la symétrie du problème.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés de l'espérance</div>
+    <ul>
+      <li>$E(aX + b) = aE(X) + b$ pour tous réels $a$ et $b$</li>
+      <li>Si $X$ et $Y$ sont indépendantes : $E(X + Y) = E(X) + E(Y)$</li>
+      <li>Si $X$ et $Y$ sont indépendantes : $V(X + Y) = V(X) + V(Y)$</li>
+    </ul>
+  </div>
+
+  <h2>III. Loi binomiale</h2>
+
+  <h3>1. Schéma de Bernoulli</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Une <strong>épreuve de Bernoulli</strong> est une expérience aléatoire à deux issues : "succès" (probabilité $p$) et "échec" (probabilité $q = 1-p$).
+    </p>
+    <p>
+      Un <strong>schéma de Bernoulli</strong> de paramètres $n$ et $p$ consiste à répéter $n$ fois de manière indépendante une épreuve de Bernoulli de paramètre $p$.
+    </p>
+  </div>
+
+  <h3>2. Loi binomiale $\mathcal{B}(n, p)$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Soit $X$ le nombre de succès dans un schéma de Bernoulli de paramètres $n$ et $p$.
+      On dit que $X$ suit la <strong>loi binomiale</strong> $\mathcal{B}(n, p)$.
+      La probabilité d'obtenir exactement $k$ succès est :
+      $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+      où $\displaystyle\binom{n}{k} = \frac{n!}{k!(n-k)!}$ est le coefficient binomial.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Espérance et variance de la loi binomiale</div>
+    <ul>
+      <li>$E(X) = np$</li>
+      <li>$V(X) = np(1-p)$</li>
+      <li>$\sigma(X) = \sqrt{np(1-p)}$</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>
+      Un QCM comporte 10 questions. Chaque question propose 4 réponses dont une seule est correcte.
+      Un élève répond au hasard. Soit $X$ le nombre de bonnes réponses.
+    </p>
+    <p>$X \sim \mathcal{B}(10,\; 0{,}25)$.</p>
+    <p>$E(X) = 10 \times 0{,}25 = 2{,}5$ bonnes réponses en moyenne.</p>
+    <p>$V(X) = 10 \times 0{,}25 \times 0{,}75 = 1{,}875$ et $\sigma(X) \approx 1{,}37$.</p>
+    <p style="margin-top:0.75rem;">Quelle est la probabilité d'avoir exactement 5 bonnes réponses ?</p>
+    $$P(X = 5) = \binom{10}{5} (0{,}25)^5 (0{,}75)^5 = 252 \times 0{,}0009766 \times 0{,}2373 \approx 0{,}058$$
+    <p>Environ 5,8% de chances : il est très peu probable d'avoir la moyenne en répondant au hasard.</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      L'exemple du QCM illustre un point important. On entend souvent dire qu'un test à choix multiples "donne 25% de chances de réussite". C'est vrai par question isolée. Mais la probabilité d'avoir au moins la moyenne (5 bonnes réponses sur 10) en répondant au hasard est inférieure à 8%. Le passage d'une probabilité locale (par question) à une probabilité globale (sur le test entier) est souvent mal compris. Ce type de malentendu se retrouve dans de nombreux domaines.
+    </p>
+  </div>
+
+  <h3>3. Coefficients binomiaux</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés des coefficients binomiaux</div>
+    <ul>
+      <li>$\displaystyle\binom{n}{0} = \binom{n}{n} = 1$</li>
+      <li>$\displaystyle\binom{n}{1} = \binom{n}{n-1} = n$</li>
+      <li><strong>Symétrie :</strong> $\displaystyle\binom{n}{k} = \binom{n}{n-k}$</li>
+      <li><strong>Triangle de Pascal :</strong> $\displaystyle\binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1}$</li>
+    </ul>
+  </div>
+
+  <h2>IV. Exercices</h2>
+
+  <h3>Exercice 1 : probabilités conditionnelles</h3>
+  <p>
+    Une usine fabrique des composants électroniques. 70% proviennent de la machine A et 30% de la machine B.
+    Le taux de pièces défectueuses est de 2% pour la machine A et de 4% pour la machine B.
+  </p>
+  <ol>
+    <li>Calculer la probabilité qu'une pièce prise au hasard soit défectueuse.</li>
+    <li>Une pièce est défectueuse. Quelle est la probabilité qu'elle provienne de la machine B ?</li>
+    <li>Comparer ce résultat avec le taux de production de la machine B. Que constatez-vous ?</li>
+  </ol>
+
+  <h3>Exercice 2 : variable aléatoire</h3>
+  <p>On lance un dé truqué. La probabilité d'obtenir chaque face est :</p>
+  <table style="border-collapse: collapse; font-size: 0.85rem; margin: 0.5rem 0;">
+    <tr style="border-bottom: 1px solid #e8e8e8;">
+      <td style="padding:4px 8px; font-weight:bold;">Face</td>
+      <td style="padding:4px 8px;">1</td><td style="padding:4px 8px;">2</td><td style="padding:4px 8px;">3</td>
+      <td style="padding:4px 8px;">4</td><td style="padding:4px 8px;">5</td><td style="padding:4px 8px;">6</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 8px; font-weight:bold;">$P$</td>
+      <td style="padding:4px 8px;">0,1</td><td style="padding:4px 8px;">0,1</td><td style="padding:4px 8px;">0,2</td>
+      <td style="padding:4px 8px;">0,2</td><td style="padding:4px 8px;">0,2</td><td style="padding:4px 8px;">0,2</td>
+    </tr>
+  </table>
+  <ol>
+    <li>Calculer $E(X)$ et $V(X)$.</li>
+    <li>Est-il avantageux de jouer à un jeu où l'on gagne la valeur de la face obtenue si la mise est de 4 euros ?</li>
+  </ol>
+
+  <h3>Exercice 3 : loi binomiale</h3>
+  <p>
+    Un contrôle qualité consiste à prélever 20 pièces dans un lot. On sait que le taux de pièces défectueuses dans la production est de 8%.
+  </p>
+  <ol>
+    <li>Soit $X$ le nombre de pièces défectueuses dans l'échantillon. Quelle loi suit $X$ ?</li>
+    <li>Calculer $E(X)$ et $\sigma(X)$.</li>
+    <li>Calculer la probabilité qu'il n'y ait aucune pièce défectueuse.</li>
+    <li>Calculer la probabilité qu'il y ait au moins 3 pièces défectueuses.</li>
+  </ol>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> Par la formule des probabilités totales :</p>
+    <p>$P(D) = P(A) \cdot P_A(D) + P(B) \cdot P_B(D) = 0{,}7 \times 0{,}02 + 0{,}3 \times 0{,}04 = 0{,}014 + 0{,}012 = 0{,}026$.</p>
+    <p>Le taux global de défaut est de 2,6%.</p>
+    <p><strong>2.</strong> $P_D(B) = \dfrac{P(B \cap D)}{P(D)} = \dfrac{0{,}012}{0{,}026} \approx 0{,}462$.</p>
+    <p>Un produit défectueux a environ 46,2% de chances de provenir de la machine B.</p>
+    <p><strong>3.</strong> La machine B représente 30% de la production mais 46,2% des pièces défectueuses. Sa contribution aux défauts est disproportionnée par rapport à son volume de production. Ce type de raisonnement est utilisé pour décider où investir en priorité pour réduire les défauts : parfois mieux vaut améliorer une petite chaîne très défectueuse qu'une grande chaîne peu défectueuse.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $X \sim \mathcal{B}(20,\; 0{,}08)$.</p>
+    <p><strong>2.</strong> $E(X) = 20 \times 0{,}08 = 1{,}6$ et $\sigma(X) = \sqrt{20 \times 0{,}08 \times 0{,}92} = \sqrt{1{,}472} \approx 1{,}21$.</p>
+    <p><strong>3.</strong> $P(X = 0) = \binom{20}{0} (0{,}08)^0 (0{,}92)^{20} = (0{,}92)^{20} \approx 0{,}189$. Environ 18,9%.</p>
+    <p><strong>4.</strong> $P(X \geq 3) = 1 - P(X \leq 2) = 1 - [P(X=0) + P(X=1) + P(X=2)]$.</p>
+    <p>$P(X=1) = \binom{20}{1} (0{,}08)^1 (0{,}92)^{19} = 20 \times 0{,}08 \times (0{,}92)^{19} \approx 0{,}329$.</p>
+    <p>$P(X=2) = \binom{20}{2} (0{,}08)^2 (0{,}92)^{18} = 190 \times 0{,}0064 \times (0{,}92)^{18} \approx 0{,}271$.</p>
+    <p>$P(X \geq 3) \approx 1 - 0{,}189 - 0{,}329 - 0{,}271 \approx 0{,}211$. Environ 21,1%.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2012-2013/terminale-s/integration.html">&larr; Intégration</a>
+  <a href="exponentielle.html">Fonction exponentielle &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
