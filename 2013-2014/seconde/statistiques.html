@@ -561,14 +561,16 @@ function drawPiece() {
     ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial';
     ctx.fillText('PILE', margin.l + barW * 0.45, h - margin.b + 20);
     ctx.font = '12px Arial'; ctx.fillStyle = '#2a5298';
-    ctx.fillText(pieceP + ' (' + (pieceP/total*100).toFixed(1) + '%)', margin.l + barW * 0.3, h - margin.b - bh - 8);
+    ctx.fillText(pieceP, margin.l + barW * 0.45, h - margin.b - bh - 20);
+    ctx.fillText((pieceP/total*100).toFixed(1) + '%', margin.l + barW * 0.45, h - margin.b - bh - 5);
     // Face
     bh = (pieceF / maxV) * plotH;
     ctx.fillStyle = 'rgba(192,57,43,0.7)'; ctx.fillRect(margin.l + barW * 1.7, h - margin.b - bh, barW * 0.6, bh);
     ctx.fillStyle = '#333'; ctx.font = 'bold 14px Arial';
     ctx.fillText('FACE', margin.l + barW * 1.85, h - margin.b + 20);
     ctx.font = '12px Arial'; ctx.fillStyle = '#c0392b';
-    ctx.fillText(pieceF + ' (' + (pieceF/total*100).toFixed(1) + '%)', margin.l + barW * 1.7, h - margin.b - bh - 8);
+    ctx.fillText(pieceF, margin.l + barW * 1.9, h - margin.b - bh - 20);
+    ctx.fillText((pieceF/total*100).toFixed(1) + '%', margin.l + barW * 1.9, h - margin.b - bh - 5);
     // Ligne 50%
     const y50 = h - margin.b - (total / 2 / maxV) * plotH;
     ctx.setLineDash([4,3]); ctx.strokeStyle = '#27ae60'; ctx.lineWidth = 1;
@@ -577,7 +579,7 @@ function drawPiece() {
     ctx.fillText('50%', w - margin.r - 25, y50 - 4);
   }
   ctx.fillStyle = '#666'; ctx.font = '11px Arial';
-  ctx.fillText('Total : ' + total + ' lancers', margin.l, margin.t - 8);
+  ctx.fillText('Total : ' + total + ' lancers', w - margin.r - 120, margin.t - 8);
   document.getElementById('resultPiece').textContent = total > 0
     ? 'Pile : ' + (pieceP/total*100).toFixed(1) + '% | Face : ' + (pieceF/total*100).toFixed(1) + '%. Plus on lance, plus on se rapproche de 50/50.'
     : 'Cliquez sur un bouton pour lancer des pièces.';
