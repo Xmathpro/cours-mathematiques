@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volumes : introduction . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Grandeurs et mesures</span><span>Chaine 5, lecon 3</span></div>
+<h1 class="cours-titre-principal">Volumes : introduction</h1>
+<p class="cours-sous-titre">Volume du pave droit et conversions</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Grandeurs</span> <span>6eme</span> <span>Lecon 3</span></div>
+
+<h2>I. Qu'est-ce qu'un volume ?</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Le <strong>volume</strong> d'un solide est la mesure de l'<strong>espace qu'il occupe</strong>. C'est "combien il peut contenir". On le mesure en unites de volume : cm cube, dm cube, m cube, ou en litres.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : remplir un pave droit avec des cubes unites</h4>
+<canvas id="canvasCubes" width="600" height="350"></canvas>
+<div class="controls">
+<label>Longueur :</label><input type="range" id="volL" min="2" max="8" value="4"><span id="volLval">4</span>
+<label>Largeur :</label><input type="range" id="volW" min="2" max="6" value="3"><span id="volWval">3</span>
+<label>Hauteur :</label><input type="range" id="volH" min="1" max="5" value="2"><span id="volHval">2</span>
+</div>
+<div class="result-text" id="resultCubes"></div>
+</div>
+
+<h2>II. Volume du pave droit</h2>
+
+<div class="propriete"><div class="encadre-titre">Formule</div>
+$$V = L \times l \times h$$
+<p>$L$ = longueur, $l$ = largeur, $h$ = hauteur.</p>
+<p>Le <strong>cube</strong> est un cas particulier : $V = c^3$ (toutes les aretes sont egales).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Calculateur de volume</h4>
+<canvas id="canvasVolCalc" width="600" height="300"></canvas>
+<div class="controls">
+<label>L :</label><input type="range" id="calcL" min="1" max="12" value="6"><span id="calcLval">6</span> cm
+<label>l :</label><input type="range" id="calcW" min="1" max="10" value="4"><span id="calcWval">4</span> cm
+<label>h :</label><input type="range" id="calcH" min="1" max="8" value="3"><span id="calcHval">3</span> cm
+</div>
+<div class="result-text" id="resultVolCalc"></div>
+</div>
+
+<h2>III. Conversions</h2>
+
+<div class="propriete"><div class="encadre-titre">Unites de volume et de contenance</div>
+<p>Chaque unite de volume est <strong>1000 fois</strong> plus grande que la suivante.</p>
+<p>$1 \text{ m}^3 = 1\,000 \text{ dm}^3 = 1\,000\,000 \text{ cm}^3$</p>
+<p>Le lien avec les litres :</p>
+<p style="text-align:center;font-size:1.1rem;font-weight:bold;color:#2a5298;margin:.75rem 0">$1 \text{ dm}^3 = 1 \text{ L}$</p>
+<p>$1 \text{ cm}^3 = 1 \text{ mL}$, $1 \text{ m}^3 = 1\,000 \text{ L}$</p>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<ol>
+<li>Calculer le volume d'un pave droit de 8 cm, 5 cm et 3 cm.</li>
+<li>Calculer le volume d'un cube de 4 cm de cote.</li>
+<li>Un aquarium mesure 60 cm de long, 30 cm de large et 40 cm de haut. Quel est son volume en cm cube ? En litres ?</li>
+<li>Convertir : a) 3,5 dm cube en cm cube. b) 2 500 cm cube en dm cube (et en litres).</li>
+<li>Une brique de jus mesure 10 cm par 6 cm par 20 cm. Combien de litres contient-elle ?</li>
+</ol>
+
+<h2>V. Corriges</h2>
+
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> $V = 8 \times 5 \times 3 = 120$ cm cube.</p>
+<p><strong>2.</strong> $V = 4^3 = 64$ cm cube.</p>
+<p><strong>3.</strong> $V = 60 \times 30 \times 40 = 72\,000$ cm cube $= 72$ dm cube $= 72$ L.</p>
+<p><strong>4.</strong> a) $3{,}5 \times 1\,000 = 3\,500$ cm cube. b) $2\,500 \div 1\,000 = 2{,}5$ dm cube $= 2{,}5$ L.</p>
+<p><strong>5.</strong> $V = 10 \times 6 \times 20 = 1\,200$ cm cube $= 1{,}2$ dm cube $= 1{,}2$ L.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="aires.html">&larr; Aires</a><a href="tableaux-diagrammes.html">Tableaux et diagrammes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+// CUBES UNITES (perspective isometrique)
+function drawCubes(){
+  const c=document.getElementById('canvasCubes');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const L=parseInt(document.getElementById('volL').value);
+  const W=parseInt(document.getElementById('volW').value);
+  const H=parseInt(document.getElementById('volH').value);
+  document.getElementById('volLval').textContent=L;document.getElementById('volWval').textContent=W;document.getElementById('volHval').textContent=H;
+  ctx.clearRect(0,0,w,h);
+  const sz=Math.min(28,180/Math.max(L,W,H));
+  const ox=w*0.35,oy=h*0.75;
+  const dx=sz*0.9,dy=sz*0.5;
+
+  function isoX(x,y,z){return ox+x*dx-y*dx*0.6;}
+  function isoY(x,y,z){return oy-z*sz-x*dy*0.5-y*dy*0.3;}
+
+  function drawCube(x,y,z,color){
+    const px=isoX(x,y,z),py=isoY(x,y,z);
+    // Top
+    ctx.fillStyle=color;ctx.beginPath();
+    ctx.moveTo(px,py-sz);ctx.lineTo(px+dx,py-sz-dy*0.5);ctx.lineTo(px+dx-dx*0.6,py-sz-dy*0.5-dy*0.3);ctx.lineTo(px-dx*0.6,py-sz-dy*0.3);ctx.closePath();ctx.fill();ctx.stroke();
+    // Front
+    ctx.fillStyle=color+'dd';ctx.beginPath();
+    ctx.moveTo(px,py-sz);ctx.lineTo(px+dx,py-sz-dy*0.5);ctx.lineTo(px+dx,py-dy*0.5);ctx.lineTo(px,py);ctx.closePath();ctx.fill();ctx.stroke();
+    // Side
+    ctx.fillStyle=color+'aa';ctx.beginPath();
+    ctx.moveTo(px,py-sz);ctx.lineTo(px-dx*0.6,py-sz-dy*0.3);ctx.lineTo(px-dx*0.6,py-dy*0.3);ctx.lineTo(px,py);ctx.closePath();ctx.fill();ctx.stroke();
+  }
+
+  ctx.strokeStyle='#fff';ctx.lineWidth=0.5;
+  // Draw from back to front
+  for(let y=W-1;y>=0;y--){
+    for(let x=0;x<L;x++){
+      for(let z=0;z<H;z++){
+        const hue=200+z*20;
+        drawCube(x,y,z,'hsl('+hue+',50%,70%)');
+      }
+    }
+  }
+
+  // Formule a droite
+  const rx=w*0.7;
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('V = L x l x h',rx,40);
+  ctx.font='13px Arial';ctx.fillStyle='#555';
+  ctx.fillText('V = '+L+' x '+W+' x '+H,rx,65);
+  ctx.fillStyle='#2a5298';ctx.font='bold 18px Arial';
+  ctx.fillText('= '+(L*W*H)+' cubes',rx,95);
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('Couche de base : '+L+' x '+W+' = '+(L*W),rx,130);
+  ctx.fillText('Nombre de couches : '+H,rx,150);
+
+  document.getElementById('resultCubes').textContent='Le pave droit contient '+L+' x '+W+' x '+H+' = '+(L*W*H)+' cubes unites. Chaque couche a '+(L*W)+' cubes, et il y a '+H+' couches.';
+}
+['volL','volW','volH'].forEach(id=>document.getElementById(id).addEventListener('input',drawCubes));
+drawCubes();
+
+// CALCULATEUR
+function drawVolCalc(){
+  const c=document.getElementById('canvasVolCalc');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const L=parseInt(document.getElementById('calcL').value);
+  const l=parseInt(document.getElementById('calcW').value);
+  const hv=parseInt(document.getElementById('calcH').value);
+  document.getElementById('calcLval').textContent=L;document.getElementById('calcWval').textContent=l;document.getElementById('calcHval').textContent=hv;
+  ctx.clearRect(0,0,w,h);
+
+  // Pave en perspective simple
+  const cx=w*0.28,cy=h*0.55;const sc=12;
+  const pw=L*sc,pl=l*sc*0.6,ph=hv*sc;
+  // Face avant
+  ctx.fillStyle='rgba(42,82,152,0.15)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+  ctx.beginPath();ctx.rect(cx,cy-ph,pw,ph);ctx.fill();ctx.stroke();
+  // Face dessus
+  ctx.fillStyle='rgba(42,82,152,0.08)';
+  ctx.beginPath();ctx.moveTo(cx,cy-ph);ctx.lineTo(cx+pl,cy-ph-pl*0.5);ctx.lineTo(cx+pw+pl,cy-ph-pl*0.5);ctx.lineTo(cx+pw,cy-ph);ctx.closePath();ctx.fill();ctx.stroke();
+  // Face cote
+  ctx.fillStyle='rgba(42,82,152,0.1)';
+  ctx.beginPath();ctx.moveTo(cx+pw,cy-ph);ctx.lineTo(cx+pw+pl,cy-ph-pl*0.5);ctx.lineTo(cx+pw+pl,cy-pl*0.5);ctx.lineTo(cx+pw,cy);ctx.closePath();ctx.fill();ctx.stroke();
+  // Labels
+  ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';
+  ctx.fillText('L = '+L+' cm',cx+pw/2,cy+18);
+  ctx.fillText('h = '+hv+' cm',cx-18,cy-ph/2);
+  ctx.fillText('l = '+l+' cm',cx+pw+pl/2+12,cy-pl*0.25+10);
+
+  // Etapes a droite
+  const rx=w*0.55;const vol=L*l*hv;
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('Pave droit',rx,40);
+  ctx.font='13px Arial';ctx.fillStyle='#555';
+  ctx.fillText('V = L x l x h',rx,70);
+  ctx.fillText('V = '+L+' x '+l+' x '+hv,rx,95);
+  ctx.fillStyle='#2a5298';ctx.font='bold 18px Arial';
+  ctx.fillText('V = '+vol+' cm cube',rx,125);
+
+  // Conversion
+  ctx.fillStyle='#888';ctx.font='12px Arial';
+  if(vol>=1000){
+    ctx.fillText('= '+(vol/1000).toFixed(1)+' dm cube',rx,155);
+    ctx.fillText('= '+(vol/1000).toFixed(1)+' L',rx,175);
+  } else {
+    ctx.fillText('= '+(vol/1000).toFixed(3)+' dm cube',rx,155);
+    ctx.fillText('= '+vol+' mL',rx,175);
+  }
+
+  document.getElementById('resultVolCalc').textContent='V = '+L+' x '+l+' x '+hv+' = '+vol+' cm cube'+(vol>=1000?' = '+(vol/1000).toFixed(1)+' L':'')+ '.';
+}
+['calcL','calcW','calcH'].forEach(id=>document.getElementById(id).addEventListener('input',drawVolCalc));
+drawVolCalc();
+</script>
+</body>
+</html>

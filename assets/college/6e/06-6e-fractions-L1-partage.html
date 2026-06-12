@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La fraction comme partage . 6ème</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type="range"]{width:100px;cursor:pointer}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}
+.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6ème</span><span>Nombres et calculs</span><span>Fractions : chaîne 2, leçon 1</span></div>
+<h1 class="cours-titre-principal">La fraction comme partage</h1>
+<p class="cours-sous-titre">Comprendre ce que signifie une fraction, le numérateur et le dénominateur</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="lecon-path">
+<span>Fractions</span> <span>6ème</span> <span>Leçon 1 / 3</span>
+</div>
+
+<h2>I. Qu'est-ce qu'une fraction ?</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une <strong>fraction</strong> $\dfrac{a}{b}$ signifie :</p>
+<p style="text-align:center; font-size:1.1rem; margin:1rem 0;">
+"On coupe en <strong>$b$ parts égales</strong>, on en prend <strong>$a$</strong>."
+</p>
+<ul>
+<li>$a$ s'appelle le <strong>numérateur</strong> (en haut) : combien on prend.</li>
+<li>$b$ s'appelle le <strong>dénominateur</strong> (en bas) : en combien on coupe.</li>
+</ul>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : couper et prendre des parts</h4>
+<canvas id="canvasPizza" width="600" height="350"></canvas>
+<div class="controls">
+<label>Dénominateur (on coupe en) :</label>
+<input type="range" id="denomSlider" min="2" max="12" value="4">
+<span id="denomVal">4</span>
+<label>Numérateur (on prend) :</label>
+<input type="range" id="numerSlider" min="0" max="12" value="3">
+<span id="numerVal">3</span>
+</div>
+<div class="result-text" id="resultPizza"></div>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Comment lire une fraction ?</div>
+<ul>
+<li>$\dfrac{1}{2}$ se lit "un demi" (la moitié)</li>
+<li>$\dfrac{1}{3}$ se lit "un tiers"</li>
+<li>$\dfrac{1}{4}$ se lit "un quart"</li>
+<li>$\dfrac{3}{5}$ se lit "trois cinquièmes"</li>
+<li>$\dfrac{7}{10}$ se lit "sept dixièmes"</li>
+</ul>
+<p>Règle : à partir de 5, on ajoute "-ième" au dénominateur.</p>
+</div>
+
+<h2>II. Cas particuliers</h2>
+
+<div class="interactive-box">
+<h4>Visualiser : les cas particuliers</h4>
+<canvas id="canvasCas" width="600" height="280"></canvas>
+<div class="result-text" id="resultCas"></div>
+</div>
+
+<h2>III. Fraction d'une quantité</h2>
+
+<div class="definition"><div class="encadre-titre">Calculer une fraction d'un nombre</div>
+<p>Pour calculer $\dfrac{a}{b}$ d'un nombre $N$ :</p>
+<ol>
+<li>On <strong>divise</strong> $N$ par $b$ (on trouve la taille d'une part).</li>
+<li>On <strong>multiplie</strong> par $a$ (on prend $a$ parts).</li>
+</ol>
+$$\frac{a}{b} \times N = \frac{N \div b \times a}{} = \frac{N \times a}{b}$$
+</div>
+
+<div class="interactive-box">
+<h4>Calculer une fraction d'un nombre</h4>
+<canvas id="canvasCalcFrac" width="600" height="300"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<input type="range" id="totalSlider" min="6" max="40" value="20">
+<span id="totalVal">20</span>
+<label>Fraction :</label>
+<input type="range" id="fNum" min="1" max="5" value="3">
+<span id="fNumVal">3</span>
+<label>/</label>
+<input type="range" id="fDen" min="2" max="10" value="4">
+<span id="fDenVal">4</span>
+</div>
+<div class="result-text" id="resultCalcFrac"></div>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$\dfrac{1}{4}$ de 20 : on divise 20 par 4 = 5. On prend 1 part = <strong>5</strong>.</p>
+<p>$\dfrac{3}{5}$ de 30 : on divise 30 par 5 = 6. On prend 3 parts = $6 \times 3$ = <strong>18</strong>.</p>
+<p>$\dfrac{2}{3}$ de 90 minutes : on divise 90 par 3 = 30. On prend 2 parts = $30 \times 2$ = <strong>60 minutes</strong>.</p>
+</div>
+
+<h2>IV. Fraction supérieure à 1</h2>
+
+<div class="definition"><div class="encadre-titre">Quand le numérateur dépasse le dénominateur</div>
+<p>Si $a > b$, la fraction $\dfrac{a}{b}$ est <strong>supérieure à 1</strong>. On prend plus de parts qu'il n'y en a dans un tout. On a besoin de <strong>plusieurs "gâteaux"</strong>.</p>
+<p>Exemple : $\dfrac{7}{4}$ = 1 gâteau entier ($\dfrac{4}{4}$) + $\dfrac{3}{4}$ d'un deuxième = $1\dfrac{3}{4}$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : fractions supérieures à 1</h4>
+<canvas id="canvasImpropre" width="600" height="250"></canvas>
+<div class="controls">
+<label>Numérateur :</label>
+<input type="range" id="impNum" min="1" max="15" value="7">
+<span id="impNumVal">7</span>
+<label>Dénominateur :</label>
+<input type="range" id="impDen" min="2" max="6" value="4">
+<span id="impDenVal">4</span>
+</div>
+<div class="result-text" id="resultImpropre"></div>
+</div>
+
+<h2>V. Exercices</h2>
+
+<ol>
+<li>Quelle fraction représente 5 parts coloriées sur un total de 8 parts ?</li>
+<li>Calculer $\dfrac{1}{4}$ de 28.</li>
+<li>Calculer $\dfrac{3}{5}$ de 45.</li>
+<li>Lors d'un match de 90 minutes, une équipe a le ballon pendant $\dfrac{2}{3}$ du temps. Combien de minutes ?</li>
+<li>Écrire $\dfrac{11}{4}$ sous la forme $a\dfrac{b}{c}$ (partie entière + fraction).</li>
+</ol>
+
+<h2>VI. Corrigés</h2>
+
+<div class="exemple"><div class="encadre-titre">Corrigés</div>
+<p><strong>1.</strong> $\dfrac{5}{8}$.</p>
+<p><strong>2.</strong> $28 \div 4 = 7$. $\dfrac{1}{4}$ de 28 = <strong>7</strong>.</p>
+<p><strong>3.</strong> $45 \div 5 = 9$. $9 \times 3 = 27$. $\dfrac{3}{5}$ de 45 = <strong>27</strong>.</p>
+<p><strong>4.</strong> $90 \div 3 = 30$. $30 \times 2 = 60$. L'équipe a le ballon <strong>60 minutes</strong>.</p>
+<p><strong>5.</strong> $11 \div 4 = 2$ reste $3$. Donc $\dfrac{11}{4} = 2\dfrac{3}{4}$.</p>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="../progression-chaines.html">&larr; Progression</a>
+<a href="fractions-droite-graduee.html">Placer une fraction sur une droite &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+const colors=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085','#d35400','#f39c12','#1abc9c','#e74c3c','#3498db','#9b59b6'];
+
+// ====== PIZZA ======
+function drawPizza(){
+  const c=document.getElementById('canvasPizza');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const den=parseInt(document.getElementById('denomSlider').value);
+  let num=parseInt(document.getElementById('numerSlider').value);
+  document.getElementById('denomVal').textContent=den;
+  // Clamp numerator
+  document.getElementById('numerSlider').max=den*2;
+  if(num>den*2)num=den*2;
+  document.getElementById('numerVal').textContent=num;
+  ctx.clearRect(0,0,w,h);
+
+  const nbPizzas=Math.ceil(num/den)||1;
+  const pizzaR=Math.min(100, (w-40)/(nbPizzas*2.5));
+  let taken=0;
+
+  for(let p=0;p<nbPizzas;p++){
+    const cx=pizzaR*1.3+p*(pizzaR*2.5);
+    const cy=h*0.45;
+    const partsThisPizza=Math.min(den, num-taken);
+
+    // Cercle de base
+    ctx.strokeStyle='#ddd';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(cx,cy,pizzaR,0,Math.PI*2);ctx.stroke();
+
+    // Parts
+    for(let i=0;i<den;i++){
+      const startAngle=-Math.PI/2+i*(2*Math.PI/den);
+      const endAngle=-Math.PI/2+(i+1)*(2*Math.PI/den);
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,pizzaR,startAngle,endAngle);ctx.closePath();
+
+      if(i<partsThisPizza){
+        ctx.fillStyle=colors[i%colors.length]+'cc';ctx.fill();
+      } else {
+        ctx.fillStyle='#f5f5f5';ctx.fill();
+      }
+      ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+    }
+    taken+=partsThisPizza;
+
+    // Label
+    ctx.fillStyle='#444';ctx.font='bold 11px Arial';ctx.textAlign='center';
+    if(nbPizzas>1)ctx.fillText((p===nbPizzas-1&&num%den!==0)?partsThisPizza+'/'+den:'complet',cx,cy+pizzaR+20);
+  }
+
+  // Fraction display
+  ctx.fillStyle='#2a5298';ctx.font='bold 36px Arial';ctx.textAlign='center';
+  ctx.fillText(num,w-80,h*0.35);
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(w-110,h*0.42);ctx.lineTo(w-50,h*0.42);ctx.stroke();
+  ctx.fillText(den,w-80,h*0.58);
+
+  // Labels
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('← numérateur',w-80,h*0.25);
+  ctx.fillText('← dénominateur',w-80,h*0.68);
+
+  const decimal=(num/den).toFixed(2);
+  const sup=num>den?' (plus que 1 entier !)':'';
+  document.getElementById('resultPizza').textContent=num+'/'+den+' = on coupe en '+den+' parts, on en prend '+num+'. Valeur décimale : '+decimal+sup;
+}
+['denomSlider','numerSlider'].forEach(id=>document.getElementById(id).addEventListener('input',drawPizza));
+drawPizza();
+
+// ====== CAS PARTICULIERS ======
+(function(){
+  const c=document.getElementById('canvasCas');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+
+  const cases=[
+    {frac:'a/1 = a', desc:'Pas de découpe. On prend tout.', num:3, den:1, example:'3/1 = 3'},
+    {frac:'a/a = 1', desc:'On prend toutes les parts.', num:4, den:4, example:'4/4 = 1'},
+    {frac:'0/a = 0', desc:'On ne prend rien.', num:0, den:4, example:'0/4 = 0'},
+    {frac:'a/0 = ✗', desc:'INTERDIT ! On ne divise jamais par 0.', num:-1, den:0, example:'impossible'}
+  ];
+
+  const boxW=130,boxH=220,gap=15;const startX=(w-cases.length*(boxW+gap))/2;
+
+  cases.forEach((cas,idx)=>{
+    const x=startX+idx*(boxW+gap);
+    // Box
+    ctx.fillStyle=idx===3?'#fce4e4':'#f8f9fa';
+    ctx.strokeStyle=idx===3?'#c0392b':'#ddd';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x,10,boxW,boxH,8);ctx.fill();ctx.stroke();
+
+    // Mini circle
+    const cr=30,ccx=x+boxW/2,ccy=70;
+    if(idx<3){
+      ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(ccx,ccy,cr,0,Math.PI*2);ctx.stroke();
+      const den=cas.den||1;const num=cas.num;
+      for(let i=0;i<Math.max(den,1);i++){
+        const sa=-Math.PI/2+i*(2*Math.PI/Math.max(den,1));
+        const ea=-Math.PI/2+(i+1)*(2*Math.PI/Math.max(den,1));
+        ctx.beginPath();ctx.moveTo(ccx,ccy);ctx.arc(ccx,ccy,cr,sa,ea);ctx.closePath();
+        ctx.fillStyle=i<num?colors[i%colors.length]+'aa':'#f0f0f0';ctx.fill();
+        ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke();
+      }
+    } else {
+      ctx.fillStyle='#c0392b';ctx.font='bold 30px Arial';ctx.textAlign='center';ctx.fillText('✗',ccx,ccy+10);
+    }
+
+    // Text
+    ctx.fillStyle=idx===3?'#c0392b':'#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='center';
+    ctx.fillText(cas.frac,x+boxW/2,130);
+    ctx.fillStyle='#555';ctx.font='11px Arial';
+    const words=cas.desc.split(' ');let line='',ly=155;
+    words.forEach(wd=>{const test=line+wd+' ';if(ctx.measureText(test).width>boxW-16){ctx.fillText(line,x+boxW/2,ly);line=wd+' ';ly+=14;}else line=test;});
+    ctx.fillText(line,x+boxW/2,ly);
+
+    ctx.fillStyle='#888';ctx.font='10px Arial';
+    ctx.fillText(cas.example,x+boxW/2,boxH-5);
+  });
+  ctx.textAlign='left';
+})();
+
+// ====== CALC FRACTION D'UN NOMBRE ======
+function drawCalcFrac(){
+  const c=document.getElementById('canvasCalcFrac');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const total=parseInt(document.getElementById('totalSlider').value);
+  const fn=parseInt(document.getElementById('fNum').value);
+  const fd=parseInt(document.getElementById('fDen').value);
+  document.getElementById('totalVal').textContent=total;
+  document.getElementById('fNumVal').textContent=fn;
+  document.getElementById('fDenVal').textContent=fd;
+  ctx.clearRect(0,0,w,h);
+
+  const partSize=total/fd;
+  const result=partSize*fn;
+
+  // Draw total as dots
+  const dotR=6;const cols=Math.min(10,total);const rows=Math.ceil(total/cols);
+  const startX=30,startY=30;const gap=Math.min(20,(w*0.35)/cols);
+
+  let count=0;
+  for(let r=0;r<rows;r++){
+    for(let cc=0;cc<cols&&count<total;cc++){
+      const x=startX+cc*gap;const y=startY+r*gap;
+      const groupIdx=Math.floor(count/partSize);
+      const taken=groupIdx<fn;
+      ctx.fillStyle=taken?colors[groupIdx%colors.length]:'#ddd';
+      ctx.beginPath();ctx.arc(x,y,dotR-1,0,Math.PI*2);ctx.fill();
+      count++;
+    }
+  }
+
+  // Étapes à droite (décalé pour ne pas chevaucher)
+  const rx=Math.max(cols*gap+60, w*0.45);
+  ctx.fillStyle='#444';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText(fn+'/'+fd+' de '+total+' = ?',rx,45);
+
+  ctx.fillStyle='#555';ctx.font='12px Arial';
+  ctx.fillText('Étape 1 : '+total+' ÷ '+fd+' = '+partSize.toFixed(1),rx,80);
+  ctx.fillText('(taille d\'une part)',rx,97);
+
+  ctx.fillText('Étape 2 : '+partSize.toFixed(1)+' × '+fn+' = '+result.toFixed(1),rx,130);
+  ctx.fillText('(on prend '+fn+' parts)',rx,147);
+
+  ctx.fillStyle='#2a5298';ctx.font='bold 20px Arial';
+  ctx.fillText('= '+result.toFixed(result%1===0?0:1),rx,185);
+
+  // Légende
+  ctx.fillStyle='#888';ctx.font='10px Arial';
+  ctx.fillText('● coloré = pris    ● gris = pas pris',startX,h-10);
+
+  document.getElementById('resultCalcFrac').textContent=fn+'/'+fd+' de '+total+' = '+(result%1===0?result:result.toFixed(1))+'. On divise '+total+' en '+fd+' groupes de '+partSize.toFixed(1)+', on en prend '+fn+'.';
+}
+['totalSlider','fNum','fDen'].forEach(id=>document.getElementById(id).addEventListener('input',drawCalcFrac));
+drawCalcFrac();
+
+// ====== FRACTIONS IMPROPRES ======
+function drawImpropre(){
+  const c=document.getElementById('canvasImpropre');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const num=parseInt(document.getElementById('impNum').value);
+  const den=parseInt(document.getElementById('impDen').value);
+  document.getElementById('impNumVal').textContent=num;
+  document.getElementById('impDenVal').textContent=den;
+  ctx.clearRect(0,0,w,h);
+
+  const nbWholes=Math.floor(num/den);
+  const remainder=num%den;
+  const nbCircles=nbWholes+(remainder>0?1:0);
+  const r=Math.min(55,(w-40)/(nbCircles*2.3));
+
+  let taken=0;
+  for(let p=0;p<nbCircles;p++){
+    const cx=r*1.2+p*(r*2.3);const cy=h*0.4;
+    const partsHere=Math.min(den,num-taken);
+
+    for(let i=0;i<den;i++){
+      const sa=-Math.PI/2+i*(2*Math.PI/den);
+      const ea=-Math.PI/2+(i+1)*(2*Math.PI/den);
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();
+      ctx.fillStyle=i<partsHere?colors[p%6]+'cc':'#f0f0f0';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+    }
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+
+    // Label dessous
+    ctx.fillStyle='#444';ctx.font='10px Arial';ctx.textAlign='center';
+    if(partsHere===den)ctx.fillText('entier',cx,cy+r+16);
+    else ctx.fillText(partsHere+'/'+den,cx,cy+r+16);
+    taken+=partsHere;
+  }
+
+  // Résultat
+  ctx.fillStyle='#2a5298';ctx.font='bold 18px Arial';ctx.textAlign='left';
+  const xr=w-160;
+  ctx.fillText(num+'/'+den,xr,50);
+  ctx.fillStyle='#444';ctx.font='14px Arial';
+  if(num>=den){
+    ctx.fillText('= '+nbWholes+(remainder>0?' + '+remainder+'/'+den:''),xr,80);
+    ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';
+    ctx.fillText('= '+nbWholes+(remainder>0?' '+remainder+'/'+den:''),xr,110);
+  } else {
+    ctx.fillText('< 1 (moins qu\'un entier)',xr,80);
+  }
+
+  document.getElementById('resultImpropre').textContent=num+'/'+den+(num>den?' = '+nbWholes+' entier(s) et '+remainder+'/'+den+' restant. C\'est une fraction supérieure à 1.':num===den?' = 1 exactement (toutes les parts).':' = moins de 1 (fraction propre).');
+}
+['impNum','impDen'].forEach(id=>document.getElementById(id).addEventListener('input',drawImpropre));
+drawImpropre();
+</script>
+</body>
+</html>

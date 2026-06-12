@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nombres decimaux . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Nombres et calculs</span><span>Chaine 1, lecon 2</span></div>
+<h1 class="cours-titre-principal">Nombres decimaux</h1>
+<p class="cours-sous-titre">Ecriture decimale, fractions decimales, placer et comparer</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Nombres</span> <span>6eme</span> <span>Lecon 2</span></div>
+
+<h2>I. Partie entiere et partie decimale</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>nombre decimal</strong> a une partie entiere (a gauche de la virgule) et une partie decimale (a droite). Apres la virgule : dixiemes, centiemes, milliemes.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : decomposer un nombre decimal</h4>
+<canvas id="canvasDec" width="600" height="250"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<input type="range" id="decSlider" min="100" max="99999" value="35274" step="1">
+<span id="decVal">35,274</span>
+</div>
+<div class="result-text" id="resultDec"></div>
+</div>
+
+<h2>II. Comparer des decimaux</h2>
+
+<div class="definition"><div class="encadre-titre">Attention au piege</div>
+<p>$3{,}9 > 3{,}12$ meme si $12 > 9$. On compare d'abord les parties entieres, puis les dixiemes, puis les centiemes. Astuce : ajouter des zeros a droite pour avoir le meme nombre de decimales.</p>
+<p>$3{,}9 = 3{,}90$ et $3{,}90 > 3{,}12$ car $90 > 12$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Comparer deux decimaux (attention au piege !)</h4>
+<canvas id="canvasCompDec" width="600" height="250"></canvas>
+<div class="controls">
+<label>A :</label><input type="range" id="decA" min="10" max="999" value="390"><span id="decAval">3,90</span>
+<label>B :</label><input type="range" id="decB" min="10" max="999" value="312"><span id="decBval">3,12</span>
+</div>
+<div class="result-text" id="resultCompDec"></div>
+</div>
+
+<h2>III. Placer sur une droite graduee</h2>
+
+<div class="interactive-box">
+<h4>Placer un nombre decimal sur la droite</h4>
+<canvas id="canvasPlaceDec" width="600" height="200"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<input type="range" id="placeDec" min="0" max="100" value="27"><span id="placeDecVal">2,7</span>
+</div>
+<div class="result-text" id="resultPlaceDec"></div>
+</div>
+
+<h2>IV. Exercices</h2>
+<ol>
+<li>Dans 48,306 : quel est le chiffre des centiemes ? Des dixiemes ?</li>
+<li>Ecrire sous forme de fraction decimale : 3,7 et 0,25 et 12,008.</li>
+<li>Comparer : a) 4,5 ... 4,38 ; b) 7,08 ... 7,1 ; c) 0,123 ... 0,13</li>
+<li>Ranger dans l'ordre croissant : 3,14 ; 3,2 ; 3,09 ; 3,141.</li>
+</ol>
+
+<h2>V. Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> Centiemes : 0. Dixiemes : 3.</p>
+<p><strong>2.</strong> $3{,}7 = \dfrac{37}{10}$. $0{,}25 = \dfrac{25}{100}$. $12{,}008 = \dfrac{12008}{1000}$.</p>
+<p><strong>3.</strong> a) $4{,}50 > 4{,}38$. b) $7{,}08 < 7{,}10$. c) $0{,}123 < 0{,}130$.</p>
+<p><strong>4.</strong> $3{,}09 < 3{,}14 < 3{,}141 < 3{,}2$.</p>
+</div>
+</main>
+<nav class="cours-nav"><a href="6e-nombres-L1-entiers.html">&larr; Nombres entiers</a><a href="6e-nombres-L3-addition-soustraction.html">Addition et soustraction &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+// DECOMPOSITION
+function drawDec(){
+  const c=document.getElementById('canvasDec');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const raw=parseInt(document.getElementById('decSlider').value);
+  const n=raw/1000;document.getElementById('decVal').textContent=n.toFixed(3);
+  ctx.clearRect(0,0,w,h);
+  const parts=[{name:'Dizaines',val:Math.floor(n/10)%10,color:'#2a5298'},{name:'Unites',val:Math.floor(n)%10,color:'#27ae60'},{name:'VIRGULE',val:',',color:'#c0392b'},{name:'Dixiemes',val:Math.floor(n*10)%10,color:'#8e44ad'},{name:'Centiemes',val:Math.floor(n*100)%10,color:'#e67e22'},{name:'Milliemes',val:Math.floor(n*1000)%10,color:'#16a085'}];
+  const cellW=75,startX=(w-parts.length*cellW)/2;
+  parts.forEach((p,i)=>{
+    const x=startX+i*cellW;
+    ctx.fillStyle=p.color+'22';ctx.strokeStyle=p.color;ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x+2,50,cellW-4,60,5);ctx.fill();ctx.stroke();
+    ctx.fillStyle=p.val===','?'#c0392b':'#333';ctx.font='bold '+(p.val===','?'30':'24')+'px Arial';ctx.textAlign='center';
+    ctx.fillText(p.val,x+cellW/2,90);
+    ctx.fillStyle=p.color;ctx.font='bold 9px Arial';ctx.fillText(p.name,x+cellW/2,42);
+  });
+  ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='center';
+  ctx.fillText('Partie entiere',startX+cellW,135);ctx.fillText('Partie decimale',startX+4.5*cellW,135);
+  ctx.textAlign='left';
+  document.getElementById('resultDec').textContent=n.toFixed(3)+' : partie entiere = '+Math.floor(n)+', partie decimale = '+(n-Math.floor(n)).toFixed(3).substring(2)+'. Le chiffre des dixiemes est '+Math.floor(n*10)%10+'.';
+}
+document.getElementById('decSlider').addEventListener('input',drawDec);
+drawDec();
+
+// COMPARER
+function drawCompDec(){
+  const c=document.getElementById('canvasCompDec');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('decA').value)/100;
+  const b=parseInt(document.getElementById('decB').value)/100;
+  document.getElementById('decAval').textContent=a.toFixed(2);document.getElementById('decBval').textContent=b.toFixed(2);
+  ctx.clearRect(0,0,w,h);
+  // Barres proportionnelles
+  const maxV=Math.max(a,b)*1.2;const barH=40,oy=60;
+  ctx.fillStyle='#2a5298';ctx.beginPath();ctx.roundRect(80,oy,(a/maxV)*(w-160),barH,4);ctx.fill();
+  ctx.fillStyle='#27ae60';ctx.beginPath();ctx.roundRect(80,oy+barH+15,(b/maxV)*(w-160),barH,4);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('A = '+a.toFixed(2),90,oy+26);ctx.fillText('B = '+b.toFixed(2),90,oy+barH+41);
+  // Resultat
+  const sym=a>b?'>':a<b?'<':'=';const color=a>b?'#c0392b':'#2a5298';
+  ctx.fillStyle=color;ctx.font='bold 22px Arial';ctx.textAlign='center';
+  ctx.fillText(a.toFixed(2)+' '+sym+' '+b.toFixed(2),w/2,oy+barH*2+50);
+  // Explication
+  ctx.fillStyle='#555';ctx.font='12px Arial';
+  if(Math.floor(a)!==Math.floor(b))ctx.fillText('Parties entieres differentes : '+Math.floor(a)+' vs '+Math.floor(b),w/2,oy+barH*2+75);
+  else ctx.fillText('Meme partie entiere ('+Math.floor(a)+'). On compare les decimales : '+a.toFixed(2).split('.')[1]+' vs '+b.toFixed(2).split('.')[1],w/2,oy+barH*2+75);
+  ctx.textAlign='left';
+  document.getElementById('resultCompDec').textContent=a.toFixed(2)+' '+sym+' '+b.toFixed(2)+'. Astuce : aligner les virgules et comparer chiffre par chiffre.';
+}
+['decA','decB'].forEach(id=>document.getElementById(id).addEventListener('input',drawCompDec));
+drawCompDec();
+
+// DROITE
+function drawPlaceDec(){
+  const c=document.getElementById('canvasPlaceDec');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const raw=parseInt(document.getElementById('placeDec').value);
+  const n=raw/10;document.getElementById('placeDecVal').textContent=n.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  const ox=40,oy=h/2,dw=w-80;const maxV=10;
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+dw,oy);ctx.stroke();
+  for(let i=0;i<=maxV;i++){
+    const px=ox+(i/maxV)*dw;
+    ctx.strokeStyle='#333';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(px,oy-10);ctx.lineTo(px,oy+10);ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText(i,px,oy+25);
+    // Petites graduations
+    if(i<maxV)for(let j=1;j<10;j++){const ppx=ox+(i+j/10)/maxV*dw;ctx.strokeStyle='#ccc';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(ppx,oy-5);ctx.lineTo(ppx,oy+5);ctx.stroke();}
+  }
+  const px=ox+(n/maxV)*dw;
+  ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(px,oy,7,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.fillText(n.toFixed(1),px,oy-18);
+  const lower=Math.floor(n),upper=lower+1;
+  ctx.fillStyle='rgba(42,82,152,0.1)';
+  const pxL=ox+(lower/maxV)*dw,pxU=ox+(upper/maxV)*dw;
+  ctx.fillRect(pxL,oy-12,pxU-pxL,24);
+  ctx.textAlign='left';
+  document.getElementById('resultPlaceDec').textContent=n.toFixed(1)+' est entre '+lower+' et '+upper+'. On divise l\'intervalle ['+lower+', '+upper+'] en 10 et on compte '+(raw%10)+' graduations.';
+}
+document.getElementById('placeDec').addEventListener('input',drawPlaceDec);
+drawPlaceDec();
+</script>
+</body>
+</html>
