@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}pre.code{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem 1.2rem;border-radius:6px;margin:1rem 0;line-height:1.8;overflow-x:auto;white-space:pre}table.sql-result{border-collapse:collapse;font-family:'Courier New',monospace;font-size:.82rem;margin:.75rem 0;width:100%}table.sql-result th{background:#2a5298;color:#fff;padding:6px 12px;text-align:left}table.sql-result td{border:1px solid #e0e0e0;padding:5px 12px}table.sql-result tr:nth-child(even){background:#f8f9fa}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#nsi">NSI</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>NSI . Terminale</span><span>Programme 2019</span><span>2020-2021</span></div>
+<h1 class="cours-titre-principal">SQL : interroger une base de données</h1>
+<p class="cours-sous-titre">SELECT, WHERE, JOIN, agrégation et modèle relationnel</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Le modèle relationnel</h2>
+
+<div class="definition"><div class="encadre-titre">Définitions</div>
+<p>Une <strong>base de données relationnelle</strong> organise les données en <strong>tables</strong> (ou relations). Chaque table a :</p>
+<ul>
+<li>Des <strong>colonnes</strong> (ou attributs) : le nom, le type de chaque donnée.</li>
+<li>Des <strong>lignes</strong> (ou enregistrements, ou tuples) : chaque ligne est une entrée.</li>
+<li>Une <strong>clé primaire</strong> : un attribut unique qui identifie chaque ligne.</li>
+<li>Des <strong>clés étrangères</strong> : des attributs qui font référence à une autre table.</li>
+</ul>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : structure d'une base de données</h4>
+<canvas id="canvasSchema" width="600" height="320"></canvas>
+<div class="result-text" id="resultSchema">Deux tables reliées par une clé étrangère. Un élève appartient à une classe.</div>
+</div>
+
+<h3>Exemple de table : élèves</h3>
+
+<table class="sql-result">
+<tr><th>id</th><th>prenom</th><th>nom</th><th>age</th><th>classe_id</th></tr>
+<tr><td>1</td><td>Alice</td><td>Martin</td><td>16</td><td>1</td></tr>
+<tr><td>2</td><td>Bob</td><td>Dupont</td><td>17</td><td>2</td></tr>
+<tr><td>3</td><td>Clara</td><td>Leroy</td><td>16</td><td>1</td></tr>
+<tr><td>4</td><td>David</td><td>Moreau</td><td>17</td><td>3</td></tr>
+<tr><td>5</td><td>Emma</td><td>Garcia</td><td>15</td><td>2</td></tr>
+</table>
+
+<h2>II. SELECT : lire des données</h2>
+
+<pre class="code">
+-- Sélectionner toutes les colonnes
+SELECT *
+FROM eleves;
+
+-- Sélectionner certaines colonnes
+SELECT prenom, nom
+FROM eleves;
+
+-- Filtrer avec WHERE
+SELECT prenom, nom, age
+FROM eleves
+WHERE age >= 17;
+
+-- Trier les résultats
+SELECT prenom, nom, age
+FROM eleves
+ORDER BY age DESC;
+</pre>
+
+<div class="interactive-box">
+<h4>Simulateur SQL</h4>
+<div class="controls">
+<select id="sqlQuery" style="width:100%;font-family:'Courier New',monospace;font-size:.82rem;padding:6px">
+<option value="all">SELECT * FROM eleves</option>
+<option value="names">SELECT prenom, nom FROM eleves</option>
+<option value="age17">SELECT * FROM eleves WHERE age >= 17</option>
+<option value="order">SELECT * FROM eleves ORDER BY age</option>
+<option value="count">SELECT COUNT(*) FROM eleves</option>
+<option value="avg">SELECT AVG(age) FROM eleves</option>
+<option value="class1">SELECT * FROM eleves WHERE classe_id = 1</option>
+</select>
+</div>
+<div id="sqlResult" style="margin-top:.75rem"></div>
+<div class="result-text" id="resultSQL"></div>
+</div>
+
+<h2>III. Fonctions d'agrégation</h2>
+
+<pre class="code">
+-- Compter le nombre d'élèves
+SELECT COUNT(*) AS nombre
+FROM eleves;
+
+-- Calculer la moyenne d'âge
+SELECT AVG(age) AS age_moyen
+FROM eleves;
+
+-- Grouper par classe
+SELECT classe_id, COUNT(*) AS effectif
+FROM eleves
+GROUP BY classe_id;
+
+-- Filtrer les groupes avec HAVING
+SELECT classe_id, COUNT(*) AS effectif
+FROM eleves
+GROUP BY classe_id
+HAVING COUNT(*) >= 2;
+</pre>
+
+<h2>IV. JOIN : croiser des tables</h2>
+
+<div class="definition"><div class="encadre-titre">La jointure</div>
+<p>Un <strong>JOIN</strong> permet de combiner les données de deux tables en utilisant une clé commune (la clé étrangère).</p>
+</div>
+
+<pre class="code">
+-- Table classes
+-- id | nom         | professeur
+-- 1  | 1ère NSI A  | M. Vawda
+-- 2  | 1ère NSI B  | Mme Dupont
+-- 3  | Term NSI    | M. Vawda
+
+-- Afficher le prénom de l'élève ET le nom de sa classe
+SELECT eleves.prenom,
+       eleves.nom,
+       classes.nom AS classe
+FROM eleves
+JOIN classes ON eleves.classe_id = classes.id;
+
+-- Résultat :
+-- Alice  | Martin | 1ère NSI A
+-- Bob    | Dupont | 1ère NSI B
+-- Clara  | Leroy  | 1ère NSI A
+-- David  | Moreau | Term NSI
+-- Emma   | Garcia | 1ère NSI B
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : comment fonctionne un JOIN</h4>
+<canvas id="canvasJoin" width="600" height="320"></canvas>
+<div class="controls">
+<button onclick="animJoin()">▶ Animer le JOIN</button>
+<button onclick="resetJoin()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultJoin">Le JOIN relie chaque ligne de la table "eleves" à la ligne correspondante de la table "classes" via classe_id = id.</div>
+</div>
+
+<h2>V. INSERT, UPDATE, DELETE</h2>
+
+<pre class="code">
+-- Ajouter un élève
+INSERT INTO eleves (prenom, nom, age, classe_id)
+VALUES ('Fatou', 'Diallo', 16, 1);
+
+-- Modifier l'âge de Bob
+UPDATE eleves
+SET age = 18
+WHERE prenom = 'Bob';
+
+-- Supprimer un élève
+DELETE FROM eleves
+WHERE id = 4;
+</pre>
+
+<h2>VI. Exercices</h2>
+
+<h3>Exercice 1 : requêtes simples</h3>
+<p>En utilisant la table "eleves" ci-dessus :</p>
+<ol>
+<li>Écrire la requête qui affiche le prénom et l'âge de tous les élèves.</li>
+<li>Afficher les élèves de la classe 2, triés par nom.</li>
+<li>Compter le nombre d'élèves de 16 ans.</li>
+</ol>
+
+<h3>Exercice 2 : jointure</h3>
+<ol>
+<li>Écrire la requête qui affiche le prénom de l'élève et le nom de son professeur.</li>
+<li>Afficher le nombre d'élèves par professeur.</li>
+</ol>
+
+<h2>VII. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+-- 1
+SELECT prenom, age
+FROM eleves;
+
+-- 2
+SELECT *
+FROM eleves
+WHERE classe_id = 2
+ORDER BY nom;
+
+-- 3
+SELECT COUNT(*)
+FROM eleves
+WHERE age = 16;
+-- Résultat : 2
+</pre>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+-- 1
+SELECT eleves.prenom, classes.professeur
+FROM eleves
+JOIN classes ON eleves.classe_id = classes.id;
+
+-- 2
+SELECT classes.professeur, COUNT(*) AS nb_eleves
+FROM eleves
+JOIN classes ON eleves.classe_id = classes.id
+GROUP BY classes.professeur;
+
+-- Résultat :
+-- M. Vawda   | 3
+-- Mme Dupont | 2
+</pre>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="../../2019-2020/nsi/web.html">&larr; Le Web</a><a href="structures-donnees.html">Structures de données &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+// Schema
+(function(){
+  const c=document.getElementById('canvasSchema');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  function table(x,y,title,cols,color){
+    ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,200,30,{upperLeft:6,upperRight:6,lowerLeft:0,lowerRight:0});ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText(title,x+100,y+20);
+    cols.forEach((col,i)=>{
+      ctx.fillStyle=i%2===0?'#f8f9fa':'#fff';ctx.fillRect(x,y+30+i*25,200,25);
+      ctx.strokeStyle='#e0e0e0';ctx.strokeRect(x,y+30+i*25,200,25);
+      ctx.fillStyle='#333';ctx.font=col.pk?'bold 11px Courier New':'11px Courier New';ctx.textAlign='left';
+      ctx.fillText((col.pk?'🔑 ':'')+(col.fk?'🔗 ':'')+col.name,x+8,y+47+i*25);
+      ctx.fillStyle='#888';ctx.textAlign='right';ctx.fillText(col.type,x+192,y+47+i*25);
+    });
+    ctx.strokeStyle=color;ctx.lineWidth=2;ctx.strokeRect(x,y,200,30+cols.length*25);
+  }
+  table(30,30,'eleves',[{name:'id',type:'INT',pk:true},{name:'prenom',type:'TEXT'},{name:'nom',type:'TEXT'},{name:'age',type:'INT'},{name:'classe_id',type:'INT',fk:true}],'#2a5298');
+  table(370,50,'classes',[{name:'id',type:'INT',pk:true},{name:'nom',type:'TEXT'},{name:'professeur',type:'TEXT'}],'#27ae60');
+  // Arrow
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.setLineDash([6,4]);
+  ctx.beginPath();ctx.moveTo(230,178);ctx.lineTo(370,100);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('classe_id → id',310,130);
+  ctx.textAlign='left';
+})();
+
+// SQL Simulator
+const eleves=[{id:1,prenom:'Alice',nom:'Martin',age:16,classe_id:1},{id:2,prenom:'Bob',nom:'Dupont',age:17,classe_id:2},{id:3,prenom:'Clara',nom:'Leroy',age:16,classe_id:1},{id:4,prenom:'David',nom:'Moreau',age:17,classe_id:3},{id:5,prenom:'Emma',nom:'Garcia',age:15,classe_id:2}];
+function runSQL(){
+  const q=document.getElementById('sqlQuery').value;
+  let rows=[],cols=[];
+  if(q==='all'){cols=['id','prenom','nom','age','classe_id'];rows=eleves;}
+  else if(q==='names'){cols=['prenom','nom'];rows=eleves;}
+  else if(q==='age17'){cols=['id','prenom','nom','age','classe_id'];rows=eleves.filter(e=>e.age>=17);}
+  else if(q==='order'){cols=['id','prenom','nom','age','classe_id'];rows=[...eleves].sort((a,b)=>a.age-b.age);}
+  else if(q==='count'){cols=['COUNT(*)'];rows=[{['COUNT(*)']:eleves.length}];}
+  else if(q==='avg'){cols=['AVG(age)'];rows=[{['AVG(age)']:(eleves.reduce((s,e)=>s+e.age,0)/eleves.length).toFixed(1)}];}
+  else if(q==='class1'){cols=['id','prenom','nom','age','classe_id'];rows=eleves.filter(e=>e.classe_id===1);}
+  let html='<table class="sql-result"><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>';
+  rows.forEach(r=>{html+='<tr>'+cols.map(c=>'<td>'+(r[c]!==undefined?r[c]:'')+'</td>').join('')+'</tr>';});
+  html+='</table>';
+  document.getElementById('sqlResult').innerHTML=html;
+  document.getElementById('resultSQL').textContent=rows.length+' ligne(s) retournée(s).';
+}
+document.getElementById('sqlQuery').addEventListener('change',runSQL);
+runSQL();
+
+// JOIN animation
+let joinStep=0;
+function resetJoin(){joinStep=0;drawJoin();}
+function animJoin(){if(joinStep<5){joinStep++;drawJoin();setTimeout(animJoin,800);}}
+function drawJoin(){
+  const c=document.getElementById('canvasJoin');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const e=[{p:'Alice',c:1},{p:'Bob',c:2},{p:'Clara',c:1},{p:'David',c:3},{p:'Emma',c:2}];
+  const cl=[{id:1,n:'1ère NSI A'},{id:2,n:'1ère NSI B'},{id:3,n:'Term NSI'}];
+  // Left table
+  ctx.fillStyle='#2a5298';ctx.beginPath();ctx.roundRect(20,20,120,25,4);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('eleves',80,37);
+  e.forEach((el,i)=>{
+    const y=50+i*35;const active=i<joinStep;
+    ctx.fillStyle=active?'rgba(42,82,152,0.15)':'#f8f9fa';ctx.fillRect(20,y,120,30);ctx.strokeStyle='#ddd';ctx.strokeRect(20,y,120,30);
+    ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText(el.p+' (c:'+el.c+')',80,y+18);
+  });
+  // Right table
+  ctx.fillStyle='#27ae60';ctx.beginPath();ctx.roundRect(460,20,120,25,4);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('classes',520,37);
+  cl.forEach((c2,i)=>{
+    const y=50+i*50;
+    ctx.fillStyle='#f8f9fa';ctx.fillRect(460,y,120,35);ctx.strokeStyle='#ddd';ctx.strokeRect(460,y,120,35);
+    ctx.fillStyle='#333';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('id:'+c2.id+' '+c2.n,520,y+20);
+  });
+  // Arrows for matched rows
+  for(let i=0;i<Math.min(joinStep,e.length);i++){
+    const el=e[i];const clIdx=cl.findIndex(c2=>c2.id===el.c);
+    const y1=65+i*35;const y2=67+clIdx*50;
+    ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(140,y1);ctx.lineTo(460,y2);ctx.stroke();ctx.setLineDash([]);
+  }
+  // Result
+  if(joinStep>0){
+    ctx.fillStyle='#444';ctx.font='bold 11px Arial';ctx.textAlign='left';ctx.fillText('Résultat du JOIN :',200,240);
+    for(let i=0;i<Math.min(joinStep,e.length);i++){
+      const el=e[i];const c2=cl.find(c3=>c3.id===el.c);
+      ctx.fillStyle='#333';ctx.font='10px Courier New';ctx.fillText(el.p+' → '+c2.n,200,258+i*16);
+    }
+  }
+  ctx.textAlign='left';
+  document.getElementById('resultJoin').textContent=joinStep>0?joinStep+' ligne(s) jointe(s). Chaque élève est relié à sa classe via classe_id = id.':'Cliquez pour voir comment le JOIN relie les deux tables.';
+}
+drawJoin();
+</script>
+</body>
+</html>
