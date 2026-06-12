@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithmique . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type="range"]{width:110px;cursor:pointer}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.algo-box{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem;border-radius:6px;margin:1rem 0;line-height:1.7}
+.kw{color:#569cd6}.fn{color:#dcdcaa}.str{color:#ce9178}.cmt{color:#6a9955}.num{color:#b5cea8}.op{color:#c0392b}
+.step-active{background:rgba(255,255,0,0.15);border-left:3px solid #f1c40f;padding-left:6px}
+.badge-mru{display:inline-block;background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;font-size:.7rem;font-weight:bold;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-family:Arial,sans-serif}
+.flowchart-box{background:#fff;border:1px solid #ddd;border-radius:4px;padding:.5rem 1rem;font-family:'Courier New',monospace;font-size:.8rem;display:inline-block}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#nsi">NSI</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>NSI . Première</span>
+      <span>Programme 2019</span>
+      <span>Maurice . 2019-2020</span>
+    </div>
+    <h1 class="cours-titre-principal">Algorithmique</h1>
+    <p class="cours-sous-titre">Recherche, tri, complexité et algorithmes classiques <span class="badge-mru">🇲🇺 Maurice</span></p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Qu'est-ce qu'un algorithme ?</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Un <strong>algorithme</strong> est une suite finie d'instructions précises permettant de résoudre un problème en un nombre fini d'étapes.
+      Le mot vient du mathématicien persan Al-Khwarizmi (IX<sup>e</sup> siècle), dont le nom latinisé a donné "algorithme".
+    </p>
+    <p>
+      Un algorithme doit être : <strong>correct</strong> (donne le bon résultat), <strong>fini</strong> (termine toujours), <strong>précis</strong> (chaque étape est non ambiguë) et <strong>efficace</strong> (utilise peu de ressources).
+    </p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À Maurice : la recette du riz frit mauricien</div>
+    <p>
+      Une recette de cuisine est un algorithme. Voici la "version informatique" du riz frit mauricien :
+    </p>
+    <div class="algo-box">
+<span class="kw">def</span> <span class="fn">riz_frit_mauricien</span>(riz_cuit, oignons, oeufs, sauce_soja):
+    <span class="cmt"># Étape 1 : préconditions</span>
+    <span class="kw">if</span> riz_cuit == <span class="kw">False</span>:
+        <span class="kw">return</span> <span class="str">"Erreur : il faut du riz cuit d'abord"</span>
+
+    <span class="cmt"># Étape 2 : frire les oignons</span>
+    <span class="kw">for</span> oignon <span class="kw">in</span> oignons:
+        faire_frire(oignon, huile=<span class="str">"huile végétale"</span>)
+
+    <span class="cmt"># Étape 3 : ajouter les œufs</span>
+    melanger(oeufs, oignons)
+
+    <span class="cmt"># Étape 4 : ajouter le riz et assaisonner</span>
+    ajouter(riz_cuit)
+    assaisonner(sauce_soja)
+
+    <span class="kw">return</span> <span class="str">"riz frit mauricien prêt 🍳"</span>
+    </div>
+    <p>Chaque étape est précise, l'ordre est important, et le résultat est bien défini. C'est un algorithme.</p>
+  </div>
+
+  <h2>II. Complexité algorithmique</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      La <strong>complexité</strong> d'un algorithme mesure son coût en temps ou en mémoire en fonction de la taille de l'entrée $n$.
+      On utilise la notation <strong>$O(...)$</strong> (notation "grand O") pour décrire l'ordre de grandeur.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Complexités courantes (de la plus rapide à la plus lente)</div>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.5rem">
+      <thead><tr style="border-bottom:1px solid #e8e8e8">
+        <th style="text-align:left;padding:6px 8px">Notation</th>
+        <th style="text-align:left;padding:6px 8px">Nom</th>
+        <th style="text-align:left;padding:6px 8px">Exemple</th>
+        <th style="text-align:left;padding:6px 8px">n=1000</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$O(1)$</td><td>Constante</td><td>Accéder à <code>liste[i]</code></td><td>1 op.</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$O(\log n)$</td><td>Logarithmique</td><td>Recherche dichotomique</td><td>10 op.</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$O(n)$</td><td>Linéaire</td><td>Parcourir une liste</td><td>1 000 op.</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$O(n \log n)$</td><td>Quasi-linéaire</td><td>Tri fusion</td><td>10 000 op.</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$O(n^2)$</td><td>Quadratique</td><td>Tri à bulles</td><td>1 000 000 op.</td></tr>
+        <tr><td style="padding:5px 8px">$O(2^n)$</td><td>Exponentielle</td><td>Toutes les combinaisons</td><td>$10^{301}$ op. !</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Visualiser : comparaison des complexités</h4>
+    <canvas id="canvasComplexite" width="600" height="320"></canvas>
+    <div class="controls">
+      <label>n max =</label>
+      <input type="range" id="nMax" min="5" max="50" value="20">
+      <span id="nMaxVal">20</span>
+    </div>
+    <div class="result-text" id="resultComplexite"></div>
+  </div>
+
+  <h2>III. Algorithmes de recherche</h2>
+
+  <h3>1. Recherche séquentielle — $O(n)$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe</div>
+    <p>
+      On parcourt la liste du début à la fin. Dans le pire cas, on fait $n$ comparaisons (élément absent ou en dernier).
+    </p>
+  </div>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">recherche_sequentielle</span>(liste, cible):
+    <span class="cmt"># Cherche cible dans liste, retourne son indice ou -1</span>
+    <span class="kw">for</span> i <span class="kw">in</span> range(len(liste)):
+        <span class="kw">if</span> liste[i] == cible:
+            <span class="kw">return</span> i  <span class="cmt"># trouvé à l'indice i</span>
+    <span class="kw">return</span> <span class="op">-1</span>  <span class="cmt"># pas trouvé</span>
+
+<span class="cmt"># Exemple mauricien : chercher une plage dans la liste</span>
+plages = [<span class="str">"Belle Mare"</span>, <span class="str">"Flic en Flac"</span>, <span class="str">"Blue Bay"</span>,
+          <span class="str">"Le Morne"</span>, <span class="str">"Trou aux Biches"</span>]
+print(recherche_sequentielle(plages, <span class="str">"Blue Bay"</span>))  <span class="cmt"># → 2</span>
+  </div>
+
+  <div class="interactive-box">
+    <h4>🏖️ Recherche séquentielle : chercher une plage de Maurice</h4>
+    <canvas id="canvasSeq" width="600" height="200"></canvas>
+    <div class="controls">
+      <label>Chercher :</label>
+      <select id="searchTarget">
+        <option value="Blue Bay">Blue Bay</option>
+        <option value="Le Morne">Le Morne</option>
+        <option value="Trou aux Biches">Trou aux Biches</option>
+        <option value="Rodrigues">Rodrigues (absent)</option>
+        <option value="Belle Mare">Belle Mare</option>
+      </select>
+      <button onclick="stepSearch()">▶ Étape suivante</button>
+      <button onclick="resetSearch()">↺ Réinitialiser</button>
+    </div>
+    <div class="result-text" id="resultSeq"></div>
+  </div>
+
+  <h3>2. Recherche dichotomique — $O(\log n)$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe (liste triée obligatoire)</div>
+    <p>
+      On compare l'élément cherché avec l'élément du milieu. Si c'est lui, on a trouvé. Sinon on sait dans quelle moitié chercher. On divise l'espace de recherche par 2 à chaque étape.
+    </p>
+    <p>Avec 1 million d'éléments, la dichotomie trouve en au plus $\log_2(10^6) \approx 20$ comparaisons, contre 1 million pour la séquentielle !</p>
+  </div>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">dichotomie</span>(liste, cible):
+    <span class="cmt"># Liste TRIÉE obligatoire</span>
+    gauche, droite = <span class="num">0</span>, len(liste) <span class="op">-</span> <span class="num">1</span>
+    <span class="kw">while</span> gauche <span class="op">&lt;=</span> droite:
+        milieu = (gauche <span class="op">+</span> droite) <span class="op">//</span> <span class="num">2</span>
+        <span class="kw">if</span> liste[milieu] == cible:
+            <span class="kw">return</span> milieu
+        <span class="kw">elif</span> liste[milieu] <span class="op">&lt;</span> cible:
+            gauche = milieu <span class="op">+</span> <span class="num">1</span>  <span class="cmt"># chercher à droite</span>
+        <span class="kw">else</span>:
+            droite = milieu <span class="op">-</span> <span class="num">1</span>  <span class="cmt"># chercher à gauche</span>
+    <span class="kw">return</span> <span class="op">-1</span>
+
+<span class="cmt"># Chercher une année parmi les prix Nobel mauriciens fictifs</span>
+annees = [<span class="num">1968</span>, <span class="num">1972</span>, <span class="num">1985</span>, <span class="num">1991</span>, <span class="num">1999</span>,
+          <span class="num">2005</span>, <span class="num">2010</span>, <span class="num">2015</span>, <span class="num">2018</span>, <span class="num">2023</span>]
+  </div>
+
+  <div class="interactive-box">
+    <h4>🔍 Recherche dichotomique — trouver un code postal mauricien</h4>
+    <canvas id="canvasDicho" width="600" height="260"></canvas>
+    <div class="controls">
+      <label>Chercher :</label>
+      <select id="dichoTarget">
+        <option value="20101">20101 (Port Louis)</option>
+        <option value="30501">30501 (Curepipe)</option>
+        <option value="40501">40501 (Quatre Bornes)</option>
+        <option value="71401">71401 (Mahébourg)</option>
+        <option value="99999">99999 (absent)</option>
+      </select>
+      <button onclick="stepDicho()">▶ Étape suivante</button>
+      <button onclick="resetDicho()">↺ Réinitialiser</button>
+    </div>
+    <div class="result-text" id="resultDicho"></div>
+  </div>
+
+  <h2>IV. Algorithmes de tri</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Pourquoi trier ?</div>
+    <p>
+      Trier des données est l'une des opérations les plus fréquentes en informatique : trier les clients d'une banque (MCB, SBM) par solde, les produits d'une boutique par prix, les élèves par note, les courses de taxi par distance. Un bon algorithme de tri peut faire économiser des heures de calcul sur de grandes bases de données.
+    </p>
+  </div>
+
+  <h3>1. Tri par sélection — $O(n^2)$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe</div>
+    <p>À chaque étape $i$, on cherche le minimum des éléments restants et on le place à la position $i$.</p>
+  </div>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">tri_selection</span>(liste):
+    n = len(liste)
+    <span class="kw">for</span> i <span class="kw">in</span> range(n):
+        <span class="cmt"># Chercher le minimum dans liste[i:]</span>
+        idx_min = i
+        <span class="kw">for</span> j <span class="kw">in</span> range(i <span class="op">+</span> <span class="num">1</span>, n):
+            <span class="kw">if</span> liste[j] <span class="op">&lt;</span> liste[idx_min]:
+                idx_min = j
+        <span class="cmt"># Échanger liste[i] et liste[idx_min]</span>
+        liste[i], liste[idx_min] = liste[idx_min], liste[i]
+    <span class="kw">return</span> liste
+
+<span class="cmt"># Trier les prix (Rs) des fruits au marché de Port Louis</span>
+prix = [<span class="num">45</span>, <span class="num">12</span>, <span class="num">78</span>, <span class="num">23</span>, <span class="num">56</span>, <span class="num">8</span>, <span class="num">34</span>]
+print(tri_selection(prix))  <span class="cmt"># [8, 12, 23, 34, 45, 56, 78]</span>
+  </div>
+
+  <div class="interactive-box">
+    <h4>🛒 Tri par sélection — prix des légumes au marché de Port Louis (Rs)</h4>
+    <canvas id="canvasSelection" width="600" height="320"></canvas>
+    <div class="controls">
+      <button onclick="stepSelection()">▶ Étape</button>
+      <button onclick="autoSelection()">⏩ Automatique</button>
+      <button onclick="resetSelection()">↺ Mélanger</button>
+    </div>
+    <div class="result-text" id="resultSelection"></div>
+  </div>
+
+  <h3>2. Tri à bulles — $O(n^2)$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe</div>
+    <p>On parcourt la liste en comparant chaque paire d'éléments consécutifs. On échange si besoin. Les grands éléments "remontent" comme des bulles.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>📊 Tri à bulles — classement des distances des villages de Maurice au centre (km)</h4>
+    <canvas id="canvasBulles" width="600" height="320"></canvas>
+    <div class="controls">
+      <button onclick="stepBulles()">▶ Étape</button>
+      <button onclick="autoBulles()">⏩ Automatique</button>
+      <button onclick="resetBulles()">↺ Mélanger</button>
+    </div>
+    <div class="result-text" id="resultBulles"></div>
+  </div>
+
+  <h3>3. Tri par insertion — $O(n^2)$ pire cas, $O(n)$ si presque trié</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Principe</div>
+    <p>On insère chaque élément à sa bonne place dans la partie déjà triée, comme on insère une carte dans une main de jeu triée.</p>
+  </div>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">tri_insertion</span>(liste):
+    <span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, len(liste)):
+        cle = liste[i]
+        j = i <span class="op">-</span> <span class="num">1</span>
+        <span class="kw">while</span> j <span class="op">&gt;=</span> <span class="num">0</span> <span class="kw">and</span> liste[j] <span class="op">&gt;</span> cle:
+            liste[j <span class="op">+</span> <span class="num">1</span>] = liste[j]
+            j <span class="op">-=</span> <span class="num">1</span>
+        liste[j <span class="op">+</span> <span class="num">1</span>] = cle
+    <span class="kw">return</span> liste
+  </div>
+
+  <h2>V. Comparaison des tris</h2>
+
+  <div class="interactive-box">
+    <h4>⚡ Course de tris : lequel est le plus rapide ?</h4>
+    <canvas id="canvasRace" width="600" height="320"></canvas>
+    <div class="controls">
+      <label>Taille n =</label>
+      <input type="range" id="raceN" min="5" max="80" value="20">
+      <span id="raceNval">20</span>
+      <button onclick="runRace()">▶ Lancer la course</button>
+      <button onclick="resetRace()">↺ Nouveau tableau</button>
+    </div>
+    <div class="result-text" id="resultRace"></div>
+  </div>
+
+  <h2>VI. Algorithmes classiques</h2>
+
+  <h3>1. Maximum et minimum</h3>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">maximum</span>(liste):
+    <span class="cmt"># Trouver le salaire max parmi les employés (Rs)</span>
+    maxi = liste[<span class="num">0</span>]
+    <span class="kw">for</span> val <span class="kw">in</span> liste:
+        <span class="kw">if</span> val <span class="op">&gt;</span> maxi:
+            maxi = val
+    <span class="kw">return</span> maxi
+
+salaires = [<span class="num">25000</span>, <span class="num">48000</span>, <span class="num">32000</span>, <span class="num">71000</span>, <span class="num">28000</span>]
+print(maximum(salaires))  <span class="cmt"># 71000 Rs</span>
+  </div>
+
+  <h3>2. Palindrome</h3>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">est_palindrome</span>(chaine):
+    <span class="cmt"># Un palindrome se lit pareil dans les deux sens</span>
+    chaine = chaine.lower().replace(<span class="str">" "</span>, <span class="str">""</span>)
+    <span class="kw">return</span> chaine == chaine[<span class="op">::-1</span>]
+
+print(est_palindrome(<span class="str">"Laval"</span>))       <span class="cmt"># True</span>
+print(est_palindrome(<span class="str">"Mauritius"</span>))  <span class="cmt"># False</span>
+print(est_palindrome(<span class="str">"kayak"</span>))      <span class="cmt"># True</span>
+  </div>
+
+  <div class="interactive-box">
+    <h4>🔤 Algorithme du palindrome : visualisation lettre par lettre</h4>
+    <canvas id="canvasPalindrome" width="600" height="220"></canvas>
+    <div class="controls">
+      <select id="palindromeSelect">
+        <option value="kayak">kayak</option>
+        <option value="Laval">Laval</option>
+        <option value="Maurice">Maurice</option>
+        <option value="racecar">racecar</option>
+        <option value="Mahébourg">Mahébourg</option>
+        <option value="rotor">rotor</option>
+      </select>
+      <button onclick="drawPalindrome()">Analyser</button>
+    </div>
+    <div class="result-text" id="resultPalindrome"></div>
+  </div>
+
+  <h3>3. Algorithme d'Euclide (PGCD)</h3>
+
+  <div class="algo-box">
+<span class="kw">def</span> <span class="fn">pgcd</span>(a, b):
+    <span class="cmt"># Algorithme d'Euclide par divisions successives</span>
+    <span class="kw">while</span> b <span class="op">!=</span> <span class="num">0</span>:
+        a, b = b, a <span class="op">%</span> b
+    <span class="kw">return</span> a
+
+<span class="cmt"># Partager 360 roupies et 504 roupies équitablement</span>
+print(pgcd(<span class="num">360</span>, <span class="num">504</span>))  <span class="cmt"># 72 → parts de 72 Rs</span>
+  </div>
+
+  <h2>VII. Exercices</h2>
+
+  <h3>Exercice 1 : recherche <span class="badge-mru">Maurice</span></h3>
+  <p>Le tableau ci-dessous représente les populations (en milliers) des principales villes de Maurice :</p>
+  <div class="algo-box">
+villes = [("Port Louis", 148), ("Beau Bassin", 109), ("Vacoas", 100),
+          ("Curepipe", 83), ("Quatre Bornes", 80)]
+  </div>
+  <ol>
+    <li>Écrire une fonction <code>chercher_ville(villes, nom)</code> qui retourne la population ou -1.</li>
+    <li>Quelle est la complexité de cette recherche ?</li>
+    <li>Écrire une fonction <code>ville_max_pop(villes)</code> qui retourne la ville la plus peuplée.</li>
+  </ol>
+
+  <h3>Exercice 2 : tri <span class="badge-mru">Maurice</span></h3>
+  <p>Voici les températures moyennes mensuelles à Maurice (°C) dans le désordre :</p>
+  <div class="algo-box">
+temperatures = [27, 24, 22, 22, 23, 28, 30, 29, 28, 26, 24, 23]
+mois = ["Jan","Fév","Mar","Avr","Mai","Jui","Jul","Aoû","Sep","Oct","Nov","Déc"]
+  </div>
+  <ol>
+    <li>Trier les températures par ordre croissant avec le tri par sélection. Combien d'échanges au maximum ?</li>
+    <li>Quel mois est le plus frais ? Le plus chaud ?</li>
+    <li>Écrire une fonction qui trie les paires (mois, température) par température.</li>
+  </ol>
+
+  <h3>Exercice 3 : complexité</h3>
+  <ol>
+    <li>Un algorithme $O(n^2)$ prend 1 seconde pour $n=1000$. Combien de temps pour $n=10000$ ?</li>
+    <li>Un algorithme $O(\log n)$ prend 10 ms pour $n=1000$. Combien de temps pour $n=1000000$ ?</li>
+    <li>Pourquoi n'utilise-t-on pas la recherche séquentielle pour chercher un contact dans un annuaire de 50 000 noms ?</li>
+  </ol>
+
+  <h2>VIII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple"><div class="encadre-titre">Corrigé</div>
+<div class="algo-box">
+<span class="kw">def</span> <span class="fn">chercher_ville</span>(villes, nom):
+    <span class="kw">for</span> ville, pop <span class="kw">in</span> villes:
+        <span class="kw">if</span> ville == nom:
+            <span class="kw">return</span> pop
+    <span class="kw">return</span> <span class="op">-1</span>
+
+<span class="cmt"># Complexité O(n) : dans le pire cas on parcourt toute la liste</span>
+
+<span class="kw">def</span> <span class="fn">ville_max_pop</span>(villes):
+    max_ville, max_pop = villes[<span class="num">0</span>]
+    <span class="kw">for</span> ville, pop <span class="kw">in</span> villes:
+        <span class="kw">if</span> pop <span class="op">&gt;</span> max_pop:
+            max_ville, max_pop = ville, pop
+    <span class="kw">return</span> max_ville, max_pop
+
+<span class="cmt"># → ("Port Louis", 148)</span>
+</div></div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple"><div class="encadre-titre">Corrigé</div>
+<div class="algo-box">
+<span class="cmt"># Tri par sélection des températures</span>
+<span class="cmt"># n=12 éléments → au max 12×11/2 = 66 comparaisons</span>
+
+paired = list(zip(temperatures, mois))
+<span class="cmt"># Tri par sélection sur les paires</span>
+<span class="kw">def</span> <span class="fn">tri_par_temp</span>(paires):
+    n = len(paires)
+    <span class="kw">for</span> i <span class="kw">in</span> range(n):
+        idx_min = i
+        <span class="kw">for</span> j <span class="kw">in</span> range(i+<span class="num">1</span>, n):
+            <span class="kw">if</span> paires[j][<span class="num">0</span>] <span class="op">&lt;</span> paires[idx_min][<span class="num">0</span>]:
+                idx_min = j
+        paires[i], paires[idx_min] = paires[idx_min], paires[i]
+    <span class="kw">return</span> paires
+
+result = tri_par_temp(paired)
+print(result[<span class="num">0</span>])   <span class="cmt"># (22, "Mar") ou (22, "Avr") : plus frais</span>
+print(result[<span class="op">-1</span>])  <span class="cmt"># (30, "Jul") : plus chaud</span>
+</div></div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple"><div class="encadre-titre">Corrigé</div>
+  <p><strong>1.</strong> $O(n^2)$ : si $n$ est multiplié par 10, le temps est multiplié par $100$. Donc 100 secondes pour $n=10\,000$.</p>
+  <p><strong>2.</strong> $O(\log n)$ : $\log_2(10^6) \approx 20$ contre $\log_2(10^3) \approx 10$. Le temps double (environ 20 ms).</p>
+  <p><strong>3.</strong> Avec 50 000 noms, la recherche séquentielle fait en moyenne 25 000 comparaisons. La dichotomie en fait au plus $\log_2(50000) \approx 16$. Sur un annuaire trié par ordre alphabétique, tout le monde fait naturellement de la dichotomie (on ouvre au milieu, puis on va à gauche ou à droite).</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="python-bases.html">&larr; Python : bases</a>
+  <a href="web.html">Le Web : HTML, CSS &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2026
+</footer>
+
+<script>
+// ===================== COMPLEXITE =====================
+function drawComplexite(){
+  const c=document.getElementById('canvasComplexite');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const N=parseInt(document.getElementById('nMax').value);
+  document.getElementById('nMaxVal').textContent=N;
+  ctx.clearRect(0,0,w,h);
+  const m={l:60,r:120,t:20,b:40};const pw=w-m.l-m.r,ph=h-m.t-m.b;
+  const funcs=[
+    {f:n=>1,c:'#27ae60',n:'O(1)'},
+    {f:n=>Math.log2(n),c:'#2a5298',n:'O(log n)'},
+    {f:n=>n,c:'#f39c12',n:'O(n)'},
+    {f:n=>n*Math.log2(n),c:'#8e44ad',n:'O(n log n)'},
+    {f:n=>n*n,c:'#e67e22',n:'O(n²)'},
+  ];
+  const maxY=N*N*1.1;
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(m.l,m.t);ctx.lineTo(m.l,h-m.b);ctx.lineTo(w-m.r,h-m.b);ctx.stroke();
+  ctx.fillStyle='#999';ctx.font='10px Arial';
+  for(let n=0;n<=N;n+=Math.max(1,Math.floor(N/5))){
+    const px=m.l+(n/N)*pw;ctx.fillText(n,px-5,h-m.b+14);
+  }
+  funcs.forEach(ff=>{
+    ctx.strokeStyle=ff.c;ctx.lineWidth=2;ctx.beginPath();let s=false;
+    for(let n=1;n<=N;n++){
+      const y=ff.f(n);const px=m.l+(n/N)*pw;const py=h-m.b-(Math.min(y,maxY)/maxY)*ph;
+      if(!s){ctx.moveTo(px,py);s=true;}else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+    // Légende à droite
+    const yLast=ff.f(N);const pyLast=h-m.b-(Math.min(yLast,maxY)/maxY)*ph;
+    ctx.fillStyle=ff.c;ctx.font='bold 11px Arial';ctx.textAlign='left';
+    ctx.fillText(ff.n,w-m.r+5,Math.max(m.t+10,Math.min(h-m.b,pyLast+4)));
+  });
+  ctx.textAlign='left';ctx.fillStyle='#555';ctx.font='11px Arial';
+  ctx.fillText('Nombre d\'opérations en fonction de n',m.l,h-m.b+30);
+  document.getElementById('resultComplexite').textContent='Pour n='+N+' : O(1)=1 op, O(log n)='+Math.floor(Math.log2(N))+' op, O(n)='+N+' op, O(n²)='+(N*N)+' op.';
+}
+document.getElementById('nMax').addEventListener('input',drawComplexite);
+drawComplexite();
+
+// ===================== RECHERCHE SÉQUENTIELLE =====================
+const plagesData=['Belle Mare','Flic en Flac','Blue Bay','Le Morne','Trou aux Biches'];
+const plagesColors=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22'];
+let searchStep=0,searchTarget='Blue Bay';
+
+function resetSearch(){searchStep=0;searchTarget=document.getElementById('searchTarget').value;drawSearch();}
+document.getElementById('searchTarget').addEventListener('change',resetSearch);
+
+function stepSearch(){
+  searchTarget=document.getElementById('searchTarget').value;
+  if(searchStep<plagesData.length)searchStep++;
+  drawSearch();
+}
+
+function drawSearch(){
+  const c=document.getElementById('canvasSeq');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const n=plagesData.length;const boxW=(w-40)/n;const y=60;
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';
+  ctx.fillText('Chercher : "'+searchTarget+'"',20,25);
+  plagesData.forEach((p,i)=>{
+    const x=20+i*boxW;let bg='#f8f9fa',border='#ddd',textCol='#333';
+    if(i<searchStep){
+      if(p===searchTarget){bg='rgba(39,174,96,0.2)';border='#27ae60';textCol='#27ae60';}
+      else{bg='rgba(192,57,43,0.1)';border='#c0392b';textCol='#c0392b';}
+    }
+    if(i===searchStep&&i<plagesData.length){bg='rgba(241,196,15,0.2)';border='#f1c40f';}
+    ctx.fillStyle=bg;ctx.strokeStyle=border;ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x+2,y,boxW-4,60,4);ctx.fill();ctx.stroke();
+    ctx.fillStyle=textCol;ctx.font='bold 10px Arial';ctx.textAlign='center';
+    ctx.fillText('['+i+']',x+boxW/2,y+18);
+    ctx.font='9px Arial';
+    const words=p.split(' ');words.forEach((w2,wi)=>ctx.fillText(w2,x+boxW/2,y+32+wi*13));
+    // Icône
+    if(i<searchStep){ctx.fillText(p===searchTarget?'✓':'✗',x+boxW/2,y+56);}
+    if(i===searchStep&&i<plagesData.length){ctx.fillText('👁',x+boxW/2,y+56);}
+  });
+  ctx.textAlign='left';
+  const foundIdx=plagesData.indexOf(searchTarget);
+  if(searchStep>foundIdx&&foundIdx>=0&&searchStep<=foundIdx+1){
+    document.getElementById('resultSeq').innerHTML='<span style="color:#27ae60;font-weight:bold">✓ Trouvé à l\'indice '+foundIdx+'</span> après '+(foundIdx+1)+' comparaison(s).';
+  } else if(searchStep>=plagesData.length&&foundIdx<0){
+    document.getElementById('resultSeq').innerHTML='<span style="color:#c0392b;font-weight:bold">✗ Non trouvé</span> après '+plagesData.length+' comparaisons. O(n) pire cas.';
+  } else {
+    document.getElementById('resultSeq').textContent='Étape '+searchStep+'/'+plagesData.length+'. Comparaisons effectuées : '+searchStep+'.';
+  }
+}
+drawSearch();
+
+// ===================== DICHOTOMIE =====================
+const postalCodes=[10101,20101,30501,40501,50201,60201,71401,80101,90201];
+const postalNames=['Beau Bassin','Port Louis','Curepipe','Quatre Bornes','Floréal','Rose Hill','Mahébourg','Rivière du Rempart','Souillac'];
+let dichoState={gauche:0,droite:postalCodes.length-1,step:0,found:-1,target:20101,done:false};
+
+function resetDicho(){
+  const t=parseInt(document.getElementById('dichoTarget').value.split(' ')[0]);
+  dichoState={gauche:0,droite:postalCodes.length-1,step:0,found:-1,target:t,done:false};
+  drawDicho();
+}
+document.getElementById('dichoTarget').addEventListener('change',resetDicho);
+
+function stepDicho(){
+  if(dichoState.done)return;
+  const {gauche,droite,target}=dichoState;
+  if(gauche>droite){dichoState.done=true;dichoState.found=-1;drawDicho();return;}
+  const milieu=Math.floor((gauche+droite)/2);
+  dichoState.step++;
+  if(postalCodes[milieu]===target){dichoState.found=milieu;dichoState.done=true;}
+  else if(postalCodes[milieu]<target)dichoState.gauche=milieu+1;
+  else dichoState.droite=milieu-1;
+  drawDicho();
+}
+
+function drawDicho(){
+  const c=document.getElementById('canvasDicho');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const {gauche,droite,found,target,done}=dichoState;
+  const milieu=Math.floor((gauche+droite)/2);
+  const n=postalCodes.length;const boxW=(w-40)/n;const y=40;
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';
+  ctx.fillText('Dichotomie : chercher '+target+'  |  Étape '+dichoState.step,20,22);
+  postalCodes.forEach((code,i)=>{
+    const x=20+i*boxW;let bg='#f8f9fa',border='#ddd';
+    if(i>=gauche&&i<=droite&&!done){bg='rgba(42,82,152,0.1)';border='#2a5298';}
+    if(i<gauche||i>droite){bg='rgba(200,200,200,0.3)';border='#ddd';}
+    if(!done&&i===milieu){bg='rgba(241,196,15,0.3)';border='#f1c40f';}
+    if(found===i){bg='rgba(39,174,96,0.3)';border='#27ae60';}
+    ctx.fillStyle=bg;ctx.strokeStyle=border;ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x+1,y,boxW-2,100,4);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='bold 9px Courier New';ctx.textAlign='center';
+    ctx.fillText(code,x+boxW/2,y+20);
+    ctx.fillStyle='#888';ctx.font='8px Arial';
+    ctx.fillText(postalNames[i].split(' ')[0],x+boxW/2,y+36);
+    if(!done&&i===milieu){ctx.fillStyle='#f39c12';ctx.font='bold 10px Arial';ctx.fillText('milieu',x+boxW/2,y+56);}
+    if(found===i){ctx.fillStyle='#27ae60';ctx.font='bold 12px Arial';ctx.fillText('✓',x+boxW/2,y+80);}
+  });
+  // Flèches gauche/droite
+  if(!done&&gauche<=droite){
+    ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(20+gauche*boxW+1,y+110);ctx.lineTo(20+droite*boxW+boxW-1,y+110);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#c0392b';ctx.font='10px Arial';ctx.textAlign='center';
+    ctx.fillText('↑g',20+gauche*boxW+boxW/2,y+125);ctx.fillText('↑d',20+droite*boxW+boxW/2,y+125);
+  }
+  ctx.textAlign='left';
+  if(found>=0){document.getElementById('resultDicho').innerHTML='<span style="color:#27ae60;font-weight:bold">✓ Trouvé ('+postalNames[found]+') en '+dichoState.step+' étape(s) !</span> Max théorique : '+Math.ceil(Math.log2(n))+' étapes.';}
+  else if(done){document.getElementById('resultDicho').innerHTML='<span style="color:#c0392b;font-weight:bold">✗ Non trouvé</span> en '+dichoState.step+' étape(s). Séquentielle aurait fait '+n+' comparaisons.';}
+  else{document.getElementById('resultDicho').textContent='Zone active : indices '+gauche+' à '+droite+'. Milieu : indice '+milieu+' ('+postalCodes[milieu]+'). Étape '+dichoState.step+'.';}
+}
+resetDicho();
+
+// ===================== TRI SÉLECTION =====================
+const itemsSelection=[
+  {nom:'Giromon',prix:35},{nom:'Brède',prix:12},{nom:'Pipangaille',prix:78},
+  {nom:'Songe',prix:23},{nom:'Moringa',prix:56},{nom:'Chouchou',prix:8}
+];
+let selState={data:[...itemsSelection],i:0,done:false,autoTimer:null};
+
+function resetSelection(){
+  clearInterval(selState.autoTimer);
+  selState={data:[...itemsSelection].map(x=>({...x})),i:0,done:false,autoTimer:null};
+  drawSelection();
+}
+function stepSelection(){
+  if(selState.done)return;
+  const d=selState.data;const n=d.length;const i=selState.i;
+  let idx_min=i;
+  for(let j=i+1;j<n;j++)if(d[j].prix<d[idx_min].prix)idx_min=j;
+  [d[i],d[idx_min]]=[d[idx_min],d[i]];
+  selState.i++;
+  if(selState.i>=n)selState.done=true;
+  drawSelection();
+}
+function autoSelection(){
+  if(selState.done)return;
+  clearInterval(selState.autoTimer);
+  selState.autoTimer=setInterval(()=>{stepSelection();if(selState.done)clearInterval(selState.autoTimer);},700);
+}
+function drawSelection(){
+  const c=document.getElementById('canvasSelection');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const d=selState.data;const n=d.length;
+  const m={l:40,r:20,t:30,b:60};const pw=w-m.l-m.r,ph=h-m.t-m.b;
+  const maxPrix=Math.max(...d.map(x=>x.prix))*1.1;
+  const barW=pw/n;
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';
+  ctx.fillText('Tri par sélection — Étape '+selState.i+'/'+n+(selState.done?' ✓ TRIÉ':''),20,20);
+  d.forEach((item,i)=>{
+    const x=m.l+i*barW;const bh=(item.prix/maxPrix)*ph;const y=h-m.b-bh;
+    let color=i<selState.i?'#27ae60':'#2a5298';
+    if(i===selState.i&&!selState.done)color='#c0392b';
+    ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x+3,y,barW-6,bh,3);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';
+    ctx.fillText(item.prix+' Rs',x+barW/2,y+15);
+    ctx.fillStyle='#333';ctx.font='9px Arial';
+    ctx.fillText(item.nom,x+barW/2,h-m.b+14);
+    if(i<selState.i){ctx.fillStyle='#27ae60';ctx.font='12px Arial';ctx.fillText('✓',x+barW/2,h-m.b+28);}
+  });
+  ctx.textAlign='left';
+  const sorted=selState.done;
+  document.getElementById('resultSelection').textContent=sorted?'Liste triée ! '+d.map(x=>x.nom+' ('+x.prix+' Rs)').join(' < '):'Partie triée (vert) : '+selState.i+' élément(s). Prochain à placer : position '+selState.i+'.';
+}
+drawSelection();
+
+// ===================== TRI BULLES =====================
+const distancesData=[
+  {nom:'Tamarin',km:28},{nom:'Flic en Flac',km:22},{nom:'Blue Bay',km:45},
+  {nom:'Mahébourg',km:42},{nom:'Grand Baie',km:19},{nom:'Rodrigues',km:561},
+  {nom:'Vacoas',km:8}
+];
+let bulState={data:[...distancesData],pass:0,inner:0,done:false,autoTimer:null};
+
+function resetBulles(){
+  clearInterval(bulState.autoTimer);
+  bulState={data:[...distancesData].map(x=>({...x})),pass:0,inner:0,done:false,autoTimer:null};
+  drawBulles();
+}
+function stepBulles(){
+  if(bulState.done)return;
+  const d=bulState.data;const n=d.length;
+  const j=bulState.inner;
+  if(d[j].km>d[j+1].km)[d[j],d[j+1]]=[d[j+1],d[j]];
+  bulState.inner++;
+  if(bulState.inner>=n-bulState.pass-1){bulState.pass++;bulState.inner=0;}
+  if(bulState.pass>=n-1)bulState.done=true;
+  drawBulles();
+}
+function autoBulles(){
+  if(bulState.done)return;
+  clearInterval(bulState.autoTimer);
+  bulState.autoTimer=setInterval(()=>{stepBulles();if(bulState.done)clearInterval(bulState.autoTimer);},400);
+}
+function drawBulles(){
+  const c=document.getElementById('canvasBulles');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const d=bulState.data;const n=d.length;
+  const m={l:40,r:20,t:30,b:60};const pw=w-m.l-m.r,ph=h-m.t-m.b;
+  const maxKm=Math.max(...d.map(x=>x.km))*1.1;
+  const barW=pw/n;
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';
+  ctx.fillText('Tri à bulles — Passe '+(bulState.pass+1)+(bulState.done?' ✓ TRIÉ':''),20,20);
+  d.forEach((item,i)=>{
+    const x=m.l+i*barW;const bh=(item.km/maxKm)*ph;const y=h-m.b-bh;
+    const sorted=i>=n-bulState.pass;
+    let color=sorted?'#27ae60':i===bulState.inner||i===bulState.inner+1?'#c0392b':'#2a5298';
+    if(bulState.done)color='#27ae60';
+    ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x+3,y,barW-6,bh,3);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';
+    if(bh>20)ctx.fillText(item.km+'km',x+barW/2,y+16);
+    ctx.fillStyle='#333';ctx.font='8px Arial';
+    ctx.fillText(item.nom.split(' ')[0],x+barW/2,h-m.b+14);
+  });
+  ctx.textAlign='left';
+  document.getElementById('resultBulles').textContent=bulState.done?'Trié ! '+d.map(x=>x.nom+' ('+x.km+' km)').join(' < '):'Passe '+bulState.pass+' en cours. Les éléments rouges sont comparés. Vert = déjà à leur place.';
+}
+drawBulles();
+
+// ===================== COURSE DE TRIS =====================
+let raceData=[];
+function resetRace(){
+  const n=parseInt(document.getElementById('raceN').value);
+  document.getElementById('raceNval').textContent=n;
+  raceData=Array.from({length:n},()=>Math.floor(Math.random()*100)+1);
+  drawRaceInit();
+}
+function drawRaceInit(){
+  const c=document.getElementById('canvasRace');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle='#444';ctx.font='bold 13px Arial';
+  ctx.fillText('Tableau initial ('+raceData.length+' éléments) : ['+raceData.slice(0,8).join(', ')+(raceData.length>8?', ...':'')+']',20,25);
+  ctx.fillStyle='#888';ctx.font='12px Arial';
+  ctx.fillText('Cliquez "Lancer la course" pour voir les 3 tris en compétition.',20,50);
+}
+function countOpsTri(arr,type){
+  const a=[...arr];let ops=0;
+  if(type==='sel'){for(let i=0;i<a.length;i++){let m=i;for(let j=i+1;j<a.length;j++){ops++;if(a[j]<a[m])m=j;}[a[i],a[m]]=[a[m],a[i]];}}
+  else if(type==='bul'){for(let i=0;i<a.length;i++)for(let j=0;j<a.length-i-1;j++){ops++;if(a[j]>a[j+1])[a[j],a[j+1]]=[a[j+1],a[j]];}}
+  else if(type==='ins'){for(let i=1;i<a.length;i++){let k=a[i],j=i-1;while(j>=0&&a[j]>k){ops++;a[j+1]=a[j];j--;}a[j+1]=k;}}
+  return ops;
+}
+function runRace(){
+  const n=parseInt(document.getElementById('raceN').value);
+  if(raceData.length!==n)resetRace();
+  const c=document.getElementById('canvasRace');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const ops={sel:countOpsTri(raceData,'sel'),bul:countOpsTri(raceData,'bul'),ins:countOpsTri(raceData,'ins')};
+  const names={sel:'Tri sélection',bul:'Tri à bulles',ins:'Tri insertion'};
+  const colors={sel:'#2a5298',bul:'#c0392b',ins:'#27ae60'};
+  const maxOps=Math.max(ops.sel,ops.bul,ops.ins)*1.1;
+  ctx.fillStyle='#444';ctx.font='bold 13px Arial';
+  ctx.fillText('Course de tris (n='+n+')',20,22);
+  const m={l:160,r:80,t:40,b:30};const pw=w-m.l-m.r;
+  Object.entries(ops).forEach(([key,val],i)=>{
+    const y=m.t+i*70;const barW=(val/maxOps)*pw;
+    ctx.fillStyle='#f8f9fa';ctx.beginPath();ctx.roundRect(m.l,y,pw,50,4);ctx.fill();
+    ctx.fillStyle=colors[key];ctx.beginPath();ctx.roundRect(m.l,y,barW,50,4);ctx.fill();
+    ctx.fillStyle='#333';ctx.font='bold 12px Arial';ctx.textAlign='right';
+    ctx.fillText(names[key],m.l-10,y+30);
+    ctx.fillStyle='#fff';ctx.font='bold 13px Arial';ctx.textAlign='left';
+    ctx.fillText(val+' comparaisons',m.l+barW/2-40,y+30);
+  });
+  ctx.textAlign='left';
+  const winner=Object.entries(ops).sort((a,b)=>a[1]-b[1])[0];
+  document.getElementById('resultRace').innerHTML='<strong>Gagnant : '+names[winner[0]]+'</strong> ('+winner[1]+' comparaisons). Sél: '+ops.sel+', Bulles: '+ops.bul+', Insertion: '+ops.ins+'. Théorie O(n²) : '+n*n+'.';
+}
+document.getElementById('raceN').addEventListener('input',()=>{document.getElementById('raceNval').textContent=document.getElementById('raceN').value;resetRace();});
+resetRace();
+
+// ===================== PALINDROME =====================
+function drawPalindrome(){
+  const c=document.getElementById('canvasPalindrome');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const raw=document.getElementById('palindromeSelect').value;
+  const s=raw.toLowerCase().replace(/[^a-zA-ZÀ-ÿ]/g,'');
+  const n=s.length;const boxW=Math.min(50,(w-40)/n);const y=60;const cx=w/2;const startX=cx-n*boxW/2;
+  ctx.fillStyle='#444';ctx.font='bold 13px Arial';ctx.textAlign='center';
+  ctx.fillText('"'+raw+'"  →  normalisé : "'+s+'"',cx,25);
+  // Lettres
+  for(let i=0;i<n;i++){
+    const j=n-1-i;const match=s[i]===s[j];
+    const x=startX+i*boxW;
+    ctx.fillStyle=match?'rgba(39,174,96,0.15)':'rgba(192,57,43,0.15)';
+    ctx.strokeStyle=match?'#27ae60':'#c0392b';ctx.lineWidth=2;
+    ctx.beginPath();ctx.roundRect(x+1,y,boxW-2,50,4);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='bold 18px Arial';ctx.textAlign='center';
+    ctx.fillText(s[i],x+boxW/2,y+32);
+    ctx.fillStyle='#888';ctx.font='9px Arial';
+    ctx.fillText('['+i+']',x+boxW/2,y+48);
+  }
+  // Flèches miroir
+  for(let i=0;i<Math.floor(n/2);i++){
+    const j=n-1-i;const x1=startX+i*boxW+boxW/2;const x2=startX+j*boxW+boxW/2;const ya=y+120;
+    ctx.strokeStyle=s[i]===s[j]?'#27ae60':'#c0392b';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(x1,y+55);ctx.lineTo(x1,ya);ctx.lineTo(x2,ya);ctx.lineTo(x2,y+55);ctx.stroke();
+    ctx.fillStyle=s[i]===s[j]?'#27ae60':'#c0392b';ctx.font='10px Arial';ctx.textAlign='center';
+    ctx.fillText(s[i]===s[j]?'=':'≠',(x1+x2)/2,ya-4);
+  }
+  ctx.textAlign='left';
+  const isPalin=s===s.split('').reverse().join('');
+  document.getElementById('resultPalindrome').innerHTML='"'+raw+'" → <strong style="color:'+(isPalin?'#27ae60':'#c0392b')+'">'+(isPalin?'✓ PALINDROME':'✗ PAS UN PALINDROME')+'</strong>. On compare chaque lettre avec son miroir.';
+}
+document.getElementById('palindromeSelect').addEventListener('change',drawPalindrome);
+drawPalindrome();
+</script>
+</body>
+</html>
