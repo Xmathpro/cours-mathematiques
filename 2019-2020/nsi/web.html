@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Web : HTML et CSS . NSI</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+pre.code{background:#1e1e1e;color:#d4d4d4;font-family:'Courier New',monospace;font-size:.85rem;padding:1rem 1.2rem;border-radius:6px;margin:1rem 0;line-height:1.8;overflow-x:auto;white-space:pre;tab-size:4}
+.live-preview{border:2px solid #2a5298;border-radius:6px;padding:1rem;margin:1rem 0;min-height:80px}
+.live-preview-label{font-family:Arial,sans-serif;font-size:.7rem;color:#2a5298;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.split-view{display:flex;gap:1rem;flex-wrap:wrap}
+.split-view > div{flex:1;min-width:250px}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="site-header-inner">
+<div class="site-titre">Cours de <span>mathématiques</span></div>
+<nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#nsi">NSI</a></nav>
+</div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>NSI . Première</span><span>Programme 2019</span><span>2019-2020</span></div>
+<h1 class="cours-titre-principal">Le Web : HTML et CSS</h1>
+<p class="cours-sous-titre">Structure d'une page, balises HTML, mise en forme CSS et modèle client-serveur</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Comment fonctionne le Web ?</h2>
+
+<div class="definition"><div class="encadre-titre">Le modèle client-serveur</div>
+<p>Quand tu tapes une adresse dans ton navigateur :</p>
+<ol>
+<li>Ton navigateur (le <strong>client</strong>) envoie une <strong>requête HTTP</strong> au serveur.</li>
+<li>Le <strong>serveur</strong> reçoit la requête et renvoie une <strong>réponse</strong> contenant le fichier HTML.</li>
+<li>Le navigateur lit le HTML, charge le CSS et le JavaScript, puis <strong>affiche</strong> la page.</li>
+</ol>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : le parcours d'une requête Web</h4>
+<canvas id="canvasHTTP" width="600" height="280"></canvas>
+<div class="controls">
+<button onclick="animHTTP()">▶ Animer la requête</button>
+<button onclick="resetHTTP()">↺ Recommencer</button>
+</div>
+<div class="result-text" id="resultHTTP">Cliquez pour voir le parcours d'une requête Web.</div>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Les 3 langages du Web</div>
+<ul>
+<li><strong>HTML</strong> : le contenu et la structure (le squelette).</li>
+<li><strong>CSS</strong> : la mise en forme et le design (l'apparence).</li>
+<li><strong>JavaScript</strong> : l'interactivité et le comportement (les actions).</li>
+</ul>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : HTML + CSS + JavaScript = une page Web</h4>
+<canvas id="canvasLayers" width="600" height="250"></canvas>
+<div class="controls">
+<label>Afficher :</label>
+<button onclick="showLayer('html')">HTML seul</button>
+<button onclick="showLayer('css')">+ CSS</button>
+<button onclick="showLayer('js')">+ JavaScript</button>
+</div>
+<div class="result-text" id="resultLayers"></div>
+</div>
+
+<h2>II. HTML : la structure</h2>
+
+<div class="definition"><div class="encadre-titre">Qu'est-ce que le HTML ?</div>
+<p><strong>HTML</strong> (HyperText Markup Language) est un langage de <strong>balisage</strong> : on entoure le contenu de <strong>balises</strong> pour lui donner un sens. Ce n'est pas un langage de programmation : il ne fait pas de calculs.</p>
+</div>
+
+<h3>1. Structure minimale d'une page</h3>
+
+<pre class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Ma première page&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Bienvenue !&lt;/h1&gt;
+    &lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+<div class="interactive-box">
+<h4>Visualiser : l'arbre HTML (DOM)</h4>
+<canvas id="canvasDOM" width="600" height="320"></canvas>
+<div class="result-text" id="resultDOM">Le navigateur transforme le HTML en un arbre : le DOM (Document Object Model). Chaque balise est un noeud de l'arbre.</div>
+</div>
+
+<h3>2. Les balises essentielles</h3>
+
+<div class="propriete"><div class="encadre-titre">Balises de texte</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.5rem">
+<thead><tr style="border-bottom:1px solid #e8e8e8">
+<th style="text-align:left;padding:6px 8px">Balise</th>
+<th style="text-align:left;padding:6px 8px">Rôle</th>
+<th style="text-align:left;padding:6px 8px">Exemple</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code></td><td>Titres (du plus grand au plus petit)</td><td><code>&lt;h1&gt;Mon titre&lt;/h1&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;p&gt;</code></td><td>Paragraphe</td><td><code>&lt;p&gt;Un texte...&lt;/p&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;strong&gt;</code></td><td>Gras (importance)</td><td><code>&lt;strong&gt;important&lt;/strong&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;em&gt;</code></td><td>Italique (emphase)</td><td><code>&lt;em&gt;mot clé&lt;/em&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;a href="..."&gt;</code></td><td>Lien hypertexte</td><td><code>&lt;a href="page2.html"&gt;Cliquer ici&lt;/a&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;img src="..."&gt;</code></td><td>Image (balise auto-fermante)</td><td><code>&lt;img src="photo.jpg" alt="desc"&gt;</code></td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px"><code>&lt;ul&gt; &lt;li&gt;</code></td><td>Liste à puces</td><td><code>&lt;ul&gt;&lt;li&gt;item&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+<tr><td style="padding:5px 8px"><code>&lt;ol&gt; &lt;li&gt;</code></td><td>Liste numérotée</td><td><code>&lt;ol&gt;&lt;li&gt;premier&lt;/li&gt;&lt;/ol&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="interactive-box">
+<h4>Éditeur HTML en direct</h4>
+<div class="split-view">
+<div>
+<div class="live-preview-label">Code HTML</div>
+<textarea id="htmlEditor" style="width:100%;height:200px;font-family:'Courier New',monospace;font-size:.85rem;padding:.5rem;border:1px solid #ccc;border-radius:4px;resize:vertical;line-height:1.6" oninput="updatePreview()">
+<h1>Mon site</h1>
+
+<p>Bienvenue sur <strong>ma page</strong> !</p>
+
+<h2>Mes passions</h2>
+<ul>
+  <li>Programmation</li>
+  <li>Musique</li>
+  <li>Sport</li>
+</ul>
+
+<p>
+  Visitez
+  <a href="https://www.python.org">
+    le site de Python
+  </a>.
+</p>
+</textarea>
+</div>
+<div>
+<div class="live-preview-label">Aperçu</div>
+<div class="live-preview" id="htmlPreview"></div>
+</div>
+</div>
+</div>
+
+<h2>III. CSS : la mise en forme</h2>
+
+<div class="definition"><div class="encadre-titre">Qu'est-ce que le CSS ?</div>
+<p><strong>CSS</strong> (Cascading Style Sheets) contrôle l'apparence : couleurs, tailles, polices, marges, disposition. On sépare le contenu (HTML) de la présentation (CSS).</p>
+</div>
+
+<h3>1. Syntaxe CSS</h3>
+
+<pre class="code">
+/* Sélecteur { propriété: valeur; } */
+
+h1 {
+    color: blue;
+    font-size: 32px;
+    text-align: center;
+}
+
+p {
+    color: #333333;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.important {
+    background-color: yellow;
+    border: 2px solid red;
+    padding: 10px;
+}
+</pre>
+
+<h3>2. Les sélecteurs</h3>
+
+<div class="propriete"><div class="encadre-titre">3 types de sélecteurs</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.5rem">
+<thead><tr style="border-bottom:1px solid #e8e8e8">
+<th style="text-align:left;padding:6px 8px">Type</th>
+<th style="text-align:left;padding:6px 8px">Syntaxe</th>
+<th style="text-align:left;padding:6px 8px">Cible</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">Balise</td><td><code>p { ... }</code></td><td>Tous les paragraphes</td></tr>
+<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">Classe</td><td><code>.important { ... }</code></td><td>Éléments avec <code>class="important"</code></td></tr>
+<tr><td style="padding:5px 8px">Identifiant</td><td><code>#titre { ... }</code></td><td>L'élément avec <code>id="titre"</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3. Le modèle de boîte (box model)</h3>
+
+<div class="interactive-box">
+<h4>Visualiser : le box model CSS</h4>
+<canvas id="canvasBox" width="600" height="320"></canvas>
+<div class="controls">
+<label>margin =</label><input type="range" id="boxMargin" min="0" max="40" value="15"><span id="boxMval">15</span>
+<label>border =</label><input type="range" id="boxBorder" min="0" max="15" value="3"><span id="boxBval">3</span>
+<label>padding =</label><input type="range" id="boxPadding" min="0" max="40" value="20"><span id="boxPval">20</span>
+</div>
+<div class="result-text" id="resultBox"></div>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1 : lire du HTML</h3>
+<pre class="code">
+&lt;h2&gt;Recette&lt;/h2&gt;
+&lt;p&gt;Voici les &lt;strong&gt;ingrédients&lt;/strong&gt; :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;200g de farine&lt;/li&gt;
+  &lt;li&gt;3 oeufs&lt;/li&gt;
+  &lt;li&gt;50cl de lait&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<ol>
+<li>Combien de balises ouvrantes y a-t-il ?</li>
+<li>Quel texte apparaîtra en gras ?</li>
+<li>Dessiner l'arbre DOM de ce fragment.</li>
+</ol>
+
+<h3>Exercice 2 : écrire du HTML</h3>
+<p>Écrire le code HTML d'une page contenant :</p>
+<ol>
+<li>Un titre principal "Mon CV".</li>
+<li>Un paragraphe de présentation avec votre prénom en gras.</li>
+<li>Une liste numérotée de 3 compétences.</li>
+<li>Un lien vers le site de votre école.</li>
+</ol>
+
+<h3>Exercice 3 : CSS</h3>
+<p>Écrire le CSS pour :</p>
+<ol>
+<li>Mettre tous les titres <code>h1</code> en bleu foncé.</li>
+<li>Donner un fond gris clair à tous les paragraphes avec un arrondi de 5px.</li>
+<li>Créer une classe <code>.alerte</code> avec fond rouge, texte blanc et padding de 15px.</li>
+</ol>
+
+<h2>V. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> 7 balises ouvrantes : <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;ul&gt;</code>, 3 <code>&lt;li&gt;</code>.</p>
+<p><strong>2.</strong> Le mot "ingrédients" apparaîtra en gras (il est dans <code>&lt;strong&gt;</code>).</p>
+<p><strong>3.</strong> L'arbre : le fragment contient 3 noeuds au premier niveau (<code>h2</code>, <code>p</code>, <code>ul</code>). <code>p</code> contient du texte et <code>strong</code>. <code>ul</code> contient 3 <code>li</code>.</p>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Mon CV&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Mon CV&lt;/h1&gt;
+
+  &lt;p&gt;
+    Bonjour, je m'appelle &lt;strong&gt;Alex&lt;/strong&gt;.
+    Je suis élève en Première NSI.
+  &lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;Python&lt;/li&gt;
+    &lt;li&gt;HTML et CSS&lt;/li&gt;
+    &lt;li&gt;Algorithmique&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;a href="https://mon-ecole.fr"&gt;
+    Site de mon école
+  &lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<h3>Corrigé exercice 3</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre class="code">
+h1 {
+    color: #1a3c6e;
+}
+
+p {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.alerte {
+    background-color: #e74c3c;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+</pre>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="algorithmique.html">&larr; Algorithmique</a>
+<a href="../../2020-2021/nsi/sql.html">SQL &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+// ============ HTTP ANIMATION ============
+let httpStep=0;
+function resetHTTP(){httpStep=0;drawHTTP();}
+function animHTTP(){if(httpStep<5)httpStep++;drawHTTP();if(httpStep<5)setTimeout(animHTTP,900);}
+function drawHTTP(){
+  const c=document.getElementById('canvasHTTP');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  // Client
+  ctx.fillStyle='#2a5298';ctx.beginPath();ctx.roundRect(30,80,120,100,8);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText('🖥️ Client',90,120);
+  ctx.font='10px Arial';ctx.fillText('(ton navigateur)',90,140);
+  // Server
+  ctx.fillStyle='#27ae60';ctx.beginPath();ctx.roundRect(450,80,120,100,8);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 13px Arial';ctx.fillText('🖧 Serveur',510,120);
+  ctx.font='10px Arial';ctx.fillText('(héberge le site)',510,140);
+  // Steps
+  const msgs=['','1. Requête HTTP →','2. Le serveur cherche la page','3. ← Réponse HTML','4. Le navigateur affiche la page'];
+  if(httpStep>=1){ctx.strokeStyle='#e67e22';ctx.lineWidth=2.5;ctx.setLineDash([8,4]);ctx.beginPath();ctx.moveTo(150,110);ctx.lineTo(450,110);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#e67e22';ctx.beginPath();ctx.moveTo(450,110);ctx.lineTo(440,104);ctx.lineTo(440,116);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#e67e22';ctx.font='11px Arial';ctx.fillText('GET /index.html',300,100);}
+  if(httpStep>=2){ctx.fillStyle='rgba(39,174,96,0.2)';ctx.beginPath();ctx.roundRect(460,190,100,30,4);ctx.fill();ctx.fillStyle='#27ae60';ctx.font='10px Arial';ctx.fillText('Recherche...',510,210);}
+  if(httpStep>=3){ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;ctx.setLineDash([8,4]);ctx.beginPath();ctx.moveTo(450,150);ctx.lineTo(150,150);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#2a5298';ctx.beginPath();ctx.moveTo(150,150);ctx.lineTo(160,144);ctx.lineTo(160,156);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#2a5298';ctx.font='11px Arial';ctx.fillText('200 OK + fichier HTML',300,168);}
+  if(httpStep>=4){ctx.fillStyle='rgba(42,82,152,0.2)';ctx.beginPath();ctx.roundRect(40,190,100,30,4);ctx.fill();ctx.fillStyle='#2a5298';ctx.font='10px Arial';ctx.fillText('Affichage !',90,210);}
+  ctx.textAlign='left';
+  document.getElementById('resultHTTP').textContent=httpStep>0?msgs[httpStep]:'Cliquez sur ▶ pour voir les étapes d\'une requête Web.';
+}
+drawHTTP();
+
+// ============ LAYERS ============
+function showLayer(mode){
+  const c=document.getElementById('canvasLayers');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const x=50,y=30,bw=500,bh=180;
+  // HTML layer
+  ctx.fillStyle='#f0f0f0';ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  ctx.beginPath();ctx.roundRect(x,y,bw,bh,8);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#333';ctx.font='bold 22px Times New Roman';ctx.fillText('Mon site web',x+20,y+40);
+  ctx.font='14px Times New Roman';ctx.fillText('Bienvenue ! Voici un paragraphe de texte.',x+20,y+70);
+  ctx.fillText('• Premier élément',x+20,y+100);ctx.fillText('• Deuxième élément',x+20,y+120);
+  ctx.fillStyle='blue';ctx.font='14px Times New Roman';ctx.fillText('Un lien cliquable',x+20,y+150);
+  if(mode==='css'||mode==='js'){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#1a3c6e';ctx.beginPath();ctx.roundRect(x,y,bw,50,{upperLeft:8,upperRight:8,lowerLeft:0,lowerRight:0});ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 24px Arial';ctx.fillText('Mon site web',x+20,y+35);
+    ctx.fillStyle='#fafafa';ctx.beginPath();ctx.rect(x,y+50,bw,bh-50);ctx.fill();ctx.strokeStyle='#ddd';ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='15px Arial';ctx.fillText('Bienvenue ! Voici un paragraphe de texte.',x+20,y+85);
+    ctx.fillStyle='#2a5298';ctx.beginPath();ctx.roundRect(x+15,y+100,180,28,4);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='12px Arial';ctx.fillText('Premier élément',x+25,y+118);
+    ctx.fillStyle='#27ae60';ctx.beginPath();ctx.roundRect(x+205,y+100,180,28,4);ctx.fill();
+    ctx.fillStyle='#fff';ctx.fillText('Deuxième élément',x+215,y+118);
+    ctx.fillStyle='#e67e22';ctx.font='bold 14px Arial';ctx.fillText('Un lien cliquable →',x+20,y+160);
+  }
+  if(mode==='js'){
+    ctx.fillStyle='rgba(241,196,15,0.3)';ctx.beginPath();ctx.roundRect(x+350,y+95,140,35,6);ctx.fill();
+    ctx.strokeStyle='#f1c40f';ctx.lineWidth=2;ctx.strokeRect(x+350,y+95,140,35);
+    ctx.fillStyle='#333';ctx.font='11px Arial';ctx.fillText('🖱️ Cliquez ici !',x+370,y+116);
+  }
+  const labels={html:'HTML seul : texte brut, pas de style. Le navigateur par défaut met les titres en gros et les liens en bleu.',css:'HTML + CSS : couleurs, polices, disposition. Le contenu est le même, seule la présentation change.',js:'HTML + CSS + JS : interactivité. Les boutons réagissent, les animations tournent.'};
+  document.getElementById('resultLayers').textContent=labels[mode];
+}
+showLayer('html');
+
+// ============ DOM TREE ============
+(function(){
+  const c=document.getElementById('canvasDOM');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  function node(x,y,label,color){
+    ctx.fillStyle=color||'#2a5298';ctx.beginPath();ctx.roundRect(x-35,y-14,70,28,6);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 11px Courier New';ctx.textAlign='center';ctx.fillText(label,x,y+4);
+  }
+  function line(x1,y1,x2,y2){ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x1,y1+14);ctx.lineTo(x2,y2-14);ctx.stroke();}
+  const cx=w/2;
+  node(cx,30,'<html>','#333');
+  line(cx,30,cx-150,90);line(cx,30,cx+150,90);
+  node(cx-150,90,'<head>','#8e44ad');node(cx+150,90,'<body>','#c0392b');
+  line(cx-150,90,cx-220,155);line(cx-150,90,cx-80,155);
+  node(cx-220,155,'<meta>','#8e44ad');node(cx-80,155,'<title>','#8e44ad');
+  line(cx+150,90,cx+60,155);line(cx+150,90,cx+240,155);
+  node(cx+60,155,'<h1>','#e67e22');node(cx+240,155,'<p>','#27ae60');
+  // Texte feuilles
+  ctx.fillStyle='#888';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('"Ma page"',cx-80,195);ctx.fillText('"Bienvenue !"',cx+60,195);ctx.fillText('"Un paragraphe"',cx+240,195);
+  ctx.fillStyle='#444';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('L\'arbre DOM : chaque balise est un noeud. Le navigateur navigue dans cet arbre pour afficher la page.',20,280);
+  ctx.fillText('Les feuilles sont le texte visible.',20,300);
+})();
+
+// ============ BOX MODEL ============
+function drawBox(){
+  const c=document.getElementById('canvasBox');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const mg=parseInt(document.getElementById('boxMargin').value);
+  const bd=parseInt(document.getElementById('boxBorder').value);
+  const pd=parseInt(document.getElementById('boxPadding').value);
+  document.getElementById('boxMval').textContent=mg;document.getElementById('boxBval').textContent=bd;document.getElementById('boxPval').textContent=pd;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;const contentW=160,contentH=60;
+  // Margin
+  const mW=contentW+2*pd+2*bd+2*mg,mH=contentH+2*pd+2*bd+2*mg;
+  ctx.fillStyle='rgba(230,126,34,0.15)';ctx.fillRect(cx-mW/2,cy-mH/2,mW,mH);
+  ctx.strokeStyle='#e67e22';ctx.setLineDash([4,3]);ctx.lineWidth=1;ctx.strokeRect(cx-mW/2,cy-mH/2,mW,mH);ctx.setLineDash([]);
+  // Border
+  const bW=contentW+2*pd+2*bd,bH=contentH+2*pd+2*bd;
+  ctx.fillStyle='rgba(44,62,80,0.3)';ctx.fillRect(cx-bW/2,cy-bH/2,bW,bH);
+  // Padding
+  const pW=contentW+2*pd,pH=contentH+2*pd;
+  ctx.fillStyle='rgba(39,174,96,0.15)';ctx.fillRect(cx-pW/2,cy-pH/2,pW,pH);
+  // Content
+  ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(cx-contentW/2,cy-contentH/2,contentW,contentH);
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.strokeRect(cx-contentW/2,cy-contentH/2,contentW,contentH);
+  // Labels
+  ctx.font='bold 12px Arial';ctx.textAlign='center';
+  ctx.fillStyle='#2a5298';ctx.fillText('CONTENU',cx,cy+4);
+  ctx.fillStyle='#27ae60';ctx.font='10px Arial';ctx.fillText('padding: '+pd+'px',cx,cy-contentH/2-pd/2+5);
+  ctx.fillStyle='#2c3e50';ctx.fillText('border: '+bd+'px',cx,cy-contentH/2-pd-bd/2+2);
+  ctx.fillStyle='#e67e22';ctx.fillText('margin: '+mg+'px',cx,cy-contentH/2-pd-bd-mg/2+2);
+  // Légende
+  ctx.textAlign='left';ctx.font='11px Arial';
+  const ly=h-20;
+  ctx.fillStyle='rgba(42,82,152,0.3)';ctx.fillRect(20,ly-10,12,12);ctx.fillStyle='#333';ctx.fillText('Contenu',36,ly);
+  ctx.fillStyle='rgba(39,174,96,0.2)';ctx.fillRect(110,ly-10,12,12);ctx.fillStyle='#333';ctx.fillText('Padding',126,ly);
+  ctx.fillStyle='rgba(44,62,80,0.3)';ctx.fillRect(200,ly-10,12,12);ctx.fillStyle='#333';ctx.fillText('Border',216,ly);
+  ctx.fillStyle='rgba(230,126,34,0.15)';ctx.fillRect(280,ly-10,12,12);ctx.fillStyle='#333';ctx.fillText('Margin',296,ly);
+  const totalW=contentW+2*pd+2*bd+2*mg;
+  document.getElementById('resultBox').textContent='Largeur totale = contenu ('+contentW+') + 2×padding ('+2*pd+') + 2×border ('+2*bd+') + 2×margin ('+2*mg+') = '+totalW+'px.';
+}
+['boxMargin','boxBorder','boxPadding'].forEach(id=>document.getElementById(id).addEventListener('input',drawBox));
+drawBox();
+
+// ============ LIVE EDITOR ============
+function updatePreview(){
+  const code=document.getElementById('htmlEditor').value;
+  document.getElementById('htmlPreview').innerHTML=code;
+}
+updatePreview();
+</script>
+</body>
+</html>
