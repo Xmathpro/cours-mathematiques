@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithmique et Python . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>En ligne . 2021-2022</span></div>
+<h1 class="cours-titre-principal">Algorithmique et Python</h1>
+<p class="cours-sous-titre">Algorithmes fondamentaux appliqués aux mathématiques en Python</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Algorithmes et fonctions</h2>
+
+<div class="exemple"><div class="encadre-titre">Étude d'une fonction</div>
+<pre>
+import math
+
+def f(x):
+    return x * math.exp(-x)
+
+def derivee(f, x, h=1e-6):
+    return (f(x + h) - f(x)) / h
+
+# Table de valeurs
+print("x\t\tf(x)\t\tf'(x)")
+for x_val in [i * 0.5 for i in range(-4, 12)]:
+    print(f"{x_val:.1f}\t\t{f(x_val):.4f}\t\t{derivee(f, x_val):.4f}")
+</pre>
+</div>
+
+<h2>II. Algorithmes et suites</h2>
+
+<div class="exemple"><div class="encadre-titre">Seuil de convergence</div>
+<pre>
+def seuil(u0, a, b, epsilon):
+    """Trouve n tel que |u_n - limite| < epsilon"""
+    limite = b / (1 - a)  # point fixe
+    u = u0
+    n = 0
+    while abs(u - limite) >= epsilon:
+        u = a * u + b
+        n += 1
+    return n, u
+
+n, u = seuil(100, 0.8, 5, 0.01)
+print(f"Convergence à 0.01 près en {n} étapes. u_n = {u:.4f}")
+# Limite = 5/(1-0.8) = 25
+</pre>
+</div>
+
+<h2>III. Algorithmes et probabilités</h2>
+
+<div class="exemple"><div class="encadre-titre">Estimation de Pi par Monte Carlo</div>
+<pre>
+import random
+
+def estimer_pi(n):
+    dans_cercle = 0
+    for _ in range(n):
+        x = random.uniform(-1, 1)
+        y = random.uniform(-1, 1)
+        if x**2 + y**2 <= 1:
+            dans_cercle += 1
+    return 4 * dans_cercle / n
+
+for n in [100, 1000, 10000, 100000]:
+    pi_approx = estimer_pi(n)
+    print(f"n = {n:>6} : pi ≈ {pi_approx:.4f}")
+</pre>
+</div>
+
+<h2>IV. Algorithmes et intégration</h2>
+
+<div class="exemple"><div class="encadre-titre">Méthode des trapèzes</div>
+<pre>
+def trapezes(f, a, b, n):
+    h = (b - a) / n
+    s = (f(a) + f(b)) / 2
+    for i in range(1, n):
+        s += f(a + i * h)
+    return s * h
+
+import math
+# Intégrale de sin(x) de 0 à pi (valeur exacte = 2)
+for n in [10, 100, 1000]:
+    result = trapezes(math.sin, 0, math.pi, n)
+    print(f"n = {n:>4} : ∫sin(x)dx ≈ {result:.6f} (erreur : {abs(result-2):.6f})")
+</pre>
+</div>
+
+<h2>V. Algorithmes et résolution d'équations</h2>
+
+<div class="exemple"><div class="encadre-titre">Méthode de dichotomie</div>
+<pre>
+def dichotomie(f, a, b, epsilon):
+    """Trouve x tel que f(x) = 0 sur [a, b]"""
+    while b - a > epsilon:
+        m = (a + b) / 2
+        if f(a) * f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return (a + b) / 2
+
+import math
+# Résoudre e^x = x + 2
+g = lambda x: math.exp(x) - x - 2
+sol = dichotomie(g, -2, 0, 1e-8)
+print(f"Solution : x ≈ {sol:.8f}")
+sol2 = dichotomie(g, 1, 2, 1e-8)
+print(f"Solution : x ≈ {sol2:.8f}")
+</pre>
+</div>
+
+<h2>VI. Exercices</h2>
+<h3>Exercice 1</h3>
+<p>Écrire une fonction Python qui calcule $\displaystyle\sum_{k=1}^{n} \frac{1}{k^2}$ et tester pour $n = 10, 100, 1000$. Comparer avec $\frac{\pi^2}{6}$.</p>
+
+<h3>Exercice 2</h3>
+<p>Écrire un programme qui détermine par balayage le nombre de solutions de $\ln x = \frac{1}{x}$ sur $[0{,}1, 10]$.</p>
+
+<h2>VII. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre>
+import math
+
+def somme_inverses_carres(n):
+    return sum(1 / k**2 for k in range(1, n + 1))
+
+for n in [10, 100, 1000]:
+    s = somme_inverses_carres(n)
+    print(f"S({n}) = {s:.6f}  |  pi²/6 = {math.pi**2/6:.6f}  |  erreur = {abs(s - math.pi**2/6):.6f}")
+# S(10) = 1.549768, S(100) = 1.634984, S(1000) = 1.643935
+# pi²/6 = 1.644934. La somme converge lentement vers pi²/6.
+</pre>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre>
+import math
+
+def f(x):
+    return math.log(x) - 1/x
+
+solutions = 0
+x = 0.1
+pas = 0.001
+prev = f(x)
+while x <= 10:
+    x += pas
+    curr = f(x)
+    if prev * curr < 0:  # changement de signe
+        solutions += 1
+        print(f"Solution trouvée vers x ≈ {x:.3f}")
+    prev = curr
+
+print(f"Nombre de solutions : {solutions}")
+# Trouve 1 solution vers x ≈ 1.763
+</pre>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="geometrie.html">&larr; Géométrie et produit scalaire</a><a href="../../index.html">Retour à l'accueil &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+</body>
+</html>

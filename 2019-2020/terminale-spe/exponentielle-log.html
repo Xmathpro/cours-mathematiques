@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exponentielle et logarithme . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2020-2021</span></div>
+<h1 class="cours-titre-principal">Exponentielle et logarithme</h1>
+<p class="cours-sous-titre">Propriétés, dérivées, limites, équations et applications</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Fonction exponentielle</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>L'exponentielle est l'unique fonction $f$ dérivable sur $\mathbb{R}$ telle que $f' = f$ et $f(0) = 1$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriétés algébriques</div>
+<ul><li>$e^{a+b} = e^a \times e^b$</li><li>$e^{a-b} = \dfrac{e^a}{e^b}$</li><li>$(e^a)^n = e^{na}$</li><li>$e^x > 0$ pour tout $x$</li></ul>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Dérivées</div>
+<ul><li>$(e^x)' = e^x$</li><li>$(e^{u})' = u' e^{u}$</li></ul>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : exponentielle et ses propriétés</h4>
+<canvas id="canvasExp" width="600" height="350"></canvas>
+<div class="controls">
+<label>Afficher :</label>
+<select id="expSelect">
+<option value="exp">e^x</option>
+<option value="exp_neg">e^(-x)</option>
+<option value="both">e^x et e^(-x)</option>
+<option value="xexp">x·e^(-x)</option>
+</select>
+</div>
+<div class="result-text" id="resultExp"></div>
+</div>
+
+<h2>II. Fonction logarithme népérien</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Le logarithme népérien est la réciproque de l'exponentielle : $y = \ln x \iff x = e^y$ pour $x > 0$.</p>
+<ul><li>$\ln(e^x) = x$ et $e^{\ln x} = x$</li><li>$\ln 1 = 0$ et $\ln e = 1$</li></ul>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriétés algébriques</div>
+<ul><li>$\ln(ab) = \ln a + \ln b$</li><li>$\ln\left(\dfrac{a}{b}\right) = \ln a - \ln b$</li><li>$\ln(a^n) = n\ln a$</li></ul>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Dérivées</div>
+<ul><li>$(\ln x)' = \dfrac{1}{x}$</li><li>$(\ln u)' = \dfrac{u'}{u}$</li></ul>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : exp et ln sont réciproques</h4>
+<canvas id="canvasLnExp" width="600" height="400"></canvas>
+<div class="result-text" id="resultLnExp">Les courbes de e^x et ln(x) sont symétriques par rapport à la droite y = x.</div>
+</div>
+
+<h2>III. Équations et inéquations</h2>
+
+<div class="methode"><div class="encadre-titre">Résoudre avec exp et ln</div>
+<p><strong>1.</strong> $e^{2x-1} = 5 \iff 2x-1 = \ln 5 \iff x = \dfrac{1+\ln 5}{2}$.</p>
+<p><strong>2.</strong> $\ln(3x+2) = 4 \iff 3x+2 = e^4 \iff x = \dfrac{e^4-2}{3}$.</p>
+<p><strong>3.</strong> $e^{2x} - 3e^x + 2 = 0$. Posons $X = e^x > 0$ : $X^2-3X+2=0$, $(X-1)(X-2)=0$. $x=0$ ou $x=\ln 2$.</p>
+</div>
+
+<h2>IV. Croissances comparées</h2>
+
+<div class="theoreme"><div class="encadre-titre">Théorème</div>
+<ul><li>$\lim_{x\to+\infty} \dfrac{e^x}{x^n} = +\infty$</li><li>$\lim_{x\to+\infty} \dfrac{\ln x}{x^n} = 0$</li><li>$\lim_{x\to+\infty} x^n e^{-x} = 0$</li><li>$\lim_{x\to 0^+} x^n \ln x = 0$</li></ul>
+<p>Résumé : l'exponentielle domine les puissances qui dominent le logarithme.</p>
+</div>
+
+<h2>V. Python</h2>
+
+<div class="exemple"><div class="encadre-titre">Résoudre $e^x = x + 2$ par balayage</div>
+<pre>
+import math
+
+def f(x):
+    return math.exp(x) - x - 2
+
+# Balayage entre -2 et 2
+x = -2.0
+while f(x) < 0:
+    x += 0.001
+print(f"Solution approchée : x ≈ {x:.3f}")
+# Trouve x ≈ 1.146
+</pre>
+</div>
+
+<h2>VI. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<ol>
+<li>Résoudre $e^{3x} = e^{x+4}$.</li>
+<li>Résoudre $\ln(x^2-3) = \ln(2x)$.</li>
+<li>Résoudre $2e^{2x} - 7e^x + 3 = 0$.</li>
+</ol>
+
+<h3>Exercice 2 : étude de fonction</h3>
+<p>$f(x) = (x-2)e^x$.</p>
+<ol><li>Calculer $f'(x)$.</li><li>Variations et extremum.</li><li>Limites en $\pm\infty$.</li></ol>
+
+<h2>VII. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $3x = x+4 \iff x = 2$.</p>
+<p><strong>2.</strong> Conditions : $x^2-3>0$ et $x>0$. $x^2-3=2x \iff x^2-2x-3=0 \iff (x-3)(x+1)=0$. $x=3$ (valide) ou $x=-1$ (rejeté car $x>0$).</p>
+<p><strong>3.</strong> $X=e^x>0$. $2X^2-7X+3=0$. $\Delta=49-24=25$. $X=3$ ou $X=\frac{1}{2}$. $x=\ln 3$ ou $x=-\ln 2$.</p>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $f'(x) = e^x + (x-2)e^x = (x-1)e^x$.</p>
+<p><strong>2.</strong> $f'(x)=0 \iff x=1$. $f'(x)<0$ sur $]-\infty,1[$, $f'(x)>0$ sur $]1,+\infty[$. Minimum $f(1)=-e$.</p>
+<p><strong>3.</strong> $\lim_{+\infty} = +\infty$. $\lim_{-\infty} = 0$ (croissance comparée).</p>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="../../2019-2020/terminale-spe/integration.html">&larr; Intégration</a>
+<a href="probabilites.html">Probabilités et loi normale &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function dg(ctx,w,h,ox,oy,sc){ctx.strokeStyle='#e8e8e8';ctx.lineWidth=0.5;for(let i=-20;i<=20;i++){let px=ox+i*sc;if(px>=0&&px<=w){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();}let py=oy-i*sc;if(py>=0&&py<=h){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();}}ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();}
+function pf(ctx,f,ox,oy,sc,w,c,lw){ctx.strokeStyle=c;ctx.lineWidth=lw||2;ctx.beginPath();let s=false;for(let px=0;px<w;px++){let x=(px-ox)/sc,y=f(x);if(!isFinite(y)||Math.abs(y)>10){s=false;continue;}let py=oy-y*sc;if(!s){ctx.moveTo(px,py);s=true;}else ctx.lineTo(px,py);}ctx.stroke();}
+
+function drawExp(){
+  const c=document.getElementById('canvasExp');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.35,oy=h*0.6,sc=40;ctx.clearRect(0,0,w,h);dg(ctx,w,h,ox,oy,sc);
+  const sel=document.getElementById('expSelect').value;
+  if(sel==='exp'||sel==='both')pf(ctx,x=>Math.exp(x),ox,oy,sc,w,'#2a5298',2.5);
+  if(sel==='exp_neg'||sel==='both')pf(ctx,x=>Math.exp(-x),ox,oy,sc,w,'#c0392b',2.5);
+  if(sel==='xexp')pf(ctx,x=>x*Math.exp(-x),ox,oy,sc,w,'#8e44ad',2.5);
+  const descs={exp:'e^x : croissante, AH y=0 en -∞',exp_neg:'e^(-x) : décroissante, AH y=0 en +∞',both:'e^x (bleu) et e^(-x) (rouge) : symétriques par rapport à l\'axe y',xexp:'xe^(-x) : max en x=1, tend vers 0 en +∞'};
+  document.getElementById('resultExp').textContent=descs[sel];
+}
+document.getElementById('expSelect').addEventListener('change',drawExp);drawExp();
+
+function drawLnExp(){
+  const c=document.getElementById('canvasLnExp');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.35,oy=h*0.55,sc=45;ctx.clearRect(0,0,w,h);dg(ctx,w,h,ox,oy,sc);
+  pf(ctx,x=>Math.exp(x),ox,oy,sc,w,'#2a5298',2.5);
+  pf(ctx,x=>x>0?Math.log(x):NaN,ox,oy,sc,w,'#c0392b',2.5);
+  // y = x
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#888';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy-(w-ox)*sc/sc+oy);
+  for(let px=0;px<w;px++){let x=(px-ox)/sc;let py=oy-x*sc;if(py>0&&py<h){px===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}}
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.font='bold 12px Arial';
+  ctx.fillStyle='#2a5298';ctx.fillText('e^x',w-60,30);
+  ctx.fillStyle='#c0392b';ctx.fillText('ln(x)',w-60,50);
+  ctx.fillStyle='#888';ctx.fillText('y = x',w-60,70);
+}
+drawLnExp();
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Géométrie et produit scalaire . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>En ligne . 2021-2022</span></div>
+<h1 class="cours-titre-principal">Géométrie et produit scalaire</h1>
+<p class="cours-sous-titre">Produit scalaire dans le plan, orthogonalité, équations de droites et de cercles</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Produit scalaire dans le plan</h2>
+
+<div class="definition"><div class="encadre-titre">Définitions équivalentes</div>
+<p>Soient $\vec{u}(x, y)$ et $\vec{v}(x', y')$.</p>
+<ul>
+<li>$\vec{u} \cdot \vec{v} = xx' + yy'$ (en coordonnées)</li>
+<li>$\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})$ (avec l'angle)</li>
+<li>$\vec{u} \cdot \vec{v} = \frac{1}{2}(\|\vec{u}+\vec{v}\|^2 - \|\vec{u}\|^2 - \|\vec{v}\|^2)$ (par la norme)</li>
+</ul>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriétés</div>
+<ul>
+<li>$\vec{u} \cdot \vec{v} = 0 \iff \vec{u} \perp \vec{v}$</li>
+<li>$\vec{u} \cdot \vec{u} = \|\vec{u}\|^2$</li>
+<li>Bilinéarité : $\vec{u} \cdot (\vec{v} + \vec{w}) = \vec{u} \cdot \vec{v} + \vec{u} \cdot \vec{w}$</li>
+<li>$(k\vec{u}) \cdot \vec{v} = k(\vec{u} \cdot \vec{v})$</li>
+</ul>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : produit scalaire et angle</h4>
+<canvas id="canvasPS" width="600" height="350"></canvas>
+<div class="controls">
+<label>u: x=</label><input type="range" id="pux" min="-40" max="40" value="30"><span id="puxv">3</span>
+<label>y=</label><input type="range" id="puy" min="-40" max="40" value="10"><span id="puyv">1</span>
+<label>v: x=</label><input type="range" id="pvx" min="-40" max="40" value="10"><span id="pvxv">1</span>
+<label>y=</label><input type="range" id="pvy" min="-40" max="40" value="30"><span id="pvyv">3</span>
+</div>
+<div class="result-text" id="resultPS"></div>
+</div>
+
+<h2>II. Applications</h2>
+
+<h3>Équation de cercle</h3>
+<div class="propriete"><div class="encadre-titre">Propriété</div>
+<p>Le cercle de centre $\Omega(a, b)$ et de rayon $r$ a pour équation :</p>
+$$(x-a)^2 + (y-b)^2 = r^2$$
+<p>Forme développée : $x^2 + y^2 - 2ax - 2by + a^2 + b^2 - r^2 = 0$.</p>
+</div>
+
+<h3>Projection orthogonale</h3>
+<div class="definition"><div class="encadre-titre">Projeté orthogonal</div>
+<p>Le projeté orthogonal de $M$ sur une droite $d$ est le point $H$ de $d$ tel que $\overrightarrow{MH} \perp \vec{u}_d$.</p>
+</div>
+
+<h2>III. Exercices</h2>
+<h3>Exercice 1</h3>
+<p>$\vec{u}(2, -3)$ et $\vec{v}(4, 1)$.</p>
+<ol><li>Calculer $\vec{u} \cdot \vec{v}$.</li><li>Calculer l'angle $(\vec{u}, \vec{v})$.</li></ol>
+
+<h3>Exercice 2</h3>
+<p>$A(1, 2)$, $B(5, 4)$, $C(3, 6)$.</p>
+<ol><li>Le triangle ABC est-il rectangle ? Justifier avec le produit scalaire.</li><li>Déterminer l'équation du cercle circonscrit.</li></ol>
+
+<h2>IV. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $\vec{u}\cdot\vec{v} = 2\times4 + (-3)\times1 = 8-3 = 5$.</p>
+<p><strong>2.</strong> $\|\vec{u}\| = \sqrt{4+9} = \sqrt{13}$. $\|\vec{v}\| = \sqrt{16+1} = \sqrt{17}$.</p>
+<p>$\cos\theta = \dfrac{5}{\sqrt{13}\times\sqrt{17}} = \dfrac{5}{\sqrt{221}} \approx 0{,}336$. $\theta \approx 70{,}3°$.</p>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $\overrightarrow{AB}(4,2)$, $\overrightarrow{AC}(2,4)$. $\overrightarrow{AB}\cdot\overrightarrow{AC} = 8+8 = 16 \neq 0$. Pas rectangle en A.</p>
+<p>$\overrightarrow{BA}(-4,-2)$, $\overrightarrow{BC}(-2,2)$. $\overrightarrow{BA}\cdot\overrightarrow{BC} = 8-4 = 4 \neq 0$. Pas rectangle en B.</p>
+<p>$\overrightarrow{CA}(-2,-4)$, $\overrightarrow{CB}(2,-2)$. $\overrightarrow{CA}\cdot\overrightarrow{CB} = -4+8 = 4 \neq 0$. Pas rectangle en C.</p>
+<p>Le triangle n'est pas rectangle.</p>
+<p><strong>2.</strong> $(x-a)^2+(y-b)^2=r^2$. En remplaçant avec A, B, C on obtient un système. Le centre est le point équidistant des trois sommets. Milieu AB = (3,3). La médiatrice de AB a pour vecteur normal $\overrightarrow{AB}(4,2)$ : $4(x-3)+2(y-3)=0$, soit $2x+y=9$. Médiatrice de AC : vecteur normal $\overrightarrow{AC}(2,4)$ : $2(x-2)+4(y-4)=0$, soit $x+2y=10$. Système : $2x+y=9$ et $x+2y=10$. $x=\frac{8}{3}$, $y=\frac{11}{3}$. $r^2=(1-8/3)^2+(2-11/3)^2 = 25/9+25/9 = 50/9$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="../../2020-2021/terminale-spe/suites.html">&larr; Suites numériques</a><a href="python.html">Algorithmique et Python &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function drawPS(){
+  const c=document.getElementById('canvasPS');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.3,oy=h*0.6,sc=40;
+  const ux=parseInt(document.getElementById('pux').value)/10,uy=parseInt(document.getElementById('puy').value)/10;
+  const vx=parseInt(document.getElementById('pvx').value)/10,vy=parseInt(document.getElementById('pvy').value)/10;
+  ['puxv','puyv','pvxv','pvyv'].forEach((id,i)=>{document.getElementById(id).textContent=[ux,uy,vx,vy][i].toFixed(0);});
+  ctx.clearRect(0,0,w,h);
+  // Grid
+  ctx.strokeStyle='#e8e8e8';ctx.lineWidth=0.5;for(let i=-10;i<=10;i++){let px=ox+i*sc;if(px>=0&&px<=w){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();}let py=oy-i*sc;if(py>=0&&py<=h){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();}}
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();
+  // Vectors
+  function arrow(x1,y1,x2,y2,col){ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-10*Math.cos(a-0.35),y2-10*Math.sin(a-0.35));ctx.lineTo(x2-10*Math.cos(a+0.35),y2-10*Math.sin(a+0.35));ctx.closePath();ctx.fill();}
+  arrow(ox,oy,ox+ux*sc,oy-uy*sc,'#2a5298');
+  arrow(ox,oy,ox+vx*sc,oy-vy*sc,'#27ae60');
+  ctx.font='bold 13px Arial';ctx.fillStyle='#2a5298';ctx.fillText('u',ox+ux*sc+5,oy-uy*sc);
+  ctx.fillStyle='#27ae60';ctx.fillText('v',ox+vx*sc+5,oy-vy*sc);
+  const ps=ux*vx+uy*vy;const nu=Math.sqrt(ux*ux+uy*uy);const nv=Math.sqrt(vx*vx+vy*vy);
+  let angle=nu>0&&nv>0?Math.acos(Math.min(1,Math.max(-1,ps/(nu*nv))))*180/Math.PI:0;
+  const orth=ps===0;
+  if(orth){ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.fillText('⊥ ORTHOGONAUX',10,25);}
+  document.getElementById('resultPS').innerHTML='u·v = '+ux.toFixed(0)+'×'+vx.toFixed(0)+' + '+uy.toFixed(0)+'×'+vy.toFixed(0)+' = <strong>'+ps+'</strong>. Angle ≈ '+angle.toFixed(1)+'°.'+(orth?' <strong style="color:#c0392b">Orthogonaux.</strong>':'');
+}
+['pux','puy','pvx','pvy'].forEach(id=>document.getElementById(id).addEventListener('input',drawPS));
+drawPS();
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intégration . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+  .interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+  canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+  .controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+  .controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}
+  .controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem;cursor:pointer}
+  .result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="site-header-inner">
+  <div class="site-titre">Cours de <span>mathématiques</span></div>
+  <nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav>
+</div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+  <div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2019-2020</span></div>
+  <h1 class="cours-titre-principal">Intégration</h1>
+  <p class="cours-sous-titre">Primitives, intégrale, aire sous une courbe, intégration par parties et Python</p>
+</div></div>
+
+<main class="cours-corps">
+
+  <h2>I. Primitives</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>$F$ est une <strong>primitive</strong> de $f$ sur $I$ si $F' = f$ sur $I$. Si $F$ est une primitive de $f$, alors toutes les primitives sont de la forme $F + c$ ($c \in \mathbb{R}$).</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Primitives usuelles</div>
+    <table style="width:100%; border-collapse:collapse; font-size:.9rem; margin-top:.5rem">
+      <thead><tr style="border-bottom:1px solid #e8e8e8"><th style="text-align:left;padding:5px 8px">$f(x)$</th><th style="text-align:left;padding:5px 8px">$F(x)$</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$x^n$ ($n \neq -1$)</td><td style="padding:5px 8px">$\dfrac{x^{n+1}}{n+1}$</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$\dfrac{1}{x}$</td><td style="padding:5px 8px">$\ln|x|$</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$e^x$</td><td style="padding:5px 8px">$e^x$</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0"><td style="padding:5px 8px">$u' e^u$</td><td style="padding:5px 8px">$e^u$</td></tr>
+        <tr><td style="padding:5px 8px">$\dfrac{u'}{u}$</td><td style="padding:5px 8px">$\ln|u|$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>II. Intégrale</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>$$\int_a^b f(x)\, dx = F(b) - F(a)$$</p>
+    <p>où $F$ est une primitive quelconque de $f$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : aire sous une courbe</h4>
+    <canvas id="canvasAire" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Fonction :</label>
+      <select id="funcAire">
+        <option value="carre">f(x) = x²</option>
+        <option value="sin">f(x) = sin(x)</option>
+        <option value="exp">f(x) = e^(-x)</option>
+        <option value="poly">f(x) = -x² + 4</option>
+      </select>
+      <label>a =</label><input type="range" id="aSlider" min="-30" max="30" value="0"><span id="aVal">0</span>
+      <label>b =</label><input type="range" id="bSlider" min="-30" max="40" value="20"><span id="bVal">2</span>
+    </div>
+    <div class="result-text" id="resultAire"></div>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Linéarité : $\int_a^b (\lambda f + \mu g) = \lambda \int_a^b f + \mu \int_a^b g$</li>
+      <li>Chasles : $\int_a^b f = \int_a^c f + \int_c^b f$</li>
+      <li>Positivité : si $f \geq 0$ sur $[a,b]$ alors $\int_a^b f \geq 0$</li>
+      <li>Sens : $\int_a^b f = -\int_b^a f$</li>
+    </ul>
+  </div>
+
+  <h2>III. Intégration par parties</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Formule</div>
+    $$\int_a^b u(x)v'(x)\,dx = [u(x)v(x)]_a^b - \int_a^b u'(x)v(x)\,dx$$
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Calculer $\int_0^1 xe^x\,dx$. On pose $u = x$, $v' = e^x$. Donc $u' = 1$, $v = e^x$.</p>
+    <p>$\int_0^1 xe^x\,dx = [xe^x]_0^1 - \int_0^1 e^x\,dx = e - [e^x]_0^1 = e - (e-1) = 1$.</p>
+  </div>
+
+  <h2>IV. Valeur moyenne</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>La <strong>valeur moyenne</strong> de $f$ sur $[a, b]$ est :</p>
+    $$\mu = \frac{1}{b-a}\int_a^b f(x)\,dx$$
+  </div>
+
+  <h2>V. Python et intégration</h2>
+
+  <div class="exemple">
+    <div class="encadre-titre">Méthode des rectangles en Python</div>
+<pre>
+def integrale_rectangles(f, a, b, n=1000):
+    h = (b - a) / n
+    s = 0
+    for i in range(n):
+        s += f(a + i * h) * h
+    return s
+
+import math
+# Calculer l'intégrale de e^x de 0 à 1
+result = integrale_rectangles(math.exp, 0, 1)
+print(f"Intégrale approchée : {result:.6f}")
+print(f"Valeur exacte (e-1) : {math.e - 1:.6f}")
+</pre>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : méthode des rectangles</h4>
+    <canvas id="canvasRect" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Rectangles :</label>
+      <input type="range" id="nRect" min="1" max="50" value="5"><span id="nRectVal">5</span>
+    </div>
+    <div class="result-text" id="resultRect"></div>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : primitives et intégrales</h3>
+  <ol>
+    <li>$\int_0^3 (2x+1)\,dx$</li>
+    <li>$\int_1^e \dfrac{1}{x}\,dx$</li>
+    <li>$\int_0^1 e^{2x}\,dx$</li>
+    <li>$\int_0^{\pi} \sin x\,dx$</li>
+  </ol>
+
+  <h3>Exercice 2 : intégration par parties</h3>
+  <ol>
+    <li>$\int_0^1 (x+1)e^x\,dx$</li>
+    <li>$\int_1^e x\ln x\,dx$</li>
+  </ol>
+
+  <h3>Exercice 3 : aire</h3>
+  <p>Calculer l'aire entre la courbe de $f(x) = x^2$ et la droite $y = 4$ sur $[-2, 2]$.</p>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $[x^2 + x]_0^3 = (9+3) - 0 = 12$.</p>
+    <p><strong>2.</strong> $[\ln x]_1^e = \ln e - \ln 1 = 1 - 0 = 1$.</p>
+    <p><strong>3.</strong> $[\frac{1}{2}e^{2x}]_0^1 = \frac{1}{2}(e^2 - 1) \approx 3{,}19$.</p>
+    <p><strong>4.</strong> $[-\cos x]_0^{\pi} = -\cos\pi + \cos 0 = 1 + 1 = 2$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $u = x+1$, $v' = e^x$. $u' = 1$, $v = e^x$.</p>
+    <p>$[(x+1)e^x]_0^1 - \int_0^1 e^x\,dx = 2e - 1 - (e-1) = e = e \approx 2{,}718$.</p>
+    <p><strong>2.</strong> $u = \ln x$, $v' = x$. $u' = 1/x$, $v = x^2/2$.</p>
+    <p>$[\frac{x^2}{2}\ln x]_1^e - \int_1^e \frac{x}{2}\,dx = \frac{e^2}{2} - [\frac{x^2}{4}]_1^e = \frac{e^2}{2} - \frac{e^2-1}{4} = \frac{e^2+1}{4} \approx 2{,}10$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p>Sur $[-2, 2]$, $4 \geq x^2$. Aire $= \int_{-2}^{2} (4 - x^2)\,dx = [4x - \frac{x^3}{3}]_{-2}^{2}$.</p>
+    <p>$= (8 - \frac{8}{3}) - (-8 + \frac{8}{3}) = 16 - \frac{16}{3} = \frac{32}{3} \approx 10{,}67$ u.a.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="derivation.html">&larr; Dérivation avancée</a>
+  <a href="../../2020-2021/terminale-spe/exponentielle-log.html">Exponentielle et logarithme &rarr;</a>
+</nav>
+
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function drawGrid(ctx,w,h,ox,oy,sc){ctx.strokeStyle='#e8e8e8';ctx.lineWidth=0.5;for(let i=-20;i<=20;i++){let px=ox+i*sc;if(px>=0&&px<=w){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();}let py=oy-i*sc;if(py>=0&&py<=h){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();}}ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();}
+
+const aireFuncs={
+  carre:{f:x=>x*x,F:(a,b)=>b*b*b/3-a*a*a/3,n:'x²'},
+  sin:{f:x=>Math.sin(x),F:(a,b)=>-Math.cos(b)+Math.cos(a),n:'sin(x)'},
+  exp:{f:x=>Math.exp(-x),F:(a,b)=>-Math.exp(-b)+Math.exp(-a),n:'e^(-x)'},
+  poly:{f:x=>-x*x+4,F:(a,b)=>(-b*b*b/3+4*b)-(-a*a*a/3+4*a),n:'-x²+4'}
+};
+
+function drawAire(){
+  const c=document.getElementById('canvasAire');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.35,oy=h*0.65,sc=40;
+  const a=parseInt(document.getElementById('aSlider').value)/10;
+  const b=parseInt(document.getElementById('bSlider').value)/10;
+  document.getElementById('aVal').textContent=a.toFixed(1);
+  document.getElementById('bVal').textContent=b.toFixed(1);
+  ctx.clearRect(0,0,w,h);drawGrid(ctx,w,h,ox,oy,sc);
+  const sel=document.getElementById('funcAire').value;const af=aireFuncs[sel];
+  // Aire
+  for(let px=Math.max(0,ox+Math.min(a,b)*sc);px<Math.min(w,ox+Math.max(a,b)*sc);px++){
+    let x=(px-ox)/sc;let y=af.f(x);if(!isFinite(y)||Math.abs(y)>10)continue;
+    let py=oy-y*sc;
+    ctx.fillStyle=y>=0?'rgba(42,82,152,0.2)':'rgba(192,57,43,0.2)';
+    if(y>=0)ctx.fillRect(px,py,1,oy-py);else ctx.fillRect(px,oy,1,py-oy);
+  }
+  // Courbe
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;ctx.beginPath();let s=false;
+  for(let px=0;px<w;px++){let x=(px-ox)/sc,y=af.f(x);if(!isFinite(y)||Math.abs(y)>10){s=false;continue;}let py=oy-y*sc;if(!s){ctx.moveTo(px,py);s=true;}else ctx.lineTo(px,py);}ctx.stroke();
+  // Bornes
+  ctx.setLineDash([4,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1;
+  [a,b].forEach(v=>{let px=ox+v*sc;ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();});
+  ctx.setLineDash([]);
+  const integral=af.F(a,b);
+  document.getElementById('resultAire').textContent='∫ de '+a.toFixed(1)+' à '+b.toFixed(1)+' de '+af.n+' dx = '+integral.toFixed(4);
+}
+['funcAire','aSlider','bSlider'].forEach(id=>document.getElementById(id).addEventListener('input',drawAire));
+document.getElementById('funcAire').addEventListener('change',drawAire);
+drawAire();
+
+// === RECTANGLES ===
+function drawRect(){
+  const c=document.getElementById('canvasRect');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.15,oy=h*0.75,sc=80;
+  const n=parseInt(document.getElementById('nRect').value);
+  document.getElementById('nRectVal').textContent=n;
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(ox,10);ctx.lineTo(ox,h-30);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox-10,oy);ctx.lineTo(w-10,oy);ctx.stroke();
+  const f=x=>x*x;const a=0,b=3;
+  const dx=(b-a)/n;let sum=0;
+  for(let i=0;i<n;i++){
+    let xi=a+i*dx;let yi=f(xi);sum+=yi*dx;
+    let px=ox+xi*sc,pw=dx*sc,ph=yi*sc;
+    ctx.fillStyle='rgba(42,82,152,0.25)';ctx.fillRect(px,oy-ph,pw,ph);
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.strokeRect(px,oy-ph,pw,ph);
+  }
+  // Courbe
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2.5;ctx.beginPath();
+  for(let px=ox;px<ox+b*sc;px++){let x=(px-ox)/sc;let y=f(x);ctx.lineTo(px,oy-y*sc);}ctx.stroke();
+  ctx.fillStyle='#666';ctx.font='11px Arial';
+  ctx.fillText('0',ox-3,oy+15);ctx.fillText('3',ox+3*sc-3,oy+15);
+  const exact=9; // ∫0→3 x² = 9
+  document.getElementById('resultRect').textContent=
+    '∫₀³ x² dx ≈ '+sum.toFixed(4)+' ('+n+' rectangles). Valeur exacte : '+exact+'. Erreur : '+(Math.abs(sum-exact)).toFixed(4);
+}
+document.getElementById('nRect').addEventListener('input',drawRect);
+drawRect();
+</script>
+
+</body>
+</html>

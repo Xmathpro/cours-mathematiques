@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probabilités et loi normale . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2020-2021</span></div>
+<h1 class="cours-titre-principal">Probabilités et loi normale</h1>
+<p class="cours-sous-titre">Loi des grands nombres, loi normale, intervalle de fluctuation et estimation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels : loi binomiale</h2>
+
+<div class="propriete"><div class="encadre-titre">$X \sim \mathcal{B}(n, p)$</div>
+<p>$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$. $E(X) = np$. $V(X) = np(1-p)$. $\sigma(X) = \sqrt{np(1-p)}$.</p>
+</div>
+
+<h2>II. Loi normale</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>La <strong>loi normale</strong> $\mathcal{N}(\mu, \sigma^2)$ est une loi continue définie par sa moyenne $\mu$ et son écart-type $\sigma$. Sa courbe de densité est la fameuse "courbe en cloche" symétrique par rapport à $x = \mu$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Règles des 68-95-99.7</div>
+<ul>
+<li>$P(\mu - \sigma \leq X \leq \mu + \sigma) \approx 68\%$</li>
+<li>$P(\mu - 2\sigma \leq X \leq \mu + 2\sigma) \approx 95\%$</li>
+<li>$P(\mu - 3\sigma \leq X \leq \mu + 3\sigma) \approx 99{,}7\%$</li>
+</ul>
+</div>
+
+<div class="definition"><div class="encadre-titre">Loi normale centrée réduite $\mathcal{N}(0, 1)$</div>
+<p>$Z = \dfrac{X - \mu}{\sigma}$ suit $\mathcal{N}(0, 1)$. On ramène toute loi normale à la loi centrée réduite pour utiliser les tables.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : la courbe de Gauss</h4>
+<canvas id="canvasNormale" width="600" height="350"></canvas>
+<div class="controls">
+<label>μ =</label><input type="range" id="muSlider" min="-30" max="30" value="0"><span id="muVal">0</span>
+<label>σ =</label><input type="range" id="sigmaSlider" min="5" max="30" value="10"><span id="sigmaVal">1.0</span>
+</div>
+<div class="result-text" id="resultNormale"></div>
+</div>
+
+<h2>III. Intervalle de fluctuation</h2>
+
+<div class="definition"><div class="encadre-titre">Intervalle de fluctuation au seuil 95%</div>
+<p>Pour une proportion observée $f$ dans un échantillon de taille $n$ :</p>
+$$I_{95} = \left[p - 1{,}96\frac{\sigma}{\sqrt{n}} ;\; p + 1{,}96\frac{\sigma}{\sqrt{n}}\right]$$
+<p>avec $\sigma = \sqrt{p(1-p)}$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">À méditer</div>
+<p>L'intervalle de fluctuation est utilisé pour décider si un écart observé est "significatif" ou dû au hasard. Si la fréquence observée est en dehors de l'intervalle, on rejette l'hypothèse. Ce seuil de 95% est une convention, pas une vérité absolue. Pourquoi 95% et pas 90% ou 99% ? C'est un choix qui reflète un compromis entre prudence et sensibilité. Ce choix a des conséquences concrètes dans la recherche scientifique et médicale.</p>
+</div>
+
+<h2>IV. Estimation</h2>
+
+<div class="definition"><div class="encadre-titre">Intervalle de confiance</div>
+<p>On observe une fréquence $f$ dans un échantillon de taille $n$. L'intervalle de confiance au niveau 95% pour la vraie proportion $p$ est :</p>
+$$IC_{95} = \left[f - \frac{1}{\sqrt{n}} ;\; f + \frac{1}{\sqrt{n}}\right]$$
+<p>(formule simplifiée au programme de terminale).</p>
+</div>
+
+<h2>V. Python</h2>
+
+<div class="exemple"><div class="encadre-titre">Simuler la loi des grands nombres</div>
+<pre>
+import random
+
+def simuler_proportion(n, p=0.5):
+    """Simule n lancers de pièce et retourne la fréquence de pile"""
+    succes = sum(1 for _ in range(n) if random.random() < p)
+    return succes / n
+
+# La fréquence se rapproche de p quand n augmente
+for n in [10, 100, 1000, 10000, 100000]:
+    freq = simuler_proportion(n)
+    print(f"n = {n:>6} : fréquence = {freq:.4f}")
+</pre>
+</div>
+
+<h2>VI. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>$X \sim \mathcal{N}(50, 10^2)$.</p>
+<ol><li>Calculer $P(40 \leq X \leq 60)$.</li><li>Calculer $P(X \geq 70)$.</li></ol>
+
+<h3>Exercice 2</h3>
+<p>Un sondage sur 400 personnes donne 55% d'opinions favorables.</p>
+<ol><li>Calculer l'intervalle de confiance à 95%.</li><li>Peut-on conclure que la majorité est favorable ?</li></ol>
+
+<h2>VII. Corrigés</h2>
+
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $40 = \mu - \sigma$ et $60 = \mu + \sigma$. Par la règle des 68% : $P(40 \leq X \leq 60) \approx 68\%$.</p>
+<p><strong>2.</strong> $70 = \mu + 2\sigma$. $P(X \leq 70) \approx 97{,}5\%$ donc $P(X \geq 70) \approx 2{,}5\%$.</p>
+</div>
+
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $IC = [0{,}55 - \frac{1}{\sqrt{400}} ;\; 0{,}55 + \frac{1}{\sqrt{400}}] = [0{,}55 - 0{,}05 ;\; 0{,}55 + 0{,}05] = [0{,}50 ;\; 0{,}60]$.</p>
+<p><strong>2.</strong> L'intervalle contient 0,50 (la limite de la majorité). On ne peut donc pas conclure avec certitude que la majorité est favorable. Il faudrait un échantillon plus grand ou une proportion plus nette.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="exponentielle-log.html">&larr; Exponentielle et logarithme</a><a href="suites.html">Suites numériques &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function drawNormale(){
+  const c=document.getElementById('canvasNormale');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const mu=parseInt(document.getElementById('muSlider').value)/10;
+  const sigma=parseInt(document.getElementById('sigmaSlider').value)/10;
+  document.getElementById('muVal').textContent=mu.toFixed(1);
+  document.getElementById('sigmaVal').textContent=sigma.toFixed(1);
+  ctx.clearRect(0,0,w,h);
+  const margin={l:40,r:20,t:20,b:40};const pw=w-margin.l-margin.r,ph=h-margin.t-margin.b;
+  const xMin=mu-4*sigma,xMax=mu+4*sigma,xRange=xMax-xMin;
+  const gauss=x=>Math.exp(-0.5*((x-mu)/sigma)**2)/(sigma*Math.sqrt(2*Math.PI));
+  const yMax=gauss(mu)*1.1;
+  // Axes
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(margin.l,h-margin.b);ctx.lineTo(w-margin.r,h-margin.b);ctx.stroke();
+  // Zone 68%
+  for(let px=0;px<pw;px++){let x=xMin+(px/pw)*xRange;let y=gauss(x);let py=h-margin.b-(y/yMax)*ph;
+    if(x>=mu-sigma&&x<=mu+sigma){ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(margin.l+px,py,1,h-margin.b-py);}}
+  // Zone 95%
+  for(let px=0;px<pw;px++){let x=xMin+(px/pw)*xRange;let y=gauss(x);let py=h-margin.b-(y/yMax)*ph;
+    if((x>=mu-2*sigma&&x<mu-sigma)||(x>mu+sigma&&x<=mu+2*sigma)){ctx.fillStyle='rgba(39,174,96,0.15)';ctx.fillRect(margin.l+px,py,1,h-margin.b-py);}}
+  // Courbe
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;ctx.beginPath();
+  for(let px=0;px<pw;px++){let x=xMin+(px/pw)*xRange;let y=gauss(x);let py=h-margin.b-(y/yMax)*ph;px===0?ctx.moveTo(margin.l+px,py):ctx.lineTo(margin.l+px,py);}ctx.stroke();
+  // Labels
+  ctx.fillStyle='#444';ctx.font='11px Arial';
+  ctx.fillText('μ='+mu.toFixed(1),margin.l+pw/2-15,h-margin.b+15);
+  ctx.fillText('μ-σ',margin.l+pw*(sigma/(4*sigma*2))-10,h-margin.b+15);
+  ctx.fillText('μ+σ',margin.l+pw-pw*(sigma/(4*sigma*2))-10,h-margin.b+15);
+  ctx.fillStyle='#2a5298';ctx.fillText('68%',margin.l+pw/2-10,h-margin.b-ph*0.3);
+  document.getElementById('resultNormale').textContent='μ = '+mu.toFixed(1)+', σ = '+sigma.toFixed(1)+'. 68% des valeurs entre '+(mu-sigma).toFixed(1)+' et '+(mu+sigma).toFixed(1)+'. 95% entre '+(mu-2*sigma).toFixed(1)+' et '+(mu+2*sigma).toFixed(1)+'.';
+}
+['muSlider','sigmaSlider'].forEach(id=>document.getElementById(id).addEventListener('input',drawNormale));
+drawNormale();
+</script>
+</body>
+</html>

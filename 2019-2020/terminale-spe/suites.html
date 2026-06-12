@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suites numériques . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:120px;cursor:pointer}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#terminale-spe">Terminale spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Terminale spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2020-2021</span></div>
+<h1 class="cours-titre-principal">Suites numériques</h1>
+<p class="cours-sous-titre">Limites de suites, récurrence, suites auxiliaires et Python</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Limites de suites</h2>
+
+<div class="propriete"><div class="encadre-titre">Limites de suites géométriques $q^n$</div>
+<ul><li>$|q|<1$ : $\lim q^n = 0$</li><li>$q=1$ : $\lim q^n = 1$</li><li>$q>1$ : $\lim q^n = +\infty$</li><li>$q \leq -1$ : pas de limite</li></ul>
+</div>
+
+<div class="theoreme"><div class="encadre-titre">Théorème des gendarmes</div>
+<p>Si $u_n \leq v_n \leq w_n$ et $\lim u_n = \lim w_n = \ell$, alors $\lim v_n = \ell$.</p>
+</div>
+
+<div class="theoreme"><div class="encadre-titre">Convergence monotone</div>
+<p>Toute suite croissante majorée converge. Toute suite décroissante minorée converge.</p>
+</div>
+
+<h2>II. Raisonnement par récurrence</h2>
+
+<div class="methode"><div class="encadre-titre">Méthode</div>
+<p><strong>Initialisation :</strong> vérifier $P(n_0)$.</p>
+<p><strong>Hérédité :</strong> supposer $P(n)$ et montrer $P(n+1)$.</p>
+<p><strong>Conclusion :</strong> $P(n)$ vraie pour tout $n \geq n_0$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : convergence d'une suite récurrente $u_{n+1} = au_n + b$</h4>
+<canvas id="canvasSuite" width="600" height="350"></canvas>
+<div class="controls">
+<label>a =</label><input type="range" id="aSuite" min="-15" max="15" value="5"><span id="aSuiteVal">0.5</span>
+<label>b =</label><input type="range" id="bSuite" min="-30" max="30" value="20"><span id="bSuiteVal">2</span>
+<label>u₀ =</label><input type="range" id="u0Suite" min="-30" max="30" value="10"><span id="u0Val">10</span>
+</div>
+<div class="result-text" id="resultSuite"></div>
+</div>
+
+<h2>III. Suites auxiliaires</h2>
+
+<div class="methode"><div class="encadre-titre">Suite $u_{n+1} = au_n + b$ ($a \neq 1$)</div>
+<p>Point fixe : $\ell = \dfrac{b}{1-a}$. On pose $v_n = u_n - \ell$. Alors $(v_n)$ est géométrique de raison $a$ :</p>
+$$u_n = (u_0 - \ell) \cdot a^n + \ell$$
+</div>
+
+<h2>IV. Python et suites</h2>
+
+<div class="exemple"><div class="encadre-titre">Calculer les termes d'une suite récurrente</div>
+<pre>
+def suite_recursive(u0, a, b, n):
+    u = u0
+    for i in range(n):
+        u = a * u + b
+    return u
+
+# u0 = 10, u_{n+1} = 0.5*u_n + 2
+for n in range(20):
+    print(f"u_{n} = {suite_recursive(10, 0.5, 2, n):.4f}")
+# Converge vers 4 (point fixe : 2/(1-0.5) = 4)
+</pre>
+</div>
+
+<h2>V. Exercices</h2>
+<h3>Exercice 1</h3>
+<p>$u_0 = 8$ et $u_{n+1} = 0{,}7u_n + 3$.</p>
+<ol><li>Calculer le point fixe.</li><li>Exprimer $u_n$ en fonction de $n$.</li><li>Calculer $\lim u_n$.</li></ol>
+
+<h3>Exercice 2</h3>
+<p>Montrer par récurrence que $2^n \geq n^2$ pour tout $n \geq 4$.</p>
+
+<h2>VI. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $\ell = \dfrac{3}{1-0{,}7} = \dfrac{3}{0{,}3} = 10$.</p>
+<p><strong>2.</strong> $u_n = (8-10) \times 0{,}7^n + 10 = -2 \times 0{,}7^n + 10$.</p>
+<p><strong>3.</strong> $|0{,}7| < 1$ donc $0{,}7^n \to 0$. $\lim u_n = 10$.</p>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>Init ($n=4$) :</strong> $2^4 = 16 \geq 4^2 = 16$. Vrai.</p>
+<p><strong>Hérédité :</strong> supposons $2^n \geq n^2$ pour $n \geq 4$.</p>
+<p>$2^{n+1} = 2 \times 2^n \geq 2n^2$. Il suffit de montrer $2n^2 \geq (n+1)^2 = n^2+2n+1$.</p>
+<p>$2n^2 \geq n^2+2n+1 \iff n^2-2n-1 \geq 0 \iff (n-1)^2 \geq 2$. Vrai pour $n \geq 4$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="probabilites.html">&larr; Probabilités et loi normale</a><a href="../../2021-2022/terminale-spe/geometrie.html">Géométrie et produit scalaire &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function drawSuite(){
+  const c=document.getElementById('canvasSuite');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('aSuite').value)/10;
+  const b=parseInt(document.getElementById('bSuite').value)/10;
+  const u0=parseInt(document.getElementById('u0Suite').value)/10*5;
+  document.getElementById('aSuiteVal').textContent=a.toFixed(1);
+  document.getElementById('bSuiteVal').textContent=b.toFixed(0);
+  document.getElementById('u0Val').textContent=u0.toFixed(0);
+  ctx.clearRect(0,0,w,h);
+  const margin={l:50,r:20,t:20,b:40};const pw=w-margin.l-margin.r,ph=h-margin.t-margin.b;
+  const N=30;const terms=[];let u=u0;
+  for(let i=0;i<=N;i++){terms.push(u);u=a*u+b;}
+  let yMin=Math.min(...terms),yMax=Math.max(...terms);
+  if(yMin===yMax){yMin-=1;yMax+=1;}const pad=(yMax-yMin)*0.1;yMin-=pad;yMax+=pad;
+  // Axes
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(margin.l,margin.t);ctx.lineTo(margin.l,h-margin.b);ctx.lineTo(w-margin.r,h-margin.b);ctx.stroke();
+  // Point fixe
+  if(a!==1){const pf=b/(1-a);
+    if(pf>=yMin&&pf<=yMax){const pyf=margin.t+ph-((pf-yMin)/(yMax-yMin))*ph;
+    ctx.setLineDash([4,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(margin.l,pyf);ctx.lineTo(w-margin.r,pyf);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#c0392b';ctx.font='11px Arial';ctx.fillText('ℓ='+pf.toFixed(1),w-margin.r-50,pyf-5);}}
+  // Points
+  terms.forEach((v,i)=>{if(i>N)return;
+    let px=margin.l+(i/N)*pw;let py=margin.t+ph-((v-yMin)/(yMax-yMin))*ph;
+    ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);ctx.fill();
+    if(i>0){let ppx=margin.l+((i-1)/N)*pw;let ppy=margin.t+ph-((terms[i-1]-yMin)/(yMax-yMin))*ph;
+    ctx.strokeStyle='rgba(42,82,152,0.4)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ppx,ppy);ctx.lineTo(px,py);ctx.stroke();}
+  });
+  let desc='u₀='+u0.toFixed(0)+', u_{n+1}='+a.toFixed(1)+'u_n+'+b.toFixed(0)+'. ';
+  if(a!==1)desc+='Point fixe ℓ='+( b/(1-a)).toFixed(1)+'. ';
+  if(Math.abs(a)<1)desc+='Converge vers ℓ.';
+  else if(Math.abs(a)>1)desc+='Diverge.';
+  else desc+='Suite arithmétique de raison '+b.toFixed(0)+'.';
+  document.getElementById('resultSuite').textContent=desc;
+}
+['aSuite','bSuite','u0Suite'].forEach(id=>document.getElementById(id).addEventListener('input',drawSuite));
+drawSuite();
+</script>
+</body>
+</html>
