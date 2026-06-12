@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limites de fonctions . Terminale spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin: 1.5rem 0; }
+  .interactive-box h4 { font-family: Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #2a5298; margin-bottom: 0.75rem; }
+  canvas { display: block; margin: 0 auto; border: 1px solid #e8e8e8; border-radius: 4px; max-width: 100%; }
+  .controls { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.75rem; font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; }
+  .controls label { font-weight: bold; }
+  .controls input[type="range"] { width: 120px; cursor: pointer; }
+  .controls select { padding: 3px 8px; border: 1px solid #ccc; border-radius: 3px; font-size: 0.85rem; cursor: pointer; }
+  .controls button { background: #2a5298; color: #fff; border: none; padding: 5px 14px; border-radius: 4px; cursor: pointer; font-size: 0.82rem; }
+  .controls button:hover { background: #1e3d72; }
+  .result-text { font-family: Arial, sans-serif; font-size: 0.85rem; color: #444; margin-top: 0.5rem; min-height: 1.2em; line-height: 1.7; }
+</style>
+</head>
+<body>
 
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-spe">Terminale spé</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale spécialité</span>
+      <span>Programme 2019-2026</span>
+      <span>Luxembourg . 2019-2020</span>
+    </div>
+    <h1 class="cours-titre-principal">Limites de fonctions</h1>
+    <p class="cours-sous-titre">Limites en l'infini, en un point, asymptotes, formes indéterminées et Python</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Limites en l'infini</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>On dit que $f(x)$ tend vers $\ell$ quand $x$ tend vers $+\infty$ si $f(x)$ se rapproche indéfiniment de $\ell$ quand $x$ devient très grand. On note :</p>
+    $$\lim_{x \to +\infty} f(x) = \ell$$
+    <p>La droite $y = \ell$ est alors une <strong>asymptote horizontale</strong> à la courbe de $f$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Limites de référence</div>
+    <ul>
+      <li>$\lim_{x \to +\infty} x^n = +\infty$ pour $n \geq 1$</li>
+      <li>$\lim_{x \to +\infty} \dfrac{1}{x^n} = 0$ pour $n \geq 1$</li>
+      <li>$\lim_{x \to +\infty} \sqrt{x} = +\infty$</li>
+      <li>$\lim_{x \to +\infty} e^x = +\infty$ et $\lim_{x \to -\infty} e^x = 0$</li>
+      <li>$\lim_{x \to +\infty} \ln x = +\infty$ et $\lim_{x \to 0^+} \ln x = -\infty$</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : limite d'une fonction en l'infini</h4>
+    <canvas id="canvasLimite" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Fonction :</label>
+      <select id="funcLim">
+        <option value="ratio">f(x) = (2x+1)/(x-1)</option>
+        <option value="exp_decay">f(x) = 3e^(-x) + 1</option>
+        <option value="sqrt">f(x) = √x</option>
+        <option value="ln">f(x) = ln(x)</option>
+        <option value="poly">f(x) = x³ - 2x</option>
+      </select>
+      <label>Zoom :</label>
+      <input type="range" id="zoomLim" min="5" max="50" value="20">
+    </div>
+    <div class="result-text" id="resultLimite"></div>
+  </div>
+
+  <h2>II. Formes indéterminées</h2>
+
+  <div class="remarque">
+    <div class="encadre-titre">Les quatre formes indéterminées</div>
+    <p>Certaines combinaisons de limites ne permettent pas de conclure directement :</p>
+    <p style="text-align:center; font-size: 1.1rem; margin: 0.75rem 0;">
+      $\dfrac{\infty}{\infty}$ &emsp; $\dfrac{0}{0}$ &emsp; $\infty - \infty$ &emsp; $0 \times \infty$
+    </p>
+    <p>Dans ces cas, il faut transformer l'expression pour lever l'indétermination.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode 1 : factoriser par le terme dominant</div>
+    <p>Pour $\dfrac{\infty}{\infty}$ avec des polynômes, on factorise par la plus grande puissance.</p>
+    <p><strong>Exemple.</strong> $\lim_{x \to +\infty} \dfrac{3x^2 - x + 1}{2x^2 + 5x} = \lim \dfrac{x^2(3 - 1/x + 1/x^2)}{x^2(2 + 5/x)} = \dfrac{3}{2}$.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode 2 : expression conjuguée</div>
+    <p>Pour $\infty - \infty$ avec des racines.</p>
+    <p><strong>Exemple.</strong> $\lim_{x \to +\infty} (\sqrt{x+1} - \sqrt{x}) = \lim \dfrac{1}{\sqrt{x+1}+\sqrt{x}} = 0$.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Croissances comparées</div>
+    <p>En $+\infty$ : $e^x$ domine $x^n$ qui domine $\ln x$.</p>
+    <ul>
+      <li>$\lim_{x \to +\infty} \dfrac{e^x}{x^n} = +\infty$ pour tout $n$</li>
+      <li>$\lim_{x \to +\infty} \dfrac{\ln x}{x^n} = 0$ pour tout $n \geq 1$</li>
+      <li>$\lim_{x \to +\infty} x^n e^{-x} = 0$ pour tout $n$</li>
+      <li>$\lim_{x \to 0^+} x^n \ln x = 0$ pour tout $n \geq 1$</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : croissances comparées</h4>
+    <canvas id="canvasCroissance" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Comparer :</label>
+      <select id="compCroiss">
+        <option value="exp_poly">e^x vs x³</option>
+        <option value="poly_ln">x vs ln(x)</option>
+        <option value="exp_neg">x² × e^(-x)</option>
+        <option value="xln">x × ln(x) en 0+</option>
+      </select>
+    </div>
+    <div class="result-text" id="resultCroissance"></div>
+  </div>
+
+  <h2>III. Limite en un point et asymptotes verticales</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Asymptote verticale</div>
+    <p>Si $\lim_{x \to a} f(x) = \pm\infty$, la droite $x = a$ est une <strong>asymptote verticale</strong> à la courbe.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : asymptotes d'une fonction rationnelle</h4>
+    <canvas id="canvasAsymptote" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>f(x) = (ax + b) / (cx + d)</label>
+      <label>a =</label><input type="range" id="aA" min="-30" max="30" value="20"><span id="aAv">2</span>
+      <label>b =</label><input type="range" id="bA" min="-30" max="30" value="10"><span id="bAv">1</span>
+      <label>c =</label><input type="range" id="cA" min="-30" max="30" value="10"><span id="cAv">1</span>
+      <label>d =</label><input type="range" id="dA" min="-30" max="30" value="-20"><span id="dAv">-2</span>
+    </div>
+    <div class="result-text" id="resultAsymptote"></div>
+  </div>
+
+  <h2>IV. Théorèmes de comparaison</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème des gendarmes</div>
+    <p>Si $u(x) \leq f(x) \leq v(x)$ au voisinage de $a$ (ou de $+\infty$) et si $\lim u(x) = \lim v(x) = \ell$, alors $\lim f(x) = \ell$.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>$\lim_{x \to +\infty} \dfrac{\sin x}{x} = 0$ car $-\dfrac{1}{x} \leq \dfrac{\sin x}{x} \leq \dfrac{1}{x}$ et $\lim \dfrac{\pm 1}{x} = 0$.</p>
+  </div>
+
+  <h2>V. Python et limites</h2>
+
+  <div class="exemple">
+    <div class="encadre-titre">Conjecturer une limite avec Python</div>
+<pre>
+import math
+
+def f(x):
+    return (2*x**2 + 3*x - 1) / (x**2 - 5)
+
+# Tester pour de grandes valeurs de x
+for x in [10, 100, 1000, 10000, 100000]:
+    print(f"f({x}) = {f(x):.6f}")
+
+# Résultat : f(x) se rapproche de 2.0
+# On conjecture que la limite en +infini est 2
+</pre>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Visualiser les croissances comparées</div>
+<pre>
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0.1, 10, 200)
+
+plt.figure(figsize=(8, 5))
+plt.plot(x, np.exp(x), label='e^x', color='red')
+plt.plot(x, x**3, label='x³', color='blue')
+plt.plot(x, np.log(x) * 100, label='100 × ln(x)', color='green')
+plt.ylim(0, 500)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.title("Croissances comparées")
+plt.show()
+# Même en multipliant ln(x) par 100, e^x finit par dominer
+</pre>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : limites directes</h3>
+  <p>Calculer les limites suivantes :</p>
+  <ol>
+    <li>$\lim_{x \to +\infty} \dfrac{5x^3 - 2x}{3x^3 + x^2 - 1}$</li>
+    <li>$\lim_{x \to +\infty} (e^x - x^2)$</li>
+    <li>$\lim_{x \to 0^+} x \ln x$</li>
+    <li>$\lim_{x \to 2} \dfrac{x^2 - 4}{x - 2}$</li>
+    <li>$\lim_{x \to +\infty} \dfrac{\ln x}{\sqrt{x}}$</li>
+  </ol>
+
+  <h3>Exercice 2 : asymptotes</h3>
+  <p>Soit $f(x) = \dfrac{x^2 + 3x - 1}{x + 2}$.</p>
+  <ol>
+    <li>Déterminer l'ensemble de définition.</li>
+    <li>Étudier la limite en $x = -2$. En déduire une asymptote verticale.</li>
+    <li>Effectuer la division euclidienne de $x^2 + 3x - 1$ par $x + 2$.</li>
+    <li>En déduire une asymptote oblique.</li>
+  </ol>
+
+  <h3>Exercice 3 : Python</h3>
+  <p>Écrire un programme Python qui conjecture la limite de $f(x) = \dfrac{e^x}{x^{10}}$ en $+\infty$ en testant les valeurs $x = 10, 20, 30, 40, 50$.</p>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> FI $\frac{\infty}{\infty}$. On factorise par $x^3$ : limite $= \dfrac{5}{3}$.</p>
+    <p><strong>2.</strong> FI $\infty - \infty$. Par croissance comparée, $e^x$ domine $x^2$. Limite $= +\infty$.</p>
+    <p><strong>3.</strong> FI $0 \times \infty$. Par croissance comparée, $\lim_{x \to 0^+} x\ln x = 0$.</p>
+    <p><strong>4.</strong> FI $\frac{0}{0}$. On factorise : $\dfrac{(x-2)(x+2)}{x-2} = x+2 \to 4$.</p>
+    <p><strong>5.</strong> On écrit $\dfrac{\ln x}{\sqrt{x}} = \dfrac{\ln x}{x^{1/2}}$. Par croissance comparée (ln dominé par toute puissance) : limite $= 0$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $D_f = \mathbb{R} \setminus \{-2\}$.</p>
+    <p><strong>2.</strong> Numérateur en $-2$ : $4 - 6 - 1 = -3 \neq 0$. Dénominateur $\to 0$.</p>
+    <p>$\lim_{x \to -2^+} f(x) = \dfrac{-3}{0^+} = -\infty$ et $\lim_{x \to -2^-} f(x) = +\infty$.</p>
+    <p>$x = -2$ est asymptote verticale.</p>
+    <p><strong>3.</strong> $x^2 + 3x - 1 = (x+2)(x+1) - 3$. Donc $f(x) = x + 1 - \dfrac{3}{x+2}$.</p>
+    <p><strong>4.</strong> $\lim_{x \to \pm\infty} \dfrac{3}{x+2} = 0$, donc $f(x) \to x + 1$.</p>
+    <p>La droite $y = x + 1$ est asymptote oblique.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+<pre>
+import math
+
+def f(x):
+    return math.exp(x) / x**10
+
+for x in [10, 20, 30, 40, 50]:
+    print(f"f({x}) = {f(x):.2f}")
+
+# f(10) = 2.20
+# f(20) = 47.32
+# f(30) = 10686.47
+# f(40) = 5533021.56
+# f(50) = 5320482040.38
+# La limite est clairement +infini.
+# e^x domine x^10 par croissance comparée.
+</pre>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../index.html">&larr; Accueil</a>
+  <a href="derivation.html">Dérivation avancée &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2026
+</footer>
+
+<script>
+function drawGrid(ctx,w,h,ox,oy,sc){ctx.strokeStyle='#e8e8e8';ctx.lineWidth=0.5;for(let i=-20;i<=20;i++){let px=ox+i*sc;if(px>=0&&px<=w){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();}let py=oy-i*sc;if(py>=0&&py<=h){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();}}ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();}
+function plotF(ctx,f,ox,oy,sc,w,color,lw){ctx.strokeStyle=color;ctx.lineWidth=lw||2;ctx.beginPath();let s=false;for(let px=0;px<w;px++){let x=(px-ox)/sc,y=f(x);if(!isFinite(y)||Math.abs(y)>50){s=false;continue;}let py=oy-y*sc;if(!s){ctx.moveTo(px,py);s=true;}else ctx.lineTo(px,py);}ctx.stroke();}
+
+// === LIMITE ===
+const limFuncs={
+  ratio:{f:x=>x===1?NaN:(2*x+1)/(x-1),desc:'Limite en +∞ : 2 (AH y=2). Asymptote verticale x=1.'},
+  exp_decay:{f:x=>3*Math.exp(-x)+1,desc:'Limite en +∞ : 1 (AH y=1). Décroissance exponentielle vers 1.'},
+  sqrt:{f:x=>x<0?NaN:Math.sqrt(x),desc:'Limite en +∞ : +∞. Croissance de plus en plus lente.'},
+  ln:{f:x=>x<=0?NaN:Math.log(x),desc:'Limite en +∞ : +∞ (très lente). Limite en 0+ : -∞ (AV x=0).'},
+  poly:{f:x=>x*x*x-2*x,desc:'Limite en +∞ : +∞. Limite en -∞ : -∞. Pas d\'asymptote.'}
+};
+function drawLimite(){
+  const c=document.getElementById('canvasLimite');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const sc=parseInt(document.getElementById('zoomLim').value)*2;const ox=w*0.3,oy=h*0.5;
+  ctx.clearRect(0,0,w,h);drawGrid(ctx,w,h,ox,oy,sc);
+  const sel=document.getElementById('funcLim').value;const lf=limFuncs[sel];
+  plotF(ctx,lf.f,ox,oy,sc,w,'#2a5298',2.5);
+  document.getElementById('resultLimite').textContent=lf.desc;
+}
+document.getElementById('funcLim').addEventListener('change',drawLimite);
+document.getElementById('zoomLim').addEventListener('input',drawLimite);
+drawLimite();
+
+// === CROISSANCES COMPARÉES ===
+const croissF={
+  exp_poly:{fs:[{f:x=>Math.exp(x),c:'#c0392b',n:'e^x'},{f:x=>x*x*x,c:'#2a5298',n:'x³'}],desc:'e^x finit toujours par dépasser x³ (et toute puissance de x).'},
+  poly_ln:{fs:[{f:x=>x,c:'#2a5298',n:'x'},{f:x=>x>0?Math.log(x):NaN,c:'#27ae60',n:'ln(x)'}],desc:'x croît bien plus vite que ln(x). Le rapport x/ln(x) tend vers +∞.'},
+  exp_neg:{fs:[{f:x=>x*x*Math.exp(-x),c:'#8e44ad',n:'x²e^(-x)'}],desc:'x²e^(-x) → 0 en +∞. L\'exponentielle décroissante l\'emporte sur x².'},
+  xln:{fs:[{f:x=>x>0?x*Math.log(x):NaN,c:'#e67e22',n:'x·ln(x)'}],desc:'x·ln(x) → 0 quand x → 0+. La puissance l\'emporte sur le logarithme.'}
+};
+function drawCroissance(){
+  const c=document.getElementById('canvasCroissance');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w*0.2,oy=h*0.7,sc=25;
+  ctx.clearRect(0,0,w,h);drawGrid(ctx,w,h,ox,oy,sc);
+  const sel=document.getElementById('compCroiss').value;const cf=croissF[sel];
+  cf.fs.forEach(ff=>plotF(ctx,ff.f,ox,oy,sc,w,ff.c,2.5));
+  let legend=cf.fs.map(ff=>'<span style="color:'+ff.c+';font-weight:bold">'+ff.n+'</span>').join(' vs ');
+  document.getElementById('resultCroissance').innerHTML=legend+'. '+cf.desc;
+}
+document.getElementById('compCroiss').addEventListener('change',drawCroissance);
+drawCroissance();
+
+// === ASYMPTOTES ===
+function drawAsymptote(){
+  const c=document.getElementById('canvasAsymptote');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const ox=w/2,oy=h/2,sc=40;
+  const a=parseInt(document.getElementById('aA').value)/10;
+  const b=parseInt(document.getElementById('bA').value)/10;
+  const cc=parseInt(document.getElementById('cA').value)/10;
+  const d=parseInt(document.getElementById('dA').value)/10;
+  ['aAv','bAv','cAv','dAv'].forEach((id,i)=>{document.getElementById(id).textContent=[a,b,cc,d][i].toFixed(0);});
+  ctx.clearRect(0,0,w,h);drawGrid(ctx,w,h,ox,oy,sc);
+  if(cc===0){document.getElementById('resultAsymptote').textContent='c ne peut pas être 0.';return;}
+  const xv=-d/cc;
+  const yh=a/cc;
+  // AV
+  const pxv=ox+xv*sc;
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(pxv,0);ctx.lineTo(pxv,h);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='11px Arial';ctx.fillText('AV: x='+xv.toFixed(1),pxv+5,20);
+  // AH
+  const pyh=oy-yh*sc;
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#27ae60';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,pyh);ctx.lineTo(w,pyh);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#27ae60';ctx.font='11px Arial';ctx.fillText('AH: y='+yh.toFixed(1),w-80,pyh-8);
+  // Courbe
+  plotF(ctx,x=>{let den=cc*x+d;return den===0?NaN:(a*x+b)/den;},ox,oy,sc,w,'#2a5298',2.5);
+  document.getElementById('resultAsymptote').textContent='f(x) = ('+a.toFixed(0)+'x+'+b.toFixed(0)+')/('+cc.toFixed(0)+'x+'+d.toFixed(0)+'). AV: x='+xv.toFixed(1)+'. AH: y='+yh.toFixed(1)+'.';
+}
+['aA','bA','cA','dA'].forEach(id=>document.getElementById(id).addEventListener('input',drawAsymptote));
+drawAsymptote();
+</script>
+
+</body>
+</html>
