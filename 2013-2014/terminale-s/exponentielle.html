@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonction exponentielle . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2013-2014</span>
+    </div>
+    <h1 class="cours-titre-principal">Fonction exponentielle</h1>
+    <p class="cours-sous-titre">Définition, propriétés algébriques, dérivée, limites et applications</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Définition et propriété fondamentale</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Théorème d'existence et d'unicité</div>
+    <p>
+      Il existe une unique fonction $f$ définie et dérivable sur $\mathbb{R}$ telle que :
+      $$f' = f \quad \text{et} \quad f(0) = 1$$
+      Cette fonction est la <strong>fonction exponentielle</strong>, notée $\exp$ ou $e^x$.
+    </p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Ce que dit cette définition</div>
+    <p>
+      L'exponentielle est la seule fonction qui est sa propre dérivée et qui vaut 1 en 0.
+      Autrement dit, en chaque point de sa courbe, le coefficient directeur de la tangente est égal à la valeur de la fonction elle-même. Plus la fonction est grande, plus elle croît vite. C'est ce qui rend la croissance exponentielle si redoutable.
+    </p>
+  </div>
+
+  <h2>II. Propriétés algébriques</h2>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés fondamentales</div>
+    <p>Pour tous réels $a$ et $b$ :</p>
+    <ul>
+      <li>$e^{a+b} = e^a \times e^b$</li>
+      <li>$e^{a-b} = \dfrac{e^a}{e^b}$</li>
+      <li>$(e^a)^n = e^{na}$ pour tout entier $n$</li>
+      <li>$e^{-a} = \dfrac{1}{e^a}$</li>
+      <li>$e^0 = 1$</li>
+      <li>$e^x > 0$ pour tout $x \in \mathbb{R}$</li>
+    </ul>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Remarque essentielle</div>
+    <p>L'exponentielle transforme les sommes en produits. C'est la propriété la plus importante à retenir :</p>
+    <p style="text-align:center;">$e^{a+b} = e^a \times e^b$ (la somme en exposant devient un produit).</p>
+    <p>Cela explique pourquoi l'exponentielle apparaît dans tout modèle multiplicatif : intérêts composés, croissance biologique, désintégration radioactive.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : simplifier des expressions</div>
+    <p><strong>1.</strong> Simplifier $A = \dfrac{e^{3x} \times e^{2x}}{e^{x}}$.</p>
+    <p>$A = \dfrac{e^{3x+2x}}{e^x} = \dfrac{e^{5x}}{e^x} = e^{5x-x} = e^{4x}$.</p>
+    <p style="margin-top:0.75rem;"><strong>2.</strong> Simplifier $B = (e^{2x})^3 \times e^{-x}$.</p>
+    <p>$B = e^{6x} \times e^{-x} = e^{6x-x} = e^{5x}$.</p>
+  </div>
+
+  <h2>III. Résolution d'équations et d'inéquations</h2>
+
+  <div class="propriete">
+    <div class="encadre-titre">Règles fondamentales</div>
+    <p>La fonction exponentielle est <strong>strictement croissante</strong> sur $\mathbb{R}$. Donc :</p>
+    <ul>
+      <li>$e^a = e^b \iff a = b$</li>
+      <li>$e^a < e^b \iff a < b$</li>
+      <li>$e^a > 0$ pour tout $a$ (l'exponentielle ne s'annule jamais)</li>
+    </ul>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre des équations</div>
+    <p><strong>1.</strong> Résoudre $e^{2x-1} = e^{x+3}$.</p>
+    <p>Par injectivité : $2x - 1 = x + 3$, donc $x = 4$.</p>
+    <p style="margin-top:0.75rem;"><strong>2.</strong> Résoudre $e^{2x} - 5e^x + 6 = 0$.</p>
+    <p>On pose $X = e^x$ (avec $X > 0$). L'équation devient $X^2 - 5X + 6 = 0$.</p>
+    <p>$\Delta = 25 - 24 = 1$. Les racines sont $X = 2$ et $X = 3$.</p>
+    <p>$e^x = 2 \implies x = \ln 2$ et $e^x = 3 \implies x = \ln 3$.</p>
+    <p>Les solutions sont $x = \ln 2$ et $x = \ln 3$.</p>
+    <p style="margin-top:0.75rem;"><strong>3.</strong> Résoudre $e^x \geq 1$.</p>
+    <p>$e^x \geq e^0 \iff x \geq 0$. Solution : $[0, +\infty[$.</p>
+  </div>
+
+  <h2>IV. Étude de la fonction exponentielle</h2>
+
+  <h3>1. Dérivée</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Dérivée de l'exponentielle</div>
+    <ul>
+      <li>$(e^x)' = e^x$</li>
+      <li>$(e^{u(x)})' = u'(x) \cdot e^{u(x)}$ (composée)</li>
+    </ul>
+    <p>La dérivée de l'exponentielle est elle-même. C'est sa définition.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemples de dérivation</div>
+    <p><strong>1.</strong> $f(x) = xe^x$. Produit : $f'(x) = e^x + xe^x = (1+x)e^x$.</p>
+    <p><strong>2.</strong> $g(x) = e^{x^2 - 3x}$. Composée : $u = x^2-3x$, $u' = 2x-3$. $g'(x) = (2x-3)e^{x^2-3x}$.</p>
+    <p><strong>3.</strong> $h(x) = \dfrac{e^x}{x}$. Quotient : $h'(x) = \dfrac{e^x \cdot x - e^x \cdot 1}{x^2} = \dfrac{(x-1)e^x}{x^2}$.</p>
+  </div>
+
+  <h3>2. Sens de variation</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Variations</div>
+    <p>
+      Comme $e^x > 0$ pour tout $x$, la dérivée $(e^x)' = e^x > 0$ sur $\mathbb{R}$.
+      La fonction exponentielle est donc <strong>strictement croissante</strong> sur $\mathbb{R}$.
+    </p>
+  </div>
+
+  <h3>3. Limites</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Limites fondamentales</div>
+    <ul>
+      <li>$\displaystyle\lim_{x \to +\infty} e^x = +\infty$</li>
+      <li>$\displaystyle\lim_{x \to -\infty} e^x = 0$</li>
+    </ul>
+    <p>L'axe des abscisses ($y = 0$) est asymptote horizontale en $-\infty$.</p>
+  </div>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Croissances comparées</div>
+    <p>L'exponentielle croît plus vite que toute puissance de $x$ :</p>
+    <ul>
+      <li>$\displaystyle\lim_{x \to +\infty} \frac{e^x}{x^n} = +\infty$ pour tout entier $n$</li>
+      <li>$\displaystyle\lim_{x \to -\infty} x^n e^x = 0$ pour tout entier $n$</li>
+      <li>$\displaystyle\lim_{x \to +\infty} x^n e^{-x} = 0$ pour tout entier $n$</li>
+    </ul>
+    <p>En résumé : "l'exponentielle l'emporte toujours sur les polynômes".</p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">À méditer</div>
+    <p>
+      La croissance exponentielle est souvent mal comprise intuitivement. Si une population double tous les 10 ans, elle est multipliée par 1024 en un siècle. Une grandeur qui croît de "seulement" 7% par an double en 10 ans. Les conséquences à long terme de phénomènes exponentiels sont systématiquement sous-estimées par le cerveau humain, qui raisonne de manière linéaire par défaut. C'est un biais cognitif documenté que les mathématiques permettent de corriger.
+    </p>
+  </div>
+
+  <h2>V. Étude de fonctions avec exponentielle</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : étude complète de $f(x) = (x-1)e^x$</div>
+    <p><strong>Ensemble de définition :</strong> $\mathbb{R}$.</p>
+
+    <p><strong>Dérivée :</strong></p>
+    <p>$f'(x) = e^x + (x-1)e^x = (1 + x - 1)e^x = xe^x$.</p>
+
+    <p><strong>Signe de $f'$ :</strong></p>
+    <p>$e^x > 0$ pour tout $x$, donc $f'(x)$ a le signe de $x$.</p>
+    <ul>
+      <li>$f'(x) < 0$ sur $]-\infty, 0[$ : $f$ décroissante.</li>
+      <li>$f'(0) = 0$ : extremum.</li>
+      <li>$f'(x) > 0$ sur $]0, +\infty[$ : $f$ croissante.</li>
+    </ul>
+    <p>$f(0) = (0-1)e^0 = -1$ : minimum en $x = 0$, valeur $-1$.</p>
+
+    <p><strong>Limites :</strong></p>
+    <p>$\displaystyle\lim_{x \to +\infty} (x-1)e^x = +\infty$ (produit de deux quantités qui tendent vers $+\infty$).</p>
+    <p>$\displaystyle\lim_{x \to -\infty} (x-1)e^x = 0$ par croissance comparée ($e^x$ tend vers $0$ plus vite que $x-1$ ne tend vers $-\infty$).</p>
+    <p>Asymptote horizontale $y = 0$ en $-\infty$.</p>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : simplification et équations</h3>
+  <ol>
+    <li>Simplifier $\dfrac{e^{4x} \times (e^{-x})^2}{e^{2x+1}}$.</li>
+    <li>Résoudre $e^{3x+2} = e^{x-4}$.</li>
+    <li>Résoudre $e^{2x} - 3e^x - 4 = 0$.</li>
+    <li>Résoudre $e^x + e^{-x} = 2$.</li>
+  </ol>
+
+  <h3>Exercice 2 : étude de fonction</h3>
+  <p>Soit $f(x) = (2x+1)e^{-x}$ définie sur $\mathbb{R}$.</p>
+  <ol>
+    <li>Calculer $f'(x)$ et factoriser.</li>
+    <li>Étudier le signe de $f'(x)$ et dresser le tableau de variations de $f$.</li>
+    <li>Calculer les limites de $f$ en $+\infty$ et $-\infty$.</li>
+    <li>Déterminer l'équation de la tangente à la courbe au point d'abscisse $0$.</li>
+  </ol>
+
+  <h3>Exercice 3 : problème de synthèse</h3>
+  <p>
+    La concentration d'un produit chimique dans un lac est modélisée par $C(t) = 5e^{-0{,}1t}$ (en mg/L) où $t$ est le temps en jours.
+  </p>
+  <ol>
+    <li>Quelle est la concentration initiale ?</li>
+    <li>Au bout de combien de jours la concentration est-elle divisée par deux ?</li>
+    <li>Calculer $\displaystyle\lim_{t \to +\infty} C(t)$. Interpréter.</li>
+    <li>Calculer $C'(t)$. La concentration augmente-t-elle ou diminue-t-elle ?</li>
+  </ol>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $\dfrac{e^{4x} \times e^{-2x}}{e^{2x+1}} = \dfrac{e^{2x}}{e^{2x+1}} = e^{2x-(2x+1)} = e^{-1} = \dfrac{1}{e}$.</p>
+    <p><strong>2.</strong> $e^{3x+2} = e^{x-4} \iff 3x+2 = x-4 \iff 2x = -6 \iff x = -3$.</p>
+    <p><strong>3.</strong> On pose $X = e^x > 0$. $X^2 - 3X - 4 = 0$. $\Delta = 9 + 16 = 25$. $X = 4$ ou $X = -1$.</p>
+    <p>$X = -1 < 0$ impossible. $X = 4$ donne $e^x = 4$ donc $x = \ln 4 = 2\ln 2$.</p>
+    <p><strong>4.</strong> On pose $X = e^x$. $X + \dfrac{1}{X} = 2$, soit $X^2 - 2X + 1 = 0$, soit $(X-1)^2 = 0$. $X = 1$ donc $x = 0$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $C(0) = 5e^0 = 5$ mg/L.</p>
+    <p><strong>2.</strong> On cherche $t$ tel que $C(t) = 2{,}5$. $5e^{-0{,}1t} = 2{,}5$, soit $e^{-0{,}1t} = 0{,}5$, soit $-0{,}1t = \ln(0{,}5)$, soit $t = -\dfrac{\ln(0{,}5)}{0{,}1} = \dfrac{\ln 2}{0{,}1} \approx 6{,}93$ jours.</p>
+    <p><strong>3.</strong> $\displaystyle\lim_{t \to +\infty} 5e^{-0{,}1t} = 0$. À long terme, le produit se dissout entièrement.</p>
+    <p><strong>4.</strong> $C'(t) = 5 \times (-0{,}1) e^{-0{,}1t} = -0{,}5 e^{-0{,}1t} < 0$. La concentration diminue en permanence.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="probabilites.html">&larr; Probabilités et variables aléatoires</a>
+  <a href="logarithme.html">Fonction logarithme népérien &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
