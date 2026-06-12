@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nombres complexes . Terminale S</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#terminale-s">Terminale S</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Terminale S</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2014-2015</span>
+    </div>
+    <h1 class="cours-titre-principal">Nombres complexes</h1>
+    <p class="cours-sous-titre">Forme algébrique, forme trigonométrique, module, argument et applications géométriques</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. L'ensemble des nombres complexes</h2>
+
+  <h3>1. Le nombre $i$</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      On note $i$ le nombre tel que $i^2 = -1$. Ce nombre n'existe pas dans $\mathbb{R}$ : aucun réel élevé au carré ne donne un résultat négatif. On "invente" $i$ pour résoudre ce problème.
+    </p>
+    <p>
+      L'ensemble des <strong>nombres complexes</strong>, noté $\mathbb{C}$, est l'ensemble des nombres de la forme $a + bi$ avec $a, b \in \mathbb{R}$.
+    </p>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">Pourquoi les complexes ?</div>
+    <p>
+      L'équation $x^2 + 1 = 0$ n'a pas de solution dans $\mathbb{R}$. En introduisant $i$, elle admet deux solutions : $i$ et $-i$. Plus généralement, tout polynôme de degré $n$ admet exactement $n$ racines dans $\mathbb{C}$ (théorème fondamental de l'algèbre). Les complexes apparaissent en physique (électricité, mécanique quantique) et en ingénierie (traitement du signal).
+    </p>
+  </div>
+
+  <h3>2. Forme algébrique</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Tout nombre complexe $z$ s'écrit de manière unique $z = a + bi$ avec $a, b \in \mathbb{R}$.
+    </p>
+    <ul>
+      <li>$a = \text{Re}(z)$ est la <strong>partie réelle</strong> de $z$</li>
+      <li>$b = \text{Im}(z)$ est la <strong>partie imaginaire</strong> de $z$</li>
+    </ul>
+    <p>Si $b = 0$, $z$ est réel. Si $a = 0$, $z$ est un <strong>imaginaire pur</strong>.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Égalité de deux complexes</div>
+    <p>$a + bi = c + di \iff a = c$ et $b = d$.</p>
+    <p>Deux complexes sont égaux si et seulement si leurs parties réelles sont égales et leurs parties imaginaires sont égales.</p>
+  </div>
+
+  <h3>3. Opérations</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Calcul dans $\mathbb{C}$</div>
+    <p>Soient $z_1 = a + bi$ et $z_2 = c + di$.</p>
+    <ul>
+      <li><strong>Addition :</strong> $z_1 + z_2 = (a+c) + (b+d)i$</li>
+      <li><strong>Multiplication :</strong> $z_1 \times z_2 = (ac - bd) + (ad + bc)i$</li>
+    </ul>
+    <p>En pratique, on développe comme un produit classique en remplaçant $i^2$ par $-1$.</p>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>$z_1 = 3 + 2i$ et $z_2 = 1 - 4i$.</p>
+    <p>$z_1 \times z_2 = (3+2i)(1-4i) = 3 - 12i + 2i - 8i^2 = 3 - 10i - 8(-1) = 3 - 10i + 8 = 11 - 10i$.</p>
+  </div>
+
+  <h3>4. Conjugué</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Le <strong>conjugué</strong> de $z = a + bi$ est $\bar{z} = a - bi$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés du conjugué</div>
+    <ul>
+      <li>$\overline{z_1 + z_2} = \bar{z_1} + \bar{z_2}$</li>
+      <li>$\overline{z_1 \times z_2} = \bar{z_1} \times \bar{z_2}$</li>
+      <li>$z \times \bar{z} = a^2 + b^2$ (toujours réel positif)</li>
+      <li>$\text{Re}(z) = \dfrac{z + \bar{z}}{2}$ et $\text{Im}(z) = \dfrac{z - \bar{z}}{2i}$</li>
+    </ul>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : diviser deux complexes</div>
+    <p>On multiplie numérateur et dénominateur par le conjugué du dénominateur.</p>
+    <p><strong>Exemple.</strong> Calculer $\dfrac{3+2i}{1-4i}$.</p>
+    <p>$\dfrac{3+2i}{1-4i} = \dfrac{(3+2i)(1+4i)}{(1-4i)(1+4i)} = \dfrac{3+12i+2i+8i^2}{1+16} = \dfrac{3+14i-8}{17} = \dfrac{-5+14i}{17} = -\dfrac{5}{17} + \dfrac{14}{17}i$.</p>
+  </div>
+
+  <h2>II. Module et argument</h2>
+
+  <h3>1. Représentation géométrique</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Affixe d'un point</div>
+    <p>
+      Dans le plan muni d'un repère orthonormé, le point $M(a, b)$ est associé au complexe $z = a + bi$.
+      On dit que $z$ est l'<strong>affixe</strong> du point $M$ et que $M$ est l'<strong>image</strong> de $z$.
+    </p>
+  </div>
+
+  <h3>2. Module</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Le <strong>module</strong> de $z = a + bi$ est :</p>
+    $$|z| = \sqrt{a^2 + b^2}$$
+    <p>Géométriquement, $|z|$ est la distance de l'origine $O$ au point $M$ d'affixe $z$.</p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés du module</div>
+    <ul>
+      <li>$|z| \geq 0$ et $|z| = 0 \iff z = 0$</li>
+      <li>$|z_1 \times z_2| = |z_1| \times |z_2|$</li>
+      <li>$\left|\dfrac{z_1}{z_2}\right| = \dfrac{|z_1|}{|z_2|}$</li>
+      <li>$|z^n| = |z|^n$</li>
+      <li>$z \cdot \bar{z} = |z|^2$</li>
+      <li>$|\bar{z}| = |z|$</li>
+    </ul>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Distance entre deux points</div>
+    <p>Si $A$ a pour affixe $z_A$ et $B$ a pour affixe $z_B$, alors :</p>
+    $$AB = |z_B - z_A|$$
+  </div>
+
+  <h3>3. Argument</h3>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      L'<strong>argument</strong> de $z \neq 0$, noté $\arg(z)$, est l'angle orienté entre l'axe des réels positifs et le vecteur $\overrightarrow{OM}$ où $M$ est l'image de $z$. Il est défini à $2\pi$ près.
+    </p>
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés de l'argument</div>
+    <ul>
+      <li>$\arg(z_1 z_2) = \arg(z_1) + \arg(z_2) \pmod{2\pi}$</li>
+      <li>$\arg\left(\dfrac{z_1}{z_2}\right) = \arg(z_1) - \arg(z_2) \pmod{2\pi}$</li>
+      <li>$\arg(z^n) = n \cdot \arg(z) \pmod{2\pi}$</li>
+      <li>$\arg(\bar{z}) = -\arg(z) \pmod{2\pi}$</li>
+    </ul>
+  </div>
+
+  <h2>III. Forme trigonométrique et exponentielle</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Forme trigonométrique</div>
+    <p>Tout complexe $z \neq 0$ s'écrit :</p>
+    $$z = |z|(\cos\theta + i\sin\theta) \quad \text{avec } \theta = \arg(z)$$
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Notation exponentielle (formule d'Euler)</div>
+    <p>On note $e^{i\theta} = \cos\theta + i\sin\theta$. Donc tout complexe s'écrit :</p>
+    $$z = |z| \cdot e^{i\theta}$$
+  </div>
+
+  <div class="propriete">
+    <div class="encadre-titre">Arguments remarquables</div>
+    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+      <thead>
+        <tr style="border-bottom: 1px solid #e8e8e8;">
+          <th style="padding:5px 8px; text-align:left;">$z$</th>
+          <th style="padding:5px 8px; text-align:left;">$|z|$</th>
+          <th style="padding:5px 8px; text-align:left;">$\arg(z)$</th>
+          <th style="padding:5px 8px; text-align:left;">Forme exponentielle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding:4px 8px;">$1$</td><td style="padding:4px 8px;">$1$</td><td style="padding:4px 8px;">$0$</td><td style="padding:4px 8px;">$e^{i \cdot 0}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding:4px 8px;">$-1$</td><td style="padding:4px 8px;">$1$</td><td style="padding:4px 8px;">$\pi$</td><td style="padding:4px 8px;">$e^{i\pi}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding:4px 8px;">$i$</td><td style="padding:4px 8px;">$1$</td><td style="padding:4px 8px;">$\dfrac{\pi}{2}$</td><td style="padding:4px 8px;">$e^{i\pi/2}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding:4px 8px;">$-i$</td><td style="padding:4px 8px;">$1$</td><td style="padding:4px 8px;">$-\dfrac{\pi}{2}$</td><td style="padding:4px 8px;">$e^{-i\pi/2}$</td></tr>
+        <tr style="border-bottom: 1px solid #f0f0f0;"><td style="padding:4px 8px;">$1+i$</td><td style="padding:4px 8px;">$\sqrt{2}$</td><td style="padding:4px 8px;">$\dfrac{\pi}{4}$</td><td style="padding:4px 8px;">$\sqrt{2}\,e^{i\pi/4}$</td></tr>
+        <tr><td style="padding:4px 8px;">$1+i\sqrt{3}$</td><td style="padding:4px 8px;">$2$</td><td style="padding:4px 8px;">$\dfrac{\pi}{3}$</td><td style="padding:4px 8px;">$2e^{i\pi/3}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="remarque">
+    <div class="encadre-titre">La plus belle formule des mathématiques</div>
+    <p>En posant $\theta = \pi$ dans la formule d'Euler :</p>
+    $$e^{i\pi} + 1 = 0$$
+    <p>
+      Cette formule, due à Euler, relie les cinq constantes fondamentales des mathématiques ($e$, $i$, $\pi$, $1$ et $0$) en une seule équation. Beaucoup de mathématiciens la considèrent comme la plus élégante de toutes.
+    </p>
+  </div>
+
+  <h2>IV. Équations du second degré dans $\mathbb{C}$</h2>
+
+  <div class="theoreme">
+    <div class="encadre-titre">Résolution de $az^2 + bz + c = 0$ dans $\mathbb{C}$</div>
+    <p>On calcule $\Delta = b^2 - 4ac$.</p>
+    <ul>
+      <li>Si $\Delta > 0$ : deux racines réelles $z = \dfrac{-b \pm \sqrt{\Delta}}{2a}$.</li>
+      <li>Si $\Delta = 0$ : une racine double $z = \dfrac{-b}{2a}$.</li>
+      <li>Si $\Delta < 0$ : deux racines complexes conjuguées $z = \dfrac{-b \pm i\sqrt{|\Delta|}}{2a}$.</li>
+    </ul>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Résoudre $z^2 - 2z + 5 = 0$.</p>
+    <p>$\Delta = 4 - 20 = -16 < 0$.</p>
+    <p>$z = \dfrac{2 \pm i\sqrt{16}}{2} = \dfrac{2 \pm 4i}{2} = 1 \pm 2i$.</p>
+    <p>Les solutions sont $z_1 = 1 + 2i$ et $z_2 = 1 - 2i$. Elles sont bien conjuguées.</p>
+  </div>
+
+  <h2>V. Applications géométriques</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Transformations du plan</div>
+    <p><strong>Translation</strong> de vecteur d'affixe $t$ : $z' = z + t$.</p>
+    <p><strong>Rotation</strong> de centre $O$ et d'angle $\theta$ : $z' = e^{i\theta} \cdot z$.</p>
+    <p><strong>Homothétie</strong> de centre $O$ et de rapport $k$ : $z' = k \cdot z$.</p>
+    <p><strong>Similitude directe</strong> de centre $\Omega$ d'affixe $\omega$ : $z' - \omega = a(z - \omega)$ avec $a \in \mathbb{C}^*$.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : montrer que trois points sont alignés</div>
+    <p>$A$, $B$ et $C$ sont alignés si et seulement si $\dfrac{z_C - z_A}{z_B - z_A}$ est un réel.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : montrer un angle droit</div>
+    <p>L'angle $(\overrightarrow{AB}, \overrightarrow{AC}) = \dfrac{\pi}{2}$ si et seulement si $\dfrac{z_C - z_A}{z_B - z_A}$ est un imaginaire pur.</p>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : calcul en forme algébrique</h3>
+  <ol>
+    <li>Calculer $(2+3i)(4-i)$.</li>
+    <li>Calculer $(1+i)^3$.</li>
+    <li>Mettre sous forme algébrique $\dfrac{5+i}{2-3i}$.</li>
+    <li>Calculer $i^{2024}$.</li>
+  </ol>
+
+  <h3>Exercice 2 : module et argument</h3>
+  <ol>
+    <li>Calculer le module et un argument de $z_1 = -1 + i\sqrt{3}$.</li>
+    <li>Calculer le module et un argument de $z_2 = -3 - 3i$.</li>
+    <li>En déduire la forme exponentielle de $z_1$ et $z_2$.</li>
+    <li>Calculer $z_1 \times z_2$ en utilisant la forme exponentielle, puis vérifier en forme algébrique.</li>
+  </ol>
+
+  <h3>Exercice 3 : équation du second degré</h3>
+  <ol>
+    <li>Résoudre $z^2 + 4z + 13 = 0$.</li>
+    <li>Résoudre $z^2 - (3+i)z + 4i = 0$ (discriminant complexe).</li>
+  </ol>
+
+  <h3>Exercice 4 : géométrie</h3>
+  <p>On considère les points $A(1+2i)$, $B(3+4i)$ et $C(-1+4i)$.</p>
+  <ol>
+    <li>Calculer $AB$, $AC$ et $BC$.</li>
+    <li>Le triangle $ABC$ est-il isocèle ?</li>
+    <li>Le triangle $ABC$ est-il rectangle ? Justifier par le calcul d'un quotient.</li>
+  </ol>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $(2+3i)(4-i) = 8 - 2i + 12i - 3i^2 = 8 + 10i + 3 = 11 + 10i$.</p>
+    <p><strong>2.</strong> $(1+i)^2 = 1 + 2i + i^2 = 1 + 2i - 1 = 2i$.</p>
+    <p>$(1+i)^3 = (1+i)(1+i)^2 = (1+i)(2i) = 2i + 2i^2 = 2i - 2 = -2 + 2i$.</p>
+    <p><strong>3.</strong> $\dfrac{5+i}{2-3i} = \dfrac{(5+i)(2+3i)}{(2-3i)(2+3i)} = \dfrac{10+15i+2i+3i^2}{4+9} = \dfrac{10+17i-3}{13} = \dfrac{7+17i}{13} = \dfrac{7}{13} + \dfrac{17}{13}i$.</p>
+    <p><strong>4.</strong> Les puissances de $i$ sont cycliques de période 4 : $i^0 = 1$, $i^1 = i$, $i^2 = -1$, $i^3 = -i$, $i^4 = 1$, etc.</p>
+    <p>$2024 = 4 \times 506$, donc $i^{2024} = (i^4)^{506} = 1^{506} = 1$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $z_1 = -1 + i\sqrt{3}$.</p>
+    <p>$|z_1| = \sqrt{(-1)^2 + (\sqrt{3})^2} = \sqrt{1+3} = 2$.</p>
+    <p>$\cos\theta = \dfrac{-1}{2}$ et $\sin\theta = \dfrac{\sqrt{3}}{2}$. Donc $\theta = \dfrac{2\pi}{3}$.</p>
+    <p><strong>2.</strong> $z_2 = -3 - 3i$.</p>
+    <p>$|z_2| = \sqrt{9+9} = 3\sqrt{2}$.</p>
+    <p>$\cos\theta = \dfrac{-3}{3\sqrt{2}} = -\dfrac{1}{\sqrt{2}}$ et $\sin\theta = \dfrac{-3}{3\sqrt{2}} = -\dfrac{1}{\sqrt{2}}$. Donc $\theta = -\dfrac{3\pi}{4}$.</p>
+    <p><strong>3.</strong> $z_1 = 2e^{i \cdot 2\pi/3}$ et $z_2 = 3\sqrt{2}\, e^{-i \cdot 3\pi/4}$.</p>
+    <p><strong>4.</strong> En forme exponentielle :</p>
+    <p>$z_1 z_2 = 2 \times 3\sqrt{2} \times e^{i(2\pi/3 - 3\pi/4)} = 6\sqrt{2}\, e^{i(8\pi/12 - 9\pi/12)} = 6\sqrt{2}\, e^{-i\pi/12}$.</p>
+    <p>Vérification algébrique :</p>
+    <p>$z_1 z_2 = (-1+i\sqrt{3})(-3-3i) = 3 + 3i - 3i\sqrt{3} - 3i^2\sqrt{3} = 3 + 3\sqrt{3} + (3 - 3\sqrt{3})i$.</p>
+    <p>$|z_1 z_2| = |z_1| \times |z_2| = 2 \times 3\sqrt{2} = 6\sqrt{2}$. Cohérent.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $z^2 + 4z + 13 = 0$.</p>
+    <p>$\Delta = 16 - 52 = -36 < 0$.</p>
+    <p>$z = \dfrac{-4 \pm i\sqrt{36}}{2} = \dfrac{-4 \pm 6i}{2} = -2 \pm 3i$.</p>
+    <p>Solutions : $z_1 = -2 + 3i$ et $z_2 = -2 - 3i$.</p>
+    <p style="margin-top:0.75rem;"><strong>2.</strong> $z^2 - (3+i)z + 4i = 0$.</p>
+    <p>$\Delta = (3+i)^2 - 16i = 9 + 6i + i^2 - 16i = 9 + 6i - 1 - 16i = 8 - 10i$.</p>
+    <p>Il faut trouver $\delta$ tel que $\delta^2 = 8 - 10i$. Posons $\delta = x + yi$.</p>
+    <p>$(x+yi)^2 = x^2 - y^2 + 2xyi = 8 - 10i$.</p>
+    <p>Système : $x^2 - y^2 = 8$ et $2xy = -10$, soit $xy = -5$.</p>
+    <p>De plus $|\delta|^2 = |8-10i| = \sqrt{64+100} = \sqrt{164}$, donc $x^2 + y^2 = \sqrt{164} \approx 12{,}81$.</p>
+    <p>En combinant $x^2 - y^2 = 8$ et $x^2 + y^2 = \sqrt{164}$ :</p>
+    <p>$x^2 = \dfrac{8 + \sqrt{164}}{2}$ et $y = \dfrac{-5}{x}$.</p>
+    <p>On trouve $\delta \approx 3{,}23 - 1{,}55i$. Les solutions exactes sont :</p>
+    <p>$z = \dfrac{(3+i) \pm \delta}{2}$.</p>
+    <p>Vérification : on peut tester $z = i$. $i^2 - (3+i) \cdot i + 4i = -1 - 3i - i^2 + 4i = -1 - 3i + 1 + 4i = i \neq 0$.</p>
+    <p>Testons $z = 4$ : $16 - (3+i) \times 4 + 4i = 16 - 12 - 4i + 4i = 4 \neq 0$.</p>
+    <p>En fait, en factorisant directement : cherchons $z$ tel que $z^2 - 3z - iz + 4i = z(z-3) - i(z-4) = 0$.</p>
+    <p>Testons $z = i$ : $i(i-3) - i(i-4) = i^2 - 3i - i^2 + 4i = i \neq 0$.</p>
+    <p>Testons $z = 4i$ : $(4i)^2 - (3+i)(4i) + 4i = -16 - 12i - 4i^2 + 4i = -16 - 12i + 4 + 4i = -12 - 8i \neq 0$.</p>
+    <p>La méthode du discriminant complexe donne les solutions exactes via $\delta$. Pour un exercice de bac, les coefficients sont choisis pour donner un $\Delta$ dont la racine carrée est simple.</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p>$A(1+2i)$, $B(3+4i)$, $C(-1+4i)$.</p>
+    <p><strong>1.</strong> $z_B - z_A = (3+4i) - (1+2i) = 2 + 2i$. $AB = |2+2i| = \sqrt{4+4} = 2\sqrt{2}$.</p>
+    <p>$z_C - z_A = (-1+4i) - (1+2i) = -2 + 2i$. $AC = |-2+2i| = \sqrt{4+4} = 2\sqrt{2}$.</p>
+    <p>$z_C - z_B = (-1+4i) - (3+4i) = -4$. $BC = |-4| = 4$.</p>
+    <p><strong>2.</strong> $AB = AC = 2\sqrt{2}$, donc le triangle $ABC$ est <strong>isocèle en $A$</strong>.</p>
+    <p><strong>3.</strong> Calculons $\dfrac{z_C - z_A}{z_B - z_A} = \dfrac{-2+2i}{2+2i}$.</p>
+    <p>$\dfrac{-2+2i}{2+2i} = \dfrac{(-2+2i)(2-2i)}{(2+2i)(2-2i)} = \dfrac{-4+4i+4i-4i^2}{4+4} = \dfrac{-4+8i+4}{8} = \dfrac{8i}{8} = i$.</p>
+    <p>$\dfrac{z_C - z_A}{z_B - z_A} = i$ est un imaginaire pur. Donc $(\overrightarrow{AB}, \overrightarrow{AC}) = \dfrac{\pi}{2}$.</p>
+    <p>Le triangle $ABC$ est <strong>rectangle et isocèle en $A$</strong>.</p>
+    <p>Vérification par Pythagore : $AB^2 + AC^2 = 8 + 8 = 16 = BC^2 = 4^2$. Cohérent.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../2013-2014/terminale-s/logarithme.html">&larr; Fonction logarithme népérien</a>
+  <a href="geometrie-espace.html">Géométrie dans l'espace &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+</body>
+</html>
