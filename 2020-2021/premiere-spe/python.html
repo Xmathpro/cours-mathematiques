@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithmique et Python . Première spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#premieres">Première spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Première spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2020-2021</span></div>
+<h1 class="cours-titre-principal">Algorithmique et Python</h1>
+<p class="cours-sous-titre">Python appliqué aux suites, fonctions et probabilités de première</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Python et fonctions</h2>
+
+<div class="exemple"><div class="encadre-titre">Définir et étudier une fonction</div>
+<pre>
+def f(x):
+    return x**3 - 3*x + 1
+
+# Table de valeurs
+for x in range(-3, 4):
+    print(f"f({x}) = {f(x)}")
+
+# Recherche d'un zéro par balayage
+x = -2.0
+while f(x) < 0:
+    x += 0.001
+print(f"Zéro approché : x ≈ {x:.3f}")
+</pre>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Tangente numérique</div>
+<pre>
+def derivee_num(f, x, h=1e-6):
+    return (f(x + h) - f(x)) / h
+
+def tangente(f, x0, x):
+    m = derivee_num(f, x0)
+    return m * (x - x0) + f(x0)
+
+# Vérifier que f'(1) = 0 pour f(x) = x³ - 3x + 1
+print(f"f'(1) ≈ {derivee_num(f, 1):.6f}")  # ≈ 0
+</pre>
+</div>
+
+<h2>II. Python et suites</h2>
+
+<div class="exemple"><div class="encadre-titre">Générer une suite récurrente</div>
+<pre>
+def generer_suite(u0, relation, n):
+    """relation est une fonction u -> u_suivant"""
+    termes = [u0]
+    for i in range(n):
+        termes.append(relation(termes[-1]))
+    return termes
+
+# Suite u_{n+1} = 0.5*u_n + 3, u0 = 20
+termes = generer_suite(20, lambda u: 0.5 * u + 3, 15)
+for i, t in enumerate(termes):
+    print(f"u_{i} = {t:.4f}")
+# Converge vers 6 (point fixe)
+</pre>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Seuil de dépassement</div>
+<pre>
+# À partir de quel rang u_n > 1000 ?
+# Suite géométrique u_n = 3 * 1.1^n
+u = 3
+n = 0
+while u <= 1000:
+    u = u * 1.1
+    n += 1
+print(f"u_n dépasse 1000 pour n = {n}")
+# n = 61
+</pre>
+</div>
+
+<h2>III. Python et probabilités</h2>
+
+<div class="exemple"><div class="encadre-titre">Simuler un schéma de Bernoulli</div>
+<pre>
+import random
+
+def experience_bernoulli(n, p):
+    """Retourne le nombre de succès en n essais"""
+    return sum(1 for _ in range(n) if random.random() < p)
+
+# Simuler 1000 fois le lancer de 10 pièces
+resultats = [experience_bernoulli(10, 0.5) for _ in range(1000)]
+
+# Fréquence de chaque résultat
+for k in range(11):
+    freq = resultats.count(k) / 1000
+    print(f"P(X={k}) ≈ {freq:.3f}")
+</pre>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Vérifier la loi des grands nombres</div>
+<pre>
+import random
+
+p_vrai = 0.3
+for n in [10, 100, 1000, 10000]:
+    freq = sum(1 for _ in range(n) if random.random() < p_vrai) / n
+    erreur = abs(freq - p_vrai)
+    print(f"n = {n:>5} : freq = {freq:.4f}, erreur = {erreur:.4f}")
+# L'erreur diminue quand n augmente
+</pre>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Écrire un programme Python qui calcule la somme $1 + \dfrac{1}{2} + \dfrac{1}{3} + \cdots + \dfrac{1}{n}$ (somme harmonique) et tester pour $n = 10, 100, 1000$.</p>
+
+<h3>Exercice 2</h3>
+<p>Écrire un programme qui simule 10 000 lancers de 2 dés et affiche la fréquence de chaque somme (de 2 à 12).</p>
+
+<h2>V. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre>
+def harmonique(n):
+    return sum(1/k for k in range(1, n + 1))
+
+for n in [10, 100, 1000]:
+    print(f"H({n}) = {harmonique(n):.4f}")
+# H(10) = 2.9290, H(100) = 5.1874, H(1000) = 7.4855
+# La somme harmonique diverge mais très lentement
+</pre>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<pre>
+import random
+
+compteur = {s: 0 for s in range(2, 13)}
+for _ in range(10000):
+    s = random.randint(1, 6) + random.randint(1, 6)
+    compteur[s] += 1
+
+for s in range(2, 13):
+    freq = compteur[s] / 10000
+    theo = [0, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1][s] / 36
+    print(f"Somme {s:>2} : freq = {freq:.4f}, théorique = {theo:.4f}")
+</pre>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="probabilites.html">&larr; Probabilités</a><a href="../../index.html">Retour à l'accueil &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+</body>
+</html>
