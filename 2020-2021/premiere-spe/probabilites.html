@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probabilités et loi binomiale . Première spécialité</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../../index.html#premieres">Première spé</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>Première spécialité</span><span>Programme 2019-2026</span><span>Luxembourg . 2020-2021</span></div>
+<h1 class="cours-titre-principal">Probabilités et loi binomiale</h1>
+<p class="cours-sous-titre">Variables aléatoires, espérance, variance, schéma de Bernoulli et loi binomiale</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Variables aléatoires</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une <strong>variable aléatoire</strong> $X$ associe un nombre à chaque issue d'une expérience aléatoire.</p>
+<ul><li>$E(X) = \sum x_i P(X=x_i)$ (espérance : valeur moyenne attendue)</li>
+<li>$V(X) = E(X^2) - (E(X))^2$ (variance : mesure de dispersion)</li>
+<li>$\sigma(X) = \sqrt{V(X)}$ (écart-type)</li></ul>
+</div>
+
+<h2>II. Épreuve et schéma de Bernoulli</h2>
+
+<div class="definition"><div class="encadre-titre">Épreuve de Bernoulli</div>
+<p>Expérience à deux issues : succès (probabilité $p$) et échec (probabilité $1-p$).</p>
+<p>Un <strong>schéma de Bernoulli</strong> de paramètres $(n, p)$ : $n$ répétitions indépendantes.</p>
+</div>
+
+<h2>III. Loi binomiale</h2>
+
+<div class="definition"><div class="encadre-titre">$X \sim \mathcal{B}(n, p)$</div>
+<p>$X$ = nombre de succès. $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$.</p>
+<p>$E(X) = np$. $V(X) = np(1-p)$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Explorer : distribution binomiale</h4>
+<canvas id="canvasBinom" width="600" height="350"></canvas>
+<div class="controls">
+<label>n =</label><input type="range" id="nBinom" min="1" max="30" value="10"><span id="nBv">10</span>
+<label>p =</label><input type="range" id="pBinom" min="1" max="99" value="50"><span id="pBv">0.50</span>
+</div>
+<div class="result-text" id="resultBinom"></div>
+</div>
+
+<h2>IV. Python</h2>
+
+<div class="exemple"><div class="encadre-titre">Simuler une loi binomiale</div>
+<pre>
+import random
+
+def binomiale(n, p, nb_simulations=10000):
+    resultats = [0] * (n + 1)
+    for _ in range(nb_simulations):
+        succes = sum(1 for _ in range(n) if random.random() < p)
+        resultats[succes] += 1
+    return [r / nb_simulations for r in resultats]
+
+freqs = binomiale(10, 0.3)
+for k, f in enumerate(freqs):
+    print(f"P(X={k}) ≈ {f:.4f}")
+</pre>
+</div>
+
+<h2>V. Exercices</h2>
+<h3>Exercice 1</h3>
+<p>$X \sim \mathcal{B}(8, 0{,}4)$. Calculer : 1) $E(X)$ et $\sigma(X)$. 2) $P(X=3)$. 3) $P(X \geq 2)$.</p>
+
+<h3>Exercice 2</h3>
+<p>Un contrôle qualité prélève 15 pièces. Le taux de défaut est 10%.</p>
+<ol><li>Probabilité d'avoir exactement 0 pièce défectueuse.</li><li>Probabilité d'en avoir au moins 3.</li></ol>
+
+<h2>VI. Corrigés</h2>
+<h3>Corrigé exercice 1</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p><strong>1.</strong> $E(X) = 8 \times 0{,}4 = 3{,}2$. $V(X) = 8 \times 0{,}4 \times 0{,}6 = 1{,}92$. $\sigma \approx 1{,}39$.</p>
+<p><strong>2.</strong> $P(X=3) = \binom{8}{3} 0{,}4^3 \times 0{,}6^5 = 56 \times 0{,}064 \times 0{,}07776 \approx 0{,}279$.</p>
+<p><strong>3.</strong> $P(X \geq 2) = 1 - P(X=0) - P(X=1) = 1 - 0{,}6^8 - 8 \times 0{,}4 \times 0{,}6^7 \approx 1 - 0{,}0168 - 0{,}0896 = 0{,}894$.</p>
+</div>
+<h3>Corrigé exercice 2</h3>
+<div class="exemple"><div class="encadre-titre">Corrigé</div>
+<p>$X \sim \mathcal{B}(15, 0{,}1)$.</p>
+<p><strong>1.</strong> $P(X=0) = 0{,}9^{15} \approx 0{,}206$.</p>
+<p><strong>2.</strong> $P(X \geq 3) = 1 - P(X=0) - P(X=1) - P(X=2)$.</p>
+<p>$P(X=1) = 15 \times 0{,}1 \times 0{,}9^{14} \approx 0{,}343$.</p>
+<p>$P(X=2) = \binom{15}{2} \times 0{,}01 \times 0{,}9^{13} \approx 0{,}267$.</p>
+<p>$P(X \geq 3) \approx 1 - 0{,}206 - 0{,}343 - 0{,}267 = 0{,}184$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="../../2019-2020/premiere-spe/derivation.html">&larr; Dérivation</a><a href="python.html">Algorithmique et Python &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+function binom(n,k){let r=1;for(let i=0;i<k;i++)r*=(n-i)/(i+1);return r;}
+function drawBinom(){
+  const c=document.getElementById('canvasBinom');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const n=parseInt(document.getElementById('nBinom').value);
+  const p=parseInt(document.getElementById('pBinom').value)/100;
+  document.getElementById('nBv').textContent=n;document.getElementById('pBv').textContent=p.toFixed(2);
+  ctx.clearRect(0,0,w,h);
+  const m={l:50,r:20,t:20,b:50};const pw=w-m.l-m.r,ph=h-m.t-m.b;
+  const probs=[];for(let k=0;k<=n;k++)probs.push(binom(n,k)*Math.pow(p,k)*Math.pow(1-p,n-k));
+  const maxP=Math.max(...probs);const barW=pw/(n+1);
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(m.l,m.t);ctx.lineTo(m.l,h-m.b);ctx.lineTo(w-m.r,h-m.b);ctx.stroke();
+  probs.forEach((pr,k)=>{const bh=(pr/maxP)*ph;const x=m.l+k*barW;const y=h-m.b-bh;
+    ctx.fillStyle='rgba(42,82,152,0.7)';ctx.fillRect(x+2,y,barW-4,bh);
+    ctx.fillStyle='#333';ctx.font='10px Arial';ctx.fillText(k,x+barW/2-3,h-m.b+14);
+    if(pr>0.01)ctx.fillText((pr*100).toFixed(1)+'%',x+2,y-4);});
+  const esp=n*p;const sigma=Math.sqrt(n*p*(1-p));
+  document.getElementById('resultBinom').textContent='B('+n+', '+p.toFixed(2)+'). E(X) = '+esp.toFixed(1)+'. σ = '+sigma.toFixed(2)+'. Mode ≈ '+probs.indexOf(maxP)+'.';
+}
+['nBinom','pBinom'].forEach(id=>document.getElementById(id).addEventListener('input',drawBinom));
+drawBinom();
+</script>
+</body>
+</html>
