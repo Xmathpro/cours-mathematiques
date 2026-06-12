@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Nombres et calculs</span><span>Chaine 1, lecon 4</span></div>
+<h1 class="cours-titre-principal">Multiplication</h1>
+<p class="cours-sous-titre">Tables, technique posee et problemes multiplicatifs</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Nombres</span> <span>6eme</span> <span>Lecon 4</span></div>
+
+<h2>I. Tables de multiplication</h2>
+
+<div class="definition"><div class="encadre-titre">Pourquoi les tables sont essentielles</div>
+<p>Les tables sont le <strong>socle</strong> de tout le calcul. Sans elles, chaque operation est lente et pleine d'erreurs. Il faut les connaitre de 1 a 9, instantanement, dans les deux sens.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : la table de multiplication comme un rectangle</h4>
+<canvas id="canvasTable" width="600" height="300"></canvas>
+<div class="controls">
+<label>Table de :</label><input type="range" id="tableN" min="2" max="9" value="7"><span id="tableNval">7</span>
+<label>x</label><input type="range" id="tableM" min="1" max="9" value="8"><span id="tableMval">8</span>
+</div>
+<div class="result-text" id="resultTable"></div>
+</div>
+
+<h2>II. Multiplier par 10, 100, 1000</h2>
+
+<div class="propriete"><div class="encadre-titre">Regle</div>
+<p>Multiplier par 10, c'est decaler la virgule d'<strong>un cran vers la droite</strong>.</p>
+<p>$3{,}45 \times 10 = 34{,}5$ ; $0{,}7 \times 100 = 70$ ; $5{,}2 \times 1\,000 = 5\,200$</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : multiplier par 10, 100, 1000</h4>
+<canvas id="canvasMul10" width="600" height="200"></canvas>
+<div class="controls">
+<label>Nombre :</label><input type="range" id="mul10N" min="1" max="999" value="345"><span id="mul10Nval">3,45</span>
+<label>x</label>
+<button onclick="setMul(10)">x 10</button>
+<button onclick="setMul(100)">x 100</button>
+<button onclick="setMul(1000)">x 1000</button>
+</div>
+<div class="result-text" id="resultMul10"></div>
+</div>
+
+<h2>III. Multiplication posee</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour multiplier par un nombre a plusieurs chiffres : on multiplie par chaque chiffre separement (en decalant), puis on additionne.</p>
+<p>Pour les decimaux : on calcule comme s'il n'y avait pas de virgule, puis on compte le nombre total de chiffres apres la virgule et on la replace.</p>
+</div>
+
+<h2>IV. Exercices</h2>
+<ol>
+<li>Completer : $7 \times 8 = $ ... ; $6 \times 9 = $ ... ; $8 \times 4 = $ ... ; $9 \times 9 = $ ...</li>
+<li>Calculer : a) $3{,}45 \times 10$ ; b) $0{,}7 \times 100$ ; c) $5{,}2 \times 1\,000$</li>
+<li>Poser : a) $253 \times 47$ ; b) $4{,}5 \times 3$ ; c) $2{,}3 \times 1{,}2$</li>
+<li>Un boulanger fait 12 fournees de 48 pains. Combien de pains au total ?</li>
+<li>1 kg de mangues coute 2,50 euros. Prix de 3,5 kg ?</li>
+</ol>
+
+<h2>V. Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> 56 ; 54 ; 32 ; 81.</p>
+<p><strong>2.</strong> a) 34,5. b) 70. c) 5 200.</p>
+<p><strong>3.</strong> a) 11 891. b) 13,5. c) 2,76.</p>
+<p><strong>4.</strong> $12 \times 48 = 576$ pains.</p>
+<p><strong>5.</strong> $3{,}5 \times 2{,}50 = 8{,}75$ euros.</p>
+</div>
+</main>
+<nav class="cours-nav"><a href="6e-nombres-L3-addition-soustraction.html">&larr; Addition</a><a href="6e-nombres-L5-division.html">Division &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+const clrs=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085','#d35400','#f39c12','#1abc9c'];
+// TABLE VISUELLE
+function drawTable(){
+  const c=document.getElementById('canvasTable');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const n=parseInt(document.getElementById('tableN').value),m=parseInt(document.getElementById('tableM').value);
+  document.getElementById('tableNval').textContent=n;document.getElementById('tableMval').textContent=m;
+  ctx.clearRect(0,0,w,h);
+  // Rectangle de n x m points
+  const dotR=10;const maxCols=Math.min(n,9);const maxRows=Math.min(m,9);
+  const gap=Math.min(30,(w*0.5)/(maxCols+1));
+  const ox=40,oy=30;
+  for(let r=0;r<maxRows;r++){
+    for(let cc=0;cc<maxCols;cc++){
+      const x=ox+cc*gap+gap/2;const y=oy+r*gap+gap/2;
+      ctx.fillStyle=clrs[r%clrs.length];ctx.beginPath();ctx.arc(x,y,dotR-2,0,Math.PI*2);ctx.fill();
+    }
+  }
+  // Accolades et labels
+  ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='center';
+  ctx.fillText(n+' colonnes',ox+maxCols*gap/2,oy+maxRows*gap+25);
+  ctx.save();ctx.translate(ox-15,oy+maxRows*gap/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText(m+' lignes',0,0);ctx.restore();
+  // Resultat a droite
+  const rx=w*0.55;
+  ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='left';
+  ctx.fillText(n+' x '+m+' = '+(n*m),rx,50);
+  ctx.fillStyle='#555';ctx.font='13px Arial';
+  ctx.fillText(n+' colonnes de '+m+' points',rx,80);
+  ctx.fillText('= '+m+' lignes de '+n+' points',rx,100);
+  ctx.fillText('= '+(n*m)+' points au total',rx,120);
+  // Commutativite
+  ctx.fillStyle='#27ae60';ctx.font='bold 13px Arial';
+  ctx.fillText(n+' x '+m+' = '+m+' x '+n+' = '+(n*m),rx,160);
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('(commutativite : l\'ordre ne change pas le resultat)',rx,180);
+  // Table complete en petit
+  ctx.fillStyle='#333';ctx.font='10px Arial';ctx.textAlign='center';
+  for(let i=1;i<=9;i++){
+    ctx.fillStyle=i===m?'#c0392b':'#888';ctx.font=i===m?'bold 10px Arial':'10px Arial';
+    ctx.fillText(n+' x '+i+' = '+(n*i),rx+80,200+i*12);
+  }
+  document.getElementById('resultTable').textContent=n+' x '+m+' = '+(n*m)+'. Le rectangle a '+n+' colonnes et '+m+' lignes, soit '+(n*m)+' points.';
+}
+['tableN','tableM'].forEach(id=>document.getElementById(id).addEventListener('input',drawTable));
+drawTable();
+
+// MUL 10
+let mulFactor=10;
+function setMul(f){mulFactor=f;drawMul10();}
+function drawMul10(){
+  const c=document.getElementById('canvasMul10');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const raw=parseInt(document.getElementById('mul10N').value);const n=raw/100;
+  document.getElementById('mul10Nval').textContent=n.toFixed(2);
+  ctx.clearRect(0,0,w,h);
+  const result=n*mulFactor;const shift=Math.log10(mulFactor);
+  // Nombre original avec virgule
+  const sn=n.toFixed(2);const sr=result.toFixed(Math.max(0,2-shift));
+  const cx=w/2;
+  ctx.fillStyle='#333';ctx.font='bold 20px Arial';ctx.textAlign='center';
+  ctx.fillText(sn,cx-100,50);
+  ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';
+  ctx.fillText('x '+mulFactor,cx,50);
+  ctx.fillStyle='#c0392b';ctx.font='bold 20px Arial';
+  ctx.fillText('= '+sr,cx+120,50);
+  // Fleche montrant le deplacement de la virgule
+  ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';
+  ctx.fillText('La virgule se deplace de '+shift+' cran(s) vers la droite',cx,100);
+  // Illustration avec les chiffres
+  const digits=sn.replace('.','').split('');
+  const commaPos=sn.indexOf('.');
+  const cellW=35;const startX=cx-digits.length*cellW/2;const dy=140;
+  digits.forEach((d,i)=>{
+    const x=startX+i*cellW;
+    ctx.fillStyle='#f8f9fa';ctx.strokeStyle='#ddd';ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(x,dy,cellW-2,35,3);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';ctx.fillText(d,x+cellW/2,dy+24);
+  });
+  // Virgule originale
+  const vx1=startX+commaPos*cellW-2;
+  ctx.fillStyle='#c0392b';ctx.font='bold 20px Arial';ctx.fillText(',',vx1,dy+28);
+  // Virgule deplacee
+  const newCommaPos=commaPos+shift;
+  if(newCommaPos<digits.length){
+    const vx2=startX+newCommaPos*cellW-2;
+    ctx.fillStyle='#27ae60';ctx.font='bold 20px Arial';ctx.fillText(',',vx2,dy+28);
+    ctx.strokeStyle='#27ae60';ctx.lineWidth=2;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(vx1,dy-5);ctx.quadraticCurveTo((vx1+vx2)/2,dy-25,vx2,dy-5);ctx.stroke();ctx.setLineDash([]);
+  }
+  ctx.textAlign='left';
+  document.getElementById('resultMul10').textContent=sn+' x '+mulFactor+' = '+sr+'. La virgule se deplace de '+shift+' position(s) vers la droite.';
+}
+document.getElementById('mul10N').addEventListener('input',drawMul10);
+drawMul10();
+</script>
+</body>
+</html>

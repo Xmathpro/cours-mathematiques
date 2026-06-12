@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Division . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Nombres et calculs</span><span>Chaine 1, lecon 5</span></div>
+<h1 class="cours-titre-principal">Division</h1>
+<p class="cours-sous-titre">Division euclidienne, division decimale et problemes de partage</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Nombres</span> <span>6eme</span> <span>Lecon 5</span></div>
+
+<h2>I. Division euclidienne</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>La <strong>division euclidienne</strong> de $a$ par $b$ donne un <strong>quotient</strong> $q$ et un <strong>reste</strong> $r$ :</p>
+$$a = b \times q + r \quad \text{avec } 0 \leq r < b$$
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : partager en groupes egaux</h4>
+<canvas id="canvasPartage" width="600" height="300"></canvas>
+<div class="controls">
+<label>Dividende :</label><input type="range" id="divA" min="5" max="50" value="17"><span id="divAval">17</span>
+<label>Diviseur :</label><input type="range" id="divB" min="2" max="9" value="5"><span id="divBval">5</span>
+</div>
+<div class="result-text" id="resultPartage"></div>
+</div>
+
+<h2>II. Division decimale</h2>
+
+<div class="definition"><div class="encadre-titre">Principe</div>
+<p>Quand le reste n'est pas nul, on peut <strong>continuer</strong> en ajoutant une virgule au quotient et un zero au reste.</p>
+<p>Exemple : $17 \div 4 = 4{,}25$ (on continue jusqu'a ce que le reste soit 0).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : division decimale</h4>
+<canvas id="canvasDecDiv" width="600" height="250"></canvas>
+<div class="controls">
+<label>Dividende :</label><input type="range" id="ddA" min="1" max="30" value="17"><span id="ddAval">17</span>
+<label>Diviseur :</label><input type="range" id="ddB" min="2" max="8" value="4"><span id="ddBval">4</span>
+</div>
+<div class="result-text" id="resultDecDiv"></div>
+</div>
+
+<h2>III. Diviser par 10, 100, 1000</h2>
+
+<div class="propriete"><div class="encadre-titre">Regle</div>
+<p>Diviser par 10, c'est decaler la virgule d'<strong>un cran vers la gauche</strong>.</p>
+<p>$345 \div 10 = 34{,}5$ ; $7{,}2 \div 100 = 0{,}072$ ; $5 \div 1\,000 = 0{,}005$</p>
+</div>
+
+<h2>IV. Exercices</h2>
+<ol>
+<li>Division euclidienne : a) $85 \div 7$ ; b) $200 \div 13$ ; c) $1\,000 \div 9$</li>
+<li>Verifier chaque resultat avec $a = b \times q + r$.</li>
+<li>Division decimale : a) $25 \div 4$ ; b) $7 \div 8$</li>
+<li>47 bonbons partages entre 6 enfants. Combien chacun ? Combien restent ?</li>
+<li>Une corde de 15 m coupee en morceaux de 2,5 m. Combien de morceaux ?</li>
+</ol>
+
+<h2>V. Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> a) $85 = 7 \times 12 + 1$. b) $200 = 13 \times 15 + 5$. c) $1000 = 9 \times 111 + 1$.</p>
+<p><strong>2.</strong> a) $7 \times 12 + 1 = 85$. b) $13 \times 15 + 5 = 200$. c) $9 \times 111 + 1 = 1000$.</p>
+<p><strong>3.</strong> a) 6,25. b) 0,875.</p>
+<p><strong>4.</strong> $47 = 6 \times 7 + 5$. Chacun recoit 7 bonbons, il en reste 5.</p>
+<p><strong>5.</strong> $15 \div 2{,}5 = 6$ morceaux.</p>
+</div>
+</main>
+<nav class="cours-nav"><a href="6e-nombres-L4-multiplication.html">&larr; Multiplication</a><a href="6e-fractions-L1-partage.html">Fractions &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+const clrs=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085','#d35400','#f39c12'];
+
+// PARTAGE VISUEL
+function drawPartage(){
+  const c=document.getElementById('canvasPartage');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('divA').value),b=parseInt(document.getElementById('divB').value);
+  document.getElementById('divAval').textContent=a;document.getElementById('divBval').textContent=b;
+  ctx.clearRect(0,0,w,h);
+  const q=Math.floor(a/b),r=a%b;
+
+  // Dessiner les points en groupes
+  const dotR=8;const groupW=Math.min(80,(w*0.6)/b);
+  const dotsPerRow=Math.min(q,6);const rows=Math.ceil(q/dotsPerRow);
+  const ox=20,oy=30;
+
+  for(let g=0;g<b;g++){
+    const gx=ox+g*(groupW+5);const gy=oy;
+    // Cadre du groupe
+    ctx.fillStyle=clrs[g%clrs.length]+'15';ctx.strokeStyle=clrs[g%clrs.length];ctx.lineWidth=1.5;
+    const gh=Math.min(rows*22+10,120);
+    ctx.beginPath();ctx.roundRect(gx,gy,groupW,gh,4);ctx.fill();ctx.stroke();
+    // Points dans le groupe
+    let count=0;
+    for(let row=0;row<rows&&count<q;row++){
+      for(let col=0;col<dotsPerRow&&count<q;col++){
+        ctx.fillStyle=clrs[g%clrs.length];
+        ctx.beginPath();ctx.arc(gx+10+col*14,gy+15+row*18,dotR-3,0,Math.PI*2);ctx.fill();
+        count++;
+      }
+    }
+    // Label
+    ctx.fillStyle=clrs[g%clrs.length];ctx.font='bold 10px Arial';ctx.textAlign='center';
+    ctx.fillText(q,gx+groupW/2,gy+gh+14);
+  }
+
+  // Reste
+  if(r>0){
+    const rx=ox+b*(groupW+5)+10;
+    ctx.fillStyle='#f8d7da';ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.roundRect(rx,oy,40,40,4);ctx.fill();ctx.stroke();ctx.setLineDash([]);
+    for(let i=0;i<r;i++){
+      ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(rx+10+i*14,oy+20,dotR-3,0,Math.PI*2);ctx.fill();
+    }
+    ctx.fillStyle='#c0392b';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('reste '+r,rx+20,oy+55);
+  }
+
+  // Formule en bas
+  const fy=h-80;
+  ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(a+' = '+b+' x '+q+' + '+r,w/2,fy);
+  ctx.fillStyle='#555';ctx.font='12px Arial';
+  ctx.fillText('dividende = diviseur x quotient + reste',w/2,fy+25);
+  ctx.fillStyle='#27ae60';ctx.font='bold 12px Arial';
+  ctx.fillText('Verification : '+b+' x '+q+' + '+r+' = '+(b*q+r)+(b*q+r===a?' OK':''),w/2,fy+50);
+
+  ctx.textAlign='left';
+  document.getElementById('resultPartage').textContent=a+' divise par '+b+' : quotient = '+q+', reste = '+r+'. Chaque groupe recoit '+q+' elements, il en reste '+r+'.';
+}
+['divA','divB'].forEach(id=>document.getElementById(id).addEventListener('input',drawPartage));
+drawPartage();
+
+// DIVISION DECIMALE
+function drawDecDiv(){
+  const c=document.getElementById('canvasDecDiv');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('ddA').value),b=parseInt(document.getElementById('ddB').value);
+  document.getElementById('ddAval').textContent=a;document.getElementById('ddBval').textContent=b;
+  ctx.clearRect(0,0,w,h);
+  const result=(a/b);const isExact=result===Math.round(result*1000)/1000;
+
+  // Barre de progression
+  const ox=40,oy=60,bw=w-80;
+  // Barre pleine
+  ctx.fillStyle='#f0f0f0';ctx.beginPath();ctx.roundRect(ox,oy,bw,40,6);ctx.fill();
+  // Parties remplies
+  const nbParts=Math.floor(a/b);const remainder=a%b;const fractPart=(a/b)-nbParts;
+  const partW=bw/Math.max(a/b,1);
+  for(let i=0;i<nbParts;i++){
+    ctx.fillStyle=clrs[i%clrs.length]+'88';
+    ctx.beginPath();ctx.roundRect(ox+i*partW+1,oy+1,partW-2,38,i===0?{upperLeft:5,lowerLeft:5,upperRight:0,lowerRight:0}:0);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='center';
+    ctx.fillText(b,ox+i*partW+partW/2,oy+25);
+  }
+  if(remainder>0){
+    ctx.fillStyle='rgba(192,57,43,0.3)';
+    ctx.beginPath();ctx.roundRect(ox+nbParts*partW+1,oy+1,(remainder/b)*partW-2,38,0);ctx.fill();
+    ctx.fillStyle='#c0392b';ctx.font='bold 10px Arial';ctx.fillText(remainder,ox+nbParts*partW+(remainder/b)*partW/2,oy+25);
+  }
+
+  // Labels
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText(a+' a diviser',ox+bw/2,oy-15);
+
+  // Resultat
+  ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(a+' / '+b+' = '+result.toFixed(3).replace(/0+$/,'').replace(/\.$/,''),w/2,oy+80);
+
+  // Etapes
+  ctx.fillStyle='#555';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('Partie entiere : '+b+' rentre '+nbParts+' fois dans '+a,40,oy+110);
+  if(remainder>0){
+    ctx.fillText('Reste : '+remainder+'. On ajoute un zero : '+remainder+'0. '+b+' rentre '+(Math.floor(remainder*10/b))+' fois dans '+(remainder*10)+'.',40,oy+130);
+  }
+  document.getElementById('resultDecDiv').textContent=a+' / '+b+' = '+result.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+'. Quotient entier = '+nbParts+', reste = '+remainder+'.';
+}
+['ddA','ddB'].forEach(id=>document.getElementById(id).addEventListener('input',drawDecDiv));
+drawDecDiv();
+</script>
+</body>
+</html>
