@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aires . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Grandeurs et mesures</span><span>Chaine 5, lecon 2</span></div>
+<h1 class="cours-titre-principal">Aires</h1>
+<p class="cours-sous-titre">Aire du rectangle, du triangle et du disque</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="lecon-path"><span>Grandeurs</span> <span>6eme</span> <span>Lecon 2</span></div>
+
+<h2>I. Qu'est-ce qu'une aire ?</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>L'<strong>aire</strong> d'une figure est la mesure de sa <strong>surface</strong>. C'est "combien de place elle prend". On la mesure en unites d'aire : cm carre, m carre, km carre...</p>
+<p>L'aire d'un carre de 1 cm de cote vaut 1 cm carre. C'est l'unite de reference.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : compter les carres unites</h4>
+<canvas id="canvasCarres" width="600" height="300"></canvas>
+<div class="controls">
+<label>Largeur :</label>
+<input type="range" id="gridW" min="2" max="10" value="5"><span id="gridWval">5</span>
+<label>Hauteur :</label>
+<input type="range" id="gridH" min="2" max="8" value="3"><span id="gridHval">3</span>
+</div>
+<div class="result-text" id="resultCarres"></div>
+</div>
+
+<h2>II. Formules d'aire</h2>
+
+<div class="propriete"><div class="encadre-titre">Rectangle</div>
+$$\text{Aire} = L \times l$$
+</div>
+
+<div class="propriete"><div class="encadre-titre">Carre</div>
+$$\text{Aire} = c \times c = c^2$$
+</div>
+
+<div class="propriete"><div class="encadre-titre">Triangle</div>
+$$\text{Aire} = \frac{b \times h}{2}$$
+<p>$b$ = base, $h$ = hauteur relative a cette base (perpendiculaire a la base).</p>
+<p>Pourquoi diviser par 2 ? Parce qu'un triangle est la moitie d'un rectangle.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Disque</div>
+$$\text{Aire} = \pi \times r^2$$
+<p>$r$ = rayon du disque. $\pi \approx 3{,}14$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Calculateur d'aire interactif</h4>
+<canvas id="canvasAire" width="600" height="350"></canvas>
+<div class="controls">
+<label>Figure :</label>
+<select id="figAire">
+<option value="rect">Rectangle</option>
+<option value="triangle">Triangle</option>
+<option value="disque">Disque</option>
+</select>
+<label>Base / Longueur :</label>
+<input type="range" id="aireB" min="2" max="12" value="8"><span id="aireBval">8</span>
+<label>Hauteur / Rayon :</label>
+<input type="range" id="aireH" min="2" max="10" value="5"><span id="aireHval">5</span>
+</div>
+<div class="result-text" id="resultAire"></div>
+</div>
+
+<div class="interactive-box">
+<h4>Comprendre : pourquoi l'aire du triangle = base x hauteur / 2</h4>
+<canvas id="canvasTriDemo" width="600" height="280"></canvas>
+<div class="result-text">Un triangle est exactement la moitie du rectangle qui l'entoure. Donc son aire est la moitie de L x l.</div>
+</div>
+
+<h2>III. Conversions d'unites d'aire</h2>
+
+<div class="propriete"><div class="encadre-titre">Tableau de conversion</div>
+<p>Chaque unite d'aire est <strong>100 fois</strong> plus grande que la suivante (pas 10 !).</p>
+<p>$1 \text{ m}^2 = 100 \text{ dm}^2 = 10\,000 \text{ cm}^2$</p>
+<p>$1 \text{ km}^2 = 1\,000\,000 \text{ m}^2$</p>
+<p>Astuce : pour les aires, on met <strong>2 chiffres par colonne</strong> dans le tableau de conversion (au lieu de 1 pour les longueurs).</p>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<ol>
+<li>Calculer l'aire d'un rectangle de 9 cm par 4 cm.</li>
+<li>Calculer l'aire d'un carre de cote 6 cm.</li>
+<li>Calculer l'aire d'un triangle de base 10 cm et de hauteur 7 cm.</li>
+<li>Calculer l'aire d'un disque de rayon 3 cm (arrondir au dixieme).</li>
+<li>Un terrain rectangulaire mesure 80 m par 45 m. Quelle est son aire en m carre ? En hectares ? (1 ha = 10 000 m carre)</li>
+</ol>
+
+<h2>V. Corriges</h2>
+
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> $9 \times 4 = 36$ cm carre.</p>
+<p><strong>2.</strong> $6^2 = 36$ cm carre.</p>
+<p><strong>3.</strong> $\dfrac{10 \times 7}{2} = 35$ cm carre.</p>
+<p><strong>4.</strong> $\pi \times 3^2 = 9\pi \approx 28{,}3$ cm carre.</p>
+<p><strong>5.</strong> $80 \times 45 = 3\,600$ m carre $= 0{,}36$ ha.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="perimetres.html">&larr; Perimetres</a><a href="volumes-intro.html">Volumes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+// CARRES UNITES
+function drawCarres(){
+  const c=document.getElementById('canvasCarres');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const gw=parseInt(document.getElementById('gridW').value);
+  const gh=parseInt(document.getElementById('gridH').value);
+  document.getElementById('gridWval').textContent=gw;document.getElementById('gridHval').textContent=gh;
+  ctx.clearRect(0,0,w,h);
+  const cellSize=Math.min(35,(w*0.5)/gw,(h-60)/gh);
+  const ox=(w*0.5-gw*cellSize)/2+20,oy=(h-gh*cellSize)/2;
+
+  let count=0;
+  for(let r=0;r<gh;r++){
+    for(let cc=0;cc<gw;cc++){
+      const x=ox+cc*cellSize,y=oy+r*cellSize;count++;
+      ctx.fillStyle='rgba(42,82,152,'+(0.15+count/(gw*gh)*0.4)+')';
+      ctx.fillRect(x+1,y+1,cellSize-2,cellSize-2);
+      ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.strokeRect(x,y,cellSize,cellSize);
+      ctx.fillStyle='#2a5298';ctx.font='bold 9px Arial';ctx.textAlign='center';
+      ctx.fillText(count,x+cellSize/2,y+cellSize/2+3);
+    }
+  }
+  // Mesures
+  ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';
+  ctx.fillText(gw+' cm',ox+gw*cellSize/2,oy-8);
+  ctx.save();ctx.translate(ox-12,oy+gh*cellSize/2);ctx.rotate(-Math.PI/2);ctx.fillText(gh+' cm',0,0);ctx.restore();
+  // Formule a droite
+  const rx=w*0.6;
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('Aire = L x l',rx,oy+30);
+  ctx.font='13px Arial';ctx.fillStyle='#555';
+  ctx.fillText('Aire = '+gw+' x '+gh,rx,oy+55);
+  ctx.fillStyle='#2a5298';ctx.font='bold 18px Arial';
+  ctx.fillText('= '+(gw*gh)+' cm carre',rx,oy+85);
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('On compte '+(gw*gh)+' petits carres',rx,oy+115);
+  document.getElementById('resultCarres').textContent='Un rectangle de '+gw+' cm par '+gh+' cm contient '+gw+' x '+gh+' = '+(gw*gh)+' carres unites. Son aire est '+(gw*gh)+' cm carre.';
+}
+['gridW','gridH'].forEach(id=>document.getElementById(id).addEventListener('input',drawCarres));
+drawCarres();
+
+// CALCULATEUR
+function drawAire(){
+  const c=document.getElementById('canvasAire');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const sel=document.getElementById('figAire').value;
+  const b=parseInt(document.getElementById('aireB').value);
+  const hh=parseInt(document.getElementById('aireH').value);
+  document.getElementById('aireBval').textContent=b;document.getElementById('aireHval').textContent=hh;
+  ctx.clearRect(0,0,w,h);const cx=w*0.3,cy=h/2;const sc=18;
+
+  if(sel==='rect'){
+    const rw=b*sc,rh=hh*sc;
+    ctx.fillStyle='rgba(42,82,152,0.15)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+    ctx.beginPath();ctx.rect(cx-rw/2,cy-rh/2,rw,rh);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#2a5298';ctx.font='bold 12px Arial';ctx.textAlign='center';
+    ctx.fillText('L = '+b,cx,cy-rh/2-8);ctx.fillText('l = '+hh,cx+rw/2+20,cy);
+    const rx=w*0.6;ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+    ctx.fillText('Rectangle',rx,50);ctx.font='13px Arial';ctx.fillStyle='#555';
+    ctx.fillText('Aire = L x l',rx,80);ctx.fillText('Aire = '+b+' x '+hh,rx,105);
+    ctx.fillStyle='#2a5298';ctx.font='bold 18px Arial';ctx.fillText('= '+(b*hh)+' cm carre',rx,135);
+    document.getElementById('resultAire').textContent='Aire du rectangle : '+b+' x '+hh+' = '+(b*hh)+' cm carre.';
+  } else if(sel==='triangle'){
+    const bw=b*sc,bh=hh*sc;
+    ctx.fillStyle='rgba(39,174,96,0.15)';ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(cx-bw/2,cy+bh/3);ctx.lineTo(cx,cy-2*bh/3);ctx.lineTo(cx+bw/2,cy+bh/3);ctx.closePath();ctx.fill();ctx.stroke();
+    // Hauteur
+    ctx.setLineDash([4,3]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx,cy-2*bh/3);ctx.lineTo(cx,cy+bh/3);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#27ae60';ctx.font='bold 12px Arial';ctx.textAlign='center';
+    ctx.fillText('b = '+b,cx,cy+bh/3+18);
+    ctx.fillStyle='#c0392b';ctx.fillText('h = '+hh,cx+15,cy-bh/6);
+    const rx=w*0.6;const aire=(b*hh/2);
+    ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+    ctx.fillText('Triangle',rx,50);ctx.font='13px Arial';ctx.fillStyle='#555';
+    ctx.fillText('Aire = b x h / 2',rx,80);ctx.fillText('Aire = '+b+' x '+hh+' / 2',rx,105);
+    ctx.fillStyle='#27ae60';ctx.font='bold 18px Arial';ctx.fillText('= '+aire+' cm carre',rx,135);
+    document.getElementById('resultAire').textContent='Aire du triangle : '+b+' x '+hh+' / 2 = '+aire+' cm carre.';
+  } else {
+    const r=b*sc/2;
+    ctx.fillStyle='rgba(192,57,43,0.15)';ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.setLineDash([3,3]);ctx.strokeStyle='#888';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r,cy);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText('r = '+b,cx+r/2,cy-10);
+    const rx=w*0.6;const aire=(Math.PI*b*b).toFixed(1);
+    ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='left';
+    ctx.fillText('Disque',rx,50);ctx.font='13px Arial';ctx.fillStyle='#555';
+    ctx.fillText('Aire = pi x r carre',rx,80);ctx.fillText('Aire = 3,14 x '+b+' carre',rx,105);ctx.fillText('Aire = 3,14 x '+(b*b),rx,130);
+    ctx.fillStyle='#c0392b';ctx.font='bold 18px Arial';ctx.fillText('= '+aire+' cm carre',rx,160);
+    document.getElementById('resultAire').textContent='Aire du disque : pi x '+b+' carre = '+aire+' cm carre.';
+  }
+  ctx.textAlign='left';
+}
+['figAire','aireB','aireH'].forEach(id=>document.getElementById(id).addEventListener('input',drawAire));
+document.getElementById('figAire').addEventListener('change',drawAire);
+drawAire();
+
+// DEMO TRIANGLE = MOITIE DU RECTANGLE
+(function(){
+  const c=document.getElementById('canvasTriDemo');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);const cx=w/2,cy=h/2;const rw=200,rh=120;
+  // Rectangle complet
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+  ctx.strokeRect(cx-rw/2,cy-rh/2,rw,rh);ctx.setLineDash([]);
+  // Triangle (moitie coloree)
+  ctx.fillStyle='rgba(42,82,152,0.25)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(cx-rw/2,cy+rh/2);ctx.lineTo(cx-rw/2,cy-rh/2);ctx.lineTo(cx+rw/2,cy+rh/2);ctx.closePath();ctx.fill();ctx.stroke();
+  // L'autre moitie (vide)
+  ctx.fillStyle='rgba(200,200,200,0.15)';ctx.strokeStyle='#ccc';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(cx-rw/2,cy-rh/2);ctx.lineTo(cx+rw/2,cy-rh/2);ctx.lineTo(cx+rw/2,cy+rh/2);ctx.closePath();ctx.fill();ctx.stroke();
+  // Labels
+  ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='center';
+  ctx.fillText('Triangle = moitie',cx-rw/4,cy+10);
+  ctx.fillStyle='#aaa';ctx.fillText('L\'autre moitie',cx+rw/4,cy-20);
+  // Mesures
+  ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';
+  ctx.fillText('base = b',cx,cy+rh/2+20);
+  ctx.save();ctx.translate(cx-rw/2-15,cy);ctx.rotate(-Math.PI/2);ctx.fillText('hauteur = h',0,0);ctx.restore();
+  // Formules
+  ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='left';
+  ctx.fillText('Rectangle = b x h',cx+rw/2+20,cy-20);
+  ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';
+  ctx.fillText('Triangle = b x h / 2',cx+rw/2+20,cy+10);
+  ctx.textAlign='left';
+})();
+</script>
+</body>
+</html>

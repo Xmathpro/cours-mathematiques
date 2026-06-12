@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fractions sur la droite graduee . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}.controls label{font-weight:bold}.controls input[type="range"]{width:100px;cursor:pointer}.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;line-height:1.7}.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6eme</span><span>Nombres et calculs</span><span>Chaine 2, lecon 2</span></div>
+<h1 class="cours-titre-principal">Placer une fraction sur une droite graduee</h1>
+<p class="cours-sous-titre">Fractions sur la droite, fractions superieures a 1 et ecriture mixte</p>
+</div></div>
+
+<main class="cours-corps">
+<div class="lecon-path"><span>Fractions</span> <span>6eme</span> <span>Lecon 2</span></div>
+
+<h2>I. Methode pour placer une fraction</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour placer $\dfrac{a}{b}$ sur une droite graduee :</p>
+<ol>
+<li>Diviser l'intervalle [0, 1] en <strong>$b$ parts egales</strong>.</li>
+<li>Compter <strong>$a$ graduations</strong> a partir de 0.</li>
+</ol>
+<p>Si $a > b$, on depasse 1 et on continue sur l'intervalle suivant.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Placer une fraction sur la droite</h4>
+<canvas id="canvasFracDroite" width="600" height="250"></canvas>
+<div class="controls">
+<label>Numerateur :</label><input type="range" id="fracNum" min="0" max="15" value="3"><span id="fracNumVal">3</span>
+<label>Denominateur :</label><input type="range" id="fracDen" min="2" max="8" value="4"><span id="fracDenVal">4</span>
+</div>
+<div class="result-text" id="resultFracDroite"></div>
+</div>
+
+<h2>II. Fractions superieures a 1</h2>
+
+<div class="definition"><div class="encadre-titre">Ecriture mixte</div>
+<p>Quand le numerateur depasse le denominateur, la fraction vaut plus que 1. On peut l'ecrire sous forme <strong>mixte</strong> : partie entiere + fraction restante.</p>
+<p>$\dfrac{7}{4} = 1 + \dfrac{3}{4} = 1\dfrac{3}{4}$ car $7 = 4 \times 1 + 3$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Convertir : fraction impropre vers ecriture mixte</h4>
+<canvas id="canvasMixte" width="600" height="250"></canvas>
+<div class="controls">
+<label>Numerateur :</label><input type="range" id="mixNum" min="1" max="20" value="11"><span id="mixNumVal">11</span>
+<label>Denominateur :</label><input type="range" id="mixDen" min="2" max="6" value="4"><span id="mixDenVal">4</span>
+</div>
+<div class="result-text" id="resultMixte"></div>
+</div>
+
+<h2>III. Ranger des fractions</h2>
+
+<div class="propriete"><div class="encadre-titre">Comparer avec le meme denominateur</div>
+<p>Quand deux fractions ont le <strong>meme denominateur</strong>, la plus grande est celle qui a le plus grand numerateur :</p>
+<p>$\dfrac{3}{5} < \dfrac{4}{5}$ car $3 < 4$ (meme denominateur 5).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Comparer deux fractions sur la droite</h4>
+<canvas id="canvasCompFrac" width="600" height="200"></canvas>
+<div class="controls">
+<label>a/b :</label><input type="range" id="cfA" min="1" max="7" value="3"><span id="cfAval">3</span>/<input type="range" id="cfB" min="2" max="8" value="4"><span id="cfBval">4</span>
+<label>c/d :</label><input type="range" id="cfC" min="1" max="7" value="2"><span id="cfCval">2</span>/<input type="range" id="cfD" min="2" max="8" value="3"><span id="cfDval">3</span>
+</div>
+<div class="result-text" id="resultCompFrac"></div>
+</div>
+
+<h2>IV. Exercices</h2>
+<ol>
+<li>Placer sur une droite : $\dfrac{1}{2}$, $\dfrac{3}{4}$, $\dfrac{1}{4}$, $\dfrac{5}{4}$.</li>
+<li>Ecrire $\dfrac{11}{3}$ sous forme mixte.</li>
+<li>Ecrire $2\dfrac{1}{5}$ sous forme de fraction.</li>
+<li>Ranger : $\dfrac{1}{3}$, $\dfrac{1}{2}$, $\dfrac{1}{4}$, $\dfrac{3}{4}$.</li>
+<li>Quelle fraction est au milieu entre 0 et $\dfrac{1}{2}$ ?</li>
+</ol>
+
+<h2>V. Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>1.</strong> $\dfrac{1}{4}$ (0,25), $\dfrac{1}{2}$ (0,5), $\dfrac{3}{4}$ (0,75), $\dfrac{5}{4}$ (1,25).</p>
+<p><strong>2.</strong> $11 = 3 \times 3 + 2$ donc $\dfrac{11}{3} = 3\dfrac{2}{3}$.</p>
+<p><strong>3.</strong> $2\dfrac{1}{5} = \dfrac{2 \times 5 + 1}{5} = \dfrac{11}{5}$.</p>
+<p><strong>4.</strong> $\dfrac{1}{4} < \dfrac{1}{3} < \dfrac{1}{2} < \dfrac{3}{4}$.</p>
+<p><strong>5.</strong> $\dfrac{1}{4}$.</p>
+</div>
+</main>
+<nav class="cours-nav"><a href="6e-fractions-L1-partage.html">&larr; Fractions : partage</a><a href="6e-fractions-L3-fractions-egales.html">Fractions egales &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+
+<script>
+const clrs=['#2a5298','#27ae60','#c0392b','#8e44ad','#e67e22','#16a085'];
+// DROITE
+function drawFracDroite(){
+  const c=document.getElementById('canvasFracDroite');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const num=parseInt(document.getElementById('fracNum').value),den=parseInt(document.getElementById('fracDen').value);
+  document.getElementById('fracNumVal').textContent=num;document.getElementById('fracDenVal').textContent=den;
+  ctx.clearRect(0,0,w,h);
+  const val=num/den;const maxInt=Math.ceil(val)+1;
+  const ox=50,oy=h/2-20,dw=w-100;const unitW=dw/maxInt;
+  // Droite
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+dw,oy);ctx.stroke();
+  // Graduations entieres
+  for(let i=0;i<=maxInt;i++){
+    const px=ox+i*unitW;
+    ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(px,oy-12);ctx.lineTo(px,oy+12);ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText(i,px,oy+28);
+  }
+  // Sous-graduations (1/den)
+  for(let i=0;i<maxInt;i++){
+    for(let j=1;j<den;j++){
+      const px=ox+i*unitW+j*unitW/den;
+      ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,oy-6);ctx.lineTo(px,oy+6);ctx.stroke();
+    }
+  }
+  // Colorer de 0 au point
+  const px=ox+val*unitW;
+  ctx.fillStyle='rgba(42,82,152,0.15)';ctx.fillRect(ox,oy-8,px-ox,16);
+  // Point
+  ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(px,oy,8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText(num+'/'+den,px,oy-20);
+  ctx.fillStyle='#888';ctx.font='11px Arial';
+  ctx.fillText('= '+val.toFixed(2),px,oy-35);
+  // Explication
+  ctx.fillStyle='#555';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('On divise chaque unite en '+den+' parts, on compte '+num+' graduations depuis 0.',50,h-20);
+  document.getElementById('resultFracDroite').textContent=num+'/'+den+' = '+val.toFixed(2)+'. On divise [0,1] en '+den+' parts et on avance de '+num+' graduations.';
+}
+['fracNum','fracDen'].forEach(id=>document.getElementById(id).addEventListener('input',drawFracDroite));
+drawFracDroite();
+
+// MIXTE
+function drawMixte(){
+  const c=document.getElementById('canvasMixte');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const num=parseInt(document.getElementById('mixNum').value),den=parseInt(document.getElementById('mixDen').value);
+  document.getElementById('mixNumVal').textContent=num;document.getElementById('mixDenVal').textContent=den;
+  ctx.clearRect(0,0,w,h);
+  const whole=Math.floor(num/den),rem=num%den;
+  const nbCircles=whole+(rem>0?1:0);const r=Math.min(40,(w-80)/(nbCircles*2.3));
+  let taken=0;
+  for(let p=0;p<nbCircles;p++){
+    const cx=r*1.3+p*(r*2.3),cy=h*0.4;
+    const partsHere=Math.min(den,num-taken);
+    for(let i=0;i<den;i++){
+      const sa=-Math.PI/2+i*2*Math.PI/den,ea=-Math.PI/2+(i+1)*2*Math.PI/den;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();
+      ctx.fillStyle=i<partsHere?clrs[p%6]+'bb':'#f0f0f0';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+    }
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+    taken+=partsHere;
+  }
+  // Conversion
+  const rx=Math.max(w*0.55,nbCircles*r*2.3+40);
+  ctx.fillStyle='#2a5298';ctx.font='bold 22px Arial';ctx.textAlign='left';
+  ctx.fillText(num+'/'+den,rx,50);
+  ctx.fillStyle='#333';ctx.font='16px Arial';
+  ctx.fillText('= '+whole+(rem>0?' + '+rem+'/'+den:''),rx,85);
+  ctx.fillStyle='#27ae60';ctx.font='bold 18px Arial';
+  ctx.fillText('= '+whole+(rem>0?' '+rem+'/'+den:''),rx,120);
+  ctx.fillStyle='#888';ctx.font='12px Arial';
+  ctx.fillText(num+' = '+den+' x '+whole+' + '+rem,rx,155);
+  document.getElementById('resultMixte').textContent=num+'/'+den+' = '+whole+(rem>0?' et '+rem+'/'+den:'')+'. Division : '+num+' = '+den+' x '+whole+' + '+rem+'.';
+}
+['mixNum','mixDen'].forEach(id=>document.getElementById(id).addEventListener('input',drawMixte));
+drawMixte();
+
+// COMPARER
+function drawCompFrac(){
+  const c=document.getElementById('canvasCompFrac');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const a=parseInt(document.getElementById('cfA').value),b=parseInt(document.getElementById('cfB').value);
+  const cc=parseInt(document.getElementById('cfC').value),d=parseInt(document.getElementById('cfD').value);
+  document.getElementById('cfAval').textContent=a;document.getElementById('cfBval').textContent=b;
+  document.getElementById('cfCval').textContent=cc;document.getElementById('cfDval').textContent=d;
+  ctx.clearRect(0,0,w,h);
+  const v1=a/b,v2=cc/d;const maxV=Math.max(v1,v2,1)*1.3;
+  const ox=50,oy=h/2,dw=w-100;
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+dw,oy);ctx.stroke();
+  for(let i=0;i<=Math.ceil(maxV);i++){const px=ox+(i/maxV)*dw;ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,oy-8);ctx.lineTo(px,oy+8);ctx.stroke();ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText(i,px,oy+22);}
+  const px1=ox+(v1/maxV)*dw,px2=ox+(v2/maxV)*dw;
+  ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(px1,oy,7,0,Math.PI*2);ctx.fill();
+  ctx.font='bold 12px Arial';ctx.fillText(a+'/'+b,px1,oy-16);
+  ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(px2,oy,7,0,Math.PI*2);ctx.fill();
+  ctx.font='bold 12px Arial';ctx.fillText(cc+'/'+d,px2,oy-16);
+  const sym=v1>v2?'>':v1<v2?'<':'=';
+  ctx.fillStyle='#333';ctx.font='bold 18px Arial';ctx.fillText(a+'/'+b+' '+sym+' '+cc+'/'+d,w/2,oy+55);
+  ctx.fillStyle='#888';ctx.font='11px Arial';ctx.fillText('('+v1.toFixed(3)+' '+sym+' '+v2.toFixed(3)+')',w/2,oy+75);
+  ctx.textAlign='left';
+  document.getElementById('resultCompFrac').textContent=a+'/'+b+' = '+v1.toFixed(3)+' et '+cc+'/'+d+' = '+v2.toFixed(3)+'. Donc '+a+'/'+b+' '+sym+' '+cc+'/'+d+'.';
+}
+['cfA','cfB','cfC','cfD'].forEach(id=>document.getElementById(id).addEventListener('input',drawCompFrac));
+drawCompFrac();
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symétrie axiale . 6ème</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type="range"]{width:120px;cursor:pointer}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}
+.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6ème</span><span>Géométrie</span><span>Chaîne 4, leçon 1</span></div>
+<h1 class="cours-titre-principal">Symétrie axiale</h1>
+<p class="cours-sous-titre">Reconnaître un axe de symétrie, construire le symétrique d'un point et d'une figure</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="lecon-path">
+<span>Géométrie</span> <span>6ème</span> <span>Leçon 1</span>
+</div>
+
+<h2>I. Reconnaître un axe de symétrie</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Une figure admet un <strong>axe de symétrie</strong> si, en la pliant le long de cet axe, les deux moitiés se superposent exactement. L'axe est la ligne de pliage.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : plier une figure le long de son axe</h4>
+<canvas id="canvasPliage" width="600" height="350"></canvas>
+<div class="controls">
+<label>Figure :</label>
+<select id="figureSelect">
+<option value="papillon">Papillon</option>
+<option value="coeur">Coeur</option>
+<option value="triangle">Triangle isocèle</option>
+<option value="carre">Carré</option>
+<option value="rectangle">Rectangle</option>
+</select>
+<label>Pliage :</label>
+<input type="range" id="pliageSlider" min="0" max="100" value="0">
+<span id="pliageVal">0</span>%
+</div>
+<div class="result-text" id="resultPliage">Déplacez le curseur pour simuler le pliage. Les deux moitiés doivent se superposer.</div>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Combien d'axes de symétrie ?</div>
+<ul>
+<li>Segment : 2 axes (la médiatrice et la droite support).</li>
+<li>Triangle isocèle : 1 axe.</li>
+<li>Triangle équilatéral : 3 axes.</li>
+<li>Rectangle : 2 axes.</li>
+<li>Losange : 2 axes (les diagonales).</li>
+<li>Carré : 4 axes.</li>
+<li>Cercle : une infinité d'axes (tout diamètre).</li>
+</ul>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : les axes de symétrie des figures classiques</h4>
+<canvas id="canvasAxes" width="600" height="320"></canvas>
+<div class="controls">
+<label>Figure :</label>
+<select id="axesFigure">
+<option value="equilateral">Triangle équilatéral (3 axes)</option>
+<option value="isocele">Triangle isocèle (1 axe)</option>
+<option value="rectangle">Rectangle (2 axes)</option>
+<option value="carre">Carré (4 axes)</option>
+<option value="cercle">Cercle (infini)</option>
+</select>
+</div>
+<div class="result-text" id="resultAxes"></div>
+</div>
+
+<h2>II. Construire le symétrique d'un point</h2>
+
+<div class="definition"><div class="encadre-titre">Méthode</div>
+<p>Le <strong>symétrique</strong> d'un point $A$ par rapport à un axe $d$ est le point $A'$ tel que :</p>
+<ol>
+<li>$d$ est la <strong>médiatrice</strong> du segment $[AA']$.</li>
+<li>Autrement dit : $d$ est perpendiculaire à $[AA']$ et passe par son milieu.</li>
+</ol>
+<p>Pour construire $A'$ : tracer la perpendiculaire à $d$ passant par $A$, puis reporter la même distance de l'autre côté.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Construire : le symétrique d'un point par rapport à un axe</h4>
+<canvas id="canvasSymPoint" width="600" height="350"></canvas>
+<div class="controls">
+<label>Position du point A :</label>
+<label>x =</label><input type="range" id="ptX" min="20" max="250" value="120"><span id="ptXval">120</span>
+<label>y =</label><input type="range" id="ptY" min="50" max="300" value="100"><span id="ptYval">100</span>
+</div>
+<div class="result-text" id="resultSymPoint">Le point A' est le reflet de A par rapport à l'axe d. La distance de A à d est la même que de A' à d.</div>
+</div>
+
+<h2>III. Construire le symétrique d'une figure</h2>
+
+<div class="methode"><div class="encadre-titre">Méthode</div>
+<p>Pour construire le symétrique d'une figure :</p>
+<ol>
+<li>Construire le symétrique de <strong>chaque sommet</strong> par rapport à l'axe.</li>
+<li>Relier les sommets symétriques dans le même ordre.</li>
+</ol>
+</div>
+
+<div class="interactive-box">
+<h4>Construire : le symétrique d'un triangle</h4>
+<canvas id="canvasSymFigure" width="600" height="380"></canvas>
+<div class="controls">
+<label>Inclinaison de l'axe :</label>
+<input type="range" id="axeAngle" min="60" max="120" value="90">
+<span id="axeAngleVal">90</span> degres
+</div>
+<div class="result-text" id="resultSymFigure"></div>
+</div>
+
+<h2>IV. Propriétés de la symétrie axiale</h2>
+
+<div class="propriete"><div class="encadre-titre">La symétrie axiale conserve :</div>
+<ul>
+<li>Les <strong>longueurs</strong> : si $AB = 5$ cm, alors $A'B' = 5$ cm.</li>
+<li>Les <strong>angles</strong> : si l'angle en $A$ mesure 60 degres, l'angle en $A'$ mesure aussi 60 degres.</li>
+<li>Les <strong>aires</strong> : la figure et son symétrique ont la même aire.</li>
+<li>L'<strong>alignement</strong> : si $A$, $B$, $C$ sont alignés, alors $A'$, $B'$, $C'$ le sont aussi.</li>
+</ul>
+<p>Mais la symétrie <strong>inverse le sens</strong> : un texte lu normalement devient un texte miroir.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : le texte miroir (la symétrie inverse le sens)</h4>
+<canvas id="canvasMiroir" width="600" height="200"></canvas>
+<div class="result-text" id="resultMiroir">La symétrie axiale conserve les longueurs et les angles, mais inverse le sens de lecture.</div>
+</div>
+
+<h2>V. Exercices</h2>
+
+<ol>
+<li>Citer 3 lettres de l'alphabet qui ont un axe de symétrie vertical. Citer 3 qui en ont un horizontal.</li>
+<li>Combien d'axes de symétrie possède un losange ? Les décrire.</li>
+<li>Construire le symétrique du point $A(2, 5)$ par rapport à l'axe des abscisses (l'axe horizontal).</li>
+<li>Un triangle $ABC$ a pour symétrique $A'B'C'$ par rapport à un axe. $AB = 7$ cm et l'angle en $C$ mesure 50 degres. Que valent $A'B'$ et l'angle en $C'$ ?</li>
+<li>Pourquoi le mot "AMBULANCE" est-il écrit à l'envers sur les ambulances ?</li>
+</ol>
+
+<h2>VI. Corrigés</h2>
+
+<div class="exemple"><div class="encadre-titre">Corrigés</div>
+<p><strong>1.</strong> Axe vertical : A, M, T. Axe horizontal : B, C, D (ou E, K).</p>
+<p><strong>2.</strong> Un losange a 2 axes de symétrie : ses deux diagonales.</p>
+<p><strong>3.</strong> Le symétrique de $A(2, 5)$ par rapport à l'axe des abscisses est $A'(2, -5)$. L'abscisse ne change pas, l'ordonnée change de signe.</p>
+<p><strong>4.</strong> $A'B' = 7$ cm (conservation des longueurs). L'angle en $C'$ mesure 50 degres (conservation des angles).</p>
+<p><strong>5.</strong> Quand tu regardes l'ambulance dans ton rétroviseur, tu vois son reflet (symétrie par rapport au miroir). Le mot écrit à l'envers redevient lisible dans le miroir. C'est une application concrète de la symétrie axiale.</p>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="perpendiculaires-paralleles.html">&larr; Perpendiculaires et parallèles</a>
+<a href="perimetres.html">Périmètres &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+// ====== PLIAGE ======
+function drawPliage(){
+  const c=document.getElementById('canvasPliage');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const pliage=parseInt(document.getElementById('pliageSlider').value)/100;
+  document.getElementById('pliageVal').textContent=Math.round(pliage*100);
+  const sel=document.getElementById('figureSelect').value;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+
+  // Axe
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(cx,20);ctx.lineTo(cx,h-20);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('axe d',cx,15);
+
+  // Figure gauche (originale)
+  const offsetX=pliage*0; // gauche fixe
+  ctx.save();
+  drawShape(ctx,cx-80,cy,sel,'#2a5298',1);
+  ctx.restore();
+
+  // Figure droite (qui se plie)
+  ctx.save();
+  const scaleX=1-pliage*2; // de 1 à -1
+  ctx.translate(cx,0);ctx.scale(Math.max(0.01,Math.abs(scaleX)),1);ctx.translate(-cx,0);
+  if(scaleX<0){ctx.translate(cx,0);ctx.scale(-1,1);ctx.translate(-cx,0);}
+  drawShape(ctx,cx+80,cy,sel,pliage>0.45?'rgba(42,82,152,0.4)':'#27ae60',1);
+  ctx.restore();
+
+  ctx.textAlign='left';
+  document.getElementById('resultPliage').textContent=pliage<0.1?'La figure a deux moitiés de part et d\'autre de l\'axe. Pliez pour vérifier la symétrie.':pliage>0.9?'Les deux moitiés se superposent parfaitement. La figure est symétrique par rapport à cet axe.':'Pliage en cours...';
+}
+function drawShape(ctx,cx,cy,shape,color,scale){
+  ctx.fillStyle=color+'33';ctx.strokeStyle=color;ctx.lineWidth=2;
+  ctx.beginPath();
+  if(shape==='papillon'){
+    ctx.moveTo(cx,cy-40);ctx.quadraticCurveTo(cx-60,cy-60,cx-50,cy);ctx.quadraticCurveTo(cx-60,cy+60,cx,cy+40);
+  } else if(shape==='coeur'){
+    ctx.moveTo(cx,cy+40);ctx.quadraticCurveTo(cx-60,cy,cx-30,cy-30);ctx.quadraticCurveTo(cx,cy-50,cx,cy-10);
+  } else if(shape==='triangle'){
+    ctx.moveTo(cx,cy-50);ctx.lineTo(cx-50,cy+40);ctx.lineTo(cx,cy+40);
+  } else if(shape==='carre'){
+    ctx.rect(cx-50,cy-50,50,100);
+  } else {
+    ctx.rect(cx-70,cy-40,70,80);
+  }
+  ctx.closePath();ctx.fill();ctx.stroke();
+}
+document.getElementById('pliageSlider').addEventListener('input',drawPliage);
+document.getElementById('figureSelect').addEventListener('change',drawPliage);
+drawPliage();
+
+// ====== AXES DE SYMETRIE ======
+function drawAxes(){
+  const c=document.getElementById('canvasAxes');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const sel=document.getElementById('axesFigure').value;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.fillStyle='rgba(42,82,152,0.1)';
+
+  if(sel==='equilateral'){
+    const r=80;const pts=[];
+    for(let i=0;i<3;i++){const a=-Math.PI/2+i*2*Math.PI/3;pts.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});}
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();
+    // 3 axes
+    for(let i=0;i<3;i++){
+      const p=pts[i];const mid={(pts[(i+1)%3].x+pts[(i+2)%3].x)/2,my:(pts[(i+1)%3].y+pts[(i+2)%3].y)/2};
+      ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(p.x+(p.x-mid)*0.3,p.y+(p.y-mid.my)*0.3);
+      ctx.lineTo(mid+(mid-p.x)*0.3,mid.my+(mid.my-p.y)*0.3);ctx.stroke();ctx.setLineDash([]);
+    }
+    // Simpler approach
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.fillStyle='rgba(42,82,152,0.1)';
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    for(let i=0;i<3;i++){
+      const p=pts[i];const mx=(pts[(i+1)%3].x+pts[(i+2)%3].x)/2;const my=(pts[(i+1)%3].y+pts[(i+2)%3].y)/2;
+      const dx=p.x-mx,dy=p.y-my;const ext=0.4;
+      ctx.beginPath();ctx.moveTo(p.x+dx*ext,p.y+dy*ext);ctx.lineTo(mx-dx*ext,my-dy*ext);ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    document.getElementById('resultAxes').textContent='Triangle equilateral : 3 axes de symetrie. Chaque axe passe par un sommet et le milieu du cote oppose.';
+  } else if(sel==='isocele'){
+    const pts=[{x:cx,y:cy-80},{x:cx-60,y:cy+60},{x:cx+60,y:cy+60}];
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx,cy-100);ctx.lineTo(cx,cy+80);ctx.stroke();ctx.setLineDash([]);
+    document.getElementById('resultAxes').textContent='Triangle isocele : 1 seul axe de symetrie. Il passe par le sommet principal et le milieu de la base.';
+  } else if(sel==='rectangle'){
+    ctx.beginPath();ctx.rect(cx-100,cy-50,200,100);ctx.fill();ctx.stroke();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx,cy-70);ctx.lineTo(cx,cy+70);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-120,cy);ctx.lineTo(cx+120,cy);ctx.stroke();
+    ctx.setLineDash([]);
+    document.getElementById('resultAxes').textContent='Rectangle : 2 axes de symetrie. Les mediatrices des cotes (pas les diagonales !).';
+  } else if(sel==='carre'){
+    ctx.beginPath();ctx.rect(cx-60,cy-60,120,120);ctx.fill();ctx.stroke();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx,cy-80);ctx.lineTo(cx,cy+80);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-80,cy);ctx.lineTo(cx+80,cy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-80,cy-80);ctx.lineTo(cx+80,cy+80);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx+80,cy-80);ctx.lineTo(cx-80,cy+80);ctx.stroke();
+    ctx.setLineDash([]);
+    document.getElementById('resultAxes').textContent='Carre : 4 axes de symetrie. Les 2 mediatrices des cotes + les 2 diagonales.';
+  } else {
+    ctx.beginPath();ctx.arc(cx,cy,70,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+    for(let i=0;i<6;i++){
+      const a=i*Math.PI/6;
+      ctx.beginPath();ctx.moveTo(cx+90*Math.cos(a),cy+90*Math.sin(a));ctx.lineTo(cx-90*Math.cos(a),cy-90*Math.sin(a));ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    document.getElementById('resultAxes').textContent='Cercle : une infinite d\'axes de symetrie. Tout diametre est un axe.';
+  }
+  ctx.textAlign='left';
+}
+document.getElementById('axesFigure').addEventListener('change',drawAxes);
+drawAxes();
+
+// ====== SYMÉTRIQUE D'UN POINT ======
+function drawSymPoint(){
+  const c=document.getElementById('canvasSymPoint');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const px=parseInt(document.getElementById('ptX').value);
+  const py=parseInt(document.getElementById('ptY').value);
+  document.getElementById('ptXval').textContent=px;document.getElementById('ptYval').textContent=py;
+  ctx.clearRect(0,0,w,h);
+  const axeX=w/2;
+
+  // Quadrillage léger
+  ctx.strokeStyle='#f0f0f0';ctx.lineWidth=0.5;
+  for(let i=0;i<w;i+=30){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,h);ctx.stroke();}
+  for(let i=0;i<h;i+=30){ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(w,i);ctx.stroke();}
+
+  // Axe d
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(axeX,10);ctx.lineTo(axeX,h-10);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText('d',axeX,h-5);
+
+  // Point A
+  const ax=px,ay=py;
+  ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(ax,ay,6,0,Math.PI*2);ctx.fill();
+  ctx.font='bold 14px Arial';ctx.fillText('A',ax-15,ay-10);
+
+  // Point A' (symétrique)
+  const apx=2*axeX-ax;const apy=ay;
+  ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(apx,apy,6,0,Math.PI*2);ctx.fill();
+  ctx.font='bold 14px Arial';ctx.fillText("A'",apx+10,apy-10);
+
+  // Segment AA' en pointillés
+  ctx.setLineDash([4,4]);ctx.strokeStyle='#888';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(apx,apy);ctx.stroke();ctx.setLineDash([]);
+
+  // Angle droit au pied
+  const sq=10;
+  ctx.strokeStyle='#27ae60';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(axeX+sq,ay);ctx.lineTo(axeX+sq,ay-sq);ctx.lineTo(axeX,ay-sq);ctx.stroke();
+
+  // Distances
+  const dist=Math.abs(axeX-ax);
+  ctx.fillStyle='#555';ctx.font='11px Arial';
+  ctx.fillText(Math.round(dist/3)+' u',(ax+axeX)/2,ay+20);
+  ctx.fillText(Math.round(dist/3)+' u',(apx+axeX)/2,ay+20);
+
+  ctx.textAlign='left';
+  document.getElementById('resultSymPoint').textContent='A est a '+Math.round(dist/3)+' unites de l\'axe d. Son symetrique A\' est a la meme distance de l\'autre cote. Le segment [AA\'] est perpendiculaire a d et d passe par son milieu.';
+}
+['ptX','ptY'].forEach(id=>document.getElementById(id).addEventListener('input',drawSymPoint));
+drawSymPoint();
+
+// ====== SYMÉTRIQUE D'UNE FIGURE ======
+function drawSymFigure(){
+  const c=document.getElementById('canvasSymFigure');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const angle=parseInt(document.getElementById('axeAngle').value);
+  document.getElementById('axeAngleVal').textContent=angle;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2;
+  const rad=angle*Math.PI/180;
+
+  // Axe
+  const axLen=200;
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(cx-axLen*Math.cos(rad),cy+axLen*Math.sin(rad));
+  ctx.lineTo(cx+axLen*Math.cos(rad),cy-axLen*Math.sin(rad));ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';
+  ctx.fillText('d',cx+axLen*Math.cos(rad)+10,cy-axLen*Math.sin(rad));
+
+  // Triangle original
+  const pts=[{x:-100,y:-30},{x:-60,y:-80},{x:-30,y:-10}];
+
+  function reflectPoint(px,py){
+    const dx=Math.cos(rad),dy=-Math.sin(rad);
+    const dot=(px-cx)*dx+(py-cy)*dy;
+    return {x:2*(cx+dot*dx)-px, y:2*(cy+dot*dy)-py};
+  }
+
+  // Original
+  ctx.fillStyle='rgba(42,82,152,0.2)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+  ctx.beginPath();
+  pts.forEach((p,i)=>{const px=cx+p.x,py=cy+p.y;i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);});
+  ctx.closePath();ctx.fill();ctx.stroke();
+  pts.forEach((p,i)=>{ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(cx+p.x,cy+p.y,4,0,Math.PI*2);ctx.fill();
+    ctx.font='bold 12px Arial';ctx.fillText(String.fromCharCode(65+i),cx+p.x-15,cy+p.y-8);});
+
+  // Symétrique
+  const rpts=pts.map(p=>reflectPoint(cx+p.x,cy+p.y));
+  ctx.fillStyle='rgba(39,174,96,0.2)';ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+  ctx.beginPath();
+  rpts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.closePath();ctx.fill();ctx.stroke();
+  rpts.forEach((p,i)=>{ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill();
+    ctx.font='bold 12px Arial';ctx.fillText(String.fromCharCode(65+i)+"'",p.x+8,p.y-8);});
+
+  // Lignes de construction
+  ctx.setLineDash([3,3]);ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+  pts.forEach((p,i)=>{ctx.beginPath();ctx.moveTo(cx+p.x,cy+p.y);ctx.lineTo(rpts[i].x,rpts[i].y);ctx.stroke();});
+  ctx.setLineDash([]);
+
+  ctx.textAlign='left';
+  document.getElementById('resultSymFigure').textContent='Le triangle A\'B\'C\' (vert) est le symetrique du triangle ABC (bleu) par rapport a l\'axe d. On construit le symetrique de chaque sommet, puis on relie.';
+}
+document.getElementById('axeAngle').addEventListener('input',drawSymFigure);
+drawSymFigure();
+
+// ====== MIROIR ======
+(function(){
+  const c=document.getElementById('canvasMiroir');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const cx=w/2;
+
+  // Axe
+  ctx.setLineDash([6,4]);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(cx,10);ctx.lineTo(cx,h-10);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#c0392b';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('miroir',cx,h-5);
+
+  // Texte normal
+  ctx.fillStyle='#2a5298';ctx.font='bold 28px Arial';ctx.textAlign='right';
+  ctx.fillText('MATHS',cx-30,h/2+10);
+
+  // Texte miroir
+  ctx.save();ctx.translate(cx+30,0);ctx.scale(-1,1);
+  ctx.fillStyle='#27ae60';ctx.font='bold 28px Arial';ctx.textAlign='right';
+  ctx.fillText('MATHS',0,h/2+10);
+  ctx.restore();
+
+  ctx.fillStyle='#2a5298';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('original',cx/2,h/2+40);
+  ctx.fillStyle='#27ae60';ctx.fillText('reflet',cx+cx/2,h/2+40);
+  ctx.textAlign='left';
+})();
+</script>
+</body>
+</html>

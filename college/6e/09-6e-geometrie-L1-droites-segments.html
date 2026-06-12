@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Droites, segments et demi-droites . 6ème</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.lecon-path{font-family:Arial,sans-serif;font-size:.75rem;color:#888;margin-bottom:.5rem}
+.lecon-path span{background:#e0e0e0;padding:2px 8px;border-radius:10px;margin-right:.3rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathématiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>6ème</span><span>Géométrie</span><span>Chaîne 3, leçon 1</span></div>
+<h1 class="cours-titre-principal">Droites, segments et demi-droites</h1>
+<p class="cours-sous-titre">Reconnaître, nommer, coder et mesurer</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="lecon-path">
+<span>Géométrie</span> <span>6ème</span> <span>Leçon 1</span>
+</div>
+
+<h2>I. Le point</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Un <strong>point</strong> est un emplacement dans le plan. Il n'a pas de dimension (pas de longueur, pas de largeur). On le note avec une <strong>lettre majuscule</strong> et on le représente par une croix.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : placer des points</h4>
+<canvas id="canvasPoints" width="600" height="200"></canvas>
+<div class="controls">
+<button onclick="addPoint()">+ Ajouter un point</button>
+<button onclick="clearPoints()">Effacer tout</button>
+</div>
+<div class="result-text" id="resultPoints">Cliquez sur "Ajouter" pour placer des points. Chaque point est nommé par une lettre.</div>
+</div>
+
+<h2>II. La droite, le segment et la demi-droite</h2>
+
+<div class="interactive-box">
+<h4>Visualiser : les 3 objets fondamentaux</h4>
+<canvas id="canvasObjets" width="600" height="380"></canvas>
+<div class="controls">
+<label>Afficher :</label>
+<select id="objetSelect">
+<option value="all">Les 3 ensemble</option>
+<option value="droite">Droite (AB)</option>
+<option value="segment">Segment [AB]</option>
+<option value="demi">Demi-droite [AB)</option>
+</select>
+</div>
+<div class="result-text" id="resultObjets"></div>
+</div>
+
+<div class="definition"><div class="encadre-titre">La droite</div>
+<p>Une <strong>droite</strong> passe par deux points et se prolonge à l'infini des deux côtés. On la note $(AB)$ avec des parenthèses. On peut aussi lui donner un nom en minuscule : droite $d$.</p>
+<p>Par deux points distincts, il passe <strong>une seule</strong> droite.</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Le segment</div>
+<p>Un <strong>segment</strong> est la partie de la droite comprise entre deux points $A$ et $B$. Il a une <strong>longueur finie</strong>. On le note $[AB]$ avec des crochets. Sa longueur est notée $AB$ (sans crochets).</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">La demi-droite</div>
+<p>Une <strong>demi-droite</strong> part d'un point (l'<strong>origine</strong>) et se prolonge à l'infini d'un seul côté. On la note $[AB)$ : elle part de $A$ et passe par $B$ en continuant.</p>
+</div>
+
+<h2>III. Mesurer un segment</h2>
+
+<div class="definition"><div class="encadre-titre">Utiliser la règle graduée</div>
+<p>Pour mesurer la longueur d'un segment $[AB]$ :</p>
+<ol>
+<li>Placer le zéro de la règle sur le point $A$.</li>
+<li>Lire la graduation au niveau du point $B$.</li>
+<li>Écrire le résultat avec l'unité : $AB = ... \text{ cm}$</li>
+</ol>
+</div>
+
+<div class="interactive-box">
+<h4>Mesurer un segment avec la règle</h4>
+<canvas id="canvasRegle" width="600" height="250"></canvas>
+<div class="controls">
+<button onclick="newSegment()">Nouveau segment</button>
+</div>
+<div class="result-text" id="resultRegle">Lisez la longueur du segment sur la règle.</div>
+</div>
+
+<h2>IV. Milieu d'un segment</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Le <strong>milieu</strong> $M$ d'un segment $[AB]$ est le point qui est à égale distance de $A$ et de $B$. On a : $AM = MB = \dfrac{AB}{2}$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualiser : le milieu d'un segment</h4>
+<canvas id="canvasMilieu" width="600" height="200"></canvas>
+<div class="controls">
+<label>Longueur AB :</label>
+<input type="range" id="longueurAB" min="4" max="16" value="10">
+<span id="longueurABval">10</span> cm
+</div>
+<div class="result-text" id="resultMilieu"></div>
+</div>
+
+<h2>V. Points alignés</h2>
+
+<div class="definition"><div class="encadre-titre">Définition</div>
+<p>Trois points ou plus sont <strong>alignés</strong> s'ils sont tous sur la même droite. Si on place une règle le long de la droite, tous les points sont sur le bord de la règle.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Quiz : ces points sont-ils alignés ?</h4>
+<canvas id="canvasAligne" width="600" height="200"></canvas>
+<div class="controls">
+<button onclick="quizAligne('oui')">Oui, alignés</button>
+<button onclick="quizAligne('non')">Non, pas alignés</button>
+<button onclick="newQuizAligne()">Nouvelle question</button>
+</div>
+<div class="result-text" id="resultAligne">Regardez les 3 points. Sont-ils sur la même droite ?</div>
+</div>
+
+<h2>VI. Exercices</h2>
+
+<ol>
+<li>Quelle est la différence entre une droite et un segment ?</li>
+<li>Comment note-t-on la droite passant par $A$ et $B$ ? Et le segment ? Et la demi-droite d'origine $A$ passant par $B$ ?</li>
+<li>$M$ est le milieu de $[AB]$ avec $AB = 8$ cm. Que vaut $AM$ ?</li>
+<li>$A$, $B$ et $C$ sont alignés. $B$ est entre $A$ et $C$. $AB = 5$ cm et $BC = 3$ cm. Que vaut $AC$ ?</li>
+<li>Tracer un segment $[EF]$ de 7,5 cm. Placer son milieu $M$. Quelle est la longueur de $[EM]$ ?</li>
+</ol>
+
+<h2>VII. Corrigés</h2>
+
+<div class="exemple"><div class="encadre-titre">Corrigés</div>
+<p><strong>1.</strong> La droite se prolonge à l'infini des deux côtés. Le segment a deux extrémités et une longueur finie.</p>
+<p><strong>2.</strong> Droite : $(AB)$. Segment : $[AB]$. Demi-droite : $[AB)$.</p>
+<p><strong>3.</strong> $AM = \dfrac{AB}{2} = \dfrac{8}{2} = 4$ cm.</p>
+<p><strong>4.</strong> $A$, $B$, $C$ alignés avec $B$ entre $A$ et $C$ : $AC = AB + BC = 5 + 3 = 8$ cm.</p>
+<p><strong>5.</strong> $EM = \dfrac{EF}{2} = \dfrac{7,5}{2} = 3,75$ cm.</p>
+</div>
+
+</main>
+
+<nav class="cours-nav">
+<a href="../progression-chaines.html">&larr; Progression</a>
+<a href="perpendiculaires-paralleles.html">Perpendiculaires et parallèles &rarr;</a>
+</nav>
+<footer class="site-footer">M.V. . Cours de mathématiques . 2012-2026</footer>
+
+<script>
+// ====== POINTS ======
+let points=[];let nextLetter=0;
+function addPoint(){
+  if(nextLetter>=8)return;
+  points.push({x:60+Math.random()*480, y:30+Math.random()*140, label:String.fromCharCode(65+nextLetter)});
+  nextLetter++;drawPoints();
+}
+function clearPoints(){points=[];nextLetter=0;drawPoints();}
+function drawPoints(){
+  const c=document.getElementById('canvasPoints');const ctx=c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+  points.forEach(p=>{
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(p.x-6,p.y-6);ctx.lineTo(p.x+6,p.y+6);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(p.x+6,p.y-6);ctx.lineTo(p.x-6,p.y+6);ctx.stroke();
+    ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+    ctx.fillText(p.label,p.x,p.y-12);
+  });
+  ctx.textAlign='left';
+  document.getElementById('resultPoints').textContent=points.length+' point(s) placé(s) : '+points.map(p=>p.label).join(', ')+'. Chaque point est une croix avec une lettre majuscule.';
+}
+drawPoints();
+
+// ====== 3 OBJETS ======
+function drawObjets(){
+  const c=document.getElementById('canvasObjets');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const sel=document.getElementById('objetSelect').value;
+  const show=sel==='all'?['droite','segment','demi']:[sel];
+  const configs={
+    droite:{y:80,color:'#2a5298',label:'Droite (AB)',desc:'Se prolonge à l\'infini des DEUX côtés. Notation : (AB).'},
+    segment:{y:190,color:'#27ae60',label:'Segment [AB]',desc:'Limité entre A et B. A une longueur. Notation : [AB].'},
+    demi:{y:300,color:'#c0392b',label:'Demi-droite [AB)',desc:'Part de A (origine), passe par B et continue. Notation : [AB).'}
+  };
+  show.forEach(key=>{
+    const cfg=configs[key];const y=sel==='all'?cfg.y:h/2;
+    const ax=120,bx=480;
+    // Trait
+    ctx.strokeStyle=cfg.color;ctx.lineWidth=3;
+    if(key==='droite'){
+      ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(w-20,y);ctx.stroke();
+      // Flèches
+      ctx.fillStyle=cfg.color;
+      ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(30,y-6);ctx.lineTo(30,y+6);ctx.closePath();ctx.fill();
+      ctx.beginPath();ctx.moveTo(w-20,y);ctx.lineTo(w-30,y-6);ctx.lineTo(w-30,y+6);ctx.closePath();ctx.fill();
+    } else if(key==='segment'){
+      ctx.beginPath();ctx.moveTo(ax,y);ctx.lineTo(bx,y);ctx.stroke();
+    } else {
+      ctx.beginPath();ctx.moveTo(ax,y);ctx.lineTo(w-20,y);ctx.stroke();
+      ctx.fillStyle=cfg.color;
+      ctx.beginPath();ctx.moveTo(w-20,y);ctx.lineTo(w-30,y-6);ctx.lineTo(w-30,y+6);ctx.closePath();ctx.fill();
+    }
+    // Points A et B
+    [ax,bx].forEach((px,i)=>{
+      ctx.fillStyle=cfg.color;ctx.beginPath();ctx.arc(px,y,5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='center';
+      ctx.fillText(i===0?'A':'B',px,y-14);
+    });
+    // Label et description
+    ctx.fillStyle=cfg.color;ctx.font='bold 13px Arial';ctx.textAlign='left';
+    ctx.fillText(cfg.label,20,y-25);
+    if(sel!=='all'){
+      ctx.fillStyle='#555';ctx.font='12px Arial';
+      ctx.fillText(cfg.desc,20,y+35);
+    }
+  });
+  ctx.textAlign='left';
+  const descs={
+    all:'Les 3 objets fondamentaux de la géométrie. Remarquez les notations : parenthèses, crochets et crochet-parenthèse.',
+    droite:configs.droite.desc,segment:configs.segment.desc,demi:configs.demi.desc
+  };
+  document.getElementById('resultObjets').textContent=descs[sel];
+}
+document.getElementById('objetSelect').addEventListener('change',drawObjets);
+drawObjets();
+
+// ====== RÈGLE ======
+let segLength=7.3;
+function newSegment(){segLength=Math.round((3+Math.random()*9)*10)/10;drawRegle();}
+function drawRegle(){
+  const c=document.getElementById('canvasRegle');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const scale=35; // pixels per cm
+  const ox=50,oy=80;
+  // Segment
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+segLength*scale,oy);ctx.stroke();
+  // Points
+  ctx.fillStyle='#c0392b';
+  ctx.beginPath();ctx.arc(ox,oy,5,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(ox+segLength*scale,oy,5,0,Math.PI*2);ctx.fill();
+  ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('A',ox,oy-15);ctx.fillText('B',ox+segLength*scale,oy-15);
+  // Règle
+  const ry=oy+25;const rh=40;
+  ctx.fillStyle='rgba(255,220,100,0.4)';ctx.fillRect(ox-10,ry,14*scale+20,rh);
+  ctx.strokeStyle='#b8860b';ctx.lineWidth=1;ctx.strokeRect(ox-10,ry,14*scale+20,rh);
+  // Graduations
+  for(let i=0;i<=14;i++){
+    const px=ox+i*scale;
+    ctx.strokeStyle='#333';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(px,ry);ctx.lineTo(px,ry+20);ctx.stroke();
+    ctx.fillStyle='#333';ctx.font='10px Arial';ctx.textAlign='center';
+    ctx.fillText(i,px,ry+33);
+    // Petites graduations (mm)
+    for(let j=1;j<10;j++){
+      const ppx=ox+i*scale+j*scale/10;
+      if(ppx<ox+14*scale+10){
+        ctx.beginPath();ctx.moveTo(ppx,ry);ctx.lineTo(ppx,ry+(j===5?12:7));ctx.stroke();
+      }
+    }
+  }
+  ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText('cm',ox+14*scale+15,ry+33);
+  // Flèche de mesure
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(ox,ry-5);ctx.lineTo(ox,ry+rh+15);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox+segLength*scale,ry-5);ctx.lineTo(ox+segLength*scale,ry+rh+15);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';
+  ctx.fillText('AB = '+segLength.toFixed(1)+' cm',ox+segLength*scale/2,ry+rh+30);
+  ctx.textAlign='left';
+  document.getElementById('resultRegle').textContent='Le segment [AB] mesure '+segLength.toFixed(1)+' cm. On aligne le 0 sur A et on lit la graduation sous B.';
+}
+drawRegle();
+
+// ====== MILIEU ======
+function drawMilieu(){
+  const c=document.getElementById('canvasMilieu');const ctx=c.getContext('2d');const w=c.width,h=c.height;
+  const len=parseInt(document.getElementById('longueurAB').value);
+  document.getElementById('longueurABval').textContent=len;
+  ctx.clearRect(0,0,w,h);
+  const scale=30;const ox=80,oy=h/2;const bx=ox+len*scale;const mx=ox+len*scale/2;
+  // Segment
+  ctx.strokeStyle='#2a5298';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(bx,oy);ctx.stroke();
+  // Points
+  [{x:ox,l:'A',c:'#2a5298'},{x:mx,l:'M',c:'#c0392b'},{x:bx,l:'B',c:'#2a5298'}].forEach(p=>{
+    ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,oy,6,0,Math.PI*2);ctx.fill();
+    ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText(p.l,p.x,oy-15);
+  });
+  // Codage : petits traits
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+  const tick=10;
+  [ox+len*scale/4, ox+3*len*scale/4].forEach(tx=>{
+    ctx.beginPath();ctx.moveTo(tx,oy-tick);ctx.lineTo(tx,oy+tick);ctx.stroke();
+  });
+  // Mesures
+  ctx.fillStyle='#555';ctx.font='12px Arial';ctx.textAlign='center';
+  ctx.fillText('AM = '+(len/2).toFixed(1)+' cm',mx-len*scale/4,oy+30);
+  ctx.fillText('MB = '+(len/2).toFixed(1)+' cm',mx+len*scale/4,oy+30);
+  ctx.fillStyle='#2a5298';ctx.font='bold 12px Arial';
+  ctx.fillText('AB = '+len+' cm',(ox+bx)/2,oy+55);
+  ctx.textAlign='left';
+  document.getElementById('resultMilieu').textContent='M est le milieu de [AB]. AM = MB = '+len+' ÷ 2 = '+(len/2).toFixed(1)+' cm. Les petits traits indiquent des longueurs égales.';
+}
+document.getElementById('longueurAB').addEventListener('input',drawMilieu);
+drawMilieu();
+
+// ====== ALIGNEMENT QUIZ ======
+let quizAligned=true;let quizPts=[];
+function newQuizAligne(){
+  quizAligned=Math.random()>0.4;
+  const x1=60+Math.random()*100,y1=40+Math.random()*120;
+  const x2=350+Math.random()*150,y2=quizAligned?y1+(x2-x1)*((Math.random()*0.6)-0.3):40+Math.random()*120;
+  const mx=(x1+x2)/2,my=quizAligned?(y1+y2)/2:(y1+y2)/2+(Math.random()>0.5?1:-1)*(20+Math.random()*30);
+  quizPts=[{x:x1,y:y1,l:'A'},{x:mx,y:my,l:'B'},{x:x2,y:y2,l:'C'}];
+  drawAligne();
+  document.getElementById('resultAligne').textContent='Les points A, B et C sont-ils alignés ?';
+  document.getElementById('resultAligne').style.color='#444';
+}
+function drawAligne(){
+  const c=document.getElementById('canvasAligne');const ctx=c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+  quizPts.forEach(p=>{
+    ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(p.x-7,p.y-7);ctx.lineTo(p.x+7,p.y+7);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(p.x+7,p.y-7);ctx.lineTo(p.x-7,p.y+7);ctx.stroke();
+    ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+    ctx.fillText(p.l,p.x,p.y-14);
+  });
+  ctx.textAlign='left';
+}
+function quizAligne(answer){
+  const correct=(answer==='oui'&&quizAligned)||(answer==='non'&&!quizAligned);
+  const el=document.getElementById('resultAligne');
+  if(correct){
+    el.textContent='✓ Correct ! '+(quizAligned?'Les 3 points sont bien alignés (ils sont sur la même droite).':'Les 3 points ne sont pas alignés (B n\'est pas sur la droite (AC)).');
+    el.style.color='#27ae60';
+  } else {
+    el.textContent='✗ Faux. '+(quizAligned?'Regardez bien : les 3 points sont sur la même droite.':'Le point B est décalé par rapport à la droite (AC).');
+    el.style.color='#c0392b';
+  }
+  // Dessiner la droite (AC)
+  const ctx=document.getElementById('canvasAligne').getContext('2d');
+  ctx.strokeStyle='rgba(42,82,152,0.3)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(quizPts[0].x-100*(quizPts[2].x-quizPts[0].x)/300, quizPts[0].y-100*(quizPts[2].y-quizPts[0].y)/300);
+  ctx.lineTo(quizPts[2].x+100*(quizPts[2].x-quizPts[0].x)/300, quizPts[2].y+100*(quizPts[2].y-quizPts[0].y)/300);
+  ctx.stroke();ctx.setLineDash([]);
+}
+newQuizAligne();
+</script>
+</body>
+</html>
