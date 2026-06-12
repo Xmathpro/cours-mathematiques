@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonctions : généralités . Seconde</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .interactive-box {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  .interactive-box h4 {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #2a5298;
+    margin-bottom: 0.75rem;
+  }
+  canvas {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    max-width: 100%;
+  }
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0.75rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #444;
+  }
+  .controls label { font-weight: bold; }
+  .controls select, .controls input[type="range"] { cursor: pointer; }
+  .controls input[type="range"] { width: 150px; }
+  .controls button {
+    background: #2a5298;
+    color: #fff;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
+  }
+  .controls button:hover { background: #1e3d72; }
+  .result-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-titre">Cours de <span>mathématiques</span></div>
+    <nav class="site-nav">
+      <a href="../../index.html">Accueil</a>
+      <a href="../../index.html#secondes">Seconde</a>
+    </nav>
+  </div>
+</header>
+
+<div class="cours-header">
+  <div class="cours-header-inner">
+    <div class="cours-meta">
+      <span>Seconde</span>
+      <span>Programme 2012-2019</span>
+      <span>Paris . 2012-2013</span>
+    </div>
+    <h1 class="cours-titre-principal">Fonctions : généralités</h1>
+    <p class="cours-sous-titre">Image, antécédent, courbe représentative, variations et fonctions de référence</p>
+  </div>
+</div>
+
+<main class="cours-corps">
+
+  <h2>I. Notion de fonction</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      Une <strong>fonction</strong> $f$ est un procédé qui, à chaque nombre $x$ d'un ensemble de départ, associe un unique nombre, noté $f(x)$.
+    </p>
+    <ul>
+      <li>$x$ est la <strong>variable</strong> (le nombre qu'on choisit)</li>
+      <li>$f(x)$ est l'<strong>image</strong> de $x$ par $f$ (le nombre obtenu)</li>
+      <li>$x$ est un <strong>antécédent</strong> de $f(x)$ par $f$</li>
+    </ul>
+    <p>Un nombre a toujours <strong>une seule image</strong>, mais peut avoir <strong>zéro, un ou plusieurs antécédents</strong>.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : image et antécédent</h4>
+    <canvas id="canvasImageAntecedent" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Fonction :</label>
+      <select id="funcSelect1">
+        <option value="carre">f(x) = x²</option>
+        <option value="cube">f(x) = x³</option>
+        <option value="inverse">f(x) = 1/x</option>
+        <option value="racine">f(x) = √x</option>
+        <option value="affine">f(x) = 2x - 1</option>
+      </select>
+      <label>x =</label>
+      <input type="range" id="xSlider1" min="-40" max="40" value="10">
+      <span id="xValue1">1.0</span>
+    </div>
+    <div class="result-text" id="result1"></div>
+  </div>
+
+  <div class="exemple">
+    <div class="encadre-titre">Exemple</div>
+    <p>Soit $f(x) = x^2$.</p>
+    <ul>
+      <li>L'image de 3 par $f$ est $f(3) = 9$.</li>
+      <li>L'image de $-3$ par $f$ est $f(-3) = 9$.</li>
+      <li>9 a <strong>deux antécédents</strong> : $3$ et $-3$.</li>
+      <li>$-4$ n'a <strong>aucun antécédent</strong> car aucun réel élevé au carré ne donne $-4$.</li>
+    </ul>
+  </div>
+
+  <h2>II. Courbe représentative</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>
+      La <strong>courbe représentative</strong> de $f$ dans un repère est l'ensemble des points $M(x, f(x))$ pour toutes les valeurs de $x$ de l'ensemble de définition.
+    </p>
+    <p>Le point $M(a, b)$ est sur la courbe de $f$ si et seulement si $b = f(a)$.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : les fonctions de référence</h4>
+    <canvas id="canvasRef" width="600" height="400"></canvas>
+    <div class="controls">
+      <label>Afficher :</label>
+      <button onclick="toggleFunc('carre')">x²</button>
+      <button onclick="toggleFunc('cube')">x³</button>
+      <button onclick="toggleFunc('inverse')">1/x</button>
+      <button onclick="toggleFunc('racine')">√x</button>
+      <button onclick="toggleFunc('abs')">|x|</button>
+      <button onclick="clearAll()">Tout effacer</button>
+    </div>
+    <div class="result-text" id="resultRef"></div>
+  </div>
+
+  <h2>III. Sens de variation</h2>
+
+  <div class="definition">
+    <div class="encadre-titre">Définition</div>
+    <p>Soit $f$ une fonction définie sur un intervalle $I$.</p>
+    <ul>
+      <li>$f$ est <strong>croissante</strong> sur $I$ si pour tous $a, b \in I$ : $a < b \implies f(a) \leq f(b)$. "Quand $x$ augmente, $f(x)$ augmente."</li>
+      <li>$f$ est <strong>décroissante</strong> sur $I$ si pour tous $a, b \in I$ : $a < b \implies f(a) \geq f(b)$. "Quand $x$ augmente, $f(x)$ diminue."</li>
+    </ul>
+  </div>
+
+  <div class="definition">
+    <div class="encadre-titre">Maximum et minimum</div>
+    <ul>
+      <li>$f$ admet un <strong>maximum</strong> $M$ sur $I$ s'il existe $c \in I$ tel que $f(c) = M$ et $f(x) \leq M$ pour tout $x \in I$.</li>
+      <li>$f$ admet un <strong>minimum</strong> $m$ sur $I$ s'il existe $c \in I$ tel que $f(c) = m$ et $f(x) \geq m$ pour tout $x \in I$.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : sens de variation</h4>
+    <canvas id="canvasVariation" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>Fonction :</label>
+      <select id="funcSelectVar">
+        <option value="parabole">f(x) = x² - 4x + 3</option>
+        <option value="cubique">f(x) = x³ - 3x</option>
+        <option value="affine2">f(x) = -2x + 5</option>
+        <option value="vabs">f(x) = |x - 2| + 1</option>
+      </select>
+    </div>
+    <div class="result-text" id="resultVar"></div>
+  </div>
+
+  <h2>IV. Fonctions de référence</h2>
+
+  <h3>1. Fonction affine : $f(x) = ax + b$</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Sa courbe est une <strong>droite</strong>.</li>
+      <li>$a$ est le <strong>coefficient directeur</strong> (pente) : si $a > 0$ la droite monte, si $a < 0$ elle descend.</li>
+      <li>$b$ est l'<strong>ordonnée à l'origine</strong> : $f(0) = b$.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : la fonction affine</h4>
+    <canvas id="canvasAffine" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>a =</label>
+      <input type="range" id="sliderA" min="-30" max="30" value="10">
+      <span id="valA">1.0</span>
+      <label>b =</label>
+      <input type="range" id="sliderB" min="-50" max="50" value="0">
+      <span id="valB">0.0</span>
+    </div>
+    <div class="result-text" id="resultAffine"></div>
+  </div>
+
+  <h3>2. Fonction carré : $f(x) = x^2$</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Définie sur $\mathbb{R}$.</li>
+      <li>Sa courbe est une <strong>parabole</strong> de sommet $O(0, 0)$.</li>
+      <li><strong>Décroissante</strong> sur $]-\infty, 0]$ et <strong>croissante</strong> sur $[0, +\infty[$.</li>
+      <li>Minimum en $x = 0$ : $f(0) = 0$.</li>
+      <li>Fonction <strong>paire</strong> : $f(-x) = f(x)$. La courbe est symétrique par rapport à l'axe des ordonnées.</li>
+    </ul>
+  </div>
+
+  <h3>3. Fonction inverse : $f(x) = \dfrac{1}{x}$</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Définie sur $\mathbb{R} \setminus \{0\}$ (tout sauf $x = 0$).</li>
+      <li>Sa courbe est une <strong>hyperbole</strong>.</li>
+      <li><strong>Décroissante</strong> sur $]-\infty, 0[$ et sur $]0, +\infty[$ (attention, pas décroissante sur $\mathbb{R}^*$ tout entier).</li>
+      <li>Fonction <strong>impaire</strong> : $f(-x) = -f(x)$. La courbe est symétrique par rapport à l'origine.</li>
+    </ul>
+  </div>
+
+  <h3>4. Fonction racine carrée : $f(x) = \sqrt{x}$</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>Définie sur $[0, +\infty[$.</li>
+      <li><strong>Croissante</strong> sur $[0, +\infty[$.</li>
+      <li>$f(0) = 0$, $f(1) = 1$, $f(4) = 2$, $f(9) = 3$.</li>
+      <li>La croissance ralentit : les valeurs augmentent de plus en plus lentement.</li>
+    </ul>
+  </div>
+
+  <h3>5. Fonction valeur absolue : $f(x) = |x|$</h3>
+
+  <div class="propriete">
+    <div class="encadre-titre">Propriétés</div>
+    <ul>
+      <li>$|x| = x$ si $x \geq 0$ et $|x| = -x$ si $x < 0$.</li>
+      <li>$|x|$ est la <strong>distance</strong> de $x$ à 0.</li>
+      <li>Sa courbe a la forme d'un V avec sommet en $O$.</li>
+      <li>Décroissante sur $]-\infty, 0]$, croissante sur $[0, +\infty[$.</li>
+    </ul>
+  </div>
+
+  <h2>V. Résolution graphique</h2>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre $f(x) = k$ graphiquement</div>
+    <p>On trace la droite horizontale $y = k$ et on lit les abscisses des points d'intersection avec la courbe de $f$.</p>
+  </div>
+
+  <div class="methode">
+    <div class="encadre-titre">Méthode : résoudre $f(x) = g(x)$ graphiquement</div>
+    <p>On trace les deux courbes et on lit les abscisses des points d'intersection.</p>
+  </div>
+
+  <div class="interactive-box">
+    <h4>Explorer : résolution graphique f(x) = k</h4>
+    <canvas id="canvasResol" width="600" height="350"></canvas>
+    <div class="controls">
+      <label>k =</label>
+      <input type="range" id="sliderK" min="-20" max="40" value="10">
+      <span id="valK">1.0</span>
+    </div>
+    <div class="result-text" id="resultResol"></div>
+  </div>
+
+  <h2>VI. Exercices</h2>
+
+  <h3>Exercice 1 : image et antécédent</h3>
+  <p>Soit $f(x) = 2x^2 - 3x + 1$.</p>
+  <ol>
+    <li>Calculer $f(0)$, $f(1)$, $f(-2)$ et $f(3)$.</li>
+    <li>Résoudre $f(x) = 1$. Quels sont les antécédents de 1 ?</li>
+    <li>Résoudre $f(x) = 0$.</li>
+  </ol>
+
+  <h3>Exercice 2 : lecture graphique</h3>
+  <p>On considère la fonction $f(x) = -x^2 + 4x - 3$.</p>
+  <ol>
+    <li>Calculer $f(0)$, $f(1)$, $f(2)$, $f(3)$ et $f(4)$.</li>
+    <li>Tracer la courbe de $f$ sur $[0, 4]$.</li>
+    <li>Lire graphiquement les solutions de $f(x) = 0$.</li>
+    <li>Déterminer le maximum de $f$ et la valeur de $x$ où il est atteint.</li>
+  </ol>
+
+  <h3>Exercice 3 : variations</h3>
+  <p>Soit $f(x) = (x-3)^2 - 4$.</p>
+  <ol>
+    <li>Développer $f(x)$.</li>
+    <li>Calculer $f(3)$. Que représente ce point ?</li>
+    <li>Montrer que $f$ est décroissante sur $]-\infty, 3]$ et croissante sur $[3, +\infty[$.</li>
+    <li>En déduire le minimum de $f$.</li>
+  </ol>
+
+  <h3>Exercice 4 : fonction affine</h3>
+  <p>Un plombier facture 40 euros de déplacement plus 35 euros par heure de travail.</p>
+  <ol>
+    <li>Exprimer le coût $C(h)$ en fonction du nombre d'heures $h$.</li>
+    <li>Calculer le coût pour 2 heures et pour 5 heures de travail.</li>
+    <li>Pour quel nombre d'heures le coût atteint-il 215 euros ?</li>
+  </ol>
+
+  <h2>VII. Corrigés</h2>
+
+  <h3>Corrigé exercice 1</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f(0) = 0 - 0 + 1 = 1$. $f(1) = 2 - 3 + 1 = 0$. $f(-2) = 8 + 6 + 1 = 15$. $f(3) = 18 - 9 + 1 = 10$.</p>
+    <p><strong>2.</strong> $f(x) = 1 \iff 2x^2 - 3x + 1 = 1 \iff 2x^2 - 3x = 0 \iff x(2x-3) = 0$.</p>
+    <p>$x = 0$ ou $x = \dfrac{3}{2}$. Les antécédents de 1 sont $0$ et $\dfrac{3}{2}$.</p>
+    <p><strong>3.</strong> $f(x) = 0 \iff 2x^2 - 3x + 1 = 0$. $\Delta = 9 - 8 = 1$.</p>
+    <p>$x = \dfrac{3 + 1}{4} = 1$ ou $x = \dfrac{3 - 1}{4} = \dfrac{1}{2}$.</p>
+  </div>
+
+  <h3>Corrigé exercice 2</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f(0) = -3$. $f(1) = -1+4-3 = 0$. $f(2) = -4+8-3 = 1$. $f(3) = -9+12-3 = 0$. $f(4) = -16+16-3 = -3$.</p>
+    <p><strong>3.</strong> $f(x) = 0$ pour $x = 1$ et $x = 3$ (lecture graphique confirmée par le calcul).</p>
+    <p><strong>4.</strong> Le maximum est $f(2) = 1$, atteint en $x = 2$. La parabole a son sommet en $(2, 1)$.</p>
+  </div>
+
+  <h3>Corrigé exercice 3</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $f(x) = (x-3)^2 - 4 = x^2 - 6x + 9 - 4 = x^2 - 6x + 5$.</p>
+    <p><strong>2.</strong> $f(3) = 0 - 4 = -4$. C'est le sommet de la parabole.</p>
+    <p><strong>3.</strong> Pour $a < b \leq 3$ : $a - 3 < b - 3 \leq 0$, donc $(a-3)^2 > (b-3)^2$ (le carré est décroissant sur les négatifs), donc $f(a) > f(b)$. $f$ est décroissante sur $]-\infty, 3]$.</p>
+    <p>De même, pour $3 \leq a < b$ : $0 \leq a - 3 < b - 3$, donc $(a-3)^2 < (b-3)^2$, donc $f(a) < f(b)$. $f$ est croissante sur $[3, +\infty[$.</p>
+    <p><strong>4.</strong> $f$ décroît puis croît avec un changement en $x = 3$. Donc $f(3) = -4$ est le minimum de $f$.</p>
+  </div>
+
+  <h3>Corrigé exercice 4</h3>
+  <div class="exemple">
+    <div class="encadre-titre">Corrigé</div>
+    <p><strong>1.</strong> $C(h) = 35h + 40$. Fonction affine avec $a = 35$ (coût horaire) et $b = 40$ (déplacement).</p>
+    <p><strong>2.</strong> $C(2) = 70 + 40 = 110$ euros. $C(5) = 175 + 40 = 215$ euros.</p>
+    <p><strong>3.</strong> $35h + 40 = 215 \iff 35h = 175 \iff h = 5$ heures.</p>
+  </div>
+
+</main>
+
+<nav class="cours-nav">
+  <a href="../../index.html">&larr; Accueil</a>
+  <a href="geometrie.html">Géométrie et vecteurs &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  M.V. . Cours de mathématiques . 2012-2024
+</footer>
+
+<script>
+// === UTILITAIRES DE DESSIN ===
+function drawAxes(ctx, w, h, ox, oy, scale) {
+  ctx.strokeStyle = '#ccc';
+  ctx.lineWidth = 0.5;
+  for (let i = -20; i <= 20; i++) {
+    let px = ox + i * scale;
+    if (px >= 0 && px <= w) { ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, h); ctx.stroke(); }
+    let py = oy - i * scale;
+    if (py >= 0 && py <= h) { ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(w, py); ctx.stroke(); }
+  }
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke();
+  ctx.fillStyle = '#888';
+  ctx.font = '11px Arial';
+  for (let i = -10; i <= 10; i++) {
+    if (i === 0) continue;
+    let px = ox + i * scale;
+    let py = oy - i * scale;
+    if (px > 10 && px < w - 10) { ctx.fillText(i, px - 4, oy + 14); }
+    if (py > 10 && py < h - 10) { ctx.fillText(i, ox + 6, py + 4); }
+  }
+}
+
+function plotFunc(ctx, f, ox, oy, scale, w, color, lineWidth) {
+  ctx.strokeStyle = color || '#2a5298';
+  ctx.lineWidth = lineWidth || 2;
+  ctx.beginPath();
+  let started = false;
+  for (let px = 0; px < w; px++) {
+    let x = (px - ox) / scale;
+    let y = f(x);
+    if (!isFinite(y) || Math.abs(y) > 50) { started = false; continue; }
+    let py = oy - y * scale;
+    if (!started) { ctx.moveTo(px, py); started = true; } else { ctx.lineTo(px, py); }
+  }
+  ctx.stroke();
+}
+
+// === 1. IMAGE ET ANTÉCÉDENT ===
+const funcs1 = {
+  carre: x => x*x,
+  cube: x => x*x*x,
+  inverse: x => x === 0 ? NaN : 1/x,
+  racine: x => x < 0 ? NaN : Math.sqrt(x),
+  affine: x => 2*x - 1
+};
+const funcNames = {
+  carre: 'x²', cube: 'x³', inverse: '1/x', racine: '√x', affine: '2x - 1'
+};
+
+function drawImageAntecedent() {
+  const c = document.getElementById('canvasImageAntecedent');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, scale = 40;
+  ctx.clearRect(0, 0, w, h);
+  drawAxes(ctx, w, h, ox, oy, scale);
+  const sel = document.getElementById('funcSelect1').value;
+  const f = funcs1[sel];
+  plotFunc(ctx, f, ox, oy, scale, w, '#2a5298', 2.5);
+  const xVal = parseFloat(document.getElementById('xSlider1').value) / 10;
+  document.getElementById('xValue1').textContent = xVal.toFixed(1);
+  const yVal = f(xVal);
+  if (isFinite(yVal)) {
+    const px = ox + xVal * scale;
+    const py = oy - yVal * scale;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = '#c0392b';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px, oy); ctx.lineTo(px, py); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, py); ctx.lineTo(px, py); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c0392b';
+    ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fill();
+    document.getElementById('result1').innerHTML =
+      'f(' + xVal.toFixed(1) + ') = ' + yVal.toFixed(2) +
+      '&emsp;|&emsp;L\'image de ' + xVal.toFixed(1) + ' par f est ' + yVal.toFixed(2);
+  }
+}
+document.getElementById('funcSelect1').addEventListener('change', drawImageAntecedent);
+document.getElementById('xSlider1').addEventListener('input', drawImageAntecedent);
+drawImageAntecedent();
+
+// === 2. FONCTIONS DE RÉFÉRENCE ===
+let activeFuncs = new Set();
+const refFuncs = {
+  carre: { f: x => x*x, color: '#2a5298', name: 'x²' },
+  cube: { f: x => x*x*x, color: '#27ae60', name: 'x³' },
+  inverse: { f: x => x === 0 ? NaN : 1/x, color: '#c0392b', name: '1/x' },
+  racine: { f: x => x < 0 ? NaN : Math.sqrt(x), color: '#8e44ad', name: '√x' },
+  abs: { f: x => Math.abs(x), color: '#e67e22', name: '|x|' }
+};
+
+function toggleFunc(name) {
+  if (activeFuncs.has(name)) activeFuncs.delete(name); else activeFuncs.add(name);
+  drawRef();
+}
+function clearAll() { activeFuncs.clear(); drawRef(); }
+
+function drawRef() {
+  const c = document.getElementById('canvasRef');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, scale = 40;
+  ctx.clearRect(0, 0, w, h);
+  drawAxes(ctx, w, h, ox, oy, scale);
+  let legend = [];
+  activeFuncs.forEach(name => {
+    const rf = refFuncs[name];
+    plotFunc(ctx, rf.f, ox, oy, scale, w, rf.color, 2.5);
+    legend.push('<span style="color:' + rf.color + '; font-weight:bold;">f(x) = ' + rf.name + '</span>');
+  });
+  document.getElementById('resultRef').innerHTML = legend.length ? legend.join('&emsp;') : 'Cliquez sur un bouton pour afficher une fonction.';
+}
+drawRef();
+
+// === 3. SENS DE VARIATION ===
+const varFuncs = {
+  parabole: { f: x => x*x - 4*x + 3, desc: 'f(x) = x² - 4x + 3. Décroissante sur ]-∞, 2], croissante sur [2, +∞[. Minimum f(2) = -1.' },
+  cubique: { f: x => x*x*x - 3*x, desc: 'f(x) = x³ - 3x. Croissante sur ]-∞, -1], décroissante sur [-1, 1], croissante sur [1, +∞[. Max local f(-1) = 2, min local f(1) = -2.' },
+  affine2: { f: x => -2*x + 5, desc: 'f(x) = -2x + 5. Strictement décroissante sur ℝ (coefficient directeur négatif).' },
+  vabs: { f: x => Math.abs(x - 2) + 1, desc: 'f(x) = |x - 2| + 1. Décroissante sur ]-∞, 2], croissante sur [2, +∞[. Minimum f(2) = 1.' }
+};
+
+function drawVariation() {
+  const c = document.getElementById('canvasVariation');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const ox = w / 2, oy = h * 0.65, scale = 40;
+  ctx.clearRect(0, 0, w, h);
+  drawAxes(ctx, w, h, ox, oy, scale);
+  const sel = document.getElementById('funcSelectVar').value;
+  const vf = varFuncs[sel];
+  plotFunc(ctx, vf.f, ox, oy, scale, w, '#2a5298', 2.5);
+  document.getElementById('resultVar').textContent = vf.desc;
+}
+document.getElementById('funcSelectVar').addEventListener('change', drawVariation);
+drawVariation();
+
+// === 4. FONCTION AFFINE ===
+function drawAffine() {
+  const c = document.getElementById('canvasAffine');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const ox = w / 2, oy = h / 2, scale = 30;
+  const a = parseFloat(document.getElementById('sliderA').value) / 10;
+  const b = parseFloat(document.getElementById('sliderB').value) / 10;
+  document.getElementById('valA').textContent = a.toFixed(1);
+  document.getElementById('valB').textContent = b.toFixed(1);
+  ctx.clearRect(0, 0, w, h);
+  drawAxes(ctx, w, h, ox, oy, scale);
+  plotFunc(ctx, x => a * x + b, ox, oy, scale, w, '#2a5298', 2.5);
+  // Ordonnée à l'origine
+  const pyB = oy - b * scale;
+  ctx.fillStyle = '#c0392b';
+  ctx.beginPath(); ctx.arc(ox, pyB, 5, 0, Math.PI * 2); ctx.fill();
+  let desc = 'f(x) = ' + a.toFixed(1) + 'x + ' + b.toFixed(1);
+  if (a > 0) desc += '. Croissante (a > 0).';
+  else if (a < 0) desc += '. Décroissante (a < 0).';
+  else desc += '. Constante (a = 0).';
+  desc += ' Ordonnée à l\'origine : b = ' + b.toFixed(1) + '.';
+  document.getElementById('resultAffine').textContent = desc;
+}
+document.getElementById('sliderA').addEventListener('input', drawAffine);
+document.getElementById('sliderB').addEventListener('input', drawAffine);
+drawAffine();
+
+// === 5. RÉSOLUTION GRAPHIQUE ===
+function drawResol() {
+  const c = document.getElementById('canvasResol');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const ox = w / 2, oy = h * 0.7, scale = 35;
+  const k = parseFloat(document.getElementById('sliderK').value) / 10;
+  document.getElementById('valK').textContent = k.toFixed(1);
+  ctx.clearRect(0, 0, w, h);
+  drawAxes(ctx, w, h, ox, oy, scale);
+  const f = x => x * x;
+  plotFunc(ctx, f, ox, oy, scale, w, '#2a5298', 2.5);
+  // Droite y = k
+  const pyK = oy - k * scale;
+  ctx.strokeStyle = '#c0392b';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath(); ctx.moveTo(0, pyK); ctx.lineTo(w, pyK); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#c0392b';
+  ctx.font = '12px Arial';
+  ctx.fillText('y = ' + k.toFixed(1), w - 60, pyK - 6);
+  // Points d'intersection
+  let solutions = [];
+  if (k >= 0) {
+    const sq = Math.sqrt(k);
+    [sq, -sq].forEach(x => {
+      const px = ox + x * scale;
+      const py = oy - k * scale;
+      ctx.fillStyle = '#27ae60';
+      ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.setLineDash([3, 3]);
+      ctx.strokeStyle = '#27ae60';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, oy); ctx.stroke();
+      ctx.setLineDash([]);
+      solutions.push(x.toFixed(2));
+    });
+    if (k === 0) solutions = ['0'];
+  }
+  document.getElementById('resultResol').innerHTML = k >= 0
+    ? 'f(x) = x². Résoudre x² = ' + k.toFixed(1) + ' : x = ' + solutions.join(' ou x = ')
+    : 'f(x) = x². L\'équation x² = ' + k.toFixed(1) + ' n\'a pas de solution (un carré est toujours positif).';
+}
+document.getElementById('sliderK').addEventListener('input', drawResol);
+drawResol();
+</script>
+
+</body>
+</html>
