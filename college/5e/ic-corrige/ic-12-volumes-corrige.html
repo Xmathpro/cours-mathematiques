@@ -2,30 +2,34 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IC Corrige 12 . 5eme</title>
+<title>IC 12 . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Interrogation courte</span><span>IC 12</span></div>
-<h1 class="cours-titre-principal">Corrige IC : Volumes</h1>
+<h1 class="cours-titre-principal">IC : Volumes</h1>
+<p class="cours-sous-titre">Version corrige . 15 min . /15</p>
 </div></div>
 <main class="cours-corps">
-<h3>Question 1</h3>
-<p><strong>Q :</strong> Volume d'un pave droit $4\times 3\times 7$ cm.</p>
-<p><strong>R :</strong> $84$ cm$^3$.</p>
-<h3>Question 2</h3>
-<p><strong>Q :</strong> Volume d'un cylindre de rayon $5$ cm et hauteur $8$ cm.</p>
-<p><strong>R :</strong> $\pi\times 25\times 8=200\pi\approx 628{,}3$ cm$^3$.</p>
-<h3>Question 3</h3>
-<p><strong>Q :</strong> Convertir $2{,}5$ dm$^3$ en cm$^3$ et en litres.</p>
-<p><strong>R :</strong> $2\,500$ cm$^3$ = $2{,}5$ L.</p>
-<h3>Question 4</h3>
-<p><strong>Q :</strong> Un prisme a base triangulaire ($b=6$, $h_{tri}=4$) et hauteur $h=9$ cm. Volume ?</p>
-<p><strong>R :</strong> $\frac{6\times 4}{2}\times 9=108$ cm$^3$.</p>
+<h3>Question 1 (3 pts)</h3><p>Pave droit $4\times 3\times 7$.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$84$ cm$^3$.</p></div>
+<h3>Question 2 (4 pts)</h3><p>Cylindre $r=5$, $h=8$.</p>
+<div class="interactive-box"><canvas id="c2" width="200" height="160"></canvas></div>
+<script>(function(){var c=document.getElementById('c2').getContext('2d');var cx=70,cy=145,r=35,h=100,ey=r*0.3;c.fillStyle='rgba(42,82,152,0.06)';c.beginPath();c.moveTo(cx-r,cy);c.lineTo(cx-r,cy-h);c.ellipse(cx,cy-h,r,ey,0,Math.PI,0);c.lineTo(cx+r,cy);c.ellipse(cx,cy,r,ey,0,0,Math.PI);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();c.fillStyle='rgba(42,82,152,0.1)';c.beginPath();c.ellipse(cx,cy-h,r,ey,0,0,6.28);c.fill();c.stroke();c.strokeStyle='#c0392b';c.lineWidth=2;c.beginPath();c.moveTo(cx,cy-h);c.lineTo(cx+r,cy-h);c.stroke();c.fillStyle='#c0392b';c.font='10px Arial';c.textAlign='center';c.fillText('r=5',cx+r/2,cy-h-8);c.fillStyle='#d35400';c.fillText('h=8',cx+r+12,cy-h/2);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$200\pi\approx 628$ cm$^3$.</p></div>
+<h3>Question 3 (4 pts)</h3><p>$2{,}5$ dm$^3$ en cm$^3$ et en litres.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$2\,500$ cm$^3$ = $2{,}5$ L.</p></div>
+<h3>Question 4 (4 pts)</h3><p>Prisme triangulaire $b=6$, $h_t=4$, $h=9$.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$12\times 9=108$ cm$^3$.</p></div>
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

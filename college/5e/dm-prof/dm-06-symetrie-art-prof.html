@@ -1,30 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DM Prof 06 . 5eme</title>
+<title>DM 06 . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}</style>
+</head><body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Devoir maison</span><span>DM 6</span></div>
 <h1 class="cours-titre-principal">DM 6 : Symetrie dans l'art</h1>
-<p class="cours-sous-titre">Lecon 13 . Bareme : /16</p>
-</div></div>
-<main class="cours-corps">
-<h3>Exercice 1 (6 pts)</h3>
-<p>Reproduire une figure sur quadrillage et construire son symetrique par rapport a un point O.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>Construction point par point. Chaque point a son symetrique.</p></div>
-<h3>Exercice 2 (4 pts)</h3>
-<p>Citer 5 objets de la vie courante ayant un centre de symetrie.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>As de carreau, panneau interdiction, roue, lettre S, lettre Z.</p></div>
-<h3>Exercice 3 (6 pts)</h3>
-<p>Dans un repere, tracer le triangle $A(1\,;\,2)$, $B(4\,;\,1)$, $C(2\,;\,4)$ et son symetrique par rapport a $O(0\,;\,0)$.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$A'(-1\,;\,-2)$, $B'(-4\,;\,-1)$, $C'(-2\,;\,-4)$.</p></div>
-</main>
-<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
-</body>
-</html>
+<p class="cours-sous-titre">Version professeur . Lecon 13</p>
+</div></div><main class="cours-corps">
+<h3>Exercice 1 (6 pts)</h3><p>Reproduire une figure sur quadrillage et construire son symetrique par rapport a O.</p>
+<div class="interactive-box"><canvas id="d1" width="400" height="200"></canvas></div>
+<script>(function(){var c=document.getElementById('d1').getContext('2d');c.strokeStyle='#eee';c.lineWidth=1;for(var i=0;i<400;i+=20){c.beginPath();c.moveTo(i,0);c.lineTo(i,200);c.stroke();}for(var j=0;j<200;j+=20){c.beginPath();c.moveTo(0,j);c.lineTo(400,j);c.stroke();}c.fillStyle='rgba(42,82,152,0.15)';c.beginPath();c.moveTo(80,60);c.lineTo(160,40);c.lineTo(140,100);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();c.fillStyle='rgba(211,84,0,0.15)';c.beginPath();c.moveTo(320,140);c.lineTo(240,160);c.lineTo(260,100);c.closePath();c.fill();c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();c.fillStyle='#c0392b';c.beginPath();c.arc(200,100,5,0,6.28);c.fill();c.fillStyle='#c0392b';c.font='bold 12px Arial';c.textAlign='center';c.fillText('O',208,95);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>Construction point par point.</p></div>
+<h3>Exercice 2 (4 pts)</h3><p>5 objets avec centre de symetrie.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>As de carreau, panneau, roue, lettre S, lettre Z.</p></div>
+<h3>Exercice 3 (6 pts)</h3><p>Triangle $A(1;2)$, $B(4;1)$, $C(2;4)$. Sym par rapport a O(0;0).</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$A'(-1;-2)$, $B'(-4;-1)$, $C'(-2;-4)$.</p></div>
+</main><footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer></body></html>

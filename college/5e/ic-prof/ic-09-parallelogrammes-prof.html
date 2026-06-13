@@ -2,31 +2,34 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IC Prof 09 . 5eme</title>
+<title>IC 09 . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Interrogation courte</span><span>IC 9</span></div>
 <h1 class="cours-titre-principal">IC : Parallelogrammes</h1>
+<p class="cours-sous-titre">Version professeur . 15 min . /15</p>
 </div></div>
 <main class="cours-corps">
-<p style="font-style:italic">Duree : 15 minutes. Bareme : /15.</p>
-<h3>Question 1 (4 pts)</h3>
-<p>ABCD parallelogramme, $\widehat{A}=65$°. Trouver les 3 autres angles.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$\widehat{B}=115$°, $\widehat{C}=65$°, $\widehat{D}=115$°.</p></div>
-<h3>Question 2 (4 pts)</h3>
-<p>EFGH parallelogramme, $EG=12$ cm, $FH=10$ cm, centre O. Calculer $EO$, $FO$.</p>
+<h3>Question 1 (4 pts)</h3><p>ABCD parallelogramme, $\widehat{A}=65$. Les 3 autres.</p>
+<div class="interactive-box"><canvas id="c1" width="380" height="170"></canvas></div>
+<script>(function(){var c=document.getElementById('c1').getContext('2d');c.fillStyle='rgba(42,82,152,0.06)';c.beginPath();c.moveTo(35,135);c.lineTo(270,135);c.lineTo(310,35);c.lineTo(75,35);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();c.fillStyle='#2a5298';c.font='bold 13px Arial';c.textAlign='center';c.fillText('A',25,150);c.fillText('B',280,150);c.fillText('C',320,28);c.fillText('D',65,28);c.fillStyle='#c0392b';c.font='bold 12px Arial';c.fillText('65',55,128);c.fillText('65',295,48);c.fillStyle='#27ae60';c.fillText('115',255,128);c.fillText('115',90,48);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$\widehat{B}=115$, $\widehat{C}=65$, $\widehat{D}=115$.</p></div>
+<h3>Question 2 (4 pts)</h3><p>$EG=12$, $FH=10$, centre O. $EO$, $FO$ ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div><p>$EO=6$ cm, $FO=5$ cm.</p></div>
-<h3>Question 3 (3 pts)</h3>
-<p>Citer les proprietes du losange.</p>
+<h3>Question 3 (3 pts)</h3><p>Proprietes du losange.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div><p>4 cotes egaux, diagonales perpendiculaires, centre de symetrie.</p></div>
-<h3>Question 4 (4 pts)</h3>
-<p>Un rectangle a pour dimensions $8\times 5$ cm. Calculer la longueur de sa diagonale.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$d=\sqrt{8^2+5^2}=\sqrt{89}\approx 9{,}4$ cm.</p></div>
+<h3>Question 4 (4 pts)</h3><p>Rectangle $8\times 5$. Diagonale ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$d=\sqrt{89}\approx 9{,}4$ cm.</p></div>
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

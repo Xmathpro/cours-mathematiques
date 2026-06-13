@@ -1,45 +1,38 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DS Prof 05 . 5eme</title>
+<title>DS 05 . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}</style>
+</head><body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Devoir surveille</span><span>DS 5</span></div>
 <h1 class="cours-titre-principal">DS 5 : Symetrie, aires et volumes</h1>
-<p class="cours-sous-titre">Lecons 13-15 . Duree : 50 min . Bareme : /30</p>
-</div></div>
-<main class="cours-corps">
-<h3>Exercice 1 (3 pts)</h3>
-<p>Construire le symetrique du point $A$ par rapport a $O$. $OA=4$ cm.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>On prolonge [AO) et on reporte 4 cm de l'autre cote.</p></div>
-<h3>Exercice 2 (3 pts)</h3>
-<p>La symetrie centrale conserve-t-elle les longueurs, les angles et les aires ?</p>
+<p class="cours-sous-titre">Version professeur . Lecons 13-15 . 50 min</p>
+</div></div><main class="cours-corps">
+<h3>Exercice 1 (3 pts)</h3><p>Sym de A par rapport a O, $OA=4$ cm.</p>
+<div class="interactive-box"><canvas id="d1" width="400" height="120"></canvas></div>
+<script>(function(){var c=document.getElementById('d1').getContext('2d');c.strokeStyle='#f0f0f0';c.lineWidth=1;for(var i=0;i<400;i+=20){c.beginPath();c.moveTo(i,0);c.lineTo(i,120);c.stroke();}for(var j=0;j<120;j+=20){c.beginPath();c.moveTo(0,j);c.lineTo(400,j);c.stroke();}c.strokeStyle='#bbb';c.setLineDash([3,3]);c.beginPath();c.moveTo(100,40);c.lineTo(300,80);c.stroke();c.setLineDash([]);c.fillStyle='#2a5298';c.beginPath();c.arc(100,40,5,0,6.28);c.fill();c.fillStyle='#c0392b';c.beginPath();c.arc(200,60,5,0,6.28);c.fill();c.fillStyle='#d35400';c.beginPath();c.arc(300,80,5,0,6.28);c.fill();c.font='bold 12px Arial';c.textAlign='center';c.fillStyle='#2a5298';c.fillText('A',100,30);c.fillStyle='#c0392b';c.fillText('O',200,50);c.fillStyle='#d35400';c.fillText("A'",300,100);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>Prolonger [AO) et reporter 4 cm.</p></div>
+<h3>Exercice 2 (3 pts)</h3><p>Conservation longueurs, angles, aires ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div><p>Oui aux trois.</p></div>
-<h3>Exercice 3 (4 pts)</h3>
-<p>Calculer l'aire d'un disque de rayon $r=8$ cm.</p>
+<h3>Exercice 3 (4 pts)</h3><p>Disque $r=8$. Aire.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div><p>$64\pi\approx 201{,}1$ cm$^2$.</p></div>
-<h3>Exercice 4 (3 pts)</h3>
-<p>Perimetre d'un cercle de diametre $d=14$ cm.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$\pi\times 14=14\pi\approx 44{,}0$ cm.</p></div>
-<h3>Exercice 5 (3 pts)</h3>
-<p>Volume d'un pave droit $6\times 4\times 10$ cm.</p>
+<h3>Exercice 4 (3 pts)</h3><p>Cercle diametre $14$. Perimetre.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$14\pi\approx 44{,}0$ cm.</p></div>
+<h3>Exercice 5 (3 pts)</h3><p>Pave $6\times 4\times 10$. Volume.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div><p>$240$ cm$^3$.</p></div>
-<h3>Exercice 6 (4 pts)</h3>
-<p>Volume d'un cylindre : $r=5$ cm, $h=12$ cm.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$\pi\times 25\times 12=300\pi\approx 942{,}5$ cm$^3$.</p></div>
-<h3>Exercice 7 (4 pts)</h3>
-<p>Convertir : a) $3{,}2$ m$^2$ en cm$^2$ b) $4\,500$ cm$^3$ en litres.</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>a) $32\,000$ cm$^2$. b) $4{,}5$ L.</p></div>
-<h3>Exercice 8 (6 pts)</h3>
-<p>Un terrain rectangulaire $25\times 18$ m avec un demi-disque de diametre $18$ m. Aire totale ?</p>
-<div class="exemple"><div class="encadre-titre">Corrige</div><p>$450+\frac{\pi\times 81}{2}\approx 450+127{,}2=577{,}2$ m$^2$.</p></div>
-</main>
-<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
-</body>
-</html>
+<h3>Exercice 6 (4 pts)</h3><p>Cylindre $r=5$, $h=12$. Volume.</p>
+<div class="interactive-box"><canvas id="d6" width="200" height="160"></canvas></div>
+<script>(function(){var c=document.getElementById('d6').getContext('2d');var cx=70,cy=145,r=35,h=105,ey=r*0.3;c.fillStyle='rgba(42,82,152,0.06)';c.beginPath();c.moveTo(cx-r,cy);c.lineTo(cx-r,cy-h);c.ellipse(cx,cy-h,r,ey,0,Math.PI,0);c.lineTo(cx+r,cy);c.ellipse(cx,cy,r,ey,0,0,Math.PI);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();c.fillStyle='rgba(42,82,152,0.1)';c.beginPath();c.ellipse(cx,cy-h,r,ey,0,0,6.28);c.fill();c.stroke();c.strokeStyle='#c0392b';c.lineWidth=2;c.beginPath();c.moveTo(cx,cy-h);c.lineTo(cx+r,cy-h);c.stroke();c.fillStyle='#c0392b';c.font='10px Arial';c.textAlign='center';c.fillText('r=5',cx+r/2,cy-h-8);c.fillStyle='#d35400';c.fillText('h=12',cx+r+12,cy-h/2);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$300\pi\approx 942{,}5$ cm$^3$.</p></div>
+<h3>Exercice 7 (4 pts)</h3><p>$3{,}2$ m$^2$ en cm$^2$. $4\,500$ cm$^3$ en L.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$32\,000$ cm$^2$. $4{,}5$ L.</p></div>
+<h3>Exercice 8 (6 pts)</h3><p>Terrain $25\times 18$ m + demi-disque $d=18$ m. Aire.</p>
+<div class="interactive-box"><canvas id="d8" width="380" height="160"></canvas></div>
+<script>(function(){var c=document.getElementById('d8').getContext('2d');c.fillStyle='rgba(42,82,152,0.08)';c.fillRect(30,15,170,115);c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(30,15,170,115);c.fillStyle='rgba(211,84,0,0.1)';c.beginPath();c.arc(200,72,57,-1.57,1.57);c.closePath();c.fill();c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();c.fillStyle='#333';c.font='11px Arial';c.textAlign='center';c.fillText('25',115,142);c.fillText('18',18,72);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$450+127{,}2\approx 577{,}2$ m$^2$.</p></div>
+</main><footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer></body></html>
