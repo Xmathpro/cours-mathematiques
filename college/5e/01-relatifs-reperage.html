@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nombres relatifs : reperage . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Nombres relatifs : reperage</h1>
+<p class="cours-sous-titre">Nombres positifs, negatifs, droite graduee, repere du plan</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Nombres positifs et negatifs</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Les <strong>nombres relatifs</strong> sont les nombres qui possedent un <strong>signe</strong> (positif ou negatif) et une <strong>distance a zero</strong>.</p>
+<p>Les nombres <strong>positifs</strong> sont precedes du signe $+$ (souvent omis) : $+3$, $+7{,}5$, $0$.</p>
+<p>Les nombres <strong>negatifs</strong> sont precedes du signe $-$ : $-2$, $-4{,}5$, $-10$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>Le nombre $0$ n'est ni positif ni negatif. Il separe les nombres positifs des nombres negatifs.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples concrets</div>
+<p>Les temperatures : il fait $-5$°C en hiver (5 degres en dessous de zero).</p>
+<p>Les altitudes : la Mer Morte est a $-430$ m (430 m en dessous du niveau de la mer).</p>
+<p>Un compte en banque : un solde de $-150$ euros signifie un decouvert de 150 euros.</p>
+</div>
+
+<h2>II. Nombres opposes</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux nombres relatifs sont <strong>opposes</strong> s'ils ont la meme distance a zero mais des signes contraires.</p>
+<p>L'oppose de $+3$ est $-3$. L'oppose de $-7$ est $+7$. L'oppose de $0$ est $0$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>La somme de deux nombres opposes est toujours egale a $0$ : $(+3) + (-3) = 0$.</p>
+</div>
+
+<h2>III. Reperage sur une droite graduee</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>droite graduee</strong> est une droite munie d'une origine $O$, d'un sens (vers la droite) et d'une unite de longueur. Chaque point de la droite correspond a un nombre relatif appele son <strong>abscisse</strong>.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Droite graduee interactive ====== -->
+<div class="interactive-box">
+<h4>Illustration : placer un nombre sur la droite graduee</h4>
+<canvas id="cvDroite" width="650" height="160"></canvas>
+<div class="controls">
+<label>Abscisse :</label><input type="range" id="slAbs" min="-8" max="8" value="3" step="0.5"><span id="vAbs">3</span>
+</div>
+<div class="result-text" id="resDroite"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvDroite'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slAbs').value;
+document.getElementById('vAbs').textContent=a;
+ctx.clearRect(0,0,650,160);
+var ox=40,y=80,w=570,minV=-9,maxV=9;
+var sc=w/(maxV-minV);
+// Axe
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+// Fleche
+ctx.beginPath();ctx.moveTo(ox+w-8,y-5);ctx.lineTo(ox+w,y);ctx.lineTo(ox+w-8,y+5);ctx.stroke();
+// Graduations
+ctx.fillStyle='#333';ctx.font='12px Arial';ctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){
+var x=ox+(i-minV)*sc;
+ctx.strokeStyle='#333';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(x,y-6);ctx.lineTo(x,y+6);ctx.stroke();
+ctx.fillText(i,x,y+20);
+}
+// Origine en gras
+var xo=ox+(0-minV)*sc;
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';
+ctx.fillText('O',xo,y+34);
+// Zones couleur
+ctx.fillStyle='rgba(231,76,60,0.08)';ctx.fillRect(ox,y-40,xo-ox,35);
+ctx.fillStyle='rgba(39,174,96,0.08)';ctx.fillRect(xo,y-40,ox+w-xo,35);
+ctx.fillStyle='#c0392b';ctx.font='11px Arial';ctx.fillText('negatifs',ox+(xo-ox)/2,y-28);
+ctx.fillStyle='#27ae60';ctx.fillText('positifs',xo+(ox+w-xo)/2,y-28);
+// Point courant
+var xp=ox+(a-minV)*sc;
+ctx.fillStyle=a>=0?'#27ae60':'#c0392b';
+ctx.beginPath();ctx.arc(xp,y,7,0,2*Math.PI);ctx.fill();
+ctx.font='bold 14px Arial';
+var label=a>=0?'+'+a:''+a;
+ctx.fillText(label,xp,y-15);
+// Oppose
+var opp=-a;
+var xopp=ox+(opp-minV)*sc;
+ctx.fillStyle='rgba(211,84,0,0.5)';
+ctx.beginPath();ctx.arc(xopp,y,5,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#d35400';ctx.font='12px Arial';
+var labelOpp=opp>=0?'+'+opp:''+opp;
+ctx.fillText('oppose : '+labelOpp,xopp,y+42);
+var txt='Le point d\u0027abscisse '+(a>=0?'+':'')+a+' est place sur la droite. ';
+txt+='Son oppose est '+(opp>=0?'+':'')+opp+'. Distance a zero : '+Math.abs(a)+'.';
+document.getElementById('resDroite').textContent=txt;
+}
+document.getElementById('slAbs').addEventListener('input',draw);
+draw();
+})();
+</script>
+
+<h2>IV. Comparer des nombres relatifs</h2>
+
+<div class="definition"><div class="encadre-titre">Regles de comparaison</div>
+<p>Sur la droite graduee, le plus grand est toujours le plus a <strong>droite</strong>.</p>
+<ol>
+<li>Tout nombre positif est superieur a tout nombre negatif.</li>
+<li>Entre deux nombres positifs, le plus grand est celui qui a la plus grande distance a zero.</li>
+<li>Entre deux nombres negatifs, le plus grand est celui qui a la plus <strong>petite</strong> distance a zero.</li>
+</ol>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$+3 > -5$ (positif > negatif).</p>
+<p>$-2 > -7$ (car $2 < 7$, donc $-2$ est plus proche de zero).</p>
+<p>$-1{,}5 < 0$ (tout negatif est inferieur a zero).</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Comparateur interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : comparer deux nombres relatifs</h4>
+<canvas id="cvComp" width="650" height="160"></canvas>
+<div class="controls">
+<label>a :</label><input type="range" id="slA" min="-8" max="8" value="-3" step="1"><span id="vA">-3</span>
+<label style="margin-left:1rem">b :</label><input type="range" id="slBc" min="-8" max="8" value="5" step="1"><span id="vBc">5</span>
+</div>
+<div class="result-text" id="resComp"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvComp'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slA').value,b=+document.getElementById('slBc').value;
+document.getElementById('vA').textContent=a;document.getElementById('vBc').textContent=b;
+ctx.clearRect(0,0,650,160);
+var ox=40,y=80,w=570,minV=-9,maxV=9;
+var sc=w/(maxV-minV);
+// Axe
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox+w-8,y-5);ctx.lineTo(ox+w,y);ctx.lineTo(ox+w-8,y+5);ctx.stroke();
+// Graduations
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){
+var x=ox+(i-minV)*sc;
+ctx.beginPath();ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.stroke();
+ctx.fillText(i,x,y+16);
+}
+// Point a
+var xa=ox+(a-minV)*sc;
+ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(xa,y,7,0,2*Math.PI);ctx.fill();
+ctx.font='bold 14px Arial';ctx.fillText('a = '+(a>=0?'+':'')+a,xa,y-15);
+// Point b
+var xb=ox+(b-minV)*sc;
+ctx.fillStyle='#d35400';ctx.beginPath();ctx.arc(xb,y,7,0,2*Math.PI);ctx.fill();
+ctx.font='bold 14px Arial';ctx.fillText('b = '+(b>=0?'+':'')+b,xb,y-15);
+// Resultat
+var sym=a<b?'<':(a>b?'>':'=');
+var txt=(a>=0?'+':'')+a+' '+sym+' '+(b>=0?'+':'')+b;
+if(a<b) txt+=' (a est a gauche de b sur la droite)';
+else if(a>b) txt+=' (a est a droite de b sur la droite)';
+else txt+=' (a et b sont au meme point)';
+ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+ctx.fillText((a>=0?'+':'')+a+' '+sym+' '+(b>=0?'+':'')+b,325,y+50);
+document.getElementById('resComp').textContent=txt+'.';
+}
+['slA','slBc'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>V. Reperage dans le plan</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>repere du plan</strong> est forme de deux droites graduees perpendiculaires de meme origine $O$. La droite horizontale est l'<strong>axe des abscisses</strong>, la droite verticale est l'<strong>axe des ordonnees</strong>.</p>
+<p>Chaque point du plan est repere par un couple de coordonnees $(x\,;\,y)$ ou $x$ est l'abscisse et $y$ l'ordonnee.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 3 : Repere du plan interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : coordonnees dans le repere du plan</h4>
+<canvas id="cvPlan" width="650" height="400"></canvas>
+<div class="controls">
+<label>x :</label><input type="range" id="slX" min="-5" max="5" value="3" step="1"><span id="vX">3</span>
+<label style="margin-left:1rem">y :</label><input type="range" id="slY" min="-5" max="5" value="2" step="1"><span id="vY">2</span>
+</div>
+<div class="result-text" id="resPlan"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvPlan'),ctx=cv.getContext('2d');
+var cx0=325,cy0=200,unit=32;
+function draw(){
+var px=+document.getElementById('slX').value,py=+document.getElementById('slY').value;
+document.getElementById('vX').textContent=px;document.getElementById('vY').textContent=py;
+ctx.clearRect(0,0,650,400);
+// Grille
+ctx.strokeStyle='#eee';ctx.lineWidth=1;
+for(var i=-6;i<=6;i++){
+var gx=cx0+i*unit;
+ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,400);ctx.stroke();
+var gy=cy0-i*unit;
+ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(650,gy);ctx.stroke();
+}
+// Axes
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(20,cy0);ctx.lineTo(630,cy0);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx0,10);ctx.lineTo(cx0,390);ctx.stroke();
+// Fleches
+ctx.beginPath();ctx.moveTo(625,cy0-5);ctx.lineTo(630,cy0);ctx.lineTo(625,cy0+5);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx0-5,15);ctx.lineTo(cx0,10);ctx.lineTo(cx0+5,15);ctx.stroke();
+// Labels axes
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='left';
+ctx.fillText('x',635,cy0+4);
+ctx.textAlign='center';ctx.fillText('y',cx0,8);
+// Graduations
+ctx.font='11px Arial';ctx.fillStyle='#666';
+for(var j=-5;j<=5;j++){
+if(j===0) continue;
+var gx2=cx0+j*unit;
+ctx.textAlign='center';ctx.fillText(j,gx2,cy0+16);
+ctx.beginPath();ctx.moveTo(gx2,cy0-3);ctx.lineTo(gx2,cy0+3);ctx.stroke();
+var gy2=cy0-j*unit;
+ctx.textAlign='right';ctx.fillText(j,cx0-8,gy2+4);
+ctx.beginPath();ctx.moveTo(cx0-3,gy2);ctx.lineTo(cx0+3,gy2);ctx.stroke();
+}
+ctx.textAlign='right';ctx.fillStyle='#333';ctx.font='bold 12px Arial';
+ctx.fillText('O',cx0-8,cy0+16);
+// Projections
+var ptx=cx0+px*unit,pty=cy0-py*unit;
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+ctx.beginPath();ctx.moveTo(ptx,cy0);ctx.lineTo(ptx,pty);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx0,pty);ctx.lineTo(ptx,pty);ctx.stroke();
+ctx.setLineDash([]);
+// Point
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(ptx,pty,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='left';
+ctx.fillText('A('+px+' ; '+py+')',ptx+10,pty-10);
+document.getElementById('resPlan').textContent='Le point A a pour coordonnees ('+px+' ; '+py+'). Son abscisse est '+px+' et son ordonnee est '+py+'.';
+}
+['slX','slY'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>VI. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Placer sur une droite graduee les nombres suivants : $+4$, $-2$, $-5$, $+1{,}5$, $-3{,}5$.</p>
+
+<h3>Exercice 2</h3>
+<p>Ranger dans l'ordre croissant : $-3$, $+1$, $-7$, $+5$, $0$, $-1$.</p>
+
+<h3>Exercice 3</h3>
+<p>Donner l'oppose de chacun des nombres suivants : $+6$, $-4$, $-2{,}5$, $0$, $+0{,}3$.</p>
+
+<h3>Exercice 4</h3>
+<p>Donner les coordonnees des points suivants places dans un repere : $A(3\,;\,2)$, $B(-1\,;\,4)$, $C(-3\,;\,-2)$, $D(2\,;\,-5)$.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> De gauche a droite : $-5$, $-3{,}5$, $-2$, $+1{,}5$, $+4$.</p>
+<p><strong>Ex. 2.</strong> Ordre croissant : $-7 < -3 < -1 < 0 < +1 < +5$.</p>
+<p><strong>Ex. 3.</strong> Opposes : $-6$, $+4$, $+2{,}5$, $0$, $-0{,}3$.</p>
+<p><strong>Ex. 4.</strong> $A$ : abscisse $3$, ordonnee $2$. $B$ : abscisse $-1$, ordonnee $4$. $C$ : abscisse $-3$, ordonnee $-2$. $D$ : abscisse $2$, ordonnee $-5$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><span style="color:#999">Debut du programme 5eme</span><a href="02-relatifs-addition.html">Relatifs : addition &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
