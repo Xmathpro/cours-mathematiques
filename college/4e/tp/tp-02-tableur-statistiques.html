@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP 2 : Tableur et statistiques . 4eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Organisation de donnees</span><span>Travaux pratiques</span></div>
+<h1 class="cours-titre-principal">TP 2 : Tableur et statistiques</h1>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>Objectif</h2>
+<p>Utiliser un tableur pour calculer la mediane, les quartiles et representer un diagramme en boite.</p>
+
+<h2>Materiel</h2>
+<p>Ordinateur avec LibreOffice Calc ou Google Sheets.</p>
+
+<h2>Partie 1 : Saisie des donnees</h2>
+<p>1. Saisir les notes suivantes (sur 20) dans la colonne A, de A1 a A20 :</p>
+<p>8, 14, 11, 6, 15, 9, 12, 17, 10, 13, 7, 16, 11, 8, 14, 10, 19, 5, 12, 9</p>
+<p>2. Dans la cellule C1, saisir "Effectif" et en C2 la formule <code>=NB(A1:A20)</code>.</p>
+<p>3. En C3, saisir "Moyenne" et en C4 la formule <code>=MOYENNE(A1:A20)</code>.</p>
+<p>4. En C5, saisir "Mediane" et en C6 la formule <code>=MEDIANE(A1:A20)</code>.</p>
+
+<h2>Partie 2 : Quartiles</h2>
+<p>5. En C7, saisir "Q1" et en C8 la formule <code>=QUARTILE(A1:A20;1)</code>.</p>
+<p>6. En C9, saisir "Q3" et en C10 la formule <code>=QUARTILE(A1:A20;3)</code>.</p>
+<p>7. En C11, saisir "Etendue" et en C12 la formule <code>=MAX(A1:A20)-MIN(A1:A20)</code>.</p>
+<p>8. Calculer l'ecart interquartile : $Q_3 - Q_1$.</p>
+
+<h2>Partie 3 : Diagramme en boite</h2>
+<p>9. Trier les donnees dans l'ordre croissant (menu Donnees > Trier).</p>
+<p>10. Sur une feuille, tracer a la main le diagramme en boite avec : minimum, $Q_1$, mediane, $Q_3$, maximum.</p>
+<p>11. Interpreter : 50 % des notes sont-elles au-dessus de 10 ?</p>
+
+<h2>Partie 4 : Exploration</h2>
+<p>12. Ajouter une note de 20 a la serie. Comment changent la mediane et la moyenne ?</p>
+<p>13. Remplacer la note de 5 par 0. Quel indicateur est le plus sensible aux valeurs extremes : la mediane ou la moyenne ?</p>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
