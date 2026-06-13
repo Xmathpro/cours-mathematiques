@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC 06 . 5eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Interrogation courte</span><span>IC 6</span></div>
+<h1 class="cours-titre-principal">IC : Angles</h1>
+<p class="cours-sous-titre">Bareme indicatif . 15 min . /15</p>
+</div></div>
+<main class="cours-corps">
+<h3>Question 1 (3 pts)</h3>
+<p>Nature des angles : $55$, $90$, $145$ degres.</p>
+<div class="interactive-box"><h4>Figure</h4><canvas id="c1" width="500" height="130"></canvas></div>
+<script>(function(){var c=document.getElementById('c1').getContext('2d');var a=[55,90,145],n=['55','90','145'];for(var i=0;i<3;i++){var cx=60+i*155,cy=100,r=50,ang=a[i]*Math.PI/180;c.strokeStyle='#2a5298';c.lineWidth=2;c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(ang),cy-r*Math.sin(ang));c.stroke();c.strokeStyle='#d35400';c.lineWidth=1.5;c.beginPath();c.arc(cx,cy,18,0,-ang,true);c.stroke();c.fillStyle='#c0392b';c.font='bold 11px Arial';c.textAlign='center';c.fillText(n[i]+'°',cx+28*Math.cos(ang/2),cy-28*Math.sin(ang/2));if(a[i]===90){c.strokeStyle='#2a5298';c.lineWidth=1;c.strokeRect(cx,cy-10,10,10);}}})();</script>
+<div style="border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Question 2 (3 pts)</h3><p>Complementaires : l'un mesure $42$. L'autre ?</p>
+<div style="border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Question 3 (3 pts)</h3><p>Supplementaires : l'un mesure $115$. L'autre ?</p>
+<div style="border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Question 4 (6 pts)</h3><p>Triangle : angles $x$, $2x$, $3x$. Trouver $x$.</p>
+<div class="interactive-box"><canvas id="c4" width="320" height="180"></canvas></div>
+<script>(function(){var c=document.getElementById('c4').getContext('2d');c.fillStyle='rgba(42,82,152,0.06)';c.beginPath();c.moveTo(30,160);c.lineTo(280,160);c.lineTo(180,20);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='center';c.fillText('x',50,150);c.fillText('2x',260,150);c.fillStyle='#c0392b';c.fillText('3x',185,45);})();</script>
+<div style="border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem"></div>
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC 10 . 5eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Interrogation courte</span><span>IC 10</span></div>
+<h1 class="cours-titre-principal">IC : Symetrie centrale</h1>
+<p class="cours-sous-titre">Version professeur . 15 min . /15</p>
+</div></div>
+<main class="cours-corps">
+<h3>Question 1 (4 pts)</h3><p>Sym de A par rapport a O, $OA=3{,}5$. $AA'$ ?</p>
+<div class="interactive-box"><canvas id="c1" width="420" height="130"></canvas></div>
+<script>(function(){var c=document.getElementById('c1').getContext('2d');c.strokeStyle='#f0f0f0';c.lineWidth=1;for(var i=0;i<420;i+=20){c.beginPath();c.moveTo(i,0);c.lineTo(i,130);c.stroke();}for(var j=0;j<130;j+=20){c.beginPath();c.moveTo(0,j);c.lineTo(420,j);c.stroke();}c.strokeStyle='#bbb';c.setLineDash([3,3]);c.beginPath();c.moveTo(110,40);c.lineTo(310,90);c.stroke();c.setLineDash([]);c.fillStyle='#2a5298';c.beginPath();c.arc(110,40,5,0,6.28);c.fill();c.fillStyle='#c0392b';c.beginPath();c.arc(210,65,5,0,6.28);c.fill();c.fillStyle='#d35400';c.beginPath();c.arc(310,90,5,0,6.28);c.fill();c.font='bold 12px Arial';c.textAlign='center';c.fillStyle='#2a5298';c.fillText('A',110,30);c.fillStyle='#c0392b';c.fillText('O',210,55);c.fillStyle='#d35400';c.fillText("A'",310,108);})();</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$AA'=7$ cm.</p></div>
+<h3>Question 2 (3 pts)</h3><p>Conservation longueurs, angles, aires ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>Oui aux trois.</p></div>
+<h3>Question 3 (4 pts)</h3><p>ABCD parallelogramme, centre O. Sym(A) ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>C.</p></div>
+<h3>Question 4 (4 pts)</h3><p>Sym de $M(4\,;\,-3)$ par rapport a O(0,0).</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div><p>$M'(-4\,;\,3)$.</p></div>
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
