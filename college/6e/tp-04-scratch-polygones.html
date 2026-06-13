@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP 4 : Scratch et polygones . 6eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.tp-header{background:linear-gradient(135deg,#8e44ad,#6c3483);color:#fff;padding:1.2rem 1.5rem}.tp-header h1{font-size:1.3rem;margin:0 0 .3rem}.tp-header p{font-size:.85rem;opacity:.8;margin:0}.tp-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e0e0e0}.tp-meta-cell{background:#fff;padding:.5rem .75rem;font-size:.82rem}.tp-meta-cell strong{display:block;font-size:.68rem;color:#8e44ad;text-transform:uppercase;margin-bottom:.2rem}.activite{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1rem 0}.activite h3{font-family:Arial,sans-serif;font-size:.85rem;color:#8e44ad;margin:0 0 .5rem;text-transform:uppercase;letter-spacing:.04em}.consigne{background:#f8f4fc;border-left:3px solid #8e44ad;padding:.5rem .75rem;margin:.5rem 0;font-size:.88rem}
+.scratch-block{display:inline-block;padding:4px 10px;border-radius:5px;font-family:Arial,sans-serif;font-size:.82rem;font-weight:bold;color:#fff;margin:2px 0}
+.sb-m{background:#4C97FF}.sb-c{background:#FFAB19}.sb-e{background:#FFD500;color:#333}.sb-s{background:#59C059}
+</style>
+</head>
+<body>
+<div class="tp-header"><h1>TP 4 : Programmer des polygones avec Scratch</h1><p>Boucles, angles et geometrie</p></div>
+<div class="tp-meta">
+<div class="tp-meta-cell"><strong>Duree</strong>55 min</div>
+<div class="tp-meta-cell"><strong>Modalite</strong>Individuel (salle informatique)</div>
+<div class="tp-meta-cell"><strong>Materiel</strong>Ordinateur avec Scratch (scratch.mit.edu)</div>
+<div class="tp-meta-cell"><strong>Lecons liees</strong>18, 13</div>
+</div>
+
+<main class="cours-corps">
+
+<div class="activite">
+<h3>Defi 1 : tracer un carre (10 min)</h3>
+<div class="consigne">Assemblez les blocs pour tracer un carre de cote 100.</div>
+<p><span class="scratch-block sb-e">Quand drapeau vert clique</span></p>
+<p><span class="scratch-block sb-s">Stylo en position d'ecriture</span></p>
+<p><span class="scratch-block sb-c">Repeter 4 fois</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Avancer de 100 pas</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Tourner de 90 degres</span></p>
+<p><strong>Question :</strong> pourquoi tourne-t-on de 90 degres ? Parce que $360 \div 4 = 90$.</p>
+</div>
+
+<div class="activite">
+<h3>Defi 2 : tracer un triangle equilateral (10 min)</h3>
+<div class="consigne">Modifiez le programme pour tracer un triangle equilateral.</div>
+<ol>
+<li>Combien de cotes a un triangle ? → Repeter ... fois</li>
+<li>De combien de degres faut-il tourner ? → $360 \div 3 = ...$</li>
+<li>Testez. Le triangle se ferme-t-il correctement ?</li>
+</ol>
+</div>
+
+<div class="activite">
+<h3>Defi 3 : tracer n'importe quel polygone (10 min)</h3>
+<div class="consigne">Creez un programme qui demande a l'utilisateur le nombre de cotes, puis trace le polygone.</div>
+<p><span class="scratch-block sb-e">Quand drapeau vert clique</span></p>
+<p><span class="scratch-block sb-c">Demander "Combien de cotes ?"</span></p>
+<p><span class="scratch-block sb-c">Repeter (reponse) fois</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Avancer de 80 pas</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Tourner de (360 / reponse) degres</span></p>
+<p><strong>Testez avec :</strong> 5 (pentagone), 6 (hexagone), 8 (octogone), 10, 20, 36, 360.</p>
+<p><strong>Question :</strong> que se passe-t-il quand le nombre de cotes augmente ? La figure ressemble de plus en plus a un ...</p>
+</div>
+
+<div class="activite">
+<h3>Defi 4 : une etoile (10 min)</h3>
+<div class="consigne">Modifiez l'angle de rotation pour obtenir une etoile au lieu d'un polygone.</div>
+<p>Essayez : repeter 5 fois [avancer de 100, tourner de 144 degres]. Que se passe-t-il ?</p>
+<p>Essayez d'autres angles : 120, 150, 160. Quelles figures obtient-on ?</p>
+</div>
+
+<div class="activite">
+<h3>Defi 5 bonus : une spirale (5 min)</h3>
+<div class="consigne">Au lieu d'avancer toujours de la meme distance, augmentez la distance a chaque etape.</div>
+<p><span class="scratch-block sb-c">Repeter 50 fois</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Avancer de (i * 2) pas</span></p>
+<p style="padding-left:2rem"><span class="scratch-block sb-m">Tourner de 90 degres</span></p>
+<p>(Utilisez une variable i qui augmente de 1 a chaque tour.)</p>
+</div>
+
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
