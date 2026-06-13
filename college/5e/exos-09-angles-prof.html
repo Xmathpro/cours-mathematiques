@@ -2,58 +2,305 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Prof 09 . 5eme</title>
+<title>Exercices Prof 09 : Angles . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 9</span></div>
 <h1 class="cours-titre-principal">Exercices : Angles</h1>
+<p class="cours-sous-titre">Version professeur (avec corriges)</p>
 </div></div>
 <main class="cours-corps">
 
 <h3>Exercice 1 (2 pts)</h3>
-<p>Donner la nature de chaque angle : a) $35$° b) $90$° c) $120$° d) $180$° e) $72$°.</p>
+<p>Observer les angles ci-dessous et donner la nature de chacun.</p>
+<div class="interactive-box">
+<h4>Figure : cinq angles a identifier</h4>
+<canvas id="cv1" width="650" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var angles=[35,90,120,180,72];
+var noms=['a','b','c','d','e'];
+var x0=50;
+for(var i=0;i<5;i++){
+var cx=x0+i*125,cy=130,r=50;
+var a=angles[i]*Math.PI/180;
+// Arc
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+c.strokeStyle='#d35400';c.lineWidth=1.5;
+c.beginPath();c.arc(cx,cy,20,0,-a,true);c.stroke();
+// Label
+c.fillStyle='#333';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText(noms[i]+')',cx+r/2,cy+20);
+c.fillStyle='#c0392b';c.font='11px Arial';
+c.fillText(angles[i]+'°',cx+30*Math.cos(a/2),cy-30*Math.sin(a/2));
+if(angles[i]===90){c.strokeStyle='#2a5298';c.lineWidth=1;c.strokeRect(cx,cy-12,12,12);}
+}
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>a) Aigu. b) Droit. c) Obtus. d) Plat. e) Aigu.</p></div>
+<p>a) $35$° : aigu. b) $90$° : droit. c) $120$° : obtus. d) $180$° : plat. e) $72$° : aigu.</p></div>
 
-<h3>Exercice 2 (1 pts)</h3>
+<h3>Exercice 2 (1 pt)</h3>
 <p>Deux angles sont complementaires. L'un mesure $35$°. Calculer l'autre.</p>
+<div class="interactive-box">
+<h4>Figure : angles complementaires</h4>
+<canvas id="cv2" width="350" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+var cx=80,cy=150,r=100;
+// Angle droit complet
+c.strokeStyle='#ccc';c.lineWidth=1;c.setLineDash([4,4]);
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+c.setLineDash([]);
+// Demi-droites
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+var a1=35*Math.PI/180;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a1),cy-r*Math.sin(a1));c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+// Arcs
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,30,0,-a1,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,40,-a1,-Math.PI/2,true);c.stroke();
+// Labels
+c.fillStyle='#d35400';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('35°',cx+35,cy-10);
+c.fillStyle='#27ae60';c.fillText('?',cx+10,cy-50);
+// Equerre
+c.strokeStyle='#999';c.lineWidth=1;c.strokeRect(cx,cy-14,14,14);
+// Texte
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('90° au total',200,60);
+c.fillText('? = 90° - 35° = 55°',200,85);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$90-35=55$°.</p></div>
+<p>$90 - 35 = 55$°.</p></div>
 
-<h3>Exercice 3 (1 pts)</h3>
+<h3>Exercice 3 (1 pt)</h3>
 <p>Deux angles sont supplementaires. L'un mesure $110$°. Calculer l'autre.</p>
+<div class="interactive-box">
+<h4>Figure : angles supplementaires</h4>
+<canvas id="cv3" width="400" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx=120,cy=130,r=90;
+// Angle plat
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx-r,cy);c.lineTo(cx+r,cy);c.stroke();
+var a=110*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+// Arcs
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,25,0,-a,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,35,-a,-Math.PI,true);c.stroke();
+// Labels
+c.fillStyle='#d35400';c.font='bold 13px Arial';c.textAlign='center';
+c.fillText('110°',cx+45,cy-35);
+c.fillStyle='#27ae60';c.fillText('?',cx-30,cy-45);
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('180° au total',250,50);
+c.fillText('? = 180° - 110° = 70°',250,75);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$180-110=70$°.</p></div>
+<p>$180 - 110 = 70$°.</p></div>
 
 <h3>Exercice 4 (3 pts)</h3>
-<p>Les angles $\widehat{A}$ et $\widehat{B}$ sont complementaires. $\widehat{A}=2x$ et $\widehat{B}=x+30$. Trouver $x$.</p>
+<p>Les angles $\widehat{A}$ et $\widehat{B}$ sont complementaires. $\widehat{A}=2x$ et $\widehat{B}=x+30$. Trouver $x$, puis les mesures des angles.</p>
+<div class="interactive-box">
+<h4>Figure : angles complementaires avec inconnue</h4>
+<canvas id="cv4" width="400" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var cx=80,cy=150,r=100;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+var a1=40*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a1),cy-r*Math.sin(a1));c.stroke();
+// Arcs
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,30,0,-a1,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,40,-a1,-Math.PI/2,true);c.stroke();
+// Equerre
+c.strokeStyle='#999';c.lineWidth=1;c.strokeRect(cx,cy-14,14,14);
+// Labels
+c.fillStyle='#d35400';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('A = 2x',cx+35,cy-8);
+c.fillStyle='#27ae60';c.fillText('B = x+30',cx+5,cy-55);
+c.fillStyle='#333';c.font='13px Arial';
+c.fillText('2x + (x+30) = 90',220,50);
+c.fillText('3x + 30 = 90',220,72);
+c.fillText('3x = 60  =>  x = 20',220,94);
+c.fillText('A = 40°, B = 50°',220,120);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$2x+x+30=90$, $3x=60$, $x=20$. Donc $\widehat{A}=40$° et $\widehat{B}=50$°.</p></div>
+<p>$2x + x + 30 = 90$, donc $3x = 60$ et $x = 20$. $\widehat{A} = 40$° et $\widehat{B} = 50$°.</p></div>
 
 <h3>Exercice 5 (2 pts)</h3>
-<p>Calculer l'angle manquant dans un triangle dont deux angles mesurent $50$° et $70$°.</p>
+<p>Calculer l'angle manquant dans le triangle ci-dessous.</p>
+<div class="interactive-box">
+<h4>Figure : triangle avec deux angles connus</h4>
+<canvas id="cv5" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv5').getContext('2d');
+var ax=60,ay=190,bx=300,by=190,cx2=180,cy2=40;
+// Triangle
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.closePath();c.stroke();
+c.fillStyle='rgba(42,82,152,0.06)';c.fill();
+// Labels sommets
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-15,ay+15);c.fillText('B',bx+15,by+15);c.fillText('C',cx2,cy2-10);
+// Arcs angles
+c.strokeStyle='#d35400';c.lineWidth=2;
+var angA=Math.atan2(ay-cy2,cx2-ax);
+c.beginPath();c.arc(ax,ay,25,0,-angA,true);c.stroke();
+c.fillStyle='#d35400';c.font='bold 12px Arial';
+c.fillText('50°',ax+35,ay-10);
+var angB=Math.PI-Math.atan2(by-cy2,bx-cx2);
+c.strokeStyle='#27ae60';
+c.beginPath();c.arc(bx,by,25,-Math.PI,-Math.PI+angB,false);c.stroke();
+c.fillStyle='#27ae60';
+c.fillText('70°',bx-40,by-10);
+// Angle C
+c.fillStyle='#c0392b';c.font='bold 14px Arial';
+c.fillText('?',cx2+5,cy2+35);
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('? = 180° - 50° - 70° = 60°',220,30);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$180-50-70=60$°.</p></div>
+<p>$180 - 50 - 70 = 60$°.</p></div>
 
-<h3>Exercice 6 (1 pts)</h3>
+<h3>Exercice 6 (1 pt)</h3>
 <p>Un angle droit est partage en deux angles. L'un mesure $27$°. Combien mesure l'autre ?</p>
+<div class="interactive-box">
+<h4>Figure : angle droit partage</h4>
+<canvas id="cv6" width="300" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+var cx=60,cy=140,r=90;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+var a=27*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+c.setLineDash([]);
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,25,0,-a,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,35,-a,-Math.PI/2,true);c.stroke();
+c.strokeRect(cx,cy-12,12,12);
+c.fillStyle='#d35400';c.font='12px Arial';c.textAlign='left';
+c.fillText('27°',cx+30,cy-5);
+c.fillStyle='#27ae60';c.fillText('63°',cx+8,cy-42);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$90-27=63$°.</p></div>
+<p>$90 - 27 = 63$°.</p></div>
 
 <h3>Exercice 7 (2 pts)</h3>
 <p>Deux angles adjacents forment un angle plat. L'un mesure $x$ et l'autre $3x$. Trouver $x$.</p>
+<div class="interactive-box">
+<h4>Figure : angle plat partage</h4>
+<canvas id="cv7" width="400" height="150"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv7').getContext('2d');
+var cx=150,cy=120,r=100;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx-r,cy);c.lineTo(cx+r,cy);c.stroke();
+var a=45*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,25,0,-a,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,35,-a,-Math.PI,true);c.stroke();
+c.fillStyle='#2a5298';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('x = 45°',cx+50,cy-8);
+c.fillStyle='#27ae60';c.fillText('3x = 135°',cx-35,cy-45);
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='left';
+c.fillText('x + 3x = 180°',280,40);
+c.fillText('4x = 180°',280,60);
+c.fillText('x = 45°',280,80);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$x+3x=180$, $4x=180$, $x=45$°.</p></div>
+<p>$x + 3x = 180$, $4x = 180$, $x = 45$°.</p></div>
 
 <h3>Exercice 8 (2 pts)</h3>
 <p>Dans un triangle isocele, l'angle au sommet mesure $40$°. Calculer les angles de la base.</p>
+<div class="interactive-box">
+<h4>Figure : triangle isocele</h4>
+<canvas id="cv8" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv8').getContext('2d');
+var sx=200,sy=30,ax=100,ay=200,bx=300,by=200;
+// Triangle
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(sx,sy);c.lineTo(ax,ay);c.lineTo(bx,by);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Marques egales
+var mx1=(sx+ax)/2,my1=(sy+ay)/2,mx2=(sx+bx)/2,my2=(sy+by)/2;
+var dx1=ay-sy,dy1=sx-ax,l1=Math.sqrt(dx1*dx1+dy1*dy1);dx1=dx1/l1*8;dy1=dy1/l1*8;
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(mx1-dx1,my1-dy1);c.lineTo(mx1+dx1,my1+dy1);c.stroke();
+var dx2=by-sy,dy2=sx-bx,l2=Math.sqrt(dx2*dx2+dy2*dy2);dx2=dx2/l2*8;dy2=dy2/l2*8;
+c.beginPath();c.moveTo(mx2-dx2,my2-dy2);c.lineTo(mx2+dx2,my2+dy2);c.stroke();
+// Labels
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('S',sx,sy-10);c.fillText('A',ax-15,ay+15);c.fillText('B',bx+15,by+15);
+// Angle sommet
+c.fillStyle='#d35400';c.font='bold 13px Arial';
+c.fillText('40°',sx,sy+40);
+// Angles base
+c.fillStyle='#27ae60';c.font='bold 13px Arial';
+c.fillText('70°',ax+25,ay-10);c.fillText('70°',bx-25,by-10);
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='left';
+c.fillText('(180 - 40) / 2 = 70°',280,50);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$(180-40)\div 2=70$°. Chaque angle de la base mesure $70$°.</p></div>
+<p>$(180 - 40) \div 2 = 70$°. Chaque angle de la base mesure $70$°.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

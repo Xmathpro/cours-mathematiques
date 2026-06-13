@@ -2,58 +2,177 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Prof 15 . 5eme</title>
+<title>Exercices Prof 15 : Volumes . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Exercices Lecon 15</span></div>
-<h1 class="cours-titre-principal">Exercices : Volumes : prisme droit et cylindre</h1>
+<h1 class="cours-titre-principal">Exercices : Volumes</h1>
+<p class="cours-sous-titre">Version professeur (avec corriges)</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1 (1 pts)</h3>
-<p>Calculer le volume d'un pave droit de dimensions $5$ cm, $3$ cm et $8$ cm.</p>
+<h3>Exercice 1 (1 pt)</h3>
+<p>Calculer le volume du pave droit ci-dessous.</p>
+<div class="interactive-box">
+<h4>Figure : pave droit 5 × 3 × 8 cm</h4>
+<canvas id="cv1" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var x0=80,y0=190,w=120,h=100,d=40;
+// Face avant
+c.fillStyle='rgba(42,82,152,0.08)';c.fillRect(x0,y0-h,w,h);
+c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(x0,y0-h,w,h);
+// Face droite
+c.fillStyle='rgba(42,82,152,0.04)';
+c.beginPath();c.moveTo(x0+w,y0);c.lineTo(x0+w+d,y0-d*0.6);c.lineTo(x0+w+d,y0-h-d*0.6);c.lineTo(x0+w,y0-h);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Face dessus
+c.fillStyle='rgba(42,82,152,0.12)';
+c.beginPath();c.moveTo(x0,y0-h);c.lineTo(x0+d,y0-h-d*0.6);c.lineTo(x0+w+d,y0-h-d*0.6);c.lineTo(x0+w,y0-h);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Cotes
+c.fillStyle='#c0392b';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('5 cm',x0+w/2,y0+18);
+c.save();c.translate(x0-15,y0-h/2);c.rotate(-Math.PI/2);c.fillText('8 cm',0,0);c.restore();
+c.fillText('3 cm',x0+w+d/2+5,y0-d*0.3+10);
+// Calcul
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('V = 5 × 3 × 8',260,80);
+c.fillText('= 120 cm³',260,102);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$V=5\times 3\times 8=120$ cm$^3$.</p></div>
+<p>$V = 5 \times 3 \times 8 = 120$ cm$^3$.</p></div>
 
 <h3>Exercice 2 (2 pts)</h3>
-<p>Calculer le volume d'un prisme droit a base triangulaire : base $6$ cm, hauteur du triangle $4$ cm, hauteur du prisme $10$ cm.</p>
+<p>Calculer le volume du prisme droit a base triangulaire ci-dessous.</p>
+<div class="interactive-box">
+<h4>Figure : prisme droit (base 6 cm, hauteur triangle 4 cm, hauteur prisme 10 cm)</h4>
+<canvas id="cv2" width="450" height="250"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+var ox=100,oy=220,b=100,ht=50,hp=120,dx=30,dy=-18;
+// Base inferieure
+var ax=ox,ay=oy,bx=ox+b,by=oy,cx2=ox+b/2,cy2=oy-ht;
+// Base superieure
+var ax2=ax+dx,ay2=ay-hp+dy,bx2=bx+dx,by2=by-hp+dy,cx3=cx2+dx,cy3=cy2-hp+dy;
+// Faces
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(bx2,by2);c.lineTo(ax2,ay2);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=1.5;c.stroke();
+c.fillStyle='rgba(42,82,152,0.04)';
+c.beginPath();c.moveTo(bx,by);c.lineTo(cx2,cy2);c.lineTo(cx3,cy3);c.lineTo(bx2,by2);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.stroke();
+// Cachee
+c.strokeStyle='#aaa';c.setLineDash([3,3]);
+c.beginPath();c.moveTo(ax,ay);c.lineTo(cx2,cy2);c.stroke();
+c.beginPath();c.moveTo(ax2,ay2);c.lineTo(cx3,cy3);c.stroke();
+c.setLineDash([]);
+// Face superieure
+c.fillStyle='rgba(42,82,152,0.1)';
+c.beginPath();c.moveTo(ax2,ay2);c.lineTo(bx2,by2);c.lineTo(cx3,cy3);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Aretes verticales
+c.beginPath();c.moveTo(ax,ay);c.lineTo(ax2,ay2);c.stroke();
+c.beginPath();c.moveTo(bx,by);c.lineTo(bx2,by2);c.stroke();
+c.beginPath();c.moveTo(cx2,cy2);c.lineTo(cx3,cy3);c.stroke();
+// Cotes
+c.fillStyle='#c0392b';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('6 cm',ox+b/2,oy+18);
+c.fillText('h = 4',cx2+15,cy2+10);
+c.save();c.translate(ox-15,oy-hp/2);c.rotate(-Math.PI/2);c.fillText('10 cm',0,0);c.restore();
+// Calcul
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('A_base = 6×4/2 = 12 cm²',280,80);
+c.fillText('V = 12 × 10 = 120 cm³',280,102);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$\mathcal{A}_{\text{base}}=\frac{6\times 4}{2}=12$ cm$^2$. $V=12\times 10=120$ cm$^3$.</p></div>
+<p>$\mathcal{A}_{\text{base}} = \frac{6 \times 4}{2} = 12$ cm$^2$. $V = 12 \times 10 = 120$ cm$^3$.</p></div>
 
 <h3>Exercice 3 (2 pts)</h3>
-<p>Calculer le volume d'un cylindre de rayon $3$ cm et de hauteur $10$ cm.</p>
+<p>Calculer le volume du cylindre ci-dessous ($r = 3$ cm, $h = 10$ cm).</p>
+<div class="interactive-box">
+<h4>Figure : cylindre</h4>
+<canvas id="cv3" width="350" height="250"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx0=120,cy0=220,r=50,h=150,ey=r*0.3;
+// Corps
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(cx0-r,cy0);c.lineTo(cx0-r,cy0-h);
+c.ellipse(cx0,cy0-h,r,ey,0,Math.PI,0);
+c.lineTo(cx0+r,cy0);c.ellipse(cx0,cy0,r,ey,0,0,Math.PI);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Ellipse cachee
+c.strokeStyle='#aaa';c.setLineDash([3,3]);c.lineWidth=1;
+c.beginPath();c.ellipse(cx0,cy0,r,ey,0,Math.PI,2*Math.PI);c.stroke();
+c.setLineDash([]);
+// Ellipse superieure
+c.fillStyle='rgba(42,82,152,0.1)';
+c.beginPath();c.ellipse(cx0,cy0-h,r,ey,0,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Rayon
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(cx0,cy0-h);c.lineTo(cx0+r,cy0-h);c.stroke();
+c.fillStyle='#c0392b';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('r = 3',cx0+r/2,cy0-h-12);
+// Hauteur
+c.strokeStyle='#d35400';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(cx0+r+15,cy0);c.lineTo(cx0+r+15,cy0-h);c.stroke();
+c.setLineDash([]);
+c.fillStyle='#d35400';c.fillText('h = 10',cx0+r+40,cy0-h/2);
+// Calcul
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('V = π × r² × h',220,60);
+c.fillText('= π × 9 × 10',220,82);
+c.fillText('= 90π ≈ 282,7 cm³',220,104);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$V=\pi\times 3^2\times 10=90\pi\approx 282{,}7$ cm$^3$.</p></div>
+<p>$V = \pi \times 3^2 \times 10 = 90\pi \approx 282{,}7$ cm$^3$.</p></div>
 
 <h3>Exercice 4 (2 pts)</h3>
 <p>Convertir : a) $3$ dm$^3$ en cm$^3$ b) $5\,000$ cm$^3$ en L.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>a) $3\,000$ cm$^3$. b) $5$ L.</p></div>
+<p>a) $3 \times 1\,000 = 3\,000$ cm$^3$. b) $5\,000$ cm$^3$ = $5$ dm$^3$ = $5$ L.</p></div>
 
 <h3>Exercice 5 (3 pts)</h3>
 <p>Un aquarium cylindrique a un rayon de $15$ cm et une hauteur de $40$ cm. Calculer son volume en litres.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$V=\pi\times 15^2\times 40=9000\pi\approx 28\,274$ cm$^3\approx 28{,}3$ L.</p></div>
+<p>$V = \pi \times 15^2 \times 40 = 9\,000\pi \approx 28\,274$ cm$^3 \approx 28{,}3$ L.</p></div>
 
 <h3>Exercice 6 (2 pts)</h3>
 <p>Un prisme droit a une base carree de cote $4$ cm et une hauteur de $9$ cm. Calculer son volume.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$\mathcal{A}_{\text{base}}=16$ cm$^2$. $V=16\times 9=144$ cm$^3$.</p></div>
+<p>$\mathcal{A}_{\text{base}} = 16$ cm$^2$. $V = 16 \times 9 = 144$ cm$^3$.</p></div>
 
 <h3>Exercice 7 (3 pts)</h3>
 <p>Combien de litres d'eau contient un recipient cylindrique de diametre $20$ cm et de hauteur $30$ cm ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$r=10$ cm. $V=\pi\times 100\times 30=3000\pi\approx 9\,425$ cm$^3\approx 9{,}4$ L.</p></div>
+<p>$r = 10$ cm. $V = \pi \times 100 \times 30 = 3\,000\pi \approx 9\,425$ cm$^3 \approx 9{,}4$ L.</p></div>
 
 <h3>Exercice 8 (2 pts)</h3>
 <p>Un pave droit a un volume de $180$ cm$^3$. Sa base fait $6$ cm sur $5$ cm. Calculer sa hauteur.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$h=\frac{180}{6\times 5}=\frac{180}{30}=6$ cm.</p></div>
+<p>$h = \frac{180}{6 \times 5} = \frac{180}{30} = 6$ cm.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

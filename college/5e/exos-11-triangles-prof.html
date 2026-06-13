@@ -2,58 +2,197 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Prof 11 . 5eme</title>
+<title>Exercices Prof 11 : Triangles . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 11</span></div>
 <h1 class="cours-titre-principal">Exercices : Triangles</h1>
+<p class="cours-sous-titre">Version professeur (avec corriges)</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1 (1 pts)</h3>
-<p>Dans un triangle, deux angles mesurent $45$° et $85$°. Calculer le troisieme.</p>
+<h3>Exercice 1 (1 pt)</h3>
+<p>Calculer le troisieme angle du triangle ci-dessous.</p>
+<div class="interactive-box">
+<h4>Figure : triangle avec deux angles connus</h4>
+<canvas id="cv1" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var ax=50,ay=190,bx=320,by=190,cx2=200,cy2=30;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-12,ay+15);c.fillText('B',bx+12,by+15);c.fillText('C',cx2,cy2-10);
+c.fillStyle='#d35400';c.font='bold 13px Arial';
+c.fillText('45°',ax+40,ay-12);
+c.fillStyle='#27ae60';c.fillText('85°',bx-40,by-12);
+c.fillStyle='#c0392b';c.font='bold 14px Arial';c.fillText('? = 50°',cx2+40,cy2+25);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$180-45-85=50$°.</p></div>
+<p>$180 - 45 - 85 = 50$°.</p></div>
 
-<h3>Exercice 2 (1 pts)</h3>
-<p>Un triangle a ses trois angles egaux. Combien mesure chaque angle ?</p>
+<h3>Exercice 2 (1 pt)</h3>
+<p>Un triangle a ses trois angles egaux. Combien mesure chaque angle ? Quel est ce triangle ?</p>
+<div class="interactive-box">
+<h4>Figure : triangle equilateral</h4>
+<canvas id="cv2" width="300" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+var cx=150,r=90;
+var ax=cx,ay=20;
+var bx=cx-r*Math.cos(Math.PI/6),by=20+r*Math.sin(Math.PI/6)+r;
+var dx=cx+r*Math.cos(Math.PI/6),dy=by;
+// Triangle equi approx
+var p1x=150,p1y=25,p2x=60,p2y=195,p3x=240,p3y=195;
+c.fillStyle='rgba(39,174,96,0.08)';
+c.beginPath();c.moveTo(p1x,p1y);c.lineTo(p2x,p2y);c.lineTo(p3x,p3y);c.closePath();c.fill();
+c.strokeStyle='#27ae60';c.lineWidth=2;c.stroke();
+// Marques egales
+var segs=[[p1x,p1y,p2x,p2y],[p2x,p2y,p3x,p3y],[p3x,p3y,p1x,p1y]];
+for(var i=0;i<3;i++){
+var mx=(segs[i][0]+segs[i][2])/2,my=(segs[i][1]+segs[i][3])/2;
+var ddx=segs[i][3]-segs[i][1],ddy=segs[i][0]-segs[i][2];
+var ll=Math.sqrt(ddx*ddx+ddy*ddy);ddx=ddx/ll*7;ddy=ddy/ll*7;
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(mx-ddx,my-ddy);c.lineTo(mx+ddx,my+ddy);c.stroke();
+}
+c.fillStyle='#2a5298';c.font='bold 13px Arial';c.textAlign='center';
+c.fillText('60°',p1x,p1y+30);c.fillText('60°',p2x+25,p2y-10);c.fillText('60°',p3x-25,p3y-10);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$180\div 3=60$°. C'est un triangle equilateral.</p></div>
+<p>$180 \div 3 = 60$°. C'est un triangle equilateral.</p></div>
 
 <h3>Exercice 3 (2 pts)</h3>
-<p>Peut-on construire un triangle de cotes $3$ cm, $5$ cm et $9$ cm ? Justifier.</p>
+<p>Peut-on construire un triangle de cotes $3$ cm, $5$ cm et $9$ cm ? Justifier par l'inegalite triangulaire.</p>
+<div class="interactive-box">
+<h4>Figure : inegalite triangulaire non verifiee</h4>
+<canvas id="cv3" width="500" height="120"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var sc=30;
+// Segments
+c.strokeStyle='#c0392b';c.lineWidth=4;
+c.beginPath();c.moveTo(50,50);c.lineTo(50+3*sc,50);c.stroke();
+c.fillStyle='#c0392b';c.font='12px Arial';c.textAlign='center';c.fillText('3 cm',50+1.5*sc,40);
+c.strokeStyle='#2a5298';c.lineWidth=4;
+c.beginPath();c.moveTo(50+3*sc+10,50);c.lineTo(50+3*sc+10+5*sc,50);c.stroke();
+c.fillStyle='#2a5298';c.fillText('5 cm',50+3*sc+10+2.5*sc,40);
+c.fillStyle='#333';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('3 + 5 = 8',50,90);
+// Segment 9 cm
+c.strokeStyle='#27ae60';c.lineWidth=4;
+c.beginPath();c.moveTo(50,100);c.lineTo(50+9*sc,100);c.stroke();
+c.fillStyle='#27ae60';c.font='12px Arial';c.textAlign='center';c.fillText('9 cm',50+4.5*sc,95);
+c.fillStyle='#c0392b';c.font='bold 14px Arial';c.textAlign='left';
+c.fillText('8 < 9 : IMPOSSIBLE',300,90);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$3+5=8<9$. Non, l'inegalite triangulaire n'est pas verifiee.</p></div>
+<p>$3 + 5 = 8 < 9$. Non, l'inegalite triangulaire n'est pas verifiee.</p></div>
 
 <h3>Exercice 4 (2 pts)</h3>
 <p>Peut-on construire un triangle de cotes $4$ cm, $6$ cm et $8$ cm ? Justifier.</p>
+<div class="interactive-box">
+<h4>Figure : inegalite triangulaire verifiee</h4>
+<canvas id="cv4" width="500" height="100"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var sc=25;
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('4 + 6 = 10 > 8  ✓',50,30);
+c.fillText('4 + 8 = 12 > 6  ✓',50,52);
+c.fillText('6 + 8 = 14 > 4  ✓',50,74);
+c.fillStyle='#27ae60';c.font='bold 14px Arial';
+c.fillText('Les 3 conditions sont verifiees : construction possible.',250,52);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$4+6=10>8$, $4+8=12>6$, $6+8=14>4$. Oui.</p></div>
+<p>$4+6=10>8$, $4+8=12>6$, $6+8=14>4$. Oui, construction possible.</p></div>
 
 <h3>Exercice 5 (2 pts)</h3>
-<p>Un triangle isocele a un angle de $40$° au sommet. Calculer les deux autres.</p>
+<p>Un triangle isocele a un angle au sommet de $40$°. Calculer les angles de la base.</p>
+<div class="interactive-box">
+<h4>Figure : triangle isocele</h4>
+<canvas id="cv5" width="300" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv5').getContext('2d');
+var sx=150,sy=20,ax=55,ay=185,bx=245,by=185;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(sx,sy);c.lineTo(ax,ay);c.lineTo(bx,by);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Marques egales
+c.strokeStyle='#c0392b';c.lineWidth=2;
+var mx1=(sx+ax)/2,my1=(sy+ay)/2,mx2=(sx+bx)/2,my2=(sy+by)/2;
+c.beginPath();c.moveTo(mx1-4,my1-6);c.lineTo(mx1+4,my1+6);c.stroke();
+c.beginPath();c.moveTo(mx2-4,my2-6);c.lineTo(mx2+4,my2+6);c.stroke();
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('40°',sx,sy+30);
+c.fillStyle='#27ae60';c.fillText('70°',ax+22,ay-8);c.fillText('70°',bx-22,by-8);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$(180-40)/2=70$°. Les deux angles de la base mesurent $70$°.</p></div>
+<p>$(180 - 40) \div 2 = 70$°. Les deux angles de la base mesurent $70$°.</p></div>
 
 <h3>Exercice 6 (2 pts)</h3>
 <p>Un triangle rectangle a un angle de $35$°. Calculer le troisieme angle.</p>
+<div class="interactive-box">
+<h4>Figure : triangle rectangle</h4>
+<canvas id="cv6" width="350" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+var ax=50,ay=180,bx=300,by=180,hx=50,hy=30;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(hx,hy);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Equerre
+c.strokeStyle='#2a5298';c.lineWidth=1;c.strokeRect(ax,ay-15,15,15);
+c.fillStyle='#2a5298';c.font='bold 13px Arial';c.textAlign='center';
+c.fillText('A',ax-10,ay+15);c.fillText('B',bx+12,by+15);c.fillText('C',hx-10,hy-5);
+c.fillStyle='#d35400';c.font='bold 12px Arial';
+c.fillText('90°',ax+25,ay-20);
+c.fillText('35°',bx-40,by-12);
+c.fillStyle='#27ae60';c.font='bold 14px Arial';
+c.fillText('55°',hx+25,hy+25);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$180-90-35=55$°.</p></div>
+<p>$180 - 90 - 35 = 55$°.</p></div>
 
 <h3>Exercice 7 (2 pts)</h3>
-<p>Construire un triangle $ABC$ tel que $AB=6$ cm, $\widehat{A}=50$° et $\widehat{B}=70$°. Quelle est la mesure de $\widehat{C}$ ?</p>
+<p>Construire un triangle $ABC$ tel que $AB = 6$ cm, $\widehat{A} = 50$° et $\widehat{B} = 70$°. Quelle est la mesure de $\widehat{C}$ ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$\widehat{C}=180-50-70=60$°. Construction au rapporteur.</p></div>
+<p>$\widehat{C} = 180 - 50 - 70 = 60$°. Construction au rapporteur et a la regle.</p></div>
 
 <h3>Exercice 8 (3 pts)</h3>
-<p>Trois longueurs sont donnees : $a$, $a$ et $2a$. Peut-on construire un triangle ? Justifier.</p>
+<p>Trois longueurs sont donnees : $a$, $a$ et $2a$ (avec $a > 0$). Peut-on construire un triangle ? Justifier.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$a+a=2a$. Non, il faudrait $a+a>2a$, ce qui est faux. C'est un segment, pas un triangle.</p></div>
+<p>$a + a = 2a$. Il faudrait $a + a > 2a$, ce qui est faux (egalite, pas inegalite stricte). C'est un segment aplati, pas un triangle.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

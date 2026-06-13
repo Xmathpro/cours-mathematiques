@@ -2,51 +2,178 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Eleve 09 . 5eme</title>
+<title>Exercices Eleve 09 : Angles . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.reponse{border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 9</span></div>
 <h1 class="cours-titre-principal">Exercices : Angles</h1>
+<p class="cours-sous-titre">Bareme indicatif : /14 points</p>
 </div></div>
 <main class="cours-corps">
-<p style="text-align:right;font-style:italic">Bareme indicatif : 14 points</p>
 
 <h3>Exercice 1 (2 pts)</h3>
-<p>Donner la nature de chaque angle : a) $35$° b) $90$° c) $120$° d) $180$° e) $72$°.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Observer les angles ci-dessous et donner la nature de chacun (aigu, droit, obtus ou plat).</p>
+<div class="interactive-box">
+<canvas id="cv1" width="650" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var angles=[35,90,120,180,72];var noms=['a','b','c','d','e'];var x0=50;
+for(var i=0;i<5;i++){
+var cx=x0+i*125,cy=130,r=50;var a=angles[i]*Math.PI/180;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+c.strokeStyle='#d35400';c.lineWidth=1.5;
+c.beginPath();c.arc(cx,cy,20,0,-a,true);c.stroke();
+c.fillStyle='#333';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText(noms[i]+')',cx+r/2,cy+20);
+c.fillStyle='#c0392b';c.font='11px Arial';
+c.fillText(angles[i]+'°',cx+30*Math.cos(a/2),cy-30*Math.sin(a/2));
+if(angles[i]===90){c.strokeStyle='#2a5298';c.lineWidth=1;c.strokeRect(cx,cy-12,12,12);}
+}
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 2 (1 pts)</h3>
+<h3>Exercice 2 (1 pt)</h3>
 <p>Deux angles sont complementaires. L'un mesure $35$°. Calculer l'autre.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="interactive-box">
+<canvas id="cv2" width="300" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+var cx=60,cy=140,r=90;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+var a1=35*Math.PI/180;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a1),cy-r*Math.sin(a1));c.stroke();
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,25,0,-a1,true);c.stroke();
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(cx,cy,35,-a1,-Math.PI/2,true);c.stroke();
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='left';c.fillText('35°',cx+30,cy-8);
+c.fillStyle='#27ae60';c.fillText('?',cx+8,cy-48);
+c.strokeStyle='#999';c.lineWidth=1;c.strokeRect(cx,cy-12,12,12);
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 3 (1 pts)</h3>
+<h3>Exercice 3 (1 pt)</h3>
 <p>Deux angles sont supplementaires. L'un mesure $110$°. Calculer l'autre.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="interactive-box">
+<canvas id="cv3" width="350" height="150"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx=100,cy=120,r=80;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx-r,cy);c.lineTo(cx+r,cy);c.stroke();
+var a=110*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a),cy-r*Math.sin(a));c.stroke();
+c.strokeStyle='#d35400';c.beginPath();c.arc(cx,cy,22,0,-a,true);c.stroke();
+c.strokeStyle='#27ae60';c.beginPath();c.arc(cx,cy,32,-a,-Math.PI,true);c.stroke();
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='center';c.fillText('110°',cx+40,cy-30);
+c.fillStyle='#27ae60';c.fillText('?',cx-25,cy-40);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 4 (3 pts)</h3>
 <p>Les angles $\widehat{A}$ et $\widehat{B}$ sont complementaires. $\widehat{A}=2x$ et $\widehat{B}=x+30$. Trouver $x$.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="interactive-box">
+<canvas id="cv4" width="300" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var cx=60,cy=140,r=90;
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r,cy);c.stroke();
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx,cy-r);c.stroke();
+var a1=40*Math.PI/180;
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+r*Math.cos(a1),cy-r*Math.sin(a1));c.stroke();
+c.strokeStyle='#d35400';c.beginPath();c.arc(cx,cy,25,0,-a1,true);c.stroke();
+c.strokeStyle='#27ae60';c.beginPath();c.arc(cx,cy,35,-a1,-Math.PI/2,true);c.stroke();
+c.strokeStyle='#999';c.lineWidth=1;c.strokeRect(cx,cy-12,12,12);
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='left';c.fillText('A = 2x',cx+30,cy-6);
+c.fillStyle='#27ae60';c.fillText('B = x+30',cx+5,cy-50);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 5 (2 pts)</h3>
-<p>Calculer l'angle manquant dans un triangle dont deux angles mesurent $50$° et $70$°.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Calculer l'angle manquant dans le triangle ci-dessous.</p>
+<div class="interactive-box">
+<canvas id="cv5" width="350" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv5').getContext('2d');
+var ax=50,ay=180,bx=280,by=180,cx2=160,cy2=30;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-12,ay+15);c.fillText('B',bx+12,by+15);c.fillText('C',cx2,cy2-10);
+c.fillStyle='#d35400';c.font='bold 12px Arial';
+c.fillText('50°',ax+35,ay-10);
+c.fillStyle='#27ae60';c.fillText('70°',bx-35,by-10);
+c.fillStyle='#c0392b';c.font='bold 14px Arial';c.fillText('?',cx2+5,cy2+30);
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 6 (1 pts)</h3>
+<h3>Exercice 6 (1 pt)</h3>
 <p>Un angle droit est partage en deux angles. L'un mesure $27$°. Combien mesure l'autre ?</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 7 (2 pts)</h3>
 <p>Deux angles adjacents forment un angle plat. L'un mesure $x$ et l'autre $3x$. Trouver $x$.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 8 (2 pts)</h3>
 <p>Dans un triangle isocele, l'angle au sommet mesure $40$°. Calculer les angles de la base.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="interactive-box">
+<canvas id="cv8" width="300" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv8').getContext('2d');
+var sx=150,sy=20,ax=60,ay=180,bx=240,by=180;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(sx,sy);c.lineTo(ax,ay);c.lineTo(bx,by);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+var mx1=(sx+ax)/2,my1=(sy+ay)/2,mx2=(sx+bx)/2,my2=(sy+by)/2;
+c.strokeStyle='#c0392b';c.lineWidth=2;
+var dx=8,dy=0;
+c.beginPath();c.moveTo(mx1-4,my1-6);c.lineTo(mx1+4,my1+6);c.stroke();
+c.beginPath();c.moveTo(mx2-4,my2-6);c.lineTo(mx2+4,my2+6);c.stroke();
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('S',sx,sy-8);c.fillText('A',ax-12,ay+15);c.fillText('B',bx+12,by+15);
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.fillText('40°',sx,sy+35);
+c.fillStyle='#27ae60';c.fillText('?',ax+20,ay-8);c.fillText('?',bx-20,by-8);
+})();
+</script>
+<div class="reponse"></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

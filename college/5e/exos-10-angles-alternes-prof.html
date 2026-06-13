@@ -2,58 +2,195 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Prof 10 . 5eme</title>
+<title>Exercices Prof 10 : Angles et paralleles . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 10</span></div>
 <h1 class="cours-titre-principal">Exercices : Angles et paralleles</h1>
+<p class="cours-sous-titre">Version professeur (avec corriges)</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1 (1 pts)</h3>
-<p>Deux droites paralleles sont coupees par une secante. Un angle alterne-interne mesure $55$°. Combien mesure l'autre ?</p>
+<h3>Exercice 1 (1 pt)</h3>
+<p>Sur la figure, les droites $(d_1)$ et $(d_2)$ sont paralleles, coupees par la secante $(s)$. Un angle alterne-interne mesure $55$°. Combien mesure l'autre ?</p>
+<div class="interactive-box">
+<h4>Figure : angles alternes-internes</h4>
+<canvas id="cv1" width="500" height="260"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+// Droites paralleles
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(30,80);c.lineTo(400,80);c.stroke();
+c.beginPath();c.moveTo(30,200);c.lineTo(400,200);c.stroke();
+// Fleches paralleles
+c.fillStyle='#2a5298';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('(d₁)',405,85);c.fillText('(d₂)',405,205);
+// Secante
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(120,20);c.lineTo(300,250);c.stroke();
+c.fillStyle='#d35400';c.fillText('(s)',305,248);
+// Points d'intersection
+var ix1=160,iy1=80,ix2=250,iy2=200;
+c.fillStyle='#333';c.beginPath();c.arc(ix1,iy1,3,0,2*Math.PI);c.fill();
+c.beginPath();c.arc(ix2,iy2,3,0,2*Math.PI);c.fill();
+// Angle en haut (cote droit en bas) = 55°
+var ang=55*Math.PI/180;
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.arc(ix1,iy1,25,0,Math.atan2(250-20,300-120));c.stroke();
+c.fillStyle='#c0392b';c.font='bold 14px Arial';c.textAlign='left';
+c.fillText('55°',ix1+15,iy1+20);
+// Angle alterne-interne en bas
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(ix2,iy2,25,Math.PI,Math.PI+Math.atan2(250-20,300-120));c.stroke();
+c.fillStyle='#27ae60';c.font='bold 14px Arial';
+c.fillText('55°',ix2-55,iy2-10);
+// Marques paralleles
+c.strokeStyle='#2a5298';c.lineWidth=1.5;
+c.beginPath();c.moveTo(50,75);c.lineTo(58,80);c.lineTo(50,85);c.stroke();
+c.beginPath();c.moveTo(50,195);c.lineTo(58,200);c.lineTo(50,205);c.stroke();
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
 <p>$55$° (les angles alternes-internes sont egaux quand les droites sont paralleles).</p></div>
 
-<h3>Exercice 2 (1 pts)</h3>
-<p>Un angle correspondant mesure $130$°. Combien mesure son angle correspondant de l'autre cote ?</p>
+<h3>Exercice 2 (1 pt)</h3>
+<p>Un angle correspondant mesure $130$°. Combien mesure l'angle correspondant de l'autre cote de la secante ?</p>
+<div class="interactive-box">
+<h4>Figure : angles correspondants</h4>
+<canvas id="cv2" width="500" height="260"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(30,80);c.lineTo(400,80);c.stroke();
+c.beginPath();c.moveTo(30,200);c.lineTo(400,200);c.stroke();
+c.fillStyle='#2a5298';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('(d₁)',405,85);c.fillText('(d₂)',405,205);
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(150,20);c.lineTo(280,250);c.stroke();
+// Angle correspondant en haut a gauche
+var ix1=180,iy1=80;
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.arc(ix1,iy1,25,Math.PI,Math.PI-130*Math.PI/180,true);c.stroke();
+c.fillStyle='#c0392b';c.font='bold 13px Arial';c.textAlign='right';
+c.fillText('130°',ix1-10,iy1-15);
+// Angle correspondant en bas a gauche
+var ix2=240,iy2=200;
+c.strokeStyle='#27ae60';c.lineWidth=2;
+c.beginPath();c.arc(ix2,iy2,25,Math.PI,Math.PI-130*Math.PI/180,true);c.stroke();
+c.fillStyle='#27ae60';c.font='bold 13px Arial';
+c.fillText('130°',ix2-10,iy2-15);
+// Fleches paralleles
+c.strokeStyle='#2a5298';c.lineWidth=1.5;
+c.beginPath();c.moveTo(50,75);c.lineTo(58,80);c.lineTo(50,85);c.stroke();
+c.beginPath();c.moveTo(50,195);c.lineTo(58,200);c.lineTo(50,205);c.stroke();
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$130$° (angles correspondants egaux).</p></div>
+<p>$130$° (angles correspondants egaux entre paralleles).</p></div>
 
 <h3>Exercice 3 (3 pts)</h3>
-<p>Deux droites paralleles sont coupees par une secante. Un angle vaut $72$°. Donner la mesure de tous les angles.</p>
+<p>Deux droites paralleles sont coupees par une secante. Un angle vaut $72$°. Donner la mesure de tous les angles formes.</p>
+<div class="interactive-box">
+<h4>Figure : les 8 angles</h4>
+<canvas id="cv3" width="500" height="280"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(20,90);c.lineTo(420,90);c.stroke();
+c.beginPath();c.moveTo(20,210);c.lineTo(420,210);c.stroke();
+c.strokeStyle='#888';c.lineWidth=1.5;
+c.beginPath();c.moveTo(130,15);c.lineTo(310,270);c.stroke();
+var pts=[[175,90],[265,210]];
+var labels=[['72°','108°','108°','72°'],['72°','108°','108°','72°']];
+var colors=[['#c0392b','#2a5298','#2a5298','#c0392b'],['#c0392b','#2a5298','#2a5298','#c0392b']];
+c.font='11px Arial';c.textAlign='center';
+// Labels autour du point 1
+c.fillStyle='#c0392b';c.fillText('72°',pts[0][0]+30,pts[0][1]-10);
+c.fillStyle='#2a5298';c.fillText('108°',pts[0][0]-35,pts[0][1]-10);
+c.fillStyle='#2a5298';c.fillText('108°',pts[0][0]+35,pts[0][1]+18);
+c.fillStyle='#c0392b';c.fillText('72°',pts[0][0]-30,pts[0][1]+18);
+// Labels autour du point 2
+c.fillStyle='#c0392b';c.fillText('72°',pts[1][0]+30,pts[1][1]-10);
+c.fillStyle='#2a5298';c.fillText('108°',pts[1][0]-35,pts[1][1]-10);
+c.fillStyle='#2a5298';c.fillText('108°',pts[1][0]+35,pts[1][1]+18);
+c.fillStyle='#c0392b';c.fillText('72°',pts[1][0]-30,pts[1][1]+18);
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='left';
+c.fillText('(d₁) // (d₂)',430,150);
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$72$°, $72$°, $108$°, $108$° (2 paires d'angles alternes-internes, 2 paires de supplementaires).</p></div>
+<p>4 angles de $72$° et 4 angles de $108$° ($180-72=108$). Alternes-internes egaux, correspondants egaux, supplementaires sur une droite.</p></div>
 
 <h3>Exercice 4 (2 pts)</h3>
 <p>On sait que $\widehat{A}=65$° et $\widehat{B}=65$°. Ces angles sont alternes-internes. Les droites sont-elles paralleles ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>Oui, car les angles alternes-internes sont egaux.</p></div>
+<p>Oui, les angles alternes-internes sont egaux ($65$° = $65$°), donc les droites sont paralleles (reciproque).</p></div>
 
 <h3>Exercice 5 (2 pts)</h3>
-<p>$\widehat{A}=48$° et $\widehat{B}=132$°. Ce sont des angles co-interieurs. Les droites sont-elles paralleles ?</p>
+<p>$\widehat{A}=48$° et $\widehat{B}=132$° sont des angles co-interieurs. Les droites sont-elles paralleles ?</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$48+132=180$°. Oui, les droites sont paralleles (angles co-interieurs supplementaires).</p></div>
+<p>$48 + 132 = 180$°. Oui, les droites sont paralleles (angles co-interieurs supplementaires).</p></div>
 
 <h3>Exercice 6 (3 pts)</h3>
-<p>Une secante coupe deux paralleles. Un angle mesure $3x+10$ et son alterne-interne $5x-20$. Trouver $x$.</p>
+<p>Une secante coupe deux paralleles. Un angle mesure $3x+10$ et son alterne-interne mesure $5x-20$. Trouver $x$ et la mesure des angles.</p>
+<div class="interactive-box">
+<h4>Figure : equation avec angles alternes-internes</h4>
+<canvas id="cv6" width="500" height="260"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.moveTo(30,80);c.lineTo(400,80);c.stroke();
+c.beginPath();c.moveTo(30,200);c.lineTo(400,200);c.stroke();
+c.strokeStyle='#d35400';c.lineWidth=2;
+c.beginPath();c.moveTo(120,20);c.lineTo(300,250);c.stroke();
+// Labels
+c.fillStyle='#c0392b';c.font='bold 14px Arial';c.textAlign='left';
+c.fillText('3x + 10',175,100);
+c.fillStyle='#27ae60';c.fillText('5x - 20',200,195);
+// Resolution
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('Alternes-internes egaux :',320,50);
+c.fillText('3x + 10 = 5x - 20',320,72);
+c.fillText('30 = 2x',320,94);
+c.fillText('x = 15',320,116);
+c.fillText('Angle = 3(15)+10 = 55°',320,142);
+// Fleches paralleles
+c.strokeStyle='#2a5298';c.lineWidth=1.5;
+c.beginPath();c.moveTo(50,75);c.lineTo(58,80);c.lineTo(50,85);c.stroke();
+c.beginPath();c.moveTo(50,195);c.lineTo(58,200);c.lineTo(50,205);c.stroke();
+})();
+</script>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
 <p>$3x+10=5x-20$, $30=2x$, $x=15$. Les angles mesurent $55$°.</p></div>
 
 <h3>Exercice 7 (2 pts)</h3>
-<p>Dans la figure, $(d_1)//(d_2)$. $\widehat{A}=110$°. Calculer $\widehat{B}$ (correspondant) et $\widehat{C}$ (supplementaire de B).</p>
+<p>$(d_1) // (d_2)$. $\widehat{A}=110$°. Calculer $\widehat{B}$ (correspondant) et $\widehat{C}$ (supplementaire de $\widehat{B}$).</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
 <p>$\widehat{B}=110$° (correspondant). $\widehat{C}=180-110=70$°.</p></div>
 
 <h3>Exercice 8 (2 pts)</h3>
 <p>Justifier que deux droites ne sont pas paralleles si les angles alternes-internes mesurent $60$° et $65$°.</p>
 <div class="exemple"><div class="encadre-titre">Corrige</div>
-<p>$60\neq 65$, les angles alternes-internes ne sont pas egaux, donc les droites ne sont pas paralleles.</p></div>
+<p>$60 \neq 65$, les angles alternes-internes ne sont pas egaux, donc les droites ne sont pas paralleles.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>
