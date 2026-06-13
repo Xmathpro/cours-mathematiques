@@ -2,51 +2,110 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Eleve 11 . 5eme</title>
+<title>Exercices Eleve 11 : Triangles . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.reponse{border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 11</span></div>
 <h1 class="cours-titre-principal">Exercices : Triangles</h1>
+<p class="cours-sous-titre">Bareme indicatif : /15 points</p>
 </div></div>
 <main class="cours-corps">
-<p style="text-align:right;font-style:italic">Bareme indicatif : 15 points</p>
 
-<h3>Exercice 1 (1 pts)</h3>
-<p>Dans un triangle, deux angles mesurent $45$° et $85$°. Calculer le troisieme.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Exercice 1 (1 pt)</h3>
+<p>Calculer le troisieme angle du triangle.</p>
+<div class="interactive-box">
+<canvas id="cv1" width="350" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var ax=40,ay=180,bx=300,by=180,cx2=180,cy2=30;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-12,ay+15);c.fillText('B',bx+12,by+15);c.fillText('C',cx2,cy2-10);
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.fillText('45°',ax+35,ay-10);
+c.fillStyle='#27ae60';c.fillText('85°',bx-35,by-10);
+c.fillStyle='#c0392b';c.font='bold 16px Arial';c.fillText('?',cx2+5,cy2+30);
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 2 (1 pts)</h3>
+<h3>Exercice 2 (1 pt)</h3>
 <p>Un triangle a ses trois angles egaux. Combien mesure chaque angle ?</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 3 (2 pts)</h3>
-<p>Peut-on construire un triangle de cotes $3$ cm, $5$ cm et $9$ cm ? Justifier.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Peut-on construire un triangle de cotes $3$ cm, $5$ cm et $9$ cm ?</p>
+<div class="interactive-box">
+<canvas id="cv3" width="450" height="80"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var sc=28;
+c.strokeStyle='#c0392b';c.lineWidth=4;
+c.beginPath();c.moveTo(40,30);c.lineTo(40+3*sc,30);c.stroke();
+c.fillStyle='#c0392b';c.font='12px Arial';c.textAlign='center';c.fillText('3 cm',40+1.5*sc,22);
+c.strokeStyle='#2a5298';c.lineWidth=4;
+c.beginPath();c.moveTo(40+3*sc+8,30);c.lineTo(40+3*sc+8+5*sc,30);c.stroke();
+c.fillStyle='#2a5298';c.fillText('5 cm',40+3*sc+8+2.5*sc,22);
+c.strokeStyle='#27ae60';c.lineWidth=4;
+c.beginPath();c.moveTo(40,60);c.lineTo(40+9*sc,60);c.stroke();
+c.fillStyle='#27ae60';c.fillText('9 cm',40+4.5*sc,55);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 4 (2 pts)</h3>
 <p>Peut-on construire un triangle de cotes $4$ cm, $6$ cm et $8$ cm ? Justifier.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 5 (2 pts)</h3>
-<p>Un triangle isocele a un angle de $40$° au sommet. Calculer les deux autres.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Triangle isocele, angle au sommet $40$°. Angles de la base ?</p>
+<div class="interactive-box">
+<canvas id="cv5" width="250" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv5').getContext('2d');
+var sx=125,sy=15,ax=40,ay=165,bx=210,by=165;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(sx,sy);c.lineTo(ax,ay);c.lineTo(bx,by);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo((sx+ax)/2-3,(sy+ay)/2-5);c.lineTo((sx+ax)/2+3,(sy+ay)/2+5);c.stroke();
+c.beginPath();c.moveTo((sx+bx)/2-3,(sy+by)/2-5);c.lineTo((sx+bx)/2+3,(sy+by)/2+5);c.stroke();
+c.fillStyle='#d35400';c.font='bold 12px Arial';c.textAlign='center';
+c.fillText('40°',sx,sy+28);
+c.fillStyle='#27ae60';c.font='bold 14px Arial';c.fillText('?',ax+18,ay-8);c.fillText('?',bx-18,by-8);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 6 (2 pts)</h3>
-<p>Un triangle rectangle a un angle de $35$°. Calculer le troisieme angle.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Triangle rectangle avec un angle de $35$°. Troisieme angle ?</p>
+<div class="reponse"></div>
 
 <h3>Exercice 7 (2 pts)</h3>
-<p>Construire un triangle $ABC$ tel que $AB=6$ cm, $\widehat{A}=50$° et $\widehat{B}=70$°. Quelle est la mesure de $\widehat{C}$ ?</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Construire $ABC$ : $AB=6$ cm, $\widehat{A}=50$°, $\widehat{B}=70$°. Mesurer $\widehat{C}$.</p>
+<div class="reponse"></div>
 
 <h3>Exercice 8 (3 pts)</h3>
-<p>Trois longueurs sont donnees : $a$, $a$ et $2a$. Peut-on construire un triangle ? Justifier.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Cotes $a$, $a$ et $2a$. Peut-on construire un triangle ? Justifier.</p>
+<div class="reponse"></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

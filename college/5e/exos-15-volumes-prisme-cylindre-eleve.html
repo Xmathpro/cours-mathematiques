@@ -2,51 +2,99 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Eleve 15 . 5eme</title>
+<title>Exercices Eleve 15 : Volumes . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.reponse{border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Exercices Lecon 15</span></div>
-<h1 class="cours-titre-principal">Exercices : Volumes : prisme droit et cylindre</h1>
+<h1 class="cours-titre-principal">Exercices : Volumes</h1>
+<p class="cours-sous-titre">Bareme indicatif : /17 points</p>
 </div></div>
 <main class="cours-corps">
-<p style="text-align:right;font-style:italic">Bareme indicatif : 17 points</p>
 
-<h3>Exercice 1 (1 pts)</h3>
-<p>Calculer le volume d'un pave droit de dimensions $5$ cm, $3$ cm et $8$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Exercice 1 (1 pt)</h3>
+<p>Volume du pave droit ci-dessous.</p>
+<div class="interactive-box">
+<canvas id="cv1" width="300" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var x0=60,y0=170,w=110,h=90,d=35;
+c.fillStyle='rgba(42,82,152,0.08)';c.fillRect(x0,y0-h,w,h);
+c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(x0,y0-h,w,h);
+c.fillStyle='rgba(42,82,152,0.04)';
+c.beginPath();c.moveTo(x0+w,y0);c.lineTo(x0+w+d,y0-d*0.6);c.lineTo(x0+w+d,y0-h-d*0.6);c.lineTo(x0+w,y0-h);c.closePath();c.fill();c.stroke();
+c.fillStyle='rgba(42,82,152,0.12)';
+c.beginPath();c.moveTo(x0,y0-h);c.lineTo(x0+d,y0-h-d*0.6);c.lineTo(x0+w+d,y0-h-d*0.6);c.lineTo(x0+w,y0-h);c.closePath();c.fill();c.stroke();
+c.fillStyle='#c0392b';c.font='bold 11px Arial';c.textAlign='center';
+c.fillText('5 cm',x0+w/2,y0+15);
+c.save();c.translate(x0-12,y0-h/2);c.rotate(-Math.PI/2);c.fillText('8 cm',0,0);c.restore();
+c.fillText('3 cm',x0+w+d/2+5,y0-d*0.3+8);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 2 (2 pts)</h3>
-<p>Calculer le volume d'un prisme droit a base triangulaire : base $6$ cm, hauteur du triangle $4$ cm, hauteur du prisme $10$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Volume du prisme a base triangulaire ($b=6$, $h_{tri}=4$, $h=10$ cm).</p>
+<div class="reponse"></div>
 
 <h3>Exercice 3 (2 pts)</h3>
-<p>Calculer le volume d'un cylindre de rayon $3$ cm et de hauteur $10$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Volume du cylindre ($r=3$ cm, $h=10$ cm).</p>
+<div class="interactive-box">
+<canvas id="cv3" width="250" height="210"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx0=90,cy0=190,r=40,h=130,ey=r*0.3;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(cx0-r,cy0);c.lineTo(cx0-r,cy0-h);
+c.ellipse(cx0,cy0-h,r,ey,0,Math.PI,0);
+c.lineTo(cx0+r,cy0);c.ellipse(cx0,cy0,r,ey,0,0,Math.PI);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#aaa';c.setLineDash([3,3]);c.lineWidth=1;
+c.beginPath();c.ellipse(cx0,cy0,r,ey,0,Math.PI,2*Math.PI);c.stroke();c.setLineDash([]);
+c.fillStyle='rgba(42,82,152,0.1)';
+c.beginPath();c.ellipse(cx0,cy0-h,r,ey,0,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(cx0,cy0-h);c.lineTo(cx0+r,cy0-h);c.stroke();
+c.fillStyle='#c0392b';c.font='bold 11px Arial';c.textAlign='center';c.fillText('r=3',cx0+r/2,cy0-h-10);
+c.fillStyle='#d35400';c.fillText('h=10',cx0+r+20,cy0-h/2);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 4 (2 pts)</h3>
 <p>Convertir : a) $3$ dm$^3$ en cm$^3$ b) $5\,000$ cm$^3$ en L.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 5 (3 pts)</h3>
-<p>Un aquarium cylindrique a un rayon de $15$ cm et une hauteur de $40$ cm. Calculer son volume en litres.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Aquarium cylindrique : $r=15$ cm, $h=40$ cm. Volume en litres.</p>
+<div class="reponse"></div>
 
 <h3>Exercice 6 (2 pts)</h3>
-<p>Un prisme droit a une base carree de cote $4$ cm et une hauteur de $9$ cm. Calculer son volume.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Prisme a base carree ($c=4$ cm, $h=9$ cm). Volume.</p>
+<div class="reponse"></div>
 
 <h3>Exercice 7 (3 pts)</h3>
-<p>Combien de litres d'eau contient un recipient cylindrique de diametre $20$ cm et de hauteur $30$ cm ?</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Recipient cylindrique : diametre $20$ cm, hauteur $30$ cm. Volume en cl.</p>
+<div class="reponse"></div>
 
 <h3>Exercice 8 (2 pts)</h3>
-<p>Un pave droit a un volume de $180$ cm$^3$. Sa base fait $6$ cm sur $5$ cm. Calculer sa hauteur.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Pave droit de volume $180$ cm$^3$, base $6\times5$ cm. Hauteur ?</p>
+<div class="reponse"></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

@@ -2,51 +2,129 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercices Eleve 14 . 5eme</title>
+<title>Exercices Eleve 14 : Aires . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.reponse{border:1px dashed #ccc;min-height:50px;margin:.5rem 0;padding:.5rem}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Exercices Lecon 14</span></div>
 <h1 class="cours-titre-principal">Exercices : Aires avancees</h1>
+<p class="cours-sous-titre">Bareme indicatif : /16 points</p>
 </div></div>
 <main class="cours-corps">
-<p style="text-align:right;font-style:italic">Bareme indicatif : 16 points</p>
 
 <h3>Exercice 1 (2 pts)</h3>
-<p>Calculer l'aire d'un disque de rayon $r=6$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Calculer l'aire du disque ($r=6$ cm).</p>
+<div class="interactive-box">
+<canvas id="cv1" width="250" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+c.fillStyle='rgba(42,82,152,0.1)';c.beginPath();c.arc(100,90,65,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(100,90);c.lineTo(165,90);c.stroke();
+c.fillStyle='#c0392b';c.font='bold 12px Arial';c.textAlign='center';c.fillText('r = 6 cm',132,82);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 2 (2 pts)</h3>
-<p>Calculer le perimetre d'un cercle de rayon $r=5$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Perimetre d'un cercle de rayon $r=5$ cm.</p>
+<div class="reponse"></div>
 
 <h3>Exercice 3 (2 pts)</h3>
-<p>Un demi-disque a un diametre de $10$ cm. Calculer son aire.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Aire du demi-disque (diametre $10$ cm).</p>
+<div class="interactive-box">
+<canvas id="cv3" width="250" height="120"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+c.fillStyle='rgba(211,84,0,0.1)';
+c.beginPath();c.arc(100,95,65,Math.PI,0);c.closePath();c.fill();
+c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+c.fillStyle='#c0392b';c.font='12px Arial';c.textAlign='center';c.fillText('d = 10 cm',100,110);
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 4 (3 pts)</h3>
-<p>Un terrain rectangulaire mesure $20$ m sur $15$ m. A un bout, on ajoute un demi-disque de diametre $15$ m. Calculer l'aire totale.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Aire du terrain : rectangle $20\times15$ m + demi-disque diametre $15$ m.</p>
+<div class="interactive-box">
+<canvas id="cv4" width="400" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var x0=50,y0=30,w=180,h=120,r=h/2;
+c.fillStyle='rgba(42,82,152,0.08)';c.fillRect(x0,y0,w,h);
+c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(x0,y0,w,h);
+c.fillStyle='rgba(211,84,0,0.1)';
+c.beginPath();c.arc(x0+w,y0+r,r,-Math.PI/2,Math.PI/2);c.closePath();c.fill();
+c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='center';
+c.fillText('20 m',x0+w/2,y0+h+18);
+c.save();c.translate(x0-12,y0+h/2);c.rotate(-Math.PI/2);c.fillText('15 m',0,0);c.restore();
+})();
+</script>
+<div class="reponse"></div>
 
 <h3>Exercice 5 (2 pts)</h3>
 <p>Convertir : a) $2$ m$^2$ en cm$^2$ b) $50\,000$ cm$^2$ en m$^2$.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<div class="reponse"></div>
 
 <h3>Exercice 6 (3 pts)</h3>
-<p>Une piste circulaire a un rayon interieur de $30$ m et un rayon exterieur de $35$ m. Calculer l'aire de la piste.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<p>Aire de la couronne : rayon interieur $30$ m, exterieur $35$ m.</p>
+<div class="interactive-box">
+<canvas id="cv6" width="250" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+c.fillStyle='rgba(42,82,152,0.12)';c.beginPath();c.arc(110,90,65,0,2*Math.PI);c.fill();
+c.fillStyle='#fff';c.beginPath();c.arc(110,90,45,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.beginPath();c.arc(110,90,65,0,2*Math.PI);c.stroke();
+c.strokeStyle='#d35400';c.beginPath();c.arc(110,90,45,0,2*Math.PI);c.stroke();
+c.fillStyle='#2a5298';c.font='11px Arial';c.textAlign='center';c.fillText('R=35',155,85);
+c.fillStyle='#d35400';c.fillText('r=30',135,100);
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 7 (1 pts)</h3>
-<p>Calculer l'aire d'un triangle de base $b=9$ cm et de hauteur $h=6$ cm.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Exercice 7 (1 pt)</h3>
+<p>Aire d'un triangle ($b=9$ cm, $h=6$ cm).</p>
+<div class="interactive-box">
+<canvas id="cv7" width="280" height="150"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv7').getContext('2d');
+c.fillStyle='rgba(39,174,96,0.08)';
+c.beginPath();c.moveTo(30,130);c.lineTo(200,130);c.lineTo(120,20);c.closePath();c.fill();
+c.strokeStyle='#27ae60';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(120,20);c.lineTo(120,130);c.stroke();c.setLineDash([]);
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='center';
+c.fillText('b = 9 cm',115,148);
+c.fillStyle='#c0392b';c.fillText('h = 6',132,78);
+})();
+</script>
+<div class="reponse"></div>
 
-<h3>Exercice 8 (1 pts)</h3>
-<p>Un parallelogramme a une base de $12$ cm et une hauteur de $7$ cm. Calculer son aire.</p>
-<div style="border:1px dashed #ccc;min-height:60px;margin:.5rem 0;padding:.5rem"></div>
+<h3>Exercice 8 (1 pt)</h3>
+<p>Aire d'un parallelogramme ($b=12$ cm, $h=7$ cm).</p>
+<div class="reponse"></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>
