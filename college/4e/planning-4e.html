@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning annuel 4eme . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.planning{max-width:1000px;margin:2rem auto;font-family:Arial,sans-serif}
+.trimestre{margin-bottom:2rem}
+.trimestre-titre{background:#2a5298;color:#fff;padding:10px 16px;border-radius:6px 6px 0 0;font-size:1.1rem;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.trimestre-titre:hover{background:#1e3d7a}
+.trimestre-titre .arrow{transition:transform .3s}
+.trimestre-titre.open .arrow{transform:rotate(180deg)}
+.sem-grid{display:none;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 6px 6px}
+.sem-grid.visible{display:block}
+.sem{display:grid;grid-template-columns:60px 1fr 140px 120px;border-bottom:1px solid #eee;align-items:center}
+.sem:last-child{border-bottom:none}
+.sem:hover{background:#f5f8ff}
+.sem-num{padding:10px;font-weight:bold;color:#2a5298;text-align:center;font-size:.9rem}
+.sem-contenu{padding:10px}
+.sem-lecon{font-weight:600;color:#333;font-size:.9rem}
+.sem-detail{font-size:.8rem;color:#777;margin-top:2px}
+.sem-domaine{padding:10px;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.sem-eval{padding:10px;text-align:center}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:bold;margin:1px}
+.badge-ic{background:#f39c12;color:#fff}
+.badge-ds{background:#e74c3c;color:#fff}
+.badge-dm{background:#27ae60;color:#fff}
+.badge-bilan{background:#8e44ad;color:#fff}
+.badge-tp{background:#3498db;color:#fff}
+.dom-nombres{color:#2a5298}
+.dom-grandeurs{color:#e67e22}
+.dom-geometrie{color:#27ae60}
+.dom-donnees{color:#8e44ad}
+.dom-espace{color:#c0392b}
+.dom-algo{color:#16a085}
+.legende{display:flex;gap:12px;flex-wrap:wrap;margin:1rem 0;font-size:.8rem;align-items:center}
+.vacances{background:#fff3e0;font-style:italic}
+.vacances .sem-contenu{color:#e67e22}
+.resume{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:1.5rem 0}
+.resume-box{background:#f9f9f9;border:1px solid #e0e0e0;border-radius:6px;padding:12px;text-align:center}
+.resume-box .nb{font-size:1.8rem;font-weight:bold;color:#2a5298}
+.resume-box .label{font-size:.8rem;color:#666;margin-top:4px}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Organisation</span><span>Annee</span></div>
+<h1 class="cours-titre-principal">Planning annuel de 4eme</h1>
+<p class="cours-sous-titre">Programme BO 2015 . 36 semaines . 19 lecons . 3,5 h/semaine</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="planning">
+
+<div class="resume">
+<div class="resume-box"><div class="nb">19</div><div class="label">Lecons</div></div>
+<div class="resume-box"><div class="nb">12</div><div class="label">IC</div></div>
+<div class="resume-box"><div class="nb">6</div><div class="label">DS</div></div>
+<div class="resume-box"><div class="nb">8</div><div class="label">DM</div></div>
+<div class="resume-box"><div class="nb">4</div><div class="label">TP</div></div>
+<div class="resume-box"><div class="nb">3</div><div class="label">Bilans</div></div>
+</div>
+
+<div class="legende">
+<span>Legende :</span>
+<span class="badge badge-ic">IC</span>
+<span class="badge badge-ds">DS</span>
+<span class="badge badge-dm">DM</span>
+<span class="badge badge-bilan">Bilan</span>
+<span class="badge badge-tp">TP</span>
+</div>
+
+<!-- TRIMESTRE 1 -->
+<div class="trimestre">
+<div class="trimestre-titre open" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('visible')">
+Trimestre 1 : Nombres et calculs (semaines 1 a 12)
+<span class="arrow">&#9660;</span>
+</div>
+<div class="sem-grid visible">
+
+<div class="sem"><div class="sem-num">S1</div><div class="sem-contenu"><div class="sem-lecon">01. Multiplication de relatifs</div><div class="sem-detail">Regle des signes, produit de plusieurs relatifs</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-dm">DM 1</span></div></div>
+
+<div class="sem"><div class="sem-num">S2</div><div class="sem-contenu"><div class="sem-lecon">02. Multiplication de fractions</div><div class="sem-detail">Produit, simplification, entier x fraction</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-ic">IC 1</span></div></div>
+
+<div class="sem"><div class="sem-num">S3</div><div class="sem-contenu"><div class="sem-lecon">03. Division de fractions</div><div class="sem-detail">Inverse, diviser = multiplier par l'inverse</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S4</div><div class="sem-contenu"><div class="sem-lecon">04. Puissances</div><div class="sem-detail">Puissances entieres, regles de calcul, puissances de 10</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-ic">IC 2</span> <span class="badge badge-ds">DS 1</span></div></div>
+
+<div class="sem"><div class="sem-num">S5</div><div class="sem-contenu"><div class="sem-lecon">05. Notation scientifique</div><div class="sem-detail">Ecriture scientifique, ordres de grandeur</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-dm">DM 2</span></div></div>
+
+<div class="sem"><div class="sem-num">S6</div><div class="sem-contenu"><div class="sem-lecon">06. Developper</div><div class="sem-detail">Simple et double distributivite, reduire</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-ic">IC 3</span></div></div>
+
+<div class="sem"><div class="sem-num">S7</div><div class="sem-contenu"><div class="sem-lecon">07. Factoriser</div><div class="sem-detail">Facteur commun, factorisation</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-dm">DM 3</span></div></div>
+
+<div class="sem vacances"><div class="sem-num"></div><div class="sem-contenu">Vacances de Toussaint</div><div class="sem-domaine"></div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S8</div><div class="sem-contenu"><div class="sem-lecon">Revision lecons 01-07</div><div class="sem-detail">Exercices de synthese nombres et calcul litteral</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-ic">IC 4</span> <span class="badge badge-ds">DS 2</span></div></div>
+
+<div class="sem"><div class="sem-num">S9</div><div class="sem-contenu"><div class="sem-lecon">08. Equations du premier degre</div><div class="sem-detail">Resolution, x dans les deux membres, mise en equation</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S10</div><div class="sem-contenu"><div class="sem-lecon">09. Proportionnalite et pourcentages</div><div class="sem-detail">Augmentation, reduction, coefficient multiplicateur</div></div><div class="sem-domaine dom-nombres">Nombres</div><div class="sem-eval"><span class="badge badge-ic">IC 5</span> <span class="badge badge-dm">DM 4</span></div></div>
+
+<div class="sem"><div class="sem-num">S11</div><div class="sem-contenu"><div class="sem-lecon">10. Vitesse</div><div class="sem-detail">v=d/t, conversions km/h et m/s</div></div><div class="sem-domaine dom-grandeurs">Grandeurs</div><div class="sem-eval"><span class="badge badge-ds">DS 3</span></div></div>
+
+<div class="sem"><div class="sem-num">S12</div><div class="sem-contenu"><div class="sem-lecon">Bilan du trimestre 1</div><div class="sem-detail">Revision et evaluation sommative lecons 01-10</div></div><div class="sem-domaine"></div><div class="sem-eval"><span class="badge badge-bilan">Bilan 1</span></div></div>
+
+</div></div>
+
+<!-- TRIMESTRE 2 -->
+<div class="trimestre">
+<div class="trimestre-titre" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('visible')">
+Trimestre 2 : Geometrie (semaines 13 a 24)
+<span class="arrow">&#9660;</span>
+</div>
+<div class="sem-grid">
+
+<div class="sem"><div class="sem-num">S13</div><div class="sem-contenu"><div class="sem-lecon">11. Pythagore (direct)</div><div class="sem-detail">Calculer l'hypotenuse ou un cote de l'angle droit</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-dm">DM 5</span></div></div>
+
+<div class="sem"><div class="sem-num">S14</div><div class="sem-contenu"><div class="sem-lecon">11. Pythagore (suite) + TP 1</div><div class="sem-detail">Exercices d'application + TP GeoGebra</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-ic">IC 6</span> <span class="badge badge-tp">TP 1</span></div></div>
+
+<div class="sem"><div class="sem-num">S15</div><div class="sem-contenu"><div class="sem-lecon">12. Pythagore (reciproque)</div><div class="sem-detail">Demontrer qu'un triangle est rectangle</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-ic">IC 7</span></div></div>
+
+<div class="sem"><div class="sem-num">S16</div><div class="sem-contenu"><div class="sem-lecon">13. Translation</div><div class="sem-detail">Vecteur, image d'un point, proprietes</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-dm">DM 6</span></div></div>
+
+<div class="sem vacances"><div class="sem-num"></div><div class="sem-contenu">Vacances de Noel</div><div class="sem-domaine"></div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S17</div><div class="sem-contenu"><div class="sem-lecon">13. Translation (suite)</div><div class="sem-detail">Image d'une figure, compositions</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S18</div><div class="sem-contenu"><div class="sem-lecon">14. Rotation</div><div class="sem-detail">Centre, angle, sens, proprietes</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-ic">IC 8</span> <span class="badge badge-ds">DS 4</span></div></div>
+
+<div class="sem"><div class="sem-num">S19</div><div class="sem-contenu"><div class="sem-lecon">TP 4 : GeoGebra transformations</div><div class="sem-detail">Translation et rotation sur GeoGebra</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-tp">TP 4</span></div></div>
+
+<div class="sem"><div class="sem-num">S20</div><div class="sem-contenu"><div class="sem-lecon">15. Droites remarquables</div><div class="sem-detail">Mediatrices, hauteurs, medianes, bissectrices</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-dm">DM 7</span></div></div>
+
+<div class="sem"><div class="sem-num">S21</div><div class="sem-contenu"><div class="sem-lecon">15. Droites remarquables (suite)</div><div class="sem-detail">Points remarquables, constructions</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-ic">IC 9</span></div></div>
+
+<div class="sem vacances"><div class="sem-num"></div><div class="sem-contenu">Vacances de fevrier</div><div class="sem-domaine"></div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S22</div><div class="sem-contenu"><div class="sem-lecon">Revision lecons 11-15</div><div class="sem-detail">Exercices de synthese geometrie</div></div><div class="sem-domaine dom-geometrie">Geometrie</div><div class="sem-eval"><span class="badge badge-ds">DS 5</span></div></div>
+
+<div class="sem"><div class="sem-num">S23-24</div><div class="sem-contenu"><div class="sem-lecon">Bilan du trimestre 2</div><div class="sem-detail">Revision et evaluation sommative</div></div><div class="sem-domaine"></div><div class="sem-eval"><span class="badge badge-bilan">Bilan 2</span></div></div>
+
+</div></div>
+
+<!-- TRIMESTRE 3 -->
+<div class="trimestre">
+<div class="trimestre-titre" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('visible')">
+Trimestre 3 : Donnees, espace et algorithmique (semaines 25 a 36)
+<span class="arrow">&#9660;</span>
+</div>
+<div class="sem-grid">
+
+<div class="sem"><div class="sem-num">S25</div><div class="sem-contenu"><div class="sem-lecon">16. Statistiques : mediane</div><div class="sem-detail">Mediane, quartiles, ecart interquartile</div></div><div class="sem-domaine dom-donnees">Donnees</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S26</div><div class="sem-contenu"><div class="sem-lecon">TP 2 : Tableur et statistiques</div><div class="sem-detail">Mediane et quartiles sur tableur</div></div><div class="sem-domaine dom-donnees">Donnees</div><div class="sem-eval"><span class="badge badge-ic">IC 10</span> <span class="badge badge-tp">TP 2</span></div></div>
+
+<div class="sem"><div class="sem-num">S27</div><div class="sem-contenu"><div class="sem-lecon">17. Probabilites</div><div class="sem-detail">Experience aleatoire, equiprobabilite</div></div><div class="sem-domaine dom-donnees">Donnees</div><div class="sem-eval"><span class="badge badge-dm">DM 8</span></div></div>
+
+<div class="sem"><div class="sem-num">S28</div><div class="sem-contenu"><div class="sem-lecon">17. Probabilites (suite)</div><div class="sem-detail">Calculs, arbres, problemes</div></div><div class="sem-domaine dom-donnees">Donnees</div><div class="sem-eval"><span class="badge badge-ic">IC 11</span></div></div>
+
+<div class="sem vacances"><div class="sem-num"></div><div class="sem-contenu">Vacances de printemps</div><div class="sem-domaine"></div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S29</div><div class="sem-contenu"><div class="sem-lecon">18. Pyramide et cone</div><div class="sem-detail">Description, patrons</div></div><div class="sem-domaine dom-espace">Espace</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S30</div><div class="sem-contenu"><div class="sem-lecon">18. Pyramide et cone (suite)</div><div class="sem-detail">Volumes, problemes</div></div><div class="sem-domaine dom-espace">Espace</div><div class="sem-eval"><span class="badge badge-ds">DS 6</span></div></div>
+
+<div class="sem"><div class="sem-num">S31</div><div class="sem-contenu"><div class="sem-lecon">19. Scratch : boucles et conditions</div><div class="sem-detail">Repeter, repeter jusqu'a, si/sinon</div></div><div class="sem-domaine dom-algo">Algo</div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S32</div><div class="sem-contenu"><div class="sem-lecon">TP 3 : Scratch et polygones</div><div class="sem-detail">Polygones reguliers en Scratch</div></div><div class="sem-domaine dom-algo">Algo</div><div class="sem-eval"><span class="badge badge-ic">IC 12</span> <span class="badge badge-tp">TP 3</span></div></div>
+
+<div class="sem"><div class="sem-num">S33-34</div><div class="sem-contenu"><div class="sem-lecon">Revision generale</div><div class="sem-detail">Exercices de synthese tous domaines</div></div><div class="sem-domaine"></div><div class="sem-eval"></div></div>
+
+<div class="sem"><div class="sem-num">S35-36</div><div class="sem-contenu"><div class="sem-lecon">Bilan du trimestre 3</div><div class="sem-detail">Evaluation sommative finale</div></div><div class="sem-domaine"></div><div class="sem-eval"><span class="badge badge-bilan">Bilan 3</span></div></div>
+
+</div></div>
+
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

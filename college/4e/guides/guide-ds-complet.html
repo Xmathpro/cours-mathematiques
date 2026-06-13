@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide de revision DS . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.guide-section{background:#fff;border:1px solid #e0e0e0;border-radius:6px;margin:1.5rem 0;overflow:hidden}
+.guide-titre{background:#e74c3c;color:#fff;padding:10px 16px;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.guide-titre:hover{background:#c0392b}
+.guide-corps{padding:16px;display:none}
+.guide-corps.visible{display:block}
+.guide-lecon{margin-bottom:1rem}
+.guide-lecon h3{color:#2a5298;font-size:.95rem;margin-bottom:6px}
+.guide-lecon p{font-size:.88rem;color:#444;line-height:1.6;margin-bottom:4px}
+.guide-type{display:inline-block;background:#fef3e7;padding:4px 10px;border-radius:4px;font-size:.82rem;font-family:monospace;margin:6px 0;border:1px solid #f0d9b5}
+.guide-conseil{background:#eaf7ea;border-left:3px solid #27ae60;padding:8px 12px;margin-top:10px;font-size:.85rem;border-radius:0 4px 4px 0}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Guides de revision</span><span>DS</span></div>
+<h1 class="cours-titre-principal">Guides de revision : devoirs surveilles</h1>
+<p class="cours-sous-titre">6 DS . Cliquer sur chaque DS pour voir le guide</p>
+</div></div>
+
+<main class="cours-corps">
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 1 : Relatifs et fractions (lecons 01, 02, 03) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 01 : Multiplication de relatifs</h3>
+<p>Connaitre la regle des signes : meme signe = positif, signes contraires = negatif. Determiner le signe d'un produit de plusieurs facteurs (compter les negatifs : pair = +, impair = -).</p>
+<div class="guide-type">Exercice type : $(-4) \times 3 \times (-2) \times (-5) = -120$ (3 negatifs, impair).</div></div>
+<div class="guide-lecon"><h3>Lecon 02 : Multiplication de fractions</h3>
+<p>Numerateurs entre eux, denominateurs entre eux. Simplifier avant de multiplier ("en croix"). Entier x fraction : $n \times \dfrac{a}{b} = \dfrac{na}{b}$.</p>
+<div class="guide-type">Exercice type : $\dfrac{4}{9} \times \dfrac{3}{8} = \dfrac{1}{6}$ (simplifier 4 et 8 par 4, puis 3 et 9 par 3).</div></div>
+<div class="guide-lecon"><h3>Lecon 03 : Division de fractions</h3>
+<p>Inverse de $\dfrac{a}{b}$ : c'est $\dfrac{b}{a}$. Diviser = multiplier par l'inverse.</p>
+<div class="guide-type">Exercice type : $\dfrac{3}{5} \div \dfrac{2}{7} = \dfrac{3}{5} \times \dfrac{7}{2} = \dfrac{21}{10}$.</div></div>
+<div class="guide-conseil">Toujours verifier le signe. Simplifier les fractions au maximum. Montrer les etapes.</div>
+</div></div>
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 2 : Puissances et calcul litteral (lecons 04, 05, 06, 07) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 04 : Puissances</h3>
+<p>$a^n = a \times \cdots \times a$. Conventions : $a^0 = 1$, $a^1 = a$. Attention : $(-3)^2 = 9$ mais $-3^2 = -9$. Regles : $a^m \times a^n = a^{m+n}$, $\dfrac{a^m}{a^n} = a^{m-n}$, $(a^m)^n = a^{mn}$.</p></div>
+<div class="guide-lecon"><h3>Lecon 05 : Notation scientifique</h3>
+<p>Forme $a \times 10^n$ avec $1 \leq a < 10$. Passer de decimal a scientifique et inversement. Ordres de grandeur.</p></div>
+<div class="guide-lecon"><h3>Lecon 06 : Developper</h3>
+<p>$k(a+b) = ka+kb$. $(a+b)(c+d) = ac+ad+bc+bd$. Reduire les termes semblables apres developpement.</p></div>
+<div class="guide-lecon"><h3>Lecon 07 : Factoriser</h3>
+<p>Identifier le facteur commun. $ka+kb = k(a+b)$. Verifier en redeveloppant.</p></div>
+<div class="guide-conseil">Attention aux parentheses pour les puissances. En notation scientifique, verifier que $1 \leq a < 10$. Apres developpement, toujours reduire.</div>
+</div></div>
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 3 : Equations et proportionnalite (lecons 08, 09, 10) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 08 : Equations</h3>
+<p>Isoler $x$ etape par etape. Quand $x$ est dans les deux membres : regrouper les $x$ d'un cote, les nombres de l'autre. Mise en equation de problemes.</p>
+<div class="guide-type">Exercice type : $5x+2 = 3x+10 \Rightarrow 2x = 8 \Rightarrow x = 4$.</div></div>
+<div class="guide-lecon"><h3>Lecon 09 : Pourcentages</h3>
+<p>Augmentation de $t$% : multiplier par $1+\dfrac{t}{100}$. Reduction : multiplier par $1-\dfrac{t}{100}$. Retrouver le prix initial.</p></div>
+<div class="guide-lecon"><h3>Lecon 10 : Vitesse</h3>
+<p>$v = \dfrac{d}{t}$. km/h en m/s : diviser par 3,6. Attention aux conversions de temps (minutes en heures).</p></div>
+<div class="guide-conseil">Toujours verifier la solution d'une equation. Pour les pourcentages, bien distinguer coefficient multiplicateur et taux.</div>
+</div></div>
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 4 : Pythagore et translation (lecons 11, 12, 13) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 11 : Pythagore direct</h3>
+<p>$BC^2 = AB^2 + AC^2$ dans un triangle rectangle en $A$. Calculer l'hypotenuse ($\sqrt{a^2+b^2}$) ou un cote ($\sqrt{c^2-a^2}$).</p></div>
+<div class="guide-lecon"><h3>Lecon 12 : Pythagore reciproque</h3>
+<p>Methode en 3 etapes : calculer le plus grand cote au carre, calculer la somme des deux autres au carre, conclure (egal = rectangle, different = pas rectangle).</p></div>
+<div class="guide-lecon"><h3>Lecon 13 : Translation</h3>
+<p>Definie par un vecteur. $M(x;y) \to M'(x+a\,;\,y+b)$. Conserve longueurs, angles, aires. $ABB'A'$ est un parallelogramme.</p></div>
+<div class="guide-conseil">Toujours faire une figure. Bien identifier l'hypotenuse. Pour la reciproque, rediger en 3 etapes.</div>
+</div></div>
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 5 : Rotation, droites remarquables, statistiques (lecons 14, 15, 16) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 14 : Rotation</h3>
+<p>Centre, angle, sens. Le centre est point fixe. $OM = OM'$ et $\widehat{MOM'} = \alpha$. Conserve longueurs, angles, aires.</p></div>
+<div class="guide-lecon"><h3>Lecon 15 : Droites remarquables</h3>
+<p>Mediatrice $\to$ centre du cercle circonscrit. Hauteur $\to$ orthocentre. Mediane $\to$ centre de gravite (aux 2/3). Bissectrice $\to$ centre du cercle inscrit.</p></div>
+<div class="guide-lecon"><h3>Lecon 16 : Mediane et quartiles</h3>
+<p>Ordonner les valeurs. $n$ impair : valeur du milieu. $n$ pair : moyenne des deux centrales. $Q_1$ (25%), $Q_3$ (75%).</p></div>
+<div class="guide-conseil">Bien distinguer les 4 droites remarquables. Pour la mediane, toujours ordonner d'abord.</div>
+</div></div>
+
+<div class="guide-section">
+<div class="guide-titre" onclick="this.nextElementSibling.classList.toggle('visible')">DS 6 : Probabilites, volumes, algorithmique (lecons 17, 18, 19) <span>&#9660;</span></div>
+<div class="guide-corps">
+<div class="guide-lecon"><h3>Lecon 17 : Probabilites</h3>
+<p>$0 \leq P \leq 1$. Somme = 1. Equiprobabilite : $P(A) = \dfrac{\text{favorables}}{\text{possibles}}$. Lister les issues.</p></div>
+<div class="guide-lecon"><h3>Lecon 18 : Pyramide et cone</h3>
+<p>$V = \dfrac{1}{3} \times \text{Aire base} \times h$. Cone : $V = \dfrac{1}{3}\pi r^2 h$. Generatrice : Pythagore avec $r$ et $h$.</p></div>
+<div class="guide-lecon"><h3>Lecon 19 : Scratch</h3>
+<p>"Repeter $n$ fois", "Repeter jusqu'a", "Si/sinon". Angle d'un polygone regulier : $\dfrac{360}{n}$. Savoir lire et predire un algorithme.</p></div>
+<div class="guide-conseil">En proba, verifier que la somme fait 1. Pour les volumes, ne pas oublier le $\dfrac{1}{3}$. En algo, faire un tableau de suivi.</div>
+</div></div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
