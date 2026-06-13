@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP 03 . 5eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}</style>
+</head><body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Travail pratique</span></div>
+<h1 class="cours-titre-principal">TP 3 : Symetrie centrale et figures</h1>
+<p class="cours-sous-titre">Duree : 1h . Lecon 13 . Materiel : papier calque, compas, regle</p>
+</div></div><main class="cours-corps">
+
+<h2>Objectif</h2>
+<p>Construire des symetriques de figures par rapport a un centre et verifier les proprietes de conservation.</p>
+
+<h2>Partie A : Construction</h2>
+<h3>Question 1</h3>
+<p>Sur le quadrillage ci-dessous, construire le symetrique du triangle ABC par rapport au point O.</p>
+<div class="interactive-box"><h4>Quadrillage</h4><canvas id="c1" width="500" height="350"></canvas></div>
+<script>(function(){var c=document.getElementById('c1').getContext('2d');c.strokeStyle='#e8e8e8';c.lineWidth=1;for(var i=0;i<500;i+=20){c.beginPath();c.moveTo(i,0);c.lineTo(i,350);c.stroke();}for(var j=0;j<350;j+=20){c.beginPath();c.moveTo(0,j);c.lineTo(500,j);c.stroke();}
+var ax=140,ay=100,bx=240,by=80,cx2=200,cy2=180,ox=250,oy=175;
+c.fillStyle='rgba(42,82,152,0.12)';c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.closePath();c.fill();c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+var apx=2*ox-ax,apy=2*oy-ay,bpx=2*ox-bx,bpy=2*oy-by,cpx=2*ox-cx2,cpy=2*oy-cy2;
+c.fillStyle='rgba(211,84,0,0.12)';c.beginPath();c.moveTo(apx,apy);c.lineTo(bpx,bpy);c.lineTo(cpx,cpy);c.closePath();c.fill();c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+c.strokeStyle='#bbb';c.lineWidth=1;c.setLineDash([3,3]);c.beginPath();c.moveTo(ax,ay);c.lineTo(apx,apy);c.stroke();c.beginPath();c.moveTo(bx,by);c.lineTo(bpx,bpy);c.stroke();c.beginPath();c.moveTo(cx2,cy2);c.lineTo(cpx,cpy);c.stroke();c.setLineDash([]);
+c.fillStyle='#c0392b';c.beginPath();c.arc(ox,oy,5,0,6.28);c.fill();
+c.font='bold 13px Arial';c.textAlign='center';
+c.fillStyle='#2a5298';c.fillText('A',ax-12,ay-8);c.fillText('B',bx+12,by-8);c.fillText('C',cx2-12,cy2+16);
+c.fillStyle='#d35400';c.fillText("A'",apx+12,apy+16);c.fillText("B'",bpx-12,bpy+16);c.fillText("C'",cpx+12,cpy-8);
+c.fillStyle='#c0392b';c.fillText('O',ox+12,oy-8);})();</script>
+
+<h3>Question 2</h3>
+<p>Mesurer les cotes du triangle ABC et du triangle A'B'C'. Que constatez-vous ?</p>
+
+<h3>Question 3</h3>
+<p>Mesurer les angles du triangle ABC et du triangle A'B'C'. Que constatez-vous ?</p>
+
+<h2>Partie B : Centre de symetrie</h2>
+<h3>Question 4</h3>
+<p>Tracer un parallelogramme EFGH. Tracer ses diagonales. Montrer que leur intersection est un centre de symetrie de la figure.</p>
+
+<h3>Question 5</h3>
+<p>Parmi les lettres suivantes, lesquelles ont un centre de symetrie ? A, B, H, I, N, O, S, X, Z.</p>
+
+<h2>Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Q2.</strong> $AB=A'B'$, $BC=B'C'$, $AC=A'C'$. La symetrie centrale conserve les longueurs.</p>
+<p><strong>Q3.</strong> Les angles sont egaux. La symetrie centrale conserve les angles.</p>
+<p><strong>Q4.</strong> L'intersection des diagonales est le milieu de chaque diagonale, donc le symetrique de chaque sommet par rapport a ce point est le sommet oppose.</p>
+<p><strong>Q5.</strong> H, I, N, O, S, X, Z ont un centre de symetrie.</p>
+</div>
+</main><footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer></body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP 01 . 5eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}</style>
+</head><body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Travail pratique</span></div>
+<h1 class="cours-titre-principal">TP 1 : Temperatures et nombres relatifs</h1>
+<p class="cours-sous-titre">Duree : 1h . Lecons 1-3 . Materiel : thermometre, releves meteo</p>
+</div></div><main class="cours-corps">
+
+<h2>Objectif</h2>
+<p>Utiliser les nombres relatifs dans un contexte concret : releves de temperatures.</p>
+
+<h2>Partie A : Releves</h2>
+<p>Voici les temperatures relevees dans 6 villes un jour de janvier :</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Ville</td><td style="padding:6px">Moscou</td><td style="padding:6px">Paris</td><td style="padding:6px">Reykjavik</td><td style="padding:6px">Le Caire</td><td style="padding:6px">Oslo</td><td style="padding:6px">Tunis</td></tr>
+<tr><td style="padding:4px">Temperature</td><td style="padding:4px">$-15$°C</td><td style="padding:4px">$+3$°C</td><td style="padding:4px">$-8$°C</td><td style="padding:4px">$+18$°C</td><td style="padding:4px">$-12$°C</td><td style="padding:4px">$+10$°C</td></tr>
+</table>
+
+<h3>Question 1</h3>
+<p>Placer ces 6 temperatures sur la droite graduee ci-dessous.</p>
+<div class="interactive-box"><h4>Droite graduee</h4><canvas id="c1" width="650" height="100"></canvas></div>
+<script>(function(){var c=document.getElementById('c1').getContext('2d');var ox=30,y=50,w=590,mn=-18,mx=22;var sc=w/(mx-mn);c.strokeStyle='#333';c.lineWidth=2;c.beginPath();c.moveTo(ox,y);c.lineTo(ox+w,y);c.stroke();c.fillStyle='#666';c.font='10px Arial';c.textAlign='center';for(var i=mn;i<=mx;i+=2){var x=ox+(i-mn)*sc;c.beginPath();c.moveTo(x,y-4);c.lineTo(x,y+4);c.stroke();c.fillText(i,x,y+16);}var pts=[[-15,'Moscou','#2a5298'],[3,'Paris','#27ae60'],[-8,'Reykjavik','#8e44ad'],[18,'Le Caire','#d35400'],[-12,'Oslo','#c0392b'],[10,'Tunis','#f39c12']];for(var j=0;j<pts.length;j++){var px=ox+(pts[j][0]-mn)*sc;c.fillStyle=pts[j][2];c.beginPath();c.arc(px,y,4,0,6.28);c.fill();c.font='bold 9px Arial';c.fillText(pts[j][1],px,y-10);}})();</script>
+
+<h3>Question 2</h3>
+<p>Ranger les villes de la plus froide a la plus chaude.</p>
+
+<h3>Question 3</h3>
+<p>Calculer l'ecart de temperature entre Le Caire et Moscou.</p>
+
+<h3>Question 4</h3>
+<p>A Paris, la temperature baisse de $7$°C dans la nuit. Quelle est la temperature nocturne ?</p>
+
+<h2>Partie B : Calculs</h2>
+<h3>Question 5</h3>
+<p>La temperature a Oslo monte de $15$°C dans la journee. Nouvelle temperature ?</p>
+
+<h3>Question 6</h3>
+<p>Calculer la temperature moyenne des 6 villes.</p>
+
+<h2>Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Q2.</strong> Moscou ($-15$) &lt; Oslo ($-12$) &lt; Reykjavik ($-8$) &lt; Paris ($+3$) &lt; Tunis ($+10$) &lt; Le Caire ($+18$).</p>
+<p><strong>Q3.</strong> $18-(-15) = 18+15 = 33$°C.</p>
+<p><strong>Q4.</strong> $3-7 = -4$°C.</p>
+<p><strong>Q5.</strong> $-12+15 = +3$°C.</p>
+<p><strong>Q6.</strong> $(-15+3+(-8)+18+(-12)+10)/6 = -4/6 pprox -0{,}7$°C.</p>
+</div>
+</main><footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer></body></html>

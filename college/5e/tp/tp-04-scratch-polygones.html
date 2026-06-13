@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP 04 . 5eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}</style>
+</head><body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Travail pratique</span></div>
+<h1 class="cours-titre-principal">TP 4 : Scratch et polygones reguliers</h1>
+<p class="cours-sous-titre">Duree : 1h . Lecon 19 . Materiel : ordinateur, Scratch</p>
+</div></div><main class="cours-corps">
+
+<h2>Objectif</h2>
+<p>Utiliser les boucles et les variables dans Scratch pour tracer des polygones reguliers.</p>
+
+<h2>Partie A : Le carre</h2>
+<h3>Question 1</h3>
+<p>Ecrire un programme Scratch qui trace un carre de cote 100 en utilisant une boucle "repeter 4 fois".</p>
+
+<h3>Question 2</h3>
+<p>Modifier le programme pour que le cote soit stocke dans une variable "cote". Tester avec cote = 50, 100 et 150.</p>
+
+<h2>Partie B : Triangles et hexagones</h2>
+<h3>Question 3</h3>
+<p>Adapter le programme pour tracer un triangle equilateral. Quel angle de rotation faut-il utiliser ?</p>
+
+<h3>Question 4</h3>
+<p>Tracer un hexagone regulier. Quel angle de rotation ? Combien de repetitions ?</p>
+
+<h2>Partie C : Generalisation</h2>
+<h3>Question 5</h3>
+<p>Creer une variable "nb_cotes". Ecrire un programme qui trace n'importe quel polygone regulier. L'angle de rotation est $\frac{360}{\text{nb\_cotes}}$.</p>
+
+<h3>Question 6</h3>
+<p>Tester avec nb_cotes = 3, 4, 5, 6, 8, 10, 36. Que remarque-t-on quand nb_cotes est tres grand ?</p>
+
+<h2>Corriges</h2>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Q1.</strong> Repeter 4 fois : avancer de 100, tourner de 90 degres.</p>
+<p><strong>Q2.</strong> Mettre cote a 100. Repeter 4 fois : avancer de (cote), tourner de 90.</p>
+<p><strong>Q3.</strong> Angle = $360/3 = 120$°. Repeter 3 fois : avancer de (cote), tourner de 120.</p>
+<p><strong>Q4.</strong> Angle = $360/6 = 60$°. Repeter 6 fois : avancer de (cote), tourner de 60.</p>
+<p><strong>Q5.</strong> Repeter (nb_cotes) fois : avancer de (cote), tourner de $(360/\text{nb\_cotes})$.</p>
+<p><strong>Q6.</strong> Avec 36 cotes, la figure ressemble a un cercle. Plus nb_cotes est grand, plus le polygone se rapproche d'un cercle.</p>
+</div>
+</main><footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer></body></html>
