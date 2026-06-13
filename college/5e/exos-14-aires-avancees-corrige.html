@@ -2,50 +2,191 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corrige 14 . 5eme</title>
+<title>Corrige 14 : Aires avancees . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
-<div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Corrige Lecon 14</span></div>
-<h1 class="cours-titre-principal">Corrige : Aires avancees</h1>
+<div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Exercices Lecon 14</span></div>
+<h1 class="cours-titre-principal">Exercices : Aires avancees</h1>
+<p class="cours-sous-titre">Version corrige</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1</h3>
-<p><strong>Enonce :</strong> Calculer l'aire d'un disque de rayon $r=6$ cm.</p>
-<p><strong>Reponse :</strong> $\mathcal{A}=\pi\times 6^2=36\pi\approx 113{,}1$ cm$^2$.</p>
+<h3>Exercice 1 (2 pts)</h3>
+<p>Calculer l'aire du disque ci-dessous ($r = 6$ cm).</p>
+<div class="interactive-box">
+<h4>Figure : disque de rayon 6 cm</h4>
+<canvas id="cv1" width="400" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var cx0=120,cy0=100,r=70;
+c.fillStyle='rgba(42,82,152,0.1)';c.beginPath();c.arc(cx0,cy0,r,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=2;
+c.beginPath();c.moveTo(cx0,cy0);c.lineTo(cx0+r,cy0);c.stroke();
+c.fillStyle='#c0392b';c.font='bold 13px Arial';c.textAlign='center';
+c.fillText('r = 6 cm',cx0+r/2,cy0-10);
+c.fillStyle='#333';c.beginPath();c.arc(cx0,cy0,3,0,2*Math.PI);c.fill();
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('A = π × r²',230,60);
+c.fillText('= π × 6²',230,82);
+c.fillText('= 36π',230,104);
+c.fillText('≈ 113,1 cm²',230,126);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = \pi \times 6^2 = 36\pi \approx 113{,}1$ cm$^2$.</p></div>
 
-<h3>Exercice 2</h3>
-<p><strong>Enonce :</strong> Calculer le perimetre d'un cercle de rayon $r=5$ cm.</p>
-<p><strong>Reponse :</strong> $P=2\pi\times 5=10\pi\approx 31{,}4$ cm.</p>
+<h3>Exercice 2 (2 pts)</h3>
+<p>Calculer le perimetre d'un cercle de rayon $r = 5$ cm.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$P = 2\pi \times 5 = 10\pi \approx 31{,}4$ cm.</p></div>
 
-<h3>Exercice 3</h3>
-<p><strong>Enonce :</strong> Un demi-disque a un diametre de $10$ cm. Calculer son aire.</p>
-<p><strong>Reponse :</strong> Rayon $r=5$ cm. $\mathcal{A}=\frac{\pi\times 25}{2}\approx 39{,}3$ cm$^2$.</p>
+<h3>Exercice 3 (2 pts)</h3>
+<p>Calculer l'aire du demi-disque ci-dessous (diametre $10$ cm).</p>
+<div class="interactive-box">
+<h4>Figure : demi-disque</h4>
+<canvas id="cv3" width="350" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx0=120,cy0=120,r=70;
+c.fillStyle='rgba(211,84,0,0.1)';
+c.beginPath();c.arc(cx0,cy0,r,Math.PI,0);c.closePath();c.fill();
+c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+c.strokeStyle='#c0392b';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(cx0,cy0);c.lineTo(cx0+r,cy0);c.stroke();
+c.setLineDash([]);
+c.fillStyle='#c0392b';c.font='12px Arial';c.textAlign='center';
+c.fillText('r = 5 cm',cx0+r/2,cy0+15);
+c.fillText('d = 10 cm',cx0,cy0+30);
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('A = πr²/2 = π×25/2',220,50);
+c.fillText('≈ 39,3 cm²',220,72);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$r = 5$ cm. $\mathcal{A} = \frac{\pi \times 25}{2} \approx 39{,}3$ cm$^2$.</p></div>
 
-<h3>Exercice 4</h3>
-<p><strong>Enonce :</strong> Un terrain rectangulaire mesure $20$ m sur $15$ m. A un bout, on ajoute un demi-disque de diametre $15$ m. Calculer l'aire totale.</p>
-<p><strong>Reponse :</strong> Rectangle : $300$ m$^2$. Demi-disque : $\frac{\pi\times 7{,}5^2}{2}\approx 88{,}4$ m$^2$. Total $\approx 388{,}4$ m$^2$.</p>
+<h3>Exercice 4 (3 pts)</h3>
+<p>Calculer l'aire totale du terrain ci-dessous : un rectangle $20 \times 15$ m avec un demi-disque de diametre $15$ m.</p>
+<div class="interactive-box">
+<h4>Figure : terrain compose</h4>
+<canvas id="cv4" width="500" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var x0=60,y0=40,w=200,h=140,r=h/2;
+// Rectangle
+c.fillStyle='rgba(42,82,152,0.08)';c.fillRect(x0,y0,w,h);
+c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(x0,y0,w,h);
+// Demi-disque
+c.fillStyle='rgba(211,84,0,0.1)';
+c.beginPath();c.arc(x0+w,y0+r,r,-Math.PI/2,Math.PI/2);c.closePath();c.fill();
+c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+// Cotes
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='center';
+c.fillText('20 m',x0+w/2,y0+h+18);
+c.save();c.translate(x0-15,y0+h/2);c.rotate(-Math.PI/2);c.fillText('15 m',0,0);c.restore();
+c.fillStyle='#d35400';c.fillText('r = 7,5 m',x0+w+r/2+10,y0+r);
+// Labels
+c.fillStyle='#2a5298';c.font='bold 12px Arial';c.fillText('Rectangle',x0+w/2,y0+h/2);
+c.fillStyle='#d35400';c.fillText('Demi-disque',x0+w+35,y0+r-20);
+// Calculs
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('Rect = 20×15 = 300 m²',350,60);
+c.fillText('Demi = π×7,5²/2 ≈ 88,4 m²',350,82);
+c.fillText('Total ≈ 388,4 m²',350,108);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Rectangle : $300$ m$^2$. Demi-disque : $\frac{\pi \times 7{,}5^2}{2} \approx 88{,}4$ m$^2$. Total $\approx 388{,}4$ m$^2$.</p></div>
 
-<h3>Exercice 5</h3>
-<p><strong>Enonce :</strong> Convertir : a) $2$ m$^2$ en cm$^2$ b) $50\,000$ cm$^2$ en m$^2$.</p>
-<p><strong>Reponse :</strong> a) $20\,000$ cm$^2$. b) $5$ m$^2$.</p>
+<h3>Exercice 5 (2 pts)</h3>
+<p>Convertir : a) $2$ m$^2$ en cm$^2$ b) $50\,000$ cm$^2$ en m$^2$.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>a) $2 \times 10\,000 = 20\,000$ cm$^2$. b) $50\,000 \div 10\,000 = 5$ m$^2$.</p></div>
 
-<h3>Exercice 6</h3>
-<p><strong>Enonce :</strong> Une piste circulaire a un rayon interieur de $30$ m et un rayon exterieur de $35$ m. Calculer l'aire de la piste.</p>
-<p><strong>Reponse :</strong> $\pi\times 35^2-\pi\times 30^2=\pi(1225-900)=325\pi\approx 1\,021$ m$^2$.</p>
+<h3>Exercice 6 (3 pts)</h3>
+<p>Calculer l'aire de la couronne circulaire (anneau) : rayon interieur $30$ m, rayon exterieur $35$ m.</p>
+<div class="interactive-box">
+<h4>Figure : couronne circulaire</h4>
+<canvas id="cv6" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+var cx0=140,cy0=110,r1=50,r2=70;
+c.fillStyle='rgba(42,82,152,0.12)';c.beginPath();c.arc(cx0,cy0,r2,0,2*Math.PI);c.fill();
+c.fillStyle='#fff';c.beginPath();c.arc(cx0,cy0,r1,0,2*Math.PI);c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;
+c.beginPath();c.arc(cx0,cy0,r2,0,2*Math.PI);c.stroke();
+c.strokeStyle='#d35400';
+c.beginPath();c.arc(cx0,cy0,r1,0,2*Math.PI);c.stroke();
+// Rayons
+c.strokeStyle='#888';c.lineWidth=1;c.setLineDash([3,3]);
+c.beginPath();c.moveTo(cx0,cy0);c.lineTo(cx0+r2,cy0);c.stroke();
+c.setLineDash([]);
+c.fillStyle='#2a5298';c.font='11px Arial';c.textAlign='center';
+c.fillText('R = 35',cx0+r2/2+10,cy0-8);
+c.fillStyle='#d35400';c.fillText('r = 30',cx0+r1/2,cy0+12);
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('A = πR² - πr²',250,60);
+c.fillText('= π(35² - 30²)',250,82);
+c.fillText('= π(1225 - 900)',250,104);
+c.fillText('= 325π ≈ 1021 m²',250,126);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\pi \times 35^2 - \pi \times 30^2 = \pi(1225 - 900) = 325\pi \approx 1\,021$ m$^2$.</p></div>
 
-<h3>Exercice 7</h3>
-<p><strong>Enonce :</strong> Calculer l'aire d'un triangle de base $b=9$ cm et de hauteur $h=6$ cm.</p>
-<p><strong>Reponse :</strong> $\mathcal{A}=\frac{9\times 6}{2}=27$ cm$^2$.</p>
+<h3>Exercice 7 (1 pt)</h3>
+<p>Calculer l'aire d'un triangle de base $b = 9$ cm et de hauteur $h = 6$ cm.</p>
+<div class="interactive-box">
+<h4>Figure : triangle avec base et hauteur</h4>
+<canvas id="cv7" width="350" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv7').getContext('2d');
+var ax=50,ay=150,bx=230,by=150,sx=140,sy=30;
+c.fillStyle='rgba(39,174,96,0.08)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(sx,sy);c.closePath();c.fill();
+c.strokeStyle='#27ae60';c.lineWidth=2;c.stroke();
+// Hauteur
+c.strokeStyle='#c0392b';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(sx,sy);c.lineTo(sx,ay);c.stroke();
+c.setLineDash([]);
+c.strokeRect(sx,ay-10,10,10);
+// Labels
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='center';
+c.fillText('b = 9 cm',(ax+bx)/2,ay+18);
+c.fillStyle='#c0392b';c.save();c.translate(sx+15,(sy+ay)/2);c.rotate(-Math.PI/2);c.fillText('h = 6 cm',0,0);c.restore();
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('A = b×h/2 = 9×6/2 = 27 cm²',240,80);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = \frac{9 \times 6}{2} = 27$ cm$^2$.</p></div>
 
-<h3>Exercice 8</h3>
-<p><strong>Enonce :</strong> Un parallelogramme a une base de $12$ cm et une hauteur de $7$ cm. Calculer son aire.</p>
-<p><strong>Reponse :</strong> $\mathcal{A}=12\times 7=84$ cm$^2$.</p>
+<h3>Exercice 8 (1 pt)</h3>
+<p>Un parallelogramme a une base de $12$ cm et une hauteur de $7$ cm. Calculer son aire.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = 12 \times 7 = 84$ cm$^2$.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

@@ -2,50 +2,147 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corrige 17 . 5eme</title>
+<title>Corrige 17 : Statistiques . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
-<div class="cours-meta"><span>5eme</span><span>Organisation de donnees</span><span>Corrige Lecon 17</span></div>
-<h1 class="cours-titre-principal">Corrige : Statistiques : effectifs et frequences</h1>
+<div class="cours-meta"><span>5eme</span><span>Organisation de donnees</span><span>Exercices Lecon 17</span></div>
+<h1 class="cours-titre-principal">Exercices : Statistiques, effectifs et frequences</h1>
+<p class="cours-sous-titre">Version corrige</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1</h3>
-<p><strong>Enonce :</strong> Dans une classe de 25 eleves, 10 aiment le foot, 8 le basket, 5 le tennis, 2 la natation. Calculer chaque frequence en %.</p>
-<p><strong>Reponse :</strong> Foot : $40\%$. Basket : $32\%$. Tennis : $20\%$. Natation : $8\%$.</p>
+<h3>Exercice 1 (2 pts)</h3>
+<p>Dans une classe de 25 eleves : 10 foot, 8 basket, 5 tennis, 2 natation. Calculer chaque frequence.</p>
+<div class="interactive-box">
+<h4>Figure : diagramme en barres</h4>
+<canvas id="cv1" width="500" height="250"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var noms=['Foot','Basket','Tennis','Natation'];
+var vals=[10,8,5,2];
+var cols=['#3498db','#e74c3c','#27ae60','#f1c40f'];
+var freqs=['40%','32%','20%','8%'];
+c.strokeStyle='#333';c.lineWidth=2;
+c.beginPath();c.moveTo(70,220);c.lineTo(400,220);c.stroke();
+c.beginPath();c.moveTo(70,220);c.lineTo(70,20);c.stroke();
+c.fillStyle='#666';c.font='10px Arial';c.textAlign='right';
+for(var g=0;g<=10;g+=2){var gy=220-g*18;c.fillText(g,62,gy+4);c.strokeStyle='#eee';c.lineWidth=1;c.beginPath();c.moveTo(70,gy);c.lineTo(400,gy);c.stroke();}
+c.textAlign='center';
+for(var i=0;i<4;i++){
+var bx=100+i*70,bh=vals[i]*18;
+c.fillStyle=cols[i];c.fillRect(bx,220-bh,50,bh);
+c.fillStyle='#333';c.font='bold 11px Arial';c.fillText(vals[i],bx+25,220-bh-5);
+c.fillText(noms[i],bx+25,238);
+c.fillStyle='#c0392b';c.font='10px Arial';c.fillText(freqs[i],bx+25,220-bh-18);
+}
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('Total : 25 eleves',410,60);
+c.fillText('Foot : 10/25 = 40%',410,82);
+c.fillText('Basket : 8/25 = 32%',410,100);
+c.fillText('Tennis : 5/25 = 20%',410,118);
+c.fillText('Natation : 2/25 = 8%',410,136);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Foot : $40\%$. Basket : $32\%$. Tennis : $20\%$. Natation : $8\%$.</p></div>
 
-<h3>Exercice 2</h3>
-<p><strong>Enonce :</strong> La frequence d'une note est $30\%$ et l'effectif total est $40$. Quel est l'effectif ?</p>
-<p><strong>Reponse :</strong> $40\times 0{,}3=12$.</p>
+<h3>Exercice 2 (1 pt)</h3>
+<p>La frequence d'une note est $30\%$ et l'effectif total est $40$. Quel est l'effectif ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$40 \times 0{,}3 = 12$.</p></div>
 
-<h3>Exercice 3</h3>
-<p><strong>Enonce :</strong> Calculer l'angle du secteur circulaire pour une frequence de $25\%$.</p>
-<p><strong>Reponse :</strong> $0{,}25\times 360=90$°.</p>
+<h3>Exercice 3 (1 pt)</h3>
+<p>Calculer l'angle du secteur circulaire pour une frequence de $25\%$.</p>
+<div class="interactive-box">
+<h4>Figure : secteur de 25% = 90°</h4>
+<canvas id="cv3" width="300" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var cx0=120,cy0=100,r=70;
+c.fillStyle='rgba(42,82,152,0.15)';
+c.beginPath();c.moveTo(cx0,cy0);c.arc(cx0,cy0,r,-Math.PI/2,0);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+c.strokeStyle='#ccc';c.lineWidth=1;
+c.beginPath();c.arc(cx0,cy0,r,0,2*Math.PI);c.stroke();
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('25%',cx0+35,cy0-25);
+c.fillText('90°',cx0+25,cy0-10);
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='left';
+c.fillText('0,25 × 360° = 90°',210,80);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$0{,}25 \times 360 = 90$°.</p></div>
 
-<h3>Exercice 4</h3>
-<p><strong>Enonce :</strong> Les frequences de trois categories sont $45\%$, $30\%$ et ... Calculer la troisieme.</p>
-<p><strong>Reponse :</strong> $100-45-30=25\%$.</p>
+<h3>Exercice 4 (1 pt)</h3>
+<p>Les frequences de trois categories sont $45\%$, $30\%$ et ... Calculer la troisieme.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$100 - 45 - 30 = 25\%$.</p></div>
 
-<h3>Exercice 5</h3>
-<p><strong>Enonce :</strong> Completer le tableau : effectifs 8, 12, 5 ; effectif total ? ; frequences ?</p>
-<p><strong>Reponse :</strong> Total : $25$. Frequences : $32\%$, $48\%$, $20\%$.</p>
+<h3>Exercice 5 (2 pts)</h3>
+<p>Completer le tableau : effectifs 8, 12, 5 ; effectif total ? ; frequences ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Total : $25$. Frequences : $32\%$, $48\%$, $20\%$.</p></div>
 
-<h3>Exercice 6</h3>
-<p><strong>Enonce :</strong> Un diagramme circulaire a un secteur de $108$°. Quelle est la frequence correspondante ?</p>
-<p><strong>Reponse :</strong> $108/360=0{,}3=30\%$.</p>
+<h3>Exercice 6 (2 pts)</h3>
+<p>Un diagramme circulaire a un secteur de $108$°. Quelle est la frequence ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$108 / 360 = 0{,}3 = 30\%$.</p></div>
 
-<h3>Exercice 7</h3>
-<p><strong>Enonce :</strong> On lance un de 50 fois. Le 6 sort 12 fois. Quelle est la frequence du 6 ?</p>
-<p><strong>Reponse :</strong> $12/50=0{,}24=24\%$.</p>
+<h3>Exercice 7 (1 pt)</h3>
+<p>On lance un de 50 fois. Le 6 sort 12 fois. Frequence du 6 ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$12 / 50 = 0{,}24 = 24\%$.</p></div>
 
-<h3>Exercice 8</h3>
-<p><strong>Enonce :</strong> Les effectifs de 4 couleurs sont 15, 10, 20, 5. Calculer l'effectif total et la frequence de chaque couleur.</p>
-<p><strong>Reponse :</strong> Total : $50$. Frequences : $30\%$, $20\%$, $40\%$, $10\%$.</p>
+<h3>Exercice 8 (2 pts)</h3>
+<p>Effectifs de 4 couleurs : 15, 10, 20, 5. Effectif total et frequences.</p>
+<div class="interactive-box">
+<h4>Figure : diagramme circulaire</h4>
+<canvas id="cv8" width="400" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv8').getContext('2d');
+var cx0=130,cy0=110,r=85;
+var vals=[15,10,20,5],total=50;
+var cols=['#3498db','#e74c3c','#27ae60','#f1c40f'];
+var noms=['Bleu 30%','Rouge 20%','Vert 40%','Jaune 10%'];
+var start=-Math.PI/2;
+for(var i=0;i<4;i++){
+var angle=vals[i]/total*2*Math.PI;
+c.fillStyle=cols[i];
+c.beginPath();c.moveTo(cx0,cy0);c.arc(cx0,cy0,r,start,start+angle);c.closePath();c.fill();
+c.strokeStyle='#fff';c.lineWidth=2;c.stroke();
+var mid=start+angle/2;
+c.fillStyle='#fff';c.font='bold 11px Arial';c.textAlign='center';
+c.fillText(Math.round(vals[i]/total*100)+'%',cx0+Math.cos(mid)*r*0.6,cy0+Math.sin(mid)*r*0.6+4);
+start+=angle;
+}
+c.textAlign='left';c.font='12px Arial';
+for(var j=0;j<4;j++){
+c.fillStyle=cols[j];c.fillRect(260,40+j*25,14,14);
+c.fillStyle='#333';c.fillText(noms[j],280,52+j*25);
+}
+c.fillText('Total : 50',260,150);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Total : $50$. Frequences : $30\%$, $20\%$, $40\%$, $10\%$.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

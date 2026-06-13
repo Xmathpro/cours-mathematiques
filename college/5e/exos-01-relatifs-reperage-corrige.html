@@ -2,50 +2,158 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corrige 01 . 5eme</title>
+<title>Corrige 01 : Relatifs reperage . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
-<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Corrige Lecon 1</span></div>
-<h1 class="cours-titre-principal">Corrige : Nombres relatifs : reperage</h1>
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Exercices Lecon 1</span></div>
+<h1 class="cours-titre-principal">Exercices : Nombres relatifs, reperage</h1>
+<p class="cours-sous-titre">Version corrige</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1</h3>
-<p><strong>Enonce :</strong> Placer sur une droite graduee les nombres suivants : $+3$, $-5$, $+1{,}5$, $-2{,}5$, $-4$, $+6$.</p>
-<p><strong>Reponse :</strong> Ordre sur la droite : $-5$, $-4$, $-2{,}5$, $+1{,}5$, $+3$, $+6$.</p>
+<h3>Exercice 1 (2 pts)</h3>
+<p>Placer les nombres suivants sur la droite graduee : $+3$, $-5$, $+1{,}5$, $-2{,}5$, $-4$, $+6$.</p>
+<div class="interactive-box">
+<h4>Figure : droite graduee avec les points places</h4>
+<canvas id="cv1" width="650" height="120"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var ox=40,y=60,w=570,minV=-7,maxV=8;
+var sc=w/(maxV-minV);
+c.strokeStyle='#333';c.lineWidth=2;
+c.beginPath();c.moveTo(ox,y);c.lineTo(ox+w,y);c.stroke();
+c.beginPath();c.moveTo(ox+w-6,y-4);c.lineTo(ox+w,y);c.lineTo(ox+w-6,y+4);c.stroke();
+c.fillStyle='#666';c.font='11px Arial';c.textAlign='center';
+for(var i=minV;i<=maxV;i++){var x=ox+(i-minV)*sc;c.beginPath();c.moveTo(x,y-5);c.lineTo(x,y+5);c.stroke();c.fillText(i,x,y+18);}
+var pts=[3,-5,1.5,-2.5,-4,6];
+var cols=['#c0392b','#2a5298','#27ae60','#d35400','#8e44ad','#e67e22'];
+for(var j=0;j<pts.length;j++){
+var px=ox+(pts[j]-minV)*sc;
+c.fillStyle=cols[j];c.beginPath();c.arc(px,y,5,0,2*Math.PI);c.fill();
+c.font='bold 11px Arial';c.fillText((pts[j]>=0?'+':'')+pts[j],px,y-12);
+}
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Ordre sur la droite : $-5$, $-4$, $-2{,}5$, $+1{,}5$, $+3$, $+6$.</p></div>
 
-<h3>Exercice 2</h3>
-<p><strong>Enonce :</strong> Donner l'oppose de chaque nombre : $+7$, $-3$, $-11$, $+0{,}4$, $0$.</p>
-<p><strong>Reponse :</strong> $-7$, $+3$, $+11$, $-0{,}4$, $0$.</p>
+<h3>Exercice 2 (2 pts)</h3>
+<p>Donner l'oppose de chaque nombre : $+7$, $-3$, $-11$, $+0{,}4$, $0$.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$-7$, $+3$, $+11$, $-0{,}4$, $0$.</p></div>
 
-<h3>Exercice 3</h3>
-<p><strong>Enonce :</strong> Ranger dans l'ordre croissant : $-8$, $+2$, $-1$, $0$, $+5$, $-5$.</p>
-<p><strong>Reponse :</strong> $-8 < -5 < -1 < 0 < +2 < +5$.</p>
+<h3>Exercice 3 (2 pts)</h3>
+<p>Ranger dans l'ordre croissant : $-8$, $+2$, $-1$, $0$, $+5$, $-5$.</p>
+<div class="interactive-box">
+<h4>Figure : rangement sur la droite</h4>
+<canvas id="cv3" width="650" height="100"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv3').getContext('2d');
+var ox=40,y=50,w=570,minV=-9,maxV=7;
+var sc=w/(maxV-minV);
+c.strokeStyle='#333';c.lineWidth=1.5;
+c.beginPath();c.moveTo(ox,y);c.lineTo(ox+w,y);c.stroke();
+c.fillStyle='#666';c.font='10px Arial';c.textAlign='center';
+for(var i=minV;i<=maxV;i++){var x=ox+(i-minV)*sc;c.beginPath();c.moveTo(x,y-4);c.lineTo(x,y+4);c.stroke();if(i%2===0)c.fillText(i,x,y+16);}
+var sorted=[-8,-5,-1,0,2,5];
+for(var j=0;j<sorted.length;j++){
+var px=ox+(sorted[j]-minV)*sc;
+c.fillStyle='#c0392b';c.beginPath();c.arc(px,y,4,0,2*Math.PI);c.fill();
+c.font='bold 10px Arial';c.fillText((sorted[j]>=0?'+':'')+sorted[j],px,y-10);
+}
+c.fillStyle='#333';c.font='12px Arial';c.textAlign='left';
+c.fillText('-8 < -5 < -1 < 0 < +2 < +5',180,90);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$-8 < -5 < -1 < 0 < +2 < +5$.</p></div>
 
-<h3>Exercice 4</h3>
-<p><strong>Enonce :</strong> Donner l'abscisse et l'ordonnee des points suivants : $A(3\,;\,-2)$, $B(-1\,;\,4)$, $C(0\,;\,-5)$.</p>
-<p><strong>Reponse :</strong> $A$ : abscisse $3$, ordonnee $-2$. $B$ : abscisse $-1$, ordonnee $4$. $C$ : abscisse $0$, ordonnee $-5$.</p>
+<h3>Exercice 4 (2 pts)</h3>
+<p>Donner l'abscisse et l'ordonnee des points : $A(3\,;\,-2)$, $B(-1\,;\,4)$, $C(0\,;\,-5)$.</p>
+<div class="interactive-box">
+<h4>Figure : points dans le repere</h4>
+<canvas id="cv4" width="350" height="350"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var cx0=175,cy0=175,u=28;
+c.strokeStyle='#eee';c.lineWidth=1;
+for(var i=-6;i<=6;i++){c.beginPath();c.moveTo(cx0+i*u,10);c.lineTo(cx0+i*u,340);c.stroke();c.beginPath();c.moveTo(10,cy0-i*u);c.lineTo(340,cy0-i*u);c.stroke();}
+c.strokeStyle='#333';c.lineWidth=2;
+c.beginPath();c.moveTo(10,cy0);c.lineTo(340,cy0);c.stroke();
+c.beginPath();c.moveTo(cx0,10);c.lineTo(cx0,340);c.stroke();
+c.fillStyle='#666';c.font='10px Arial';c.textAlign='center';
+for(var j=-5;j<=5;j++){if(j===0)continue;c.fillText(j,cx0+j*u,cy0+14);c.textAlign='right';c.fillText(j,cx0-6,cy0-j*u+4);c.textAlign='center';}
+var pts=[[3,-2,'A','#c0392b'],[-1,4,'B','#2a5298'],[0,-5,'C','#27ae60']];
+for(var k=0;k<3;k++){
+var px=cx0+pts[k][0]*u,py=cy0-pts[k][1]*u;
+c.fillStyle=pts[k][3];c.beginPath();c.arc(px,py,5,0,2*Math.PI);c.fill();
+c.font='bold 12px Arial';c.textAlign='left';
+c.fillText(pts[k][2]+'('+pts[k][0]+';'+pts[k][1]+')',px+8,py-8);
+}
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$A$ : abscisse $3$, ordonnee $-2$. $B$ : abscisse $-1$, ordonnee $4$. $C$ : abscisse $0$, ordonnee $-5$.</p></div>
 
-<h3>Exercice 5</h3>
-<p><strong>Enonce :</strong> Quel nombre est le plus grand ? a) $-3$ ou $-7$. b) $+2$ ou $-9$. c) $-0{,}5$ ou $-0{,}1$. d) $0$ ou $-4$.</p>
-<p><strong>Reponse :</strong> a) $-3 > -7$. b) $+2 > -9$. c) $-0{,}1 > -0{,}5$. d) $0 > -4$.</p>
+<h3>Exercice 5 (2 pts)</h3>
+<p>Quel nombre est le plus grand ? a) $-3$ ou $-7$. b) $+2$ ou $-9$. c) $-0{,}5$ ou $-0{,}1$. d) $0$ ou $-4$.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>a) $-3 > -7$. b) $+2 > -9$. c) $-0{,}1 > -0{,}5$. d) $0 > -4$.</p></div>
 
-<h3>Exercice 6</h3>
-<p><strong>Enonce :</strong> La temperature a midi est $+6$°C. Elle descend de $10$°C la nuit. Quelle est la temperature nocturne ? Placer les deux temperatures sur une droite graduee.</p>
-<p><strong>Reponse :</strong> $+6 - 10 = -4$°C. Les deux points sont places sur la droite a $+6$ et $-4$.</p>
+<h3>Exercice 6 (3 pts)</h3>
+<p>La temperature a midi est $+6$°C. Elle descend de $10$°C la nuit. Quelle est la temperature nocturne ?</p>
+<div class="interactive-box">
+<h4>Figure : thermometre</h4>
+<canvas id="cv6" width="400" height="160"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv6').getContext('2d');
+var ox=40,y=80,w=320,minV=-6,maxV=8;
+var sc=w/(maxV-minV);
+c.strokeStyle='#333';c.lineWidth=2;
+c.beginPath();c.moveTo(ox,y);c.lineTo(ox+w,y);c.stroke();
+c.fillStyle='#666';c.font='11px Arial';c.textAlign='center';
+for(var i=minV;i<=maxV;i++){var x=ox+(i-minV)*sc;c.beginPath();c.moveTo(x,y-5);c.lineTo(x,y+5);c.stroke();c.fillText(i+'°',x,y+18);}
+var px1=ox+(6-minV)*sc,px2=ox+(-4-minV)*sc;
+c.fillStyle='#c0392b';c.beginPath();c.arc(px1,y,6,0,2*Math.PI);c.fill();
+c.font='bold 12px Arial';c.fillText('+6°C',px1,y-15);
+c.fillStyle='#2a5298';c.beginPath();c.arc(px2,y,6,0,2*Math.PI);c.fill();
+c.fillText('-4°C',px2,y-15);
+c.strokeStyle='#d35400';c.lineWidth=2;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(px1,y-30);c.lineTo(px2,y-30);c.stroke();c.setLineDash([]);
+c.fillStyle='#d35400';c.fillText('-10°C',(px1+px2)/2,y-35);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$+6 - 10 = -4$°C.</p></div>
 
-<h3>Exercice 7</h3>
-<p><strong>Enonce :</strong> Dans un repere, placer les points $A(2\,;\,3)$, $B(-3\,;\,1)$, $C(-2\,;\,-4)$, $D(4\,;\,-1)$. Relier ABCD. Quelle figure semble se former ?</p>
-<p><strong>Reponse :</strong> Les 4 points forment un quadrilatere. (La forme depend du trace.)</p>
+<h3>Exercice 7 (3 pts)</h3>
+<p>Dans un repere, placer $A(2\,;\,3)$, $B(-3\,;\,1)$, $C(-2\,;\,-4)$, $D(4\,;\,-1)$. Relier ABCD.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Les 4 points forment un quadrilatere. Construction dans le repere.</p></div>
 
-<h3>Exercice 8</h3>
-<p><strong>Enonce :</strong> Un sous-marin se trouve a $-120$ m. Il remonte de $45$ m. A quelle profondeur se trouve-t-il ?</p>
-<p><strong>Reponse :</strong> $-120 + 45 = -75$ m.</p>
+<h3>Exercice 8 (2 pts)</h3>
+<p>Un sous-marin est a $-120$ m. Il remonte de $45$ m. A quelle profondeur est-il ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$-120 + 45 = -75$ m.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>

@@ -2,50 +2,187 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corrige 12 . 5eme</title>
+<title>Corrige 12 : Parallelogrammes . 5eme</title>
 <link rel="stylesheet" href="../../../assets/style.css">
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a><a href="../../progression-chaines.html">Progression</a></nav></div></header>
 <div class="cours-header"><div class="cours-header-inner">
-<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Corrige Lecon 12</span></div>
-<h1 class="cours-titre-principal">Corrige : Parallelogrammes</h1>
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Exercices Lecon 12</span></div>
+<h1 class="cours-titre-principal">Exercices : Parallelogrammes</h1>
+<p class="cours-sous-titre">Version corrige</p>
 </div></div>
 <main class="cours-corps">
 
-<h3>Exercice 1</h3>
-<p><strong>Enonce :</strong> ABCD est un parallelogramme. $\widehat{A}=72$°. Calculer $\widehat{B}$, $\widehat{C}$, $\widehat{D}$.</p>
-<p><strong>Reponse :</strong> $\widehat{B}=180-72=108$°. $\widehat{C}=72$°. $\widehat{D}=108$°.</p>
+<h3>Exercice 1 (2 pts)</h3>
+<p>ABCD est un parallelogramme. $\widehat{A} = 72$°. Calculer $\widehat{B}$, $\widehat{C}$, $\widehat{D}$.</p>
+<div class="interactive-box">
+<h4>Figure : parallelogramme ABCD</h4>
+<canvas id="cv1" width="450" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv1').getContext('2d');
+var ax=60,ay=160,bx=350,by=160,cx2=390,cy2=50,dx=100,dy=50;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(cx2,cy2);c.lineTo(dx,dy);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Diagonales pointillees
+c.strokeStyle='#ccc';c.lineWidth=1;c.setLineDash([4,4]);
+c.beginPath();c.moveTo(ax,ay);c.lineTo(cx2,cy2);c.stroke();
+c.beginPath();c.moveTo(bx,by);c.lineTo(dx,dy);c.stroke();
+c.setLineDash([]);
+// Labels
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-15,ay+15);c.fillText('B',bx+15,by+15);c.fillText('C',cx2+15,cy2-5);c.fillText('D',dx-15,dy-5);
+// Angles
+c.fillStyle='#c0392b';c.font='bold 12px Arial';
+c.fillText('72°',ax+30,ay-5);
+c.fillStyle='#27ae60';
+c.fillText('108°',bx-30,by-5);
+c.fillStyle='#c0392b';c.fillText('72°',cx2-30,cy2+18);
+c.fillStyle='#27ae60';c.fillText('108°',dx+30,dy+18);
+// Marques paralleles
+c.strokeStyle='#888';c.lineWidth=1.5;
+var segs=[[ax,ay,bx,by],[dx,dy,cx2,cy2]];
+for(var i=0;i<2;i++){
+var mx=(segs[i][0]+segs[i][2])/2,my=(segs[i][1]+segs[i][3])/2;
+c.beginPath();c.moveTo(mx-5,my-3);c.lineTo(mx+5,my+3);c.stroke();
+c.beginPath();c.moveTo(mx-5+4,my-3);c.lineTo(mx+5+4,my+3);c.stroke();
+}
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\widehat{B}=180-72=108$°. $\widehat{C}=72$° (oppose a A). $\widehat{D}=108$° (oppose a B).</p></div>
 
-<h3>Exercice 2</h3>
-<p><strong>Enonce :</strong> EFGH est un parallelogramme de centre O. $EG=10$ cm, $FH=8$ cm. Calculer $EO$, $FO$.</p>
-<p><strong>Reponse :</strong> $EO=5$ cm. $FO=4$ cm.</p>
+<h3>Exercice 2 (2 pts)</h3>
+<p>EFGH est un parallelogramme de centre O. $EG = 10$ cm, $FH = 8$ cm. Calculer $EO$ et $FO$.</p>
+<div class="interactive-box">
+<h4>Figure : diagonales d'un parallelogramme</h4>
+<canvas id="cv2" width="400" height="200"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv2').getContext('2d');
+var ex=40,ey=150,fx=320,fy=150,gx=360,gy=40,hx=80,hy=40;
+var ox=(ex+gx)/2,oy=(ey+gy)/2;
+c.fillStyle='rgba(42,82,152,0.06)';
+c.beginPath();c.moveTo(ex,ey);c.lineTo(fx,fy);c.lineTo(gx,gy);c.lineTo(hx,hy);c.closePath();c.fill();
+c.strokeStyle='#2a5298';c.lineWidth=2;c.stroke();
+// Diagonales
+c.strokeStyle='#d35400';c.lineWidth=1.5;
+c.beginPath();c.moveTo(ex,ey);c.lineTo(gx,gy);c.stroke();
+c.strokeStyle='#27ae60';
+c.beginPath();c.moveTo(fx,fy);c.lineTo(hx,hy);c.stroke();
+// Centre
+c.fillStyle='#c0392b';c.beginPath();c.arc(ox,oy,4,0,2*Math.PI);c.fill();
+c.fillStyle='#c0392b';c.font='bold 13px Arial';c.textAlign='center';c.fillText('O',ox+12,oy-8);
+// Labels
+c.fillStyle='#2a5298';c.font='bold 14px Arial';
+c.fillText('E',ex-12,ey+15);c.fillText('F',fx+12,fy+15);c.fillText('G',gx+12,gy-5);c.fillText('H',hx-12,hy-5);
+// Mesures
+c.fillStyle='#d35400';c.font='12px Arial';c.fillText('EG = 10 cm',ox+60,oy+30);
+c.fillStyle='#27ae60';c.fillText('FH = 8 cm',ox-60,oy-25);
+c.fillStyle='#333';c.font='bold 12px Arial';
+c.fillText('EO = 5',ox+10,oy+50);c.fillText('FO = 4',ox-50,oy+50);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$EO = 10/2 = 5$ cm. $FO = 8/2 = 4$ cm (les diagonales se coupent en leur milieu).</p></div>
 
-<h3>Exercice 3</h3>
-<p><strong>Enonce :</strong> Un quadrilatere a ses diagonales qui se coupent en leur milieu. Est-ce forcement un parallelogramme ?</p>
-<p><strong>Reponse :</strong> Oui, c'est une propriete caracteristique du parallelogramme.</p>
+<h3>Exercice 3 (1 pt)</h3>
+<p>Un quadrilatere a ses diagonales qui se coupent en leur milieu. Est-ce forcement un parallelogramme ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Oui, c'est une propriete caracteristique du parallelogramme.</p></div>
 
-<h3>Exercice 4</h3>
-<p><strong>Enonce :</strong> ABCD est un rectangle. $AB=8$ cm, $BC=6$ cm. Calculer le perimetre et l'aire.</p>
-<p><strong>Reponse :</strong> $P=2(8+6)=28$ cm. $\mathcal{A}=8\times 6=48$ cm$^2$.</p>
+<h3>Exercice 4 (2 pts)</h3>
+<p>ABCD est un rectangle. $AB = 8$ cm, $BC = 6$ cm. Calculer le perimetre et l'aire.</p>
+<div class="interactive-box">
+<h4>Figure : rectangle ABCD</h4>
+<canvas id="cv4" width="400" height="180"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv4').getContext('2d');
+var ax=60,ay=150,bx=300,by=150,cx2=300,cy2=40,dx=60,dy=40;
+c.fillStyle='rgba(39,174,96,0.06)';
+c.fillRect(ax,dy,bx-ax,ay-dy);
+c.strokeStyle='#2a5298';c.lineWidth=2;c.strokeRect(ax,dy,bx-ax,ay-dy);
+// Equerres
+var sq=12;
+c.strokeRect(ax,ay-sq,sq,sq);c.strokeRect(bx-sq,ay-sq,sq,sq);
+c.strokeRect(ax,dy,sq,sq);c.strokeRect(bx-sq,dy,sq,sq);
+// Labels
+c.fillStyle='#2a5298';c.font='bold 14px Arial';c.textAlign='center';
+c.fillText('A',ax-12,ay+15);c.fillText('B',bx+12,by+15);c.fillText('C',cx2+12,cy2-5);c.fillText('D',dx-12,dy-5);
+c.fillStyle='#c0392b';c.font='bold 13px Arial';
+c.fillText('8 cm',(ax+bx)/2,ay+18);
+c.save();c.translate(bx+18,(ay+dy)/2);c.rotate(-Math.PI/2);c.fillText('6 cm',0,0);c.restore();
+// Calculs
+c.fillStyle='#333';c.font='13px Arial';c.textAlign='left';
+c.fillText('P = 2(8+6) = 28 cm',320,80);
+c.fillText('A = 8 × 6 = 48 cm²',320,105);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$P = 2(8+6) = 28$ cm. $\mathcal{A} = 8 \times 6 = 48$ cm$^2$.</p></div>
 
-<h3>Exercice 5</h3>
-<p><strong>Enonce :</strong> ABCD est un losange de cote $5$ cm. Ses diagonales mesurent $6$ cm et $8$ cm. Calculer son aire.</p>
-<p><strong>Reponse :</strong> $\mathcal{A}=\frac{d_1\times d_2}{2}=\frac{6\times 8}{2}=24$ cm$^2$.</p>
+<h3>Exercice 5 (2 pts)</h3>
+<p>ABCD est un losange de cote $5$ cm. Ses diagonales mesurent $6$ cm et $8$ cm. Calculer son aire.</p>
+<div class="interactive-box">
+<h4>Figure : losange avec diagonales</h4>
+<canvas id="cv5" width="350" height="220"></canvas>
+</div>
+<script>
+(function(){
+var c=document.getElementById('cv5').getContext('2d');
+var cx0=150,cy0=110,d1=80,d2=60;
+var ax=cx0,ay=cy0-d1,bx=cx0+d2,by=cy0,dx2=cx0-d2,dy2=cy0,ex=cx0,ey=cy0+d1;
+c.fillStyle='rgba(211,84,0,0.06)';
+c.beginPath();c.moveTo(ax,ay);c.lineTo(bx,by);c.lineTo(ex,ey);c.lineTo(dx2,dy2);c.closePath();c.fill();
+c.strokeStyle='#d35400';c.lineWidth=2;c.stroke();
+// Diagonales
+c.strokeStyle='#2a5298';c.lineWidth=1.5;c.setLineDash([4,3]);
+c.beginPath();c.moveTo(ax,ay);c.lineTo(ex,ey);c.stroke();
+c.beginPath();c.moveTo(dx2,dy2);c.lineTo(bx,by);c.stroke();
+c.setLineDash([]);
+// Centre
+c.fillStyle='#333';c.beginPath();c.arc(cx0,cy0,3,0,2*Math.PI);c.fill();
+// Equerre
+c.strokeStyle='#888';c.lineWidth=1;c.strokeRect(cx0,cy0-8,8,8);
+// Labels
+c.fillStyle='#2a5298';c.font='12px Arial';c.textAlign='center';
+c.fillText('8 cm',cx0+12,cy0-d1/2);c.fillText('6 cm',cx0+d2/2+5,cy0-10);
+c.fillStyle='#333';c.font='bold 13px Arial';c.textAlign='left';
+c.fillText('Aire = (6 × 8) / 2',220,60);
+c.fillText('= 48 / 2 = 24 cm²',220,82);
+})();
+</script>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = \frac{d_1 \times d_2}{2} = \frac{6 \times 8}{2} = 24$ cm$^2$.</p></div>
 
-<h3>Exercice 6</h3>
-<p><strong>Enonce :</strong> Un parallelogramme a-t-il un axe de symetrie ? Et un centre de symetrie ?</p>
-<p><strong>Reponse :</strong> Pas d'axe de symetrie (sauf cas particuliers). Oui, un centre : l'intersection des diagonales.</p>
+<h3>Exercice 6 (2 pts)</h3>
+<p>Un parallelogramme a-t-il un axe de symetrie ? Et un centre de symetrie ?</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Pas d'axe de symetrie en general (sauf cas particuliers : rectangle, losange, carre). Oui, un centre de symetrie : l'intersection des diagonales.</p></div>
 
-<h3>Exercice 7</h3>
-<p><strong>Enonce :</strong> ABCD est un carre de cote $c=7$ cm. Calculer son perimetre, son aire et la longueur de sa diagonale (arrondir).</p>
-<p><strong>Reponse :</strong> $P=28$ cm. $\mathcal{A}=49$ cm$^2$. $d=c\sqrt{2}\approx 9{,}9$ cm.</p>
+<h3>Exercice 7 (3 pts)</h3>
+<p>ABCD est un carre de cote $c = 7$ cm. Calculer son perimetre, son aire et la longueur de sa diagonale.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>$P = 28$ cm. $\mathcal{A} = 49$ cm$^2$. $d = c\sqrt{2} \approx 9{,}9$ cm.</p></div>
 
-<h3>Exercice 8</h3>
-<p><strong>Enonce :</strong> Montrer qu'un parallelogramme ayant un angle droit est un rectangle.</p>
-<p><strong>Reponse :</strong> Si $\widehat{A}=90$°, alors $\widehat{B}=90$° (supplementaire), $\widehat{C}=90$° (oppose), $\widehat{D}=90$°. 4 angles droits : c'est un rectangle.</p>
+<h3>Exercice 8 (3 pts)</h3>
+<p>Montrer qu'un parallelogramme ayant un angle droit est un rectangle.</p>
+<div class="exemple"><div class="encadre-titre">Corrige</div>
+<p>Si $\widehat{A}=90$°, alors $\widehat{B}=90$° (supplementaire), $\widehat{C}=90$° (oppose a A), $\widehat{D}=90$° (oppose a B). Les 4 angles sont droits : c'est un rectangle.</p></div>
+
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
 </body>
