@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notation scientifique . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 5</span></div>
+<h1 class="cours-titre-principal">Notation scientifique</h1>
+<p class="cours-sous-titre">Ecriture scientifique, ordres de grandeur</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Ecriture scientifique</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> L'ecriture scientifique d'un nombre est de la forme :</p>
+$$a \times 10^n$$
+<p>ou $a$ est un nombre decimal tel que $1 \leq |a| < 10$ et $n$ est un entier relatif.</p>
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<ul>
+<li>$45\,000 = 4{,}5 \times 10^4$ (on deplace la virgule de 4 rangs vers la gauche).</li>
+<li>$0{,}0037 = 3{,}7 \times 10^{-3}$ (on deplace la virgule de 3 rangs vers la droite).</li>
+<li>$6{,}02 \times 10^{23}$ est deja en ecriture scientifique.</li>
+</ul>
+
+<p class="cours-attention"><strong>Attention.</strong> $32 \times 10^5$ n'est pas en ecriture scientifique car $32 \geq 10$. On ecrit $3{,}2 \times 10^6$.</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : notation scientifique</h4>
+<canvas id="cvSci" width="600" height="220"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<select id="selNum">
+<option value="384400">384 400</option>
+<option value="0.00056">0,000 56</option>
+<option value="150000000">150 000 000</option>
+<option value="0.0000001">0,000 000 1</option>
+<option value="6371">6 371</option>
+<option value="0.025">0,025</option>
+</select>
+</div>
+<div class="result-text" id="resSci"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvSci'),ctx=cvs.getContext('2d');
+var sel=document.getElementById('selNum'),res=document.getElementById('resSci');
+function toSci(v){
+  if(v===0)return{a:'0',n:0};
+  var neg=v<0;v=Math.abs(v);
+  var n=Math.floor(Math.log10(v));
+  var a=v/Math.pow(10,n);
+  a=Math.round(a*1e10)/1e10;
+  return{a:(neg?'-':'')+a,n:n};
+}
+function draw(){
+  var val=parseFloat(sel.value);
+  ctx.clearRect(0,0,600,220);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,220);
+  var s=toSci(val);
+  // Nombre original
+  ctx.font='bold 20px Arial';ctx.textAlign='center';ctx.fillStyle='#333';
+  var dispVal=val.toLocaleString('fr-FR');
+  ctx.fillText(dispVal,300,40);
+  // Fleche
+  ctx.beginPath();ctx.moveTo(300,55);ctx.lineTo(300,85);ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(295,80);ctx.lineTo(300,90);ctx.lineTo(305,80);ctx.fillStyle='#2a5298';ctx.fill();
+  // Ecriture scientifique
+  ctx.font='bold 24px Arial';ctx.fillStyle='#2a5298';
+  ctx.fillText(s.a+' x 10',260,120);
+  ctx.font='bold 16px Arial';ctx.fillText(s.n,340,105);
+  // Echelle visuelle
+  var labels=[
+    {n:-7,l:'nm'},{n:-6,l:'\u00b5m'},{n:-3,l:'mm'},{n:-2,l:'cm'},{n:0,l:'m'},
+    {n:3,l:'km'},{n:6,l:'Mm'},{n:8,l:'UA'},{n:12,l:'Tm'}
+  ];
+  var y=180,x0=30,xw=540;
+  ctx.strokeStyle='#ccc';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x0+xw,y);ctx.stroke();
+  for(var i=0;i<labels.length;i++){
+    var xp=x0+i*(xw/(labels.length-1));
+    ctx.beginPath();ctx.moveTo(xp,y-5);ctx.lineTo(xp,y+5);ctx.stroke();
+    ctx.fillStyle='#666';ctx.font='10px Arial';ctx.textAlign='center';
+    ctx.fillText('10^'+labels[i].n,xp,y+18);
+    ctx.fillText(labels[i].l,xp,y-10);
+  }
+  // Marker
+  var idx=-1,minD=999;
+  for(var i=0;i<labels.length;i++){
+    var d=Math.abs(labels[i].n-s.n);
+    if(d<minD){minD=d;idx=i;}
+  }
+  if(idx>=0){
+    var xm=x0+idx*(xw/(labels.length-1));
+    ctx.beginPath();ctx.arc(xm,y,6,0,2*Math.PI);ctx.fillStyle='#e74c3c';ctx.fill();
+  }
+  res.textContent=dispVal+' = '+s.a+' x 10^'+s.n;
+}
+sel.addEventListener('change',draw);draw();
+})();
+</script>
+</div>
+
+<h2>II. Ordres de grandeur</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> L'ordre de grandeur d'un nombre est la puissance de 10 la plus proche de ce nombre.</p>
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<ul>
+<li>$384\,400 \approx 4 \times 10^5$, ordre de grandeur : $10^5$.</li>
+<li>$0{,}000\,56 \approx 6 \times 10^{-4}$, ordre de grandeur : $10^{-3}$ (car $6 > 5$, on arrondit a $10^{-3}$).</li>
+</ul>
+
+<h2>III. Calculs en notation scientifique</h2>
+
+<p class="cours-methode"><strong>Methode.</strong> On regroupe les parties decimales entre elles et les puissances de 10 entre elles.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong></p>
+$$(3 \times 10^4) \times (2 \times 10^{-7}) = (3 \times 2) \times 10^{4+(-7)} = 6 \times 10^{-3}$$
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Ecrire en notation scientifique.</p>
+<p>a) $56\,000$ &nbsp;&nbsp; b) $0{,}0042$ &nbsp;&nbsp; c) $700 \times 10^5$ &nbsp;&nbsp; d) $0{,}3 \times 10^{-2}$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $5{,}6 \times 10^4$.</p>
+<p>b) $4{,}2 \times 10^{-3}$.</p>
+<p>c) $700 \times 10^5 = 7 \times 10^2 \times 10^5 = 7 \times 10^7$.</p>
+<p>d) $0{,}3 \times 10^{-2} = 3 \times 10^{-1} \times 10^{-2} = 3 \times 10^{-3}$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Calculer et donner le resultat en notation scientifique.</p>
+<p>$(4 \times 10^3) \times (5 \times 10^{-8})$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $(4 \times 5) \times 10^{3+(-8)} = 20 \times 10^{-5} = 2 \times 10^{-4}$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> La distance Terre-Soleil est d'environ $1{,}5 \times 10^8$ km. La lumiere parcourt $3 \times 10^5$ km/s. Combien de temps met la lumiere pour atteindre la Terre ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Temps $= \dfrac{1{,}5 \times 10^8}{3 \times 10^5} = \dfrac{1{,}5}{3} \times 10^{8-5} = 0{,}5 \times 10^3 = 500$ secondes, soit environ 8 minutes et 20 secondes.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Comparer $A = 3{,}2 \times 10^5$ et $B = 45 \times 10^3$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> On met $B$ en notation scientifique : $B = 4{,}5 \times 10^4$. Comme $10^5 > 10^4$, on a $A > B$. (On peut aussi convertir : $A = 320\,000$ et $B = 45\,000$.)</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Le diametre d'un atome d'hydrogene est environ $1{,}2 \times 10^{-10}$ m. Combien d'atomes faut-il aligner pour obtenir 1 mm ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $1\text{ mm} = 10^{-3}\text{ m}$. Nombre d'atomes : $\dfrac{10^{-3}}{1{,}2 \times 10^{-10}} = \dfrac{1}{1{,}2} \times 10^{-3-(-10)} = 0{,}83 \times 10^7 \approx 8{,}3 \times 10^6$, soit environ 8,3 millions d'atomes.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

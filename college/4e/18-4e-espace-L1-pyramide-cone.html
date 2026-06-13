@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyramide et cone . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:crosshair}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Espace et geometrie</span><span>Lecon 18</span></div>
+<h1 class="cours-titre-principal">Pyramide et cone de revolution</h1>
+<p class="cours-sous-titre">Description, patrons et volumes</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Pyramide</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Une pyramide est un solide dont la base est un polygone et dont les faces laterales sont des triangles ayant un sommet commun appele le sommet de la pyramide.</p>
+
+<p>La hauteur de la pyramide est le segment reliant le sommet au plan de la base, perpendiculairement a celle-ci.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Une pyramide a base carree a 4 faces laterales triangulaires et 1 base carree, soit 5 faces au total, 8 aretes et 5 sommets.</p>
+
+<p class="cours-propriete"><strong>Patron.</strong> Le patron d'une pyramide est compose de la base (le polygone) et des faces laterales (triangles) disposees autour de la base.</p>
+
+<h2>II. Cone de revolution</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Un cone de revolution est le solide engendre par la rotation d'un triangle rectangle autour de l'un des cotes de l'angle droit. Sa base est un disque et sa surface laterale est un secteur de disque.</p>
+
+<p>Le sommet est le point le plus eloigne de la base. La hauteur est la distance du sommet au centre de la base. L'apotheeme est la longueur d'une generatrice (du sommet a un point du cercle de base).</p>
+
+<h2>III. Volume</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Le volume d'une pyramide ou d'un cone de revolution est :</p>
+
+$$V = \frac{1}{3} \times \mathcal{A}_{\text{base}} \times h$$
+
+<p>ou $\mathcal{A}_{\text{base}}$ est l'aire de la base et $h$ est la hauteur.</p>
+
+<p class="cours-remarque"><strong>Remarque.</strong> Pour une pyramide a base carree de cote $c$ : $V = \frac{1}{3} \times c^2 \times h$. Pour un cone de rayon $r$ : $V = \frac{1}{3} \times \pi r^2 \times h$.</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : pyramide et cone</h4>
+<canvas id="cvSolid" width="600" height="420"></canvas>
+<div class="controls">
+<label>Solide :</label>
+<select id="selSolid" style="font-size:.85rem;padding:2px 6px">
+<option value="pyr">Pyramide (base carree)</option>
+<option value="cone">Cone de revolution</option>
+</select>
+<label>Base =</label><input type="range" id="slBase" min="2" max="8" value="4" step="0.5"><span id="vBase">4</span> cm
+<label>Hauteur =</label><input type="range" id="slH" min="2" max="10" value="6" step="0.5"><span id="vH">6</span> cm
+</div>
+<div class="result-text" id="resSolid"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvSolid'),ctx=cvs.getContext('2d');
+var selSolid=document.getElementById('selSolid');
+var slBase=document.getElementById('slBase'),slH=document.getElementById('slH');
+var vBase=document.getElementById('vBase'),vH=document.getElementById('vH');
+var res=document.getElementById('resSolid');
+function draw(){
+  var mode=selSolid.value;
+  var b=parseFloat(slBase.value),h=parseFloat(slH.value);
+  vBase.textContent=b;vH.textContent=h;
+  ctx.clearRect(0,0,600,420);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,420);
+  var cx=300,baseY=350,sc=30;
+  var bPx=b*sc,hPx=h*sc;
+  if(mode==='pyr'){
+    // Perspective oblique de la pyramide
+    var half=bPx/2;
+    var pers=half*0.5; // decalage perspective
+    // Base (parallelogramme en perspective)
+    var bfl=[cx-half,baseY]; // avant gauche
+    var bfr=[cx+half,baseY]; // avant droit
+    var bbr=[cx+half-pers,baseY-pers*0.7]; // arriere droit
+    var bbl=[cx-half-pers,baseY-pers*0.7]; // arriere gauche
+    // Sommet
+    var sx=cx-pers/2,sy=baseY-hPx-pers*0.35;
+    // Faces arriere (plus sombres)
+    ctx.fillStyle='rgba(52,152,219,0.15)';
+    ctx.beginPath();ctx.moveTo(bbl[0],bbl[1]);ctx.lineTo(bbr[0],bbr[1]);ctx.lineTo(sx,sy);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(bbl[0],bbl[1]);ctx.lineTo(bfl[0],bfl[1]);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(bbl[0],bbl[1]);ctx.lineTo(bbr[0],bbr[1]);ctx.stroke();
+    ctx.setLineDash([]);
+    // Faces avant
+    ctx.fillStyle='rgba(52,152,219,0.25)';
+    ctx.beginPath();ctx.moveTo(bfl[0],bfl[1]);ctx.lineTo(bfr[0],bfr[1]);ctx.lineTo(sx,sy);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='rgba(41,128,185,0.2)';
+    ctx.beginPath();ctx.moveTo(bfr[0],bfr[1]);ctx.lineTo(bbr[0],bbr[1]);ctx.lineTo(sx,sy);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#2980b9';ctx.stroke();
+    // Base avant
+    ctx.beginPath();ctx.moveTo(bfl[0],bfl[1]);ctx.lineTo(bfr[0],bfr[1]);ctx.lineTo(bbr[0],bbr[1]);
+    ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.stroke();
+    // Sommet vers avant gauche
+    ctx.beginPath();ctx.moveTo(bfl[0],bfl[1]);ctx.lineTo(sx,sy);ctx.stroke();
+    // Hauteur
+    ctx.strokeStyle='#e74c3c';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);
+    var centreBaseX=(bfl[0]+bfr[0]+bbr[0]+bbl[0])/4;
+    var centreBaseY=(bfl[1]+bfr[1]+bbr[1]+bbl[1])/4;
+    ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(centreBaseX,centreBaseY);ctx.stroke();
+    ctx.setLineDash([]);
+    // Labels
+    ctx.fillStyle='#2c3e50';ctx.font='bold 13px Arial';ctx.textAlign='center';
+    ctx.fillText('S',sx,sy-12);
+    ctx.fillText('h = '+h+' cm',centreBaseX+45,sy+hPx/2);
+    ctx.fillText('c = '+b+' cm',cx,baseY+20);
+    // Volume
+    var vol=b*b*h/3;
+    ctx.fillStyle='#8e44ad';ctx.font='bold 14px Arial';
+    ctx.fillText('V = 1/3 x '+b+'² x '+h+' = '+(Math.round(vol*100)/100)+' cm³',300,25);
+    res.textContent='Pyramide a base carree : c = '+b+' cm, h = '+h+' cm. V = (1/3) x '+b+'² x '+h+' = '+(Math.round(vol*100)/100)+' cm³.';
+  } else {
+    // Cone de revolution
+    var rPx=bPx/2;
+    // Ellipse de base
+    ctx.fillStyle='rgba(52,152,219,0.15)';
+    ctx.beginPath();ctx.ellipse(cx,baseY,rPx,rPx*0.3,0,0,2*Math.PI);ctx.fill();
+    ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.stroke();
+    // Sommet
+    var sy=baseY-hPx;
+    // Generatrices
+    ctx.fillStyle='rgba(52,152,219,0.2)';
+    ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx-rPx,baseY);ctx.lineTo(cx+rPx,baseY);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.stroke();
+    // Demi-ellipse arriere (pointillee)
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.ellipse(cx,baseY,rPx,rPx*0.3,0,Math.PI,2*Math.PI);ctx.stroke();
+    ctx.setLineDash([]);
+    // Hauteur
+    ctx.strokeStyle='#e74c3c';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);
+    ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx,baseY);ctx.stroke();
+    ctx.setLineDash([]);
+    // Rayon
+    ctx.strokeStyle='#27ae60';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx,baseY);ctx.lineTo(cx+rPx,baseY);ctx.stroke();
+    // Apotheme
+    var apo=Math.sqrt(rPx*rPx+hPx*hPx);
+    ctx.strokeStyle='#f39c12';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx+rPx,baseY);ctx.stroke();
+    ctx.setLineDash([]);
+    // Labels
+    ctx.fillStyle='#2c3e50';ctx.font='bold 13px Arial';ctx.textAlign='center';
+    ctx.fillText('S',cx,sy-12);
+    ctx.fillStyle='#e74c3c';ctx.fillText('h = '+h,cx-30,(sy+baseY)/2);
+    ctx.fillStyle='#27ae60';ctx.fillText('r = '+(b/2),cx+rPx/2,baseY+20);
+    var r=b/2;
+    var apoReal=Math.sqrt(r*r+h*h);
+    ctx.fillStyle='#f39c12';ctx.font='12px Arial';
+    ctx.fillText('a = '+(Math.round(apoReal*100)/100),cx+rPx/2+30,(sy+baseY)/2+10);
+    // Volume
+    var vol=Math.PI*r*r*h/3;
+    ctx.fillStyle='#8e44ad';ctx.font='bold 14px Arial';ctx.textAlign='center';
+    ctx.fillText('V = 1/3 x pi x '+r+'² x '+h+' = '+(Math.round(vol*100)/100)+' cm³',300,25);
+    res.textContent='Cone : r = '+r+' cm, h = '+h+' cm. V = (1/3) x pi x '+r+'² x '+h+' = '+(Math.round(vol*100)/100)+' cm³.';
+  }
+}
+[selSolid,slBase,slH].forEach(function(s){s.addEventListener('input',draw);s.addEventListener('change',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Calculer le volume d'une pyramide a base carree de cote 6 cm et de hauteur 9 cm.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $V = \frac{1}{3} \times 6^2 \times 9 = \frac{1}{3} \times 36 \times 9 = \frac{324}{3} = 108$ cm$^3$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Calculer le volume d'un cone de revolution de rayon 5 cm et de hauteur 12 cm. Donner la valeur exacte puis une valeur approchee.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $V = \frac{1}{3} \times \pi \times 5^2 \times 12 = \frac{1}{3} \times 300\pi = 100\pi \approx 314{,}2$ cm$^3$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Une pyramide a base rectangulaire a pour dimensions de base 4 cm et 7 cm, et une hauteur de 10 cm. Calculer son volume.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $\mathcal{A}_{\text{base}} = 4 \times 7 = 28$ cm$^2$. $V = \frac{1}{3} \times 28 \times 10 = \frac{280}{3} \approx 93{,}3$ cm$^3$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Un cone de revolution a un rayon de 3 cm et une generatrice (apotheme) de 5 cm. Calculer sa hauteur, puis son volume.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Par le theoreme de Pythagore dans le triangle rectangle forme par la hauteur, le rayon et la generatrice : $h = \sqrt{5^2 - 3^2} = \sqrt{25-9} = \sqrt{16} = 4$ cm. $V = \frac{1}{3} \times \pi \times 3^2 \times 4 = 12\pi \approx 37{,}7$ cm$^3$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Un recipient conique peut contenir 1,5 litre d'eau. Le rayon de l'ouverture est 10 cm. Quelle est la hauteur du recipient ? (Rappel : 1 L = 1 000 cm$^3$.)</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $V = 1{,}5$ L $ = 1\,500$ cm$^3$. $1\,500 = \frac{1}{3} \times \pi \times 10^2 \times h$, donc $h = \frac{1\,500 \times 3}{100\pi} = \frac{4\,500}{100\pi} = \frac{45}{\pi} \approx 14{,}3$ cm.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

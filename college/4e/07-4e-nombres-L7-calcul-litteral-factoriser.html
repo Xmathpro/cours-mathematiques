@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcul litteral : factoriser . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls select{padding:2px 6px;border-radius:4px;border:1px solid #ccc}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 7</span></div>
+<h1 class="cours-titre-principal">Calcul litteral : factoriser</h1>
+<p class="cours-sous-titre">Facteur commun, factorisation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Factoriser avec un facteur commun</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Factoriser une expression, c'est la transformer en un produit. C'est l'operation inverse du developpement.</p>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Si une expression est de la forme $ka + kb$, on peut factoriser par $k$ :</p>
+$$ka + kb = k(a + b)$$
+
+<p class="cours-methode"><strong>Methode.</strong> Pour factoriser, on identifie le facteur commun a tous les termes, puis on le met en evidence.</p>
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<ul>
+<li>$6x + 15 = 3(2x + 5)$ (facteur commun : 3)</li>
+<li>$x^2 + 4x = x(x + 4)$ (facteur commun : $x$)</li>
+<li>$12x^2 - 8x = 4x(3x - 2)$ (facteur commun : $4x$)</li>
+</ul>
+
+<div class="interactive-box">
+<h4>Illustration interactive : factorisation</h4>
+<canvas id="cvFact" width="600" height="260"></canvas>
+<div class="controls">
+<label>Expression :</label>
+<select id="selExpr">
+<option value="6x+15">6x + 15</option>
+<option value="x2+4x">x^2 + 4x</option>
+<option value="12x2-8x">12x^2 - 8x</option>
+<option value="10x+25">10x + 25</option>
+<option value="3x2-9x">3x^2 - 9x</option>
+</select>
+</div>
+<div class="result-text" id="resFact"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvFact'),ctx=cvs.getContext('2d');
+var sel=document.getElementById('selExpr'),res=document.getElementById('resFact');
+var data={
+  '6x+15':{expr:'6x + 15',fc:'3',parts:['2x','5'],result:'3(2x + 5)',a:6,b:15,k:3},
+  'x2+4x':{expr:'x\u00b2 + 4x',fc:'x',parts:['x','4'],result:'x(x + 4)',a:1,b:4,k:1},
+  '12x2-8x':{expr:'12x\u00b2 - 8x',fc:'4x',parts:['3x','2'],result:'4x(3x - 2)',a:12,b:8,k:4},
+  '10x+25':{expr:'10x + 25',fc:'5',parts:['2x','5'],result:'5(2x + 5)',a:10,b:25,k:5},
+  '3x2-9x':{expr:'3x\u00b2 - 9x',fc:'3x',parts:['x','3'],result:'3x(x - 3)',a:3,b:9,k:3}
+};
+function draw(){
+  var d=data[sel.value];
+  ctx.clearRect(0,0,600,260);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,260);
+  // Expression initiale
+  ctx.font='bold 20px Arial';ctx.textAlign='center';ctx.fillStyle='#333';
+  ctx.fillText(d.expr,300,35);
+  // Fleche
+  ctx.fillStyle='#2a5298';ctx.font='14px Arial';
+  ctx.fillText('Facteur commun : '+d.fc,300,70);
+  ctx.beginPath();ctx.moveTo(300,80);ctx.lineTo(300,100);ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(295,95);ctx.lineTo(300,105);ctx.lineTo(305,95);ctx.fillStyle='#2a5298';ctx.fill();
+  // Rectangle k x (a+b)
+  var rw=300,rh=80,rx=150,ry=115;
+  // Partie gauche
+  ctx.fillStyle='rgba(52,152,219,0.3)';ctx.fillRect(rx,ry,rw*0.6,rh);
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.strokeRect(rx,ry,rw*0.6,rh);
+  ctx.fillStyle='#2980b9';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText(d.fc+' x '+d.parts[0],rx+rw*0.3,ry+rh/2+5);
+  // Partie droite
+  ctx.fillStyle='rgba(231,76,60,0.3)';ctx.fillRect(rx+rw*0.6,ry,rw*0.4,rh);
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.strokeRect(rx+rw*0.6,ry,rw*0.4,rh);
+  ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';
+  ctx.fillText(d.fc+' x '+d.parts[1],rx+rw*0.8,ry+rh/2+5);
+  // Hauteur
+  ctx.save();ctx.translate(rx-15,ry+rh/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle='#8e44ad';ctx.font='bold 14px Arial';ctx.fillText(d.fc,0,0);ctx.restore();
+  // Resultat
+  ctx.font='bold 22px Arial';ctx.textAlign='center';ctx.fillStyle='#27ae60';
+  ctx.fillText(d.result,300,235);
+  res.textContent=d.expr+' = '+d.result;
+}
+sel.addEventListener('change',draw);draw();
+})();
+</script>
+</div>
+
+<h2>II. Reconnaitre une factorisation</h2>
+
+<p class="cours-methode"><strong>Methode.</strong> Pour verifier une factorisation, il suffit de developper le resultat et de retrouver l'expression de depart.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Verifions que $6x + 15 = 3(2x + 5)$ : on developpe $3(2x + 5) = 6x + 15$. C'est correct.</p>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Factoriser les expressions suivantes.</p>
+<p>a) $8x + 12$ &nbsp;&nbsp; b) $5x - 20$ &nbsp;&nbsp; c) $x^2 + 7x$ &nbsp;&nbsp; d) $6x^2 - 9x$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $8x + 12 = 4(2x + 3)$.</p>
+<p>b) $5x - 20 = 5(x - 4)$.</p>
+<p>c) $x^2 + 7x = x(x + 7)$.</p>
+<p>d) $6x^2 - 9x = 3x(2x - 3)$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Factoriser $A = 15x^2 + 10x$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $A = 5x(3x + 2)$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Factoriser $B = (x + 3)(2x) + (x + 3)(5)$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Le facteur commun est $(x + 3)$ : $B = (x + 3)(2x + 5)$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Developper puis factoriser $3(x + 2) + x(x + 2)$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Facteur commun $(x + 2)$ : $3(x + 2) + x(x + 2) = (x + 2)(3 + x) = (x + 2)(x + 3)$.</p>
+<p>Verification par developpement : $(x + 2)(x + 3) = x^2 + 3x + 2x + 6 = x^2 + 5x + 6$. Et $3(x + 2) + x(x + 2) = 3x + 6 + x^2 + 2x = x^2 + 5x + 6$. C'est correct.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Factoriser au maximum $C = 18x^3 - 12x^2 + 6x$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $C = 6x(3x^2 - 2x + 1)$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
