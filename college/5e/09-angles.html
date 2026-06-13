@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angles . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Lecon 9</span></div>
+<h1 class="cours-titre-principal">Angles</h1>
+<p class="cours-sous-titre">Angles complementaires, supplementaires et adjacents</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels</h2>
+
+<div class="definition"><div class="encadre-titre">Types d'angles</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Type</td><td style="padding:6px">Mesure</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">Angle nul</td><td style="padding:4px">$0$</td></tr>
+<tr><td style="padding:4px">Angle aigu</td><td style="padding:4px">entre $0$ et $90$</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">Angle droit</td><td style="padding:4px">$90$</td></tr>
+<tr><td style="padding:4px">Angle obtus</td><td style="padding:4px">entre $90$ et $180$</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">Angle plat</td><td style="padding:4px">$180$</td></tr>
+</table>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Angle interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : modifier l'angle et observer son type</h4>
+<canvas id="cvAngle" width="650" height="280"></canvas>
+<div class="controls">
+<label>Mesure :</label><input type="range" id="slAng" min="0" max="180" value="45"><span id="valAng">45</span>
+</div>
+<div class="result-text" id="resAngle"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvAngle'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slAng').value;
+document.getElementById('valAng').textContent=a+'deg';
+ctx.clearRect(0,0,650,280);
+var cx=200,cy=200,r=140,ar=a*Math.PI/180;
+// demi-droite horizontale
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r,cy);ctx.stroke();
+// demi-droite tournee
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(-ar),cy+r*Math.sin(-ar));ctx.stroke();
+// arc
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(cx,cy,40,0,-ar,true);ctx.stroke();
+// mesure
+ctx.fillStyle='#d35400';ctx.font='bold 16px Arial';ctx.textAlign='left';
+var tx=cx+55*Math.cos(-ar/2),ty=cy+55*Math.sin(-ar/2);
+ctx.fillText(a+'deg',tx,ty);
+// sommet
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx,cy,3,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText('O',cx-12,cy+16);
+// type
+var type=a===0?'nul':a<90?'aigu':a===90?'droit':a<180?'obtus':'plat';
+ctx.fillStyle='#27ae60';ctx.font='bold 18px Arial';ctx.textAlign='left';
+ctx.fillText('Angle '+type,430,120);
+if(a===90){ctx.strokeStyle='#333';ctx.lineWidth=1;ctx.strokeRect(cx,cy-15,15,15);}
+document.getElementById('resAngle').textContent='Un angle de '+a+' degres est un angle '+type+'.';
+}
+document.getElementById('slAng').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>II. Angles complementaires</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux angles sont <strong>complementaires</strong> si la somme de leurs mesures vaut $90$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un angle de $35$ et un angle de $55$ sont complementaires car $35 + 55 = 90$.</p>
+</div>
+
+<h2>III. Angles supplementaires</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux angles sont <strong>supplementaires</strong> si la somme de leurs mesures vaut $180$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un angle de $120$ et un angle de $60$ sont supplementaires car $120 + 60 = 180$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Complementaires et supplementaires ====== -->
+<div class="interactive-box">
+<h4>Illustration : trouver le complementaire ou le supplementaire</h4>
+<canvas id="cvCS" width="650" height="200"></canvas>
+<div class="controls">
+<label>Angle :</label><input type="range" id="slCS" min="1" max="179" value="60"><span id="valCS">60</span>
+</div>
+<div class="result-text" id="resCS"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvCS'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slCS').value;
+document.getElementById('valCS').textContent=a+'deg';
+ctx.clearRect(0,0,650,200);
+var cx=170,cy=160,r=100;
+// Complementaire (gauche)
+if(a<=90){
+var ar1=a*Math.PI/180,ar2=(90-a)*Math.PI/180;
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r,cy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(-ar1),cy+r*Math.sin(-ar1));ctx.stroke();
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(-Math.PI/2),cy+r*Math.sin(-Math.PI/2));ctx.stroke();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,30,0,-ar1,true);ctx.stroke();
+ctx.strokeStyle='#d35400';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,45,-ar1,-Math.PI/2,true);ctx.stroke();
+ctx.fillStyle='#2a5298';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(a+'deg',cx+50,cy-10);
+ctx.fillStyle='#d35400';ctx.fillText((90-a)+'deg',cx+20,cy-55);
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.fillText('Complementaire',cx,cy+25);
+}
+// Supplementaire (droite)
+var cx2=480,ar3=a*Math.PI/180;
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx2-r,cy);ctx.lineTo(cx2+r,cy);ctx.stroke();
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx2,cy);ctx.lineTo(cx2+r*Math.cos(-ar3),cy+r*Math.sin(-ar3));ctx.stroke();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx2,cy,-Math.PI,-Math.PI+ar3,false);ctx.stroke();
+ctx.strokeStyle='#d35400';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx2,cy,35,0,-ar3,true);ctx.stroke();
+ctx.fillStyle='#d35400';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(a+'deg',cx2+50*Math.cos(-ar3/2),cy+50*Math.sin(-ar3/2));
+ctx.fillStyle='#2a5298';ctx.fillText((180-a)+'deg',cx2-40,cy-15);
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.fillText('Supplementaire',cx2,cy+25);
+var txt='Angle : '+a+'deg. ';
+if(a<=90) txt+='Complementaire : '+(90-a)+'deg (somme = 90). ';
+else txt+='Pas de complementaire (l\'angle depasse 90). ';
+txt+='Supplementaire : '+(180-a)+'deg (somme = 180).';
+document.getElementById('resCS').textContent=txt;
+}
+document.getElementById('slCS').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>IV. Angles adjacents</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux angles sont <strong>adjacents</strong> s'ils ont le meme sommet, un cote commun, et sont situes de part et d'autre de ce cote commun.</p>
+</div>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1 : completer</h3>
+<ol>
+<li>Le complementaire d'un angle de $32$ mesure ... degres.</li>
+<li>Le supplementaire d'un angle de $115$ mesure ... degres.</li>
+<li>Deux angles complementaires mesurent $x$ et $2x$. Trouver $x$.</li>
+</ol>
+
+<h3>Exercice 2 : identifier</h3>
+<p>Parmi les paires suivantes, lesquelles sont complementaires, supplementaires, ou ni l'un ni l'autre ?</p>
+<p>a) $45$ et $45$ ; b) $70$ et $110$ ; c) $30$ et $150$ ; d) $25$ et $75$.</p>
+
+<h3>Exercice 3 : probleme</h3>
+<p>Deux angles supplementaires ont une difference de $40$. Quelles sont leurs mesures ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $90 - 32 = 58$. b) $180 - 115 = 65$. c) $x + 2x = 90$, $3x = 90$, $x = 30$. Les angles mesurent $30$ et $60$.</p>
+<p><strong>Ex. 2.</strong> a) Complementaires ($45+45=90$). b) Supplementaires ($70+110=180$). c) Supplementaires ($30+150=180$). d) Ni l'un ni l'autre ($25+75=100$).</p>
+<p><strong>Ex. 3.</strong> Soit $x$ le plus petit : $x + (x+40) = 180$, $2x = 140$, $x = 70$. Les angles mesurent $70$ et $110$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="08-fractions-add-diff-denom.html">&larr; Fractions : addition (denom. differents)</a><a href="10-angles-alternes.html">Angles alternes-internes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

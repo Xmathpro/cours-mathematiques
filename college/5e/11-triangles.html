@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triangles . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Lecon 11</span></div>
+<h1 class="cours-titre-principal">Triangles</h1>
+<p class="cours-sous-titre">Somme des angles, inegalite triangulaire, construction</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Somme des angles d'un triangle</h2>
+
+<div class="definition"><div class="encadre-titre">Propriete</div>
+<p>La somme des mesures des trois angles d'un triangle est toujours egale a <strong>$180$</strong> degres.</p>
+<p>$$\widehat{A} + \widehat{B} + \widehat{C} = 180$$</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Triangle avec angles ====== -->
+<div class="interactive-box">
+<h4>Illustration : modifier deux angles, le troisieme s'adapte</h4>
+<canvas id="cvTri" width="650" height="300"></canvas>
+<div class="controls">
+<label>Angle A :</label><input type="range" id="slA" min="10" max="150" value="50"><span id="vA">50</span>
+<label style="margin-left:1rem">Angle B :</label><input type="range" id="slB" min="10" max="150" value="70"><span id="vB">70</span>
+</div>
+<div class="result-text" id="resTri"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvTri'),ctx=cv.getContext('2d');
+function draw(){
+var angA=+document.getElementById('slA').value,angB=+document.getElementById('slB').value;
+var angC=180-angA-angB;
+if(angC<=0){document.getElementById('resTri').textContent='La somme de A et B depasse 180 : triangle impossible.';ctx.clearRect(0,0,650,300);return;}
+document.getElementById('vA').textContent=angA;document.getElementById('vB').textContent=angB;
+ctx.clearRect(0,0,650,300);
+var base=300,ax=175,ay=250;
+var bx=ax+base,by=ay;
+var rA=angA*Math.PI/180,rB=angB*Math.PI/180;
+var h=base*Math.sin(rA)*Math.sin(rB)/Math.sin(rA+rB);
+var cx2=ax+h/Math.tan(rA),cy2=ay-h;
+// Triangle
+ctx.fillStyle='rgba(42,82,152,0.1)';
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.lineTo(cx2,cy2);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Labels
+ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('A = '+angA+'deg',ax-10,ay+20);
+ctx.fillText('B = '+angB+'deg',bx+10,by+20);
+ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';
+ctx.fillText('C = '+angC+'deg',cx2,cy2-12);
+// Arcs
+ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.arc(ax,ay,25,-rA,0);ctx.stroke();
+ctx.beginPath();ctx.arc(bx,by,25,Math.PI,Math.PI+rB);ctx.stroke();
+ctx.strokeStyle='#27ae60';
+var angAtC=Math.atan2(ay-cy2,ax-cx2);var angBtC=Math.atan2(by-cy2,bx-cx2);
+ctx.beginPath();ctx.arc(cx2,cy2,20,angBtC,angAtC);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='bold 16px Arial';
+ctx.fillText(angA+' + '+angB+' + '+angC+' = 180',325,285);
+document.getElementById('resTri').textContent='Angle A = '+angA+', angle B = '+angB+', angle C = '+angC+'. Somme : '+angA+' + '+angB+' + '+angC+' = 180.';
+}
+['slA','slB'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Inegalite triangulaire</h2>
+
+<div class="definition"><div class="encadre-titre">Propriete</div>
+<p>Dans un triangle, la longueur de chaque cote est <strong>strictement inferieure</strong> a la somme des longueurs des deux autres cotes.</p>
+<p>Pour construire un triangle de cotes $a$, $b$, $c$ :</p>
+<p>$a < b + c$ et $b < a + c$ et $c < a + b$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">En pratique</div>
+<p>Il suffit de verifier que le plus grand cote est strictement inferieur a la somme des deux autres.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Inegalite triangulaire ====== -->
+<div class="interactive-box">
+<h4>Illustration : le triangle est-il constructible ?</h4>
+<canvas id="cvIneq" width="650" height="100"></canvas>
+<div class="controls">
+<label>a :</label><input type="range" id="slIA" min="1" max="10" value="5"><span id="vIA">5</span>
+<label>b :</label><input type="range" id="slIB" min="1" max="10" value="3"><span id="vIB">3</span>
+<label>c :</label><input type="range" id="slIC" min="1" max="10" value="4"><span id="vIC">4</span>
+</div>
+<div class="result-text" id="resIneq"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvIneq'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slIA').value,b=+document.getElementById('slIB').value,c=+document.getElementById('slIC').value;
+document.getElementById('vIA').textContent=a;document.getElementById('vIB').textContent=b;document.getElementById('vIC').textContent=c;
+ctx.clearRect(0,0,650,100);
+var ok=a<b+c&&b<a+c&&c<a+b;
+ctx.font='bold 20px Arial';ctx.textAlign='center';
+ctx.fillStyle=ok?'#27ae60':'#c0392b';
+ctx.fillText(ok?'CONSTRUCTIBLE':'NON CONSTRUCTIBLE',325,50);
+ctx.font='14px Arial';ctx.fillStyle='#333';
+var mx=Math.max(a,b,c),rest=(a+b+c)-mx;
+ctx.fillText('Plus grand cote : '+mx+'. Somme des autres : '+rest+'. '+mx+(ok?' < ':' >= ')+rest+'.',325,80);
+document.getElementById('resIneq').textContent=ok?'Le triangle est constructible car '+mx+' < '+rest+'.':'Le triangle n\'est pas constructible car '+mx+' >= '+rest+'.';
+}
+['slIA','slIB','slIC'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>III. Triangles particuliers</h2>
+
+<div class="definition"><div class="encadre-titre">Rappel</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Type</td><td style="padding:6px">Propriete</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">Isocele</td><td style="padding:4px">Deux cotes egaux. Les angles a la base sont egaux.</td></tr>
+<tr><td style="padding:4px">Equilateral</td><td style="padding:4px">Trois cotes egaux. Les trois angles mesurent $60$.</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">Rectangle</td><td style="padding:4px">Un angle droit ($90$).</td></tr>
+</table>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Calculer le troisieme angle : a) $\widehat{A}=40$, $\widehat{B}=75$. b) $\widehat{A}=90$, $\widehat{B}=35$. c) Triangle equilateral.</p>
+
+<h3>Exercice 2</h3>
+<p>Un triangle peut-il avoir pour cotes : a) 3, 4, 5 ? b) 2, 8, 4 ? c) 5, 5, 10 ?</p>
+
+<h3>Exercice 3</h3>
+<p>Un triangle isocele a un angle au sommet de $50$. Calculer les angles a la base.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $180-40-75=65$. b) $180-90-35=55$. c) $60$.</p>
+<p><strong>Ex. 2.</strong> a) Oui ($5<3+4$). b) Non ($8 \geq 2+4$). c) Non ($10 \geq 5+5$, il faut strictement inferieur).</p>
+<p><strong>Ex. 3.</strong> Base : $(180-50)/2 = 65$. Les angles a la base mesurent chacun $65$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="10-angles-alternes.html">&larr; Angles alternes-internes</a><a href="12-parallelogrammes.html">Parallelogrammes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

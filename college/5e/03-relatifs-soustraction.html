@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soustraction de nombres relatifs . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 3</span></div>
+<h1 class="cours-titre-principal">Soustraction de nombres relatifs</h1>
+<p class="cours-sous-titre">Transformer une soustraction en addition de l'oppose</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. L'oppose d'un nombre relatif</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>L'<strong>oppose</strong> d'un nombre $a$ est le nombre $-a$ tel que $a + (-a) = 0$.</p>
+<p>L'oppose de $(+3)$ est $(-3)$. L'oppose de $(-7)$ est $(+7)$. L'oppose de $0$ est $0$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Opposes sur la droite ====== -->
+<div class="interactive-box">
+<h4>Illustration : un nombre et son oppose sur la droite graduee</h4>
+<canvas id="cvOpp" width="650" height="130"></canvas>
+<div class="controls">
+<label>Nombre :</label><input type="range" id="slOpp" min="-8" max="8" value="5" style="width:160px"><span id="valOpp">+5</span>
+</div>
+<div class="result-text" id="resOpp"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvOpp'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slOpp').value;
+document.getElementById('valOpp').textContent=(a>=0?'+':'')+a;
+ctx.clearRect(0,0,650,130);
+var ox=40,y=60,w=570,minV=-10,maxV=10,sc=w/(maxV-minV);
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){var x=ox+(i-minV)*sc;ctx.beginPath();ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.stroke();ctx.fillText(i,x,y+16);}
+if(a!==0){
+var xa=ox+(a-minV)*sc, xoa=ox+(-a-minV)*sc;
+ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(xa,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.fillText((a>=0?'+':'')+a,xa,y-14);
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(xoa,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.fillText((-a>=0?'+':'')+(-a),xoa,y-14);
+// arc de liaison
+ctx.strokeStyle='#888';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+ctx.beginPath();ctx.arc(ox+(0-minV)*sc,y,Math.abs(a)*sc,a>0?Math.PI:0,a>0?0:Math.PI);ctx.stroke();
+ctx.setLineDash([]);
+}
+var x0=ox+(0-minV)*sc;
+ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(x0,y,4,0,2*Math.PI);ctx.fill();
+document.getElementById('resOpp').textContent=a===0?'L\'oppose de 0 est 0.':'L\'oppose de '+(a>=0?'+':'')+a+' est '+(-a>=0?'+':'')+(-a)+'. Ils sont a la meme distance de 0.';
+}
+document.getElementById('slOpp').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>II. Regle de la soustraction</h2>
+
+<div class="definition"><div class="encadre-titre">Propriete fondamentale</div>
+<p><strong>Soustraire un nombre revient a additionner son oppose.</strong></p>
+<p>$$a - b = a + (-b)$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$(+5) - (+3) = (+5) + (-3) = +2$</p>
+<p>$(+4) - (-7) = (+4) + (+7) = +11$</p>
+<p>$(-2) - (+6) = (-2) + (-6) = -8$</p>
+<p>$(-3) - (-9) = (-3) + (+9) = +6$</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Retenir</div>
+<p>Soustraire un positif, c'est reculer sur la droite. Soustraire un negatif, c'est avancer (double signe negatif = positif).</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Transformateur soustraction -> addition ====== -->
+<div class="interactive-box">
+<h4>Illustration : transformer une soustraction en addition</h4>
+<canvas id="cvTransf" width="650" height="120"></canvas>
+<div class="controls">
+<label>a = </label><input type="range" id="slTA" min="-8" max="8" value="4"><span id="valTA">+4</span>
+<label style="margin-left:1rem">b = </label><input type="range" id="slTB" min="-8" max="8" value="-7"><span id="valTB">-7</span>
+</div>
+<div class="result-text" id="resTransf"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvTransf'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slTA').value,b=+document.getElementById('slTB').value;
+document.getElementById('valTA').textContent=(a>=0?'+':'')+a;
+document.getElementById('valTB').textContent=(b>=0?'+':'')+b;
+ctx.clearRect(0,0,650,120);
+ctx.font='20px Arial';ctx.textAlign='center';ctx.fillStyle='#333';
+var sa=(a>=0?'+':'')+a, sb=(b>=0?'+':'')+b, sob=(-b>=0?'+':'')+(-b);
+ctx.fillText('('+sa+') - ('+sb+')',165,40);
+ctx.fillStyle='#c0392b';ctx.font='bold 28px Arial';ctx.fillText('=',325,45);
+ctx.fillStyle='#2a5298';ctx.font='20px Arial';
+ctx.fillText('('+sa+') + ('+sob+')',485,40);
+var s=a+(-b);
+ctx.fillStyle='#27ae60';ctx.font='bold 20px Arial';
+ctx.fillText('= '+(s>=0?'+':'')+s,325,85);
+document.getElementById('resTransf').textContent='On remplace "- ('+sb+')" par "+ ('+sob+')". Resultat : '+(s>=0?'+':'')+s+'.';
+}
+['slTA','slTB'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<!-- ====== ILLUSTRATION 3 : Droite graduee soustraction ====== -->
+<div class="interactive-box">
+<h4>Illustration : visualiser la soustraction sur la droite</h4>
+<canvas id="cvSousDr" width="650" height="170"></canvas>
+<div class="controls">
+<button onclick="newSous()">Nouveau calcul</button>
+<label>Ta reponse :</label><input type="number" id="sousAns" style="width:60px;padding:4px">
+<button onclick="checkSous()">Verifier</button>
+</div>
+<div class="result-text" id="resSous"></div>
+</div>
+<script>
+var sa,sb,sctx=document.getElementById('cvSousDr').getContext('2d');
+function drawSous(){
+sctx.clearRect(0,0,650,170);
+var ox=30,y=90,w=590,minV=-12,maxV=12,sc=w/(maxV-minV);
+sctx.strokeStyle='#333';sctx.lineWidth=1.5;
+sctx.beginPath();sctx.moveTo(ox,y);sctx.lineTo(ox+w,y);sctx.stroke();
+sctx.fillStyle='#333';sctx.font='10px Arial';sctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){var x=ox+(i-minV)*sc;sctx.beginPath();sctx.moveTo(x,y-4);sctx.lineTo(x,y+4);sctx.stroke();if(i%2===0)sctx.fillText(i,x,y+15);}
+sctx.fillStyle='#2a5298';sctx.font='bold 22px Arial';
+sctx.fillText('('+(sa>=0?'+':'')+sa+') - ('+(sb>=0?'+':'')+sb+') = ?',325,30);
+var xa=ox+(sa-minV)*sc;
+sctx.fillStyle='#2a5298';sctx.beginPath();sctx.arc(xa,y,5,0,2*Math.PI);sctx.fill();
+sctx.fillStyle='#2a5298';sctx.font='bold 12px Arial';sctx.fillText('depart : '+(sa>=0?'+':'')+sa,xa,y+35);
+}
+function newSous(){
+sa=Math.floor(Math.random()*15)-7;sb=Math.floor(Math.random()*15)-7;
+document.getElementById('sousAns').value='';document.getElementById('resSous').textContent='';drawSous();
+}
+function checkSous(){
+var rep=+document.getElementById('sousAns').value,s=sa-sb;
+if(rep===s) document.getElementById('resSous').textContent='Bravo ! ('+(sa>=0?'+':'')+sa+') - ('+(sb>=0?'+':'')+sb+') = ('+(sa>=0?'+':'')+sa+') + ('+(-sb>=0?'+':'')+(-sb)+') = '+(s>=0?'+':'')+s+'.';
+else document.getElementById('resSous').textContent='Non. ('+(sa>=0?'+':'')+sa+') - ('+(sb>=0?'+':'')+sb+') = ('+(sa>=0?'+':'')+sa+') + ('+(-sb>=0?'+':'')+(-sb)+') = '+(s>=0?'+':'')+s+'.';
+}
+newSous();
+</script>
+
+<h2>III. Exercices</h2>
+
+<h3>Exercice 1 : transformer puis calculer</h3>
+<ol>
+<li>$(+6) - (+2) = $</li>
+<li>$(-4) - (+5) = $</li>
+<li>$(+3) - (-8) = $</li>
+<li>$(-1) - (-7) = $</li>
+</ol>
+
+<h3>Exercice 2 : enchainements</h3>
+<ol>
+<li>$(+5) - (+3) + (-2) - (-4) = $</li>
+<li>$(-6) + (+8) - (-1) - (+3) = $</li>
+</ol>
+
+<h3>Exercice 3 : probleme</h3>
+<p>Un sous-marin est a $-120$ m. Il remonte de $45$ m puis redescend de $30$ m. A quelle profondeur se trouve-t-il ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $(+6)+(-2)=+4$. b) $(-4)+(-5)=-9$. c) $(+3)+(+8)=+11$. d) $(-1)+(+7)=+6$.</p>
+<p><strong>Ex. 2.</strong> a) $(+5)+(-3)+(-2)+(+4)=+4$. b) $(-6)+(+8)+(+1)+(-3)=0$.</p>
+<p><strong>Ex. 3.</strong> $(-120)+(+45)+(-30) = (-120)+(+45)+(-30) = -105$ m.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="02-relatifs-addition.html">&larr; Relatifs : addition</a><a href="04-priorites-operatoires.html">Priorites operatoires &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

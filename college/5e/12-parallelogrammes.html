@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallelogrammes . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Lecon 12</span></div>
+<h1 class="cours-titre-principal">Parallelogrammes</h1>
+<p class="cours-sous-titre">Proprietes, cas particuliers, construction</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>parallelogramme</strong> est un quadrilatere dont les cotes opposes sont paralleles deux a deux.</p>
+</div>
+
+<h2>II. Proprietes</h2>
+
+<div class="definition"><div class="encadre-titre">Proprietes du parallelogramme</div>
+<ol>
+<li>Les cotes opposes sont <strong>paralleles</strong> et de <strong>meme longueur</strong>.</li>
+<li>Les angles opposes sont <strong>egaux</strong>.</li>
+<li>Les angles consecutifs sont <strong>supplementaires</strong> (leur somme vaut $180$).</li>
+<li>Les diagonales se coupent en leur <strong>milieu</strong> (centre de symetrie).</li>
+</ol>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Parallelogramme interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : parallelogramme et ses proprietes</h4>
+<canvas id="cvPara" width="650" height="300"></canvas>
+<div class="controls">
+<label>Decalage :</label><input type="range" id="slDec" min="20" max="180" value="80"><span id="vDec">80</span>
+<label style="margin-left:1rem">Hauteur :</label><input type="range" id="slH" min="60" max="180" value="120"><span id="vH">120</span>
+</div>
+<div class="result-text" id="resPara"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvPara'),ctx=cv.getContext('2d');
+function draw(){
+var dec=+document.getElementById('slDec').value,h=+document.getElementById('slH').value;
+document.getElementById('vDec').textContent=dec;document.getElementById('vH').textContent=h;
+ctx.clearRect(0,0,650,300);
+var base=250,ax=120,ay=240;
+var bx=ax+base,by=ay;
+var dx=ax+dec,dy=ay-h;
+var cx2=dx+base,cy2=dy;
+// Parallelogramme
+ctx.fillStyle='rgba(42,82,152,0.08)';
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.lineTo(cx2,cy2);ctx.lineTo(dx,dy);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Diagonales
+ctx.strokeStyle='#d35400';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(cx2,cy2);ctx.stroke();
+ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(dx,dy);ctx.stroke();
+ctx.setLineDash([]);
+// Centre
+var mx=(ax+cx2)/2,my=(ay+cy2)/2;
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(mx,my,5,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText('O',mx+12,my-8);
+// Labels sommets
+ctx.fillStyle='#333';ctx.font='bold 14px Arial';
+ctx.fillText('A',ax-14,ay+16);ctx.fillText('B',bx+10,by+16);
+ctx.fillText('C',cx2+10,cy2-8);ctx.fillText('D',dx-14,dy-8);
+// Marques cotes egaux
+ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+var m1x=(ax+bx)/2,m1y=(ay+by)/2,m2x=(dx+cx2)/2,m2y=(dy+cy2)/2;
+ctx.beginPath();ctx.moveTo(m1x-5,m1y-5);ctx.lineTo(m1x+5,m1y+5);ctx.stroke();
+ctx.beginPath();ctx.moveTo(m2x-5,m2y-5);ctx.lineTo(m2x+5,m2y+5);ctx.stroke();
+document.getElementById('resPara').textContent='AB = DC, AD = BC. Les diagonales [AC] et [BD] se coupent en leur milieu O.';
+}
+['slDec','slH'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>III. Cas particuliers</h2>
+
+<div class="definition"><div class="encadre-titre">Les parallelogrammes particuliers</div>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Figure</td><td style="padding:6px">Propriete supplementaire</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px"><strong>Rectangle</strong></td><td style="padding:4px">Parallelogramme avec 4 angles droits. Diagonales de meme longueur.</td></tr>
+<tr><td style="padding:4px"><strong>Losange</strong></td><td style="padding:4px">Parallelogramme avec 4 cotes egaux. Diagonales perpendiculaires.</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px"><strong>Carre</strong></td><td style="padding:4px">A la fois rectangle et losange. 4 cotes egaux, 4 angles droits.</td></tr>
+</table>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Classification visuelle ====== -->
+<div class="interactive-box">
+<h4>Illustration : famille des parallelogrammes</h4>
+<canvas id="cvFam" width="650" height="220"></canvas>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvFam'),ctx=cv.getContext('2d');
+ctx.font='bold 16px Arial';ctx.textAlign='center';
+// Grand cadre
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(20,10,610,200);
+ctx.fillStyle='#2a5298';ctx.fillText('Parallelogramme',325,35);
+// Rectangle
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;ctx.strokeRect(40,50,260,150);
+ctx.fillStyle='#d35400';ctx.font='bold 14px Arial';ctx.fillText('Rectangle',170,72);
+ctx.fillStyle='#d35400';ctx.fillRect(130,85,80,55);ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.strokeRect(130,85,80,55);
+// Losange
+ctx.strokeStyle='#27ae60';ctx.lineWidth=2;ctx.strokeRect(350,50,260,150);
+ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';ctx.fillText('Losange',480,72);
+ctx.fillStyle='#27ae60';ctx.beginPath();ctx.moveTo(480,90);ctx.lineTo(520,115);ctx.lineTo(480,140);ctx.lineTo(440,115);ctx.closePath();ctx.fill();
+// Carre (intersection)
+ctx.fillStyle='#8e44ad';ctx.font='bold 13px Arial';ctx.fillText('Carre',325,170);
+ctx.fillStyle='rgba(142,68,173,0.3)';ctx.fillRect(300,175,50,30);ctx.strokeStyle='#8e44ad';ctx.strokeRect(300,175,50,30);
+})();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>ABCD est un parallelogramme. $\widehat{A} = 72$. Calculer $\widehat{B}$, $\widehat{C}$, $\widehat{D}$.</p>
+
+<h3>Exercice 2</h3>
+<p>EFGH est un parallelogramme. $EG = 10$ cm et $FH = 8$ cm. Les diagonales se coupent en O. Calculer $EO$, $OG$, $FO$, $OH$.</p>
+
+<h3>Exercice 3</h3>
+<p>Un quadrilatere a ses diagonales qui se coupent en leur milieu. Est-ce forcement un parallelogramme ? Les diagonales sont en plus de meme longueur : quel est ce quadrilatere ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $\widehat{B}=180-72=108$ (consecutifs), $\widehat{C}=72$ (oppose a A), $\widehat{D}=108$ (oppose a B).</p>
+<p><strong>Ex. 2.</strong> $EO=OG=5$ cm, $FO=OH=4$ cm (les diagonales se coupent en leur milieu).</p>
+<p><strong>Ex. 3.</strong> Oui, c'est un parallelogramme. Avec les diagonales de meme longueur, c'est un rectangle.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="11-triangles.html">&larr; Triangles</a><a href="13-symetrie-centrale.html">Symetrie centrale &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

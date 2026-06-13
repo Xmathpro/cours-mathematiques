@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistiques : effectifs et frequences . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Organisation de donnees</span><span>Lecon 17</span></div>
+<h1 class="cours-titre-principal">Statistiques : effectifs et frequences</h1>
+<p class="cours-sous-titre">Vocabulaire, effectifs, frequences, diagrammes</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Vocabulaire</h2>
+
+<div class="definition"><div class="encadre-titre">Definitions</div>
+<p>En statistiques, on etudie un <strong>caractere</strong> (ou variable) sur une <strong>population</strong>.</p>
+<p>Chaque valeur possible du caractere est une <strong>modalite</strong> (ou valeur).</p>
+<p>L'<strong>effectif</strong> d'une modalite est le nombre d'individus qui presentent cette modalite.</p>
+<p>L'<strong>effectif total</strong> est la somme de tous les effectifs.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>On interroge 30 eleves sur leur couleur preferee :</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Couleur</td><td style="padding:6px">Bleu</td><td style="padding:6px">Rouge</td><td style="padding:6px">Vert</td><td style="padding:6px">Jaune</td><td style="padding:6px">Total</td></tr>
+<tr><td style="padding:4px">Effectif</td><td style="padding:4px">12</td><td style="padding:4px">8</td><td style="padding:4px">6</td><td style="padding:4px">4</td><td style="padding:4px">30</td></tr>
+</table>
+</div>
+
+<h2>II. Frequence</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>La <strong>frequence</strong> d'une modalite est le quotient de l'effectif de cette modalite par l'effectif total :
+$$f = \frac{\text{effectif de la modalite}}{\text{effectif total}}$$</p>
+<p>On l'exprime souvent en pourcentage : $f \times 100$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>La somme de toutes les frequences est egale a $1$ (soit $100\%$).</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Diagramme en barres interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : effectifs et frequences</h4>
+<canvas id="cvBar" width="650" height="320"></canvas>
+<div class="controls">
+<label>Bleu :</label><input type="range" id="slA" min="0" max="20" value="12"><span id="vA">12</span>
+<label>Rouge :</label><input type="range" id="slBr" min="0" max="20" value="8"><span id="vBr">8</span>
+<label>Vert :</label><input type="range" id="slC" min="0" max="20" value="6"><span id="vC">6</span>
+<label>Jaune :</label><input type="range" id="slD" min="0" max="20" value="4"><span id="vD">4</span>
+</div>
+<div class="result-text" id="resBar"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvBar'),ctx=cv.getContext('2d');
+var noms=['Bleu','Rouge','Vert','Jaune'];
+var cols=['#3498db','#e74c3c','#27ae60','#f1c40f'];
+function draw(){
+var vals=[+document.getElementById('slA').value,+document.getElementById('slBr').value,+document.getElementById('slC').value,+document.getElementById('slD').value];
+document.getElementById('vA').textContent=vals[0];document.getElementById('vBr').textContent=vals[1];
+document.getElementById('vC').textContent=vals[2];document.getElementById('vD').textContent=vals[3];
+var total=vals[0]+vals[1]+vals[2]+vals[3];
+ctx.clearRect(0,0,650,320);
+// Axes
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(80,280);ctx.lineTo(420,280);ctx.stroke();
+ctx.beginPath();ctx.moveTo(80,280);ctx.lineTo(80,20);ctx.stroke();
+// Graduations y
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.textAlign='right';
+for(var g=0;g<=20;g+=5){
+var gy=280-g*12;
+ctx.fillText(g,72,gy+4);
+ctx.strokeStyle='#eee';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(80,gy);ctx.lineTo(420,gy);ctx.stroke();
+}
+// Barres
+var bw=60,gap=20,x0=100;
+ctx.textAlign='center';
+for(var i=0;i<4;i++){
+var bh=vals[i]*12;
+var bx=x0+i*(bw+gap);
+ctx.fillStyle=cols[i];ctx.fillRect(bx,280-bh,bw,bh);
+ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.strokeRect(bx,280-bh,bw,bh);
+ctx.fillStyle='#333';ctx.font='bold 12px Arial';
+ctx.fillText(vals[i],bx+bw/2,280-bh-8);
+ctx.fillText(noms[i],bx+bw/2,296);
+}
+// Tableau frequences a droite
+ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='left';
+ctx.fillText('Effectif total : '+total,440,50);
+ctx.font='12px Arial';
+for(var j=0;j<4;j++){
+var freq=total>0?(vals[j]/total*100).toFixed(1):'0.0';
+ctx.fillStyle=cols[j];ctx.fillRect(440,65+j*22,12,12);
+ctx.fillStyle='#333';ctx.fillText(noms[j]+' : '+vals[j]+' ('+freq+'%)',458,76+j*22);
+}
+var txt='Effectif total = '+total+'. ';
+if(total>0){
+for(var m=0;m<4;m++){txt+=noms[m]+' : '+(vals[m]/total*100).toFixed(1)+'%. ';}
+}
+document.getElementById('resBar').textContent=txt;
+}
+['slA','slBr','slC','slD'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>III. Diagrammes</h2>
+
+<div class="definition"><div class="encadre-titre">Types de diagrammes</div>
+<p>Pour representer des donnees statistiques, on utilise principalement :</p>
+<ol>
+<li>Le <strong>diagramme en barres</strong> (ou en batons) : la hauteur de chaque barre est proportionnelle a l'effectif.</li>
+<li>Le <strong>diagramme circulaire</strong> (ou camembert) : l'angle de chaque secteur est proportionnel a la frequence. L'angle se calcule par : $\text{angle} = f \times 360$.</li>
+</ol>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Diagramme circulaire ====== -->
+<div class="interactive-box">
+<h4>Illustration : diagramme circulaire</h4>
+<canvas id="cvCirc" width="650" height="300"></canvas>
+<div class="result-text" id="resCirc">Deplacez les curseurs ci-dessus pour voir le diagramme circulaire s'adapter.</div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvCirc'),ctx=cv.getContext('2d');
+var noms=['Bleu','Rouge','Vert','Jaune'];
+var cols=['#3498db','#e74c3c','#27ae60','#f1c40f'];
+function drawCirc(){
+var vals=[+document.getElementById('slA').value,+document.getElementById('slBr').value,+document.getElementById('slC').value,+document.getElementById('slD').value];
+var total=vals[0]+vals[1]+vals[2]+vals[3];
+ctx.clearRect(0,0,650,300);
+if(total===0){ctx.fillStyle='#999';ctx.font='14px Arial';ctx.textAlign='center';ctx.fillText('Effectif total = 0',250,150);return;}
+var cx0=200,cy0=150,r=120;
+var start=-Math.PI/2;
+for(var i=0;i<4;i++){
+var angle=vals[i]/total*2*Math.PI;
+ctx.fillStyle=cols[i];
+ctx.beginPath();ctx.moveTo(cx0,cy0);ctx.arc(cx0,cy0,r,start,start+angle);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+// Label
+if(vals[i]>0){
+var mid=start+angle/2;
+var lx=cx0+Math.cos(mid)*(r*0.65);
+var ly=cy0+Math.sin(mid)*(r*0.65);
+ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='center';
+var pct=(vals[i]/total*100).toFixed(0)+'%';
+ctx.fillText(pct,lx,ly+4);
+}
+start+=angle;
+}
+// Legende
+ctx.textAlign='left';
+for(var j=0;j<4;j++){
+var deg=(vals[j]/total*360).toFixed(1);
+ctx.fillStyle=cols[j];ctx.fillRect(400,50+j*30,16,16);
+ctx.fillStyle='#333';ctx.font='13px Arial';
+ctx.fillText(noms[j]+' : '+deg+'\u00B0',424,64+j*30);
+}
+}
+['slA','slBr','slC','slD'].forEach(function(id){document.getElementById(id).addEventListener('input',drawCirc);});
+drawCirc();
+})();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Dans une classe de 25 eleves, 10 pratiquent le football, 7 le tennis, 5 la natation et 3 le basket. Calculer la frequence de chaque sport en pourcentage.</p>
+
+<h3>Exercice 2</h3>
+<p>La frequence de la note A dans un groupe est $40\%$. L'effectif total est 50. Quel est l'effectif de la note A ?</p>
+
+<h3>Exercice 3</h3>
+<p>Calculer l'angle du secteur circulaire correspondant a une frequence de $25\%$.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> Football : $\frac{10}{25}=0{,}4 = 40\%$. Tennis : $\frac{7}{25}=0{,}28 = 28\%$. Natation : $\frac{5}{25}=0{,}2 = 20\%$. Basket : $\frac{3}{25}=0{,}12 = 12\%$.</p>
+<p><strong>Ex. 2.</strong> Effectif de A : $50 \times 0{,}4 = 20$ eleves.</p>
+<p><strong>Ex. 3.</strong> Angle : $0{,}25 \times 360 = 90$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="16-proportionnalite-coeff.html">&larr; Proportionnalite</a><a href="18-statistiques-moyenne.html">Statistiques : moyenne &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

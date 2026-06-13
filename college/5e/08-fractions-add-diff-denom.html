@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Addition de fractions (denominateurs differents) . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 8</span></div>
+<h1 class="cours-titre-principal">Addition de fractions (denominateurs differents)</h1>
+<p class="cours-sous-titre">Reduire au meme denominateur pour additionner</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Methode</h2>
+
+<div class="definition"><div class="encadre-titre">Regle</div>
+<p>Pour additionner deux fractions de <strong>denominateurs differents</strong> :</p>
+<ol>
+<li>On cherche un <strong>denominateur commun</strong> (en general, le produit des deux denominateurs, ou leur plus petit multiple commun).</li>
+<li>On transforme chaque fraction pour obtenir ce denominateur commun.</li>
+<li>On additionne les numerateurs.</li>
+</ol>
+<p>$$\frac{a}{b} + \frac{c}{d} = \frac{a \times d}{b \times d} + \frac{c \times b}{d \times b} = \frac{a \times d + c \times b}{b \times d}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple detaille</div>
+<p>$\dfrac{2}{3} + \dfrac{3}{5}$</p>
+<p>Denominateur commun : $3 \times 5 = 15$.</p>
+<p>$\dfrac{2}{3} = \dfrac{2 \times 5}{3 \times 5} = \dfrac{10}{15}$ et $\dfrac{3}{5} = \dfrac{3 \times 3}{5 \times 3} = \dfrac{9}{15}$.</p>
+<p>$\dfrac{10}{15} + \dfrac{9}{15} = \dfrac{19}{15}$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Visualisation barres ====== -->
+<div class="interactive-box">
+<h4>Illustration : mise au meme denominateur puis addition</h4>
+<canvas id="cvDiff" width="650" height="280"></canvas>
+<div class="controls">
+<label>a/b :</label><select id="dN1"><option>1</option><option selected>2</option><option>3</option><option>4</option></select> /
+<select id="dD1"><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+<label style="margin-left:1rem">c/d :</label><select id="dN2"><option>1</option><option>2</option><option selected>3</option><option>4</option></select> /
+<select id="dD2"><option>2</option><option>3</option><option>4</option><option selected>5</option></select>
+</div>
+<div class="result-text" id="resDiff"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvDiff'),ctx=cv.getContext('2d');
+function pgcd(a,b){return b?pgcd(b,a%b):a;}
+function draw(){
+var n1=+document.getElementById('dN1').value,d1=+document.getElementById('dD1').value;
+var n2=+document.getElementById('dN2').value,d2=+document.getElementById('dD2').value;
+ctx.clearRect(0,0,650,280);
+var bw=340,bh=22,x0=160;
+if(d1===d2){document.getElementById('resDiff').textContent='Les denominateurs sont deja egaux ! Utilise la regle de la lecon 7.';return;}
+var dc=d1*d2/pgcd(d1,d2);
+var nn1=n1*(dc/d1),nn2=n2*(dc/d2),ns=nn1+nn2;
+ctx.fillStyle='#333';ctx.font='bold 12px Arial';ctx.textAlign='right';
+// Ligne 1 : a/b
+ctx.fillText(n1+'/'+d1,x0-10,22);
+for(var i=0;i<d1;i++){ctx.fillStyle=i<n1?'#2a5298':'#e0e0e0';ctx.fillRect(x0+i*(bw/d1),10,bw/d1-2,bh);}
+// Ligne 2 : c/d
+ctx.fillStyle='#333';ctx.fillText(n2+'/'+d2,x0-10,62);
+for(var i=0;i<d2;i++){ctx.fillStyle=i<n2?'#d35400':'#e0e0e0';ctx.fillRect(x0+i*(bw/d2),50,bw/d2-2,bh);}
+// Fleche
+ctx.fillStyle='#888';ctx.font='italic 12px Arial';ctx.textAlign='center';
+ctx.fillText('Denominateur commun : '+dc,325,100);
+// Ligne 3 : nn1/dc
+ctx.fillStyle='#333';ctx.font='bold 12px Arial';ctx.textAlign='right';
+ctx.fillText(nn1+'/'+dc,x0-10,132);
+for(var i=0;i<dc;i++){ctx.fillStyle=i<nn1?'#2a5298':'#e0e0e0';ctx.fillRect(x0+i*(bw/dc),120,bw/dc-1,bh);}
+// Ligne 4 : nn2/dc
+ctx.fillStyle='#333';ctx.fillText(nn2+'/'+dc,x0-10,172);
+for(var i=0;i<dc;i++){ctx.fillStyle=i<nn2?'#d35400':'#e0e0e0';ctx.fillRect(x0+i*(bw/dc),160,bw/dc-1,bh);}
+// Ligne 5 : resultat
+ctx.fillStyle='#333';ctx.fillText(ns+'/'+dc,x0-10,222);
+for(var i=0;i<Math.max(dc,ns);i++){
+ctx.fillStyle=i<nn1?'#2a5298':(i<ns?'#d35400':'#e0e0e0');
+ctx.fillRect(x0+i*(bw/dc),210,bw/dc-1,bh);
+}
+ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';ctx.textAlign='center';
+var g=pgcd(ns,dc);
+var txt=n1+'/'+d1+' + '+n2+'/'+d2+' = '+nn1+'/'+dc+' + '+nn2+'/'+dc+' = '+ns+'/'+dc;
+if(g>1) txt+=' = '+(ns/g)+'/'+(dc/g);
+ctx.fillText(txt,325,260);
+document.getElementById('resDiff').textContent=txt;
+}
+['dN1','dD1','dN2','dD2'].forEach(function(id){document.getElementById(id).addEventListener('change',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Cas ou un denominateur est multiple de l'autre</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\dfrac{1}{3} + \dfrac{5}{6}$ : comme $6 = 3 \times 2$, le denominateur commun est $6$.</p>
+<p>$\dfrac{1}{3} = \dfrac{2}{6}$. Donc $\dfrac{2}{6} + \dfrac{5}{6} = \dfrac{7}{6}$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Astuce</div>
+<p>Quand un denominateur est un multiple de l'autre, il suffit de transformer une seule fraction. C'est plus rapide !</p>
+</div>
+
+<h2>III. Soustraction</h2>
+
+<div class="definition"><div class="encadre-titre">Meme methode</div>
+<p>La soustraction suit exactement le meme principe : on reduit au meme denominateur puis on soustrait les numerateurs.</p>
+<p>$$\frac{a}{b} - \frac{c}{d} = \frac{a \times d - c \times b}{b \times d}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\dfrac{5}{6} - \dfrac{1}{4} = \dfrac{5 \times 4}{6 \times 4} - \dfrac{1 \times 6}{4 \times 6} = \dfrac{20}{24} - \dfrac{6}{24} = \dfrac{14}{24} = \dfrac{7}{12}$</p>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1 : additions</h3>
+<ol>
+<li>$\dfrac{1}{3} + \dfrac{1}{4} =$</li>
+<li>$\dfrac{2}{5} + \dfrac{1}{3} =$</li>
+<li>$\dfrac{3}{4} + \dfrac{1}{6} =$</li>
+</ol>
+
+<h3>Exercice 2 : soustractions</h3>
+<ol>
+<li>$\dfrac{5}{6} - \dfrac{2}{3} =$</li>
+<li>$\dfrac{7}{8} - \dfrac{1}{4} =$</li>
+<li>$\dfrac{3}{5} - \dfrac{1}{2} =$</li>
+</ol>
+
+<h3>Exercice 3 : probleme</h3>
+<p>Ali a parcouru $\dfrac{2}{5}$ du chemin le matin et $\dfrac{1}{3}$ l'apres-midi. Quelle fraction du chemin a-t-il parcourue au total ? Que lui reste-t-il ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $\frac{4}{12}+\frac{3}{12}=\frac{7}{12}$. b) $\frac{6}{15}+\frac{5}{15}=\frac{11}{15}$. c) $\frac{9}{12}+\frac{2}{12}=\frac{11}{12}$.</p>
+<p><strong>Ex. 2.</strong> a) $\frac{5}{6}-\frac{4}{6}=\frac{1}{6}$. b) $\frac{7}{8}-\frac{2}{8}=\frac{5}{8}$. c) $\frac{6}{10}-\frac{5}{10}=\frac{1}{10}$.</p>
+<p><strong>Ex. 3.</strong> $\frac{2}{5}+\frac{1}{3}=\frac{6}{15}+\frac{5}{15}=\frac{11}{15}$. Reste : $1 - \frac{11}{15}=\frac{4}{15}$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="07-fractions-add-meme-denom.html">&larr; Fractions : addition (meme denom.)</a><a href="09-angles.html">Angles &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Addition de fractions (meme denominateur) . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 7</span></div>
+<h1 class="cours-titre-principal">Addition de fractions (meme denominateur)</h1>
+<p class="cours-sous-titre">Additionner et soustraire des fractions de meme denominateur</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Addition de fractions de meme denominateur</h2>
+
+<div class="definition"><div class="encadre-titre">Regle</div>
+<p>Pour additionner deux fractions de <strong>meme denominateur</strong>, on additionne les numerateurs et on garde le denominateur.</p>
+<p>$$\frac{a}{d} + \frac{b}{d} = \frac{a + b}{d}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$\dfrac{3}{7} + \dfrac{2}{7} = \dfrac{3+2}{7} = \dfrac{5}{7}$</p>
+<p>$\dfrac{1}{5} + \dfrac{3}{5} = \dfrac{4}{5}$</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Barres visuelles ====== -->
+<div class="interactive-box">
+<h4>Illustration : addition de fractions avec des barres</h4>
+<canvas id="cvAddF" width="650" height="220"></canvas>
+<div class="controls">
+<label>a/d :</label><select id="fN1"><option>1</option><option>2</option><option selected>3</option><option>4</option></select> /
+<select id="fD"><option>4</option><option>5</option><option>6</option><option selected>7</option><option>8</option><option>10</option></select>
+<label style="margin-left:1rem">b/d :</label><select id="fN2"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+</div>
+<div class="result-text" id="resAddF"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvAddF'),ctx=cv.getContext('2d');
+function draw(){
+var n1=+document.getElementById('fN1').value,d=+document.getElementById('fD').value,n2=+document.getElementById('fN2').value;
+if(n1+n2>d*2){document.getElementById('resAddF').textContent='La somme depasse 2, reduis les numerateurs.';return;}
+ctx.clearRect(0,0,650,220);
+var bw=400,bh=30,x0=125;
+// Barre a/d
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='right';
+ctx.fillText(n1+'/'+d,x0-10,48);
+for(var i=0;i<d;i++){ctx.fillStyle=i<n1?'#2a5298':'#e0e0e0';ctx.fillRect(x0+i*(bw/d),32,bw/d-2,bh);}
+// Barre b/d
+ctx.fillStyle='#333';ctx.textAlign='right';
+ctx.fillText(n2+'/'+d,x0-10,108);
+for(var i=0;i<d;i++){ctx.fillStyle=i<n2?'#d35400':'#e0e0e0';ctx.fillRect(x0+i*(bw/d),92,bw/d-2,bh);}
+// Signe +
+ctx.fillStyle='#333';ctx.font='bold 22px Arial';ctx.textAlign='center';ctx.fillText('+',60,85);
+// Barre resultat
+var s=n1+n2;
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='right';
+ctx.fillText(s+'/'+d,x0-10,178);
+for(var i=0;i<Math.max(d,s);i++){
+if(i<d){ctx.fillStyle=i<n1?'#2a5298':(i<s?'#d35400':'#e0e0e0');}
+else{ctx.fillStyle=i<s?'#d35400':'#e0e0e0';}
+ctx.fillRect(x0+i*(bw/d),162,bw/d-2,bh);
+}
+ctx.fillStyle='#27ae60';ctx.font='bold 22px Arial';ctx.textAlign='center';
+ctx.fillText('=',60,172);
+document.getElementById('resAddF').textContent=n1+'/'+d+' + '+n2+'/'+d+' = '+(n1+n2)+'/'+d+(s>d?' = '+(Math.floor(s/d))+' + '+(s%d)+'/'+d:'')+(s%d===0&&s<=d?' = 1':'');
+// simplification possible
+function pgcd(a,b){return b?pgcd(b,a%b):a;}
+var g=pgcd(s,d);
+if(g>1) document.getElementById('resAddF').textContent+=' (simplifiable : '+(s/g)+'/'+(d/g)+')';
+}
+['fN1','fD','fN2'].forEach(function(id){document.getElementById(id).addEventListener('change',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Soustraction de fractions de meme denominateur</h2>
+
+<div class="definition"><div class="encadre-titre">Regle</div>
+<p>$$\frac{a}{d} - \frac{b}{d} = \frac{a - b}{d}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\dfrac{7}{9} - \dfrac{4}{9} = \dfrac{7-4}{9} = \dfrac{3}{9} = \dfrac{1}{3}$</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Attention</div>
+<p>On simplifie toujours le resultat quand c'est possible. Ici $\dfrac{3}{9}$ se simplifie en $\dfrac{1}{3}$.</p>
+</div>
+
+<h2>III. Avec des nombres negatifs</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\dfrac{-3}{5} + \dfrac{7}{5} = \dfrac{-3+7}{5} = \dfrac{4}{5}$</p>
+<p>$\dfrac{2}{3} + \dfrac{-5}{3} = \dfrac{2+(-5)}{3} = \dfrac{-3}{3} = -1$</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Quiz ====== -->
+<div class="interactive-box">
+<h4>Entrainement : calcule la somme ou la difference</h4>
+<canvas id="cvQuizF" width="650" height="80"></canvas>
+<div class="controls">
+<button onclick="newQF()">Nouveau calcul</button>
+<label>Numerateur :</label><input type="number" id="qfAns" style="width:50px;padding:4px">
+<button onclick="checkQF()">Verifier</button>
+</div>
+<div class="result-text" id="resQF"></div>
+</div>
+<script>
+var qfn1,qfn2,qfd,qfop,qfctx=document.getElementById('cvQuizF').getContext('2d');
+function newQF(){
+qfd=[3,4,5,6,7,8,9][Math.floor(Math.random()*7)];
+qfn1=Math.floor(Math.random()*(qfd-1))+1;
+qfn2=Math.floor(Math.random()*(qfd-1))+1;
+qfop=Math.random()<0.5?'+':'-';
+if(qfop==='-'&&qfn1<qfn2){var t=qfn1;qfn1=qfn2;qfn2=t;}
+document.getElementById('qfAns').value='';document.getElementById('resQF').textContent='';
+qfctx.clearRect(0,0,650,80);
+qfctx.fillStyle='#2a5298';qfctx.font='bold 22px Arial';qfctx.textAlign='center';
+qfctx.fillText(qfn1+'/'+qfd+' '+qfop+' '+qfn2+'/'+qfd+' = ?/'+qfd,325,45);
+}
+function checkQF(){
+var ans=+document.getElementById('qfAns').value,correct=qfop==='+'?qfn1+qfn2:qfn1-qfn2;
+document.getElementById('resQF').textContent=ans===correct?'Correct ! '+qfn1+'/'+qfd+' '+qfop+' '+qfn2+'/'+qfd+' = '+correct+'/'+qfd+'.':'Non, la reponse est '+correct+'/'+qfd+'.';
+}
+newQF();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1 : additions</h3>
+<ol>
+<li>$\dfrac{2}{9} + \dfrac{5}{9} =$</li>
+<li>$\dfrac{3}{8} + \dfrac{1}{8} =$</li>
+<li>$\dfrac{4}{5} + \dfrac{3}{5} =$</li>
+</ol>
+
+<h3>Exercice 2 : soustractions</h3>
+<ol>
+<li>$\dfrac{7}{10} - \dfrac{3}{10} =$</li>
+<li>$\dfrac{11}{12} - \dfrac{5}{12} =$</li>
+</ol>
+
+<h3>Exercice 3 : avec des relatifs</h3>
+<ol>
+<li>$\dfrac{-2}{7} + \dfrac{5}{7} =$</li>
+<li>$\dfrac{3}{4} + \dfrac{-7}{4} =$</li>
+</ol>
+
+<h3>Exercice 4 : probleme</h3>
+<p>Marie mange $\dfrac{2}{8}$ d'une pizza et Paul $\dfrac{3}{8}$. Quelle fraction de la pizza reste-t-il ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $\frac{7}{9}$. b) $\frac{4}{8}=\frac{1}{2}$. c) $\frac{7}{5}$.</p>
+<p><strong>Ex. 2.</strong> a) $\frac{4}{10}=\frac{2}{5}$. b) $\frac{6}{12}=\frac{1}{2}$.</p>
+<p><strong>Ex. 3.</strong> a) $\frac{3}{7}$. b) $\frac{-4}{4}=-1$.</p>
+<p><strong>Ex. 4.</strong> Manges : $\frac{2}{8}+\frac{3}{8}=\frac{5}{8}$. Reste : $1 - \frac{5}{8}=\frac{3}{8}$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="06-fractions-comparer.html">&larr; Fractions : comparer</a><a href="08-fractions-add-diff-denom.html">Fractions : addition (denom. differents) &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

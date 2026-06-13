@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priorites operatoires . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.step-box{background:#f8f9fa;border-left:3px solid #2a5298;padding:.6rem 1rem;margin:.4rem 0;font-family:Arial,sans-serif;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 4</span></div>
+<h1 class="cours-titre-principal">Priorites operatoires</h1>
+<p class="cours-sous-titre">L'ordre dans lequel on effectue les calculs</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Regle des priorites</h2>
+
+<div class="definition"><div class="encadre-titre">Ordre de priorite</div>
+<p>Dans un calcul sans parentheses, on effectue les operations dans l'ordre suivant :</p>
+<ol>
+<li><strong>Les parentheses</strong> d'abord (en commencant par les plus interieures).</li>
+<li><strong>Les multiplications et divisions</strong> ensuite, de gauche a droite.</li>
+<li><strong>Les additions et soustractions</strong> en dernier, de gauche a droite.</li>
+</ol>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Moyen mnemotechnique</div>
+<p>Retiens : <strong>P</strong>arentheses, puis <strong>M</strong>ultiplications/<strong>D</strong>ivisions, puis <strong>A</strong>dditions/<strong>S</strong>oustractions.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Decomposition etape par etape ====== -->
+<div class="interactive-box">
+<h4>Illustration : decomposition d'un calcul etape par etape</h4>
+<canvas id="cvPrio" width="650" height="200"></canvas>
+<div class="controls">
+<button id="btnExPrio" onclick="nextPrio()">Exemple suivant</button>
+</div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvPrio'),ctx=cv.getContext('2d');
+var exs=[
+{expr:'3 + 5 x 2',steps:['3 + 5 x 2','3 + 10','13'],highlights:['x en priorite','addition','resultat']},
+{expr:'4 x 3 - 2 x 5',steps:['4 x 3 - 2 x 5','12 - 10','2'],highlights:['multiplications','soustraction','resultat']},
+{expr:'(7 + 3) x 2',steps:['(7 + 3) x 2','10 x 2','20'],highlights:['parentheses','multiplication','resultat']},
+{expr:'5 + 3 x (8 - 2)',steps:['5 + 3 x (8 - 2)','5 + 3 x 6','5 + 18','23'],highlights:['parentheses','multiplication','addition','resultat']},
+{expr:'(4 + 6) x (3 - 1)',steps:['(4 + 6) x (3 - 1)','10 x 2','20'],highlights:['parentheses','multiplication','resultat']}
+];
+var idx=0;
+function drawPrio(){
+var e=exs[idx%exs.length];
+ctx.clearRect(0,0,650,200);
+ctx.font='bold 16px Arial';ctx.fillStyle='#2a5298';ctx.textAlign='center';
+ctx.fillText('Calcul : '+e.expr,325,28);
+var yy=60;
+for(var i=0;i<e.steps.length;i++){
+ctx.fillStyle=i===e.steps.length-1?'#27ae60':'#333';
+ctx.font=i===e.steps.length-1?'bold 18px Arial':'16px Arial';
+ctx.textAlign='left';ctx.fillText(e.steps[i],180,yy);
+ctx.fillStyle='#888';ctx.font='italic 13px Arial';ctx.fillText(e.highlights[i],420,yy);
+if(i<e.steps.length-1){
+ctx.fillStyle='#c0392b';ctx.font='16px Arial';ctx.fillText('=',150,yy+30);
+}
+yy+=35;
+}
+}
+window.nextPrio=function(){idx++;drawPrio();};
+drawPrio();
+})();
+</script>
+
+<h2>II. Avec des nombres relatifs</h2>
+
+<div class="definition"><div class="encadre-titre">Les memes regles s'appliquent</div>
+<p>Les regles de priorite sont les memes avec des nombres relatifs. Il faut simplement faire attention aux signes lors des additions et soustractions.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple detaille</div>
+<p>$A = (-3) + (+4) \times (-2)$</p>
+<p>On effectue d'abord la multiplication : $(+4) \times (-2) = -8$.</p>
+<p>Puis l'addition : $(-3) + (-8) = -11$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple avec parentheses</div>
+<p>$B = ((-3) + (+4)) \times (-2)$</p>
+<p>On effectue d'abord la parenthese : $(-3) + (+4) = +1$.</p>
+<p>Puis la multiplication : $(+1) \times (-2) = -2$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Comparaison avec/sans parentheses ====== -->
+<div class="interactive-box">
+<h4>Illustration : attention, les parentheses changent le resultat !</h4>
+<canvas id="cvComp" width="650" height="150"></canvas>
+<div class="controls">
+<button onclick="nextComp()">Autre exemple</button>
+</div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvComp'),ctx=cv.getContext('2d');
+var pairs=[
+{sans:'3 + 5 x 2 = 13',avec:'(3 + 5) x 2 = 16'},
+{sans:'10 - 2 x 3 = 4',avec:'(10 - 2) x 3 = 24'},
+{sans:'8 + 6 / 2 = 11',avec:'(8 + 6) / 2 = 7'},
+{sans:'4 x 2 + 3 x 5 = 23',avec:'4 x (2 + 3) x 5 = 100'}
+];
+var ci=0;
+function drawComp(){
+var p=pairs[ci%pairs.length];
+ctx.clearRect(0,0,650,150);
+ctx.font='bold 14px Arial';ctx.fillStyle='#2a5298';ctx.textAlign='center';
+ctx.fillText('Sans parentheses :',170,35);
+ctx.fillText('Avec parentheses :',480,35);
+ctx.font='18px Arial';ctx.fillStyle='#333';
+ctx.fillText(p.sans,170,70);
+ctx.fillText(p.avec,480,70);
+ctx.fillStyle='#c0392b';ctx.font='bold 16px Arial';
+ctx.fillText('Resultats differents !',325,120);
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.setLineDash([5,3]);
+ctx.beginPath();ctx.moveTo(325,30);ctx.lineTo(325,90);ctx.stroke();ctx.setLineDash([]);
+}
+window.nextComp=function(){ci++;drawComp();};
+drawComp();
+})();
+</script>
+
+<h2>III. Exercices</h2>
+
+<h3>Exercice 1 : sans parentheses</h3>
+<ol>
+<li>$3 + 7 \times 2 =$</li>
+<li>$15 - 4 \times 3 =$</li>
+<li>$6 \times 5 + 2 \times 3 =$</li>
+<li>$20 - 12 \div 4 =$</li>
+</ol>
+
+<h3>Exercice 2 : avec parentheses</h3>
+<ol>
+<li>$(3 + 7) \times 2 =$</li>
+<li>$5 \times (8 - 3) =$</li>
+<li>$(2 + 3) \times (6 - 1) =$</li>
+<li>$4 \times (7 + 3 \times 2) =$</li>
+</ol>
+
+<h3>Exercice 3 : avec des relatifs</h3>
+<ol>
+<li>$(-3) + (+2) \times (-4) =$</li>
+<li>$((-5) + (+3)) \times (-2) =$</li>
+<li>$(-7) - (+3) \times (-2) + (+1) =$</li>
+</ol>
+
+<h3>Exercice 4 : probleme</h3>
+<p>Un cinema propose des places a 8 euros. Avec la carte fidelite, on a 2 euros de reduction par place. Ali achete 3 places avec la carte. Ecris le calcul en une seule expression puis calcule le prix total.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $3+14=17$. b) $15-12=3$. c) $30+6=36$. d) $20-3=17$.</p>
+<p><strong>Ex. 2.</strong> a) $10 \times 2=20$. b) $5 \times 5=25$. c) $5 \times 5=25$. d) $4 \times (7+6)=4 \times 13=52$.</p>
+<p><strong>Ex. 3.</strong> a) $(-3)+(-8)=-11$. b) $(-2) \times (-2)=+4$. c) $(-7)+(+6)+(+1)=0$.</p>
+<p><strong>Ex. 4.</strong> $3 \times (8 - 2) = 3 \times 6 = 18$ euros.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="03-relatifs-soustraction.html">&larr; Relatifs : soustraction</a><a href="05-expressions-litterales.html">Expressions litterales &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

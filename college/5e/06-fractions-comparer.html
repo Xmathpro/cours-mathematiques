@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparer des fractions . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 6</span></div>
+<h1 class="cours-titre-principal">Comparer des fractions</h1>
+<p class="cours-sous-titre">Fractions egales, simplification et comparaison</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Fractions egales</h2>
+
+<div class="definition"><div class="encadre-titre">Propriete fondamentale</div>
+<p>On ne change pas la valeur d'une fraction en <strong>multipliant</strong> (ou en <strong>divisant</strong>) son numerateur et son denominateur par un meme nombre non nul.</p>
+<p>$$\frac{a}{b} = \frac{a \times k}{b \times k} \quad (k \neq 0)$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$\dfrac{2}{3} = \dfrac{2 \times 4}{3 \times 4} = \dfrac{8}{12}$</p>
+<p>$\dfrac{15}{20} = \dfrac{15 \div 5}{20 \div 5} = \dfrac{3}{4}$</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Fractions egales visuelles ====== -->
+<div class="interactive-box">
+<h4>Illustration : deux fractions egales representees visuellement</h4>
+<canvas id="cvEgales" width="650" height="200"></canvas>
+<div class="controls">
+<label>Numerateur :</label><select id="selNum"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+<label>Denominateur :</label><select id="selDen"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>8</option></select>
+<label>Multiplier par :</label><select id="selK"><option selected>2</option><option>3</option><option>4</option></select>
+</div>
+<div class="result-text" id="resEgales"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvEgales'),ctx=cv.getContext('2d');
+function draw(){
+var n=+document.getElementById('selNum').value,d=+document.getElementById('selDen').value,k=+document.getElementById('selK').value;
+if(n>d){document.getElementById('resEgales').textContent='Le numerateur doit etre inferieur ou egal au denominateur.';return;}
+ctx.clearRect(0,0,650,200);
+// barre 1
+var bw=220,bh=40,x1=50,y1=50,x2=380,y2=50;
+ctx.strokeStyle='#333';ctx.lineWidth=1;
+for(var i=0;i<d;i++){ctx.fillStyle=i<n?'#2a5298':'#e0e0e0';ctx.fillRect(x1+i*(bw/d),y1,bw/d-1,bh);}
+ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+ctx.fillText(n+'/'+d,x1+bw/2,y1+bh+22);
+// barre 2
+var n2=n*k,d2=d*k;
+for(var i=0;i<d2;i++){ctx.fillStyle=i<n2?'#d35400':'#e0e0e0';ctx.fillRect(x2+i*(bw/d2),y2,bw/d2-1,bh);}
+ctx.fillText(n2+'/'+d2,x2+bw/2,y2+bh+22);
+// egal
+ctx.fillStyle='#27ae60';ctx.font='bold 26px Arial';ctx.fillText('=',320,y1+bh/2+8);
+// fleche
+ctx.fillStyle='#888';ctx.font='13px Arial';
+ctx.fillText('x '+k,320,y1-10);
+document.getElementById('resEgales').textContent=n+'/'+d+' = '+n2+'/'+d2+' (on a multiplie numerateur et denominateur par '+k+').';
+}
+['selNum','selDen','selK'].forEach(function(id){document.getElementById(id).addEventListener('change',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Simplifier une fraction</h2>
+
+<div class="definition"><div class="encadre-titre">Fraction irreductible</div>
+<p>Une fraction est <strong>irreductible</strong> quand on ne peut plus simplifier le numerateur et le denominateur par un meme nombre (autre que 1).</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\dfrac{18}{24}$ : on cherche un diviseur commun. $18 = 2 \times 9$ et $24 = 2 \times 12$, donc on divise par 2 : $\dfrac{9}{12}$. Encore : $9 = 3 \times 3$ et $12 = 3 \times 4$, on divise par 3 : $\dfrac{3}{4}$. C'est irreductible.</p>
+</div>
+
+<h2>III. Comparer deux fractions</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour comparer deux fractions :</p>
+<ol>
+<li>Si elles ont le <strong>meme denominateur</strong> : on compare les numerateurs.</li>
+<li>Sinon, on les reduit au <strong>meme denominateur</strong>, puis on compare les numerateurs.</li>
+</ol>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Comparer $\dfrac{3}{5}$ et $\dfrac{5}{8}$.</p>
+<p>Denominateur commun : $40$. On a $\dfrac{3}{5} = \dfrac{24}{40}$ et $\dfrac{5}{8} = \dfrac{25}{40}$.</p>
+<p>$24 < 25$ donc $\dfrac{3}{5} < \dfrac{5}{8}$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Comparateur de fractions ====== -->
+<div class="interactive-box">
+<h4>Illustration : comparer deux fractions sur la droite graduee</h4>
+<canvas id="cvComp" width="650" height="140"></canvas>
+<div class="controls">
+<label>a/b :</label><select id="cN1"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>7</option></select> / <select id="cD1"><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option><option>8</option></select>
+<label style="margin-left:1rem">c/d :</label><select id="cN2"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option><option>7</option></select> / <select id="cD2"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option selected>8</option></select>
+</div>
+<div class="result-text" id="resComp"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvComp'),ctx=cv.getContext('2d');
+function draw(){
+var n1=+document.getElementById('cN1').value,d1=+document.getElementById('cD1').value;
+var n2=+document.getElementById('cN2').value,d2=+document.getElementById('cD2').value;
+var v1=n1/d1,v2=n2/d2;
+ctx.clearRect(0,0,650,140);
+var ox=60,y=70,w=530,maxV=Math.max(v1,v2,1)*1.3;
+var sc=w/maxV;
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=0;i<=Math.ceil(maxV*4);i++){var v=i/4;if(v>maxV)break;var x=ox+v*sc;ctx.beginPath();ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.stroke();if(i%4===0)ctx.fillText(v,x,y+16);}
+var x1=ox+v1*sc,x2=ox+v2*sc;
+ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(x1,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.fillText(n1+'/'+d1,x1,y-14);
+ctx.fillStyle='#d35400';ctx.beginPath();ctx.arc(x2,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#d35400';ctx.font='bold 13px Arial';ctx.fillText(n2+'/'+d2,x2,y-14);
+var sym=v1<v2?'<':(v1>v2?'>':'=');
+document.getElementById('resComp').textContent=n1+'/'+d1+' '+sym+' '+n2+'/'+d2+' (valeurs decimales : '+v1.toFixed(3)+' '+sym+' '+v2.toFixed(3)+').';
+}
+['cN1','cD1','cN2','cD2'].forEach(function(id){document.getElementById(id).addEventListener('change',draw);});
+draw();
+})();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1 : fractions egales</h3>
+<p>Completer : a) $\dfrac{3}{5} = \dfrac{?}{20}$ ; b) $\dfrac{7}{?} = \dfrac{21}{12}$ ; c) $\dfrac{18}{30} = \dfrac{?}{5}$.</p>
+
+<h3>Exercice 2 : simplifier</h3>
+<p>Rendre irreductible : a) $\dfrac{12}{18}$ ; b) $\dfrac{35}{49}$ ; c) $\dfrac{24}{36}$.</p>
+
+<h3>Exercice 3 : comparer</h3>
+<p>Comparer : a) $\dfrac{2}{3}$ et $\dfrac{3}{4}$ ; b) $\dfrac{5}{6}$ et $\dfrac{7}{9}$ ; c) $\dfrac{4}{5}$ et $\dfrac{7}{10}$.</p>
+
+<h3>Exercice 4 : ranger</h3>
+<p>Ranger dans l'ordre croissant : $\dfrac{1}{2}$ ; $\dfrac{2}{3}$ ; $\dfrac{3}{4}$ ; $\dfrac{5}{12}$.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $12$. b) $4$. c) $3$.</p>
+<p><strong>Ex. 2.</strong> a) $\frac{2}{3}$. b) $\frac{5}{7}$. c) $\frac{2}{3}$.</p>
+<p><strong>Ex. 3.</strong> a) $\frac{8}{12} < \frac{9}{12}$ donc $\frac{2}{3} < \frac{3}{4}$. b) $\frac{15}{18} > \frac{14}{18}$ donc $\frac{5}{6} > \frac{7}{9}$. c) $\frac{8}{10} > \frac{7}{10}$ donc $\frac{4}{5} > \frac{7}{10}$.</p>
+<p><strong>Ex. 4.</strong> Denominateur commun 12 : $\frac{5}{12} < \frac{6}{12} < \frac{8}{12} < \frac{9}{12}$ soit $\frac{5}{12} < \frac{1}{2} < \frac{2}{3} < \frac{3}{4}$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="05-expressions-litterales.html">&larr; Expressions litterales</a><a href="07-fractions-add-meme-denom.html">Fractions : addition (meme denom.) &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

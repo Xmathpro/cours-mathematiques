@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expressions litterales . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 5</span></div>
+<h1 class="cours-titre-principal">Expressions litterales</h1>
+<p class="cours-sous-titre">Ecrire, simplifier et calculer avec des lettres</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Qu'est-ce qu'une expression litterale ?</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>expression litterale</strong> est une expression mathematique qui contient une ou plusieurs lettres representant des nombres.</p>
+<p>Exemples : $3x + 5$, $2a - b$, $x^2 + 1$.</p>
+</div>
+
+<h2>II. Conventions d'ecriture</h2>
+
+<div class="definition"><div class="encadre-titre">Simplification de l'ecriture</div>
+<p>En mathematiques, on simplifie l'ecriture des produits :</p>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">On ecrit</td><td style="padding:6px">Au lieu de</td><td style="padding:6px">Regle</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">$3x$</td><td style="padding:4px">$3 \times x$</td><td style="padding:4px">On supprime le signe $\times$ devant une lettre</td></tr>
+<tr><td style="padding:4px">$ab$</td><td style="padding:4px">$a \times b$</td><td style="padding:4px">On supprime le $\times$ entre deux lettres</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:4px">$x^2$</td><td style="padding:4px">$x \times x$</td><td style="padding:4px">On utilise la puissance</td></tr>
+<tr><td style="padding:4px">$1x = x$</td><td style="padding:4px">$1 \times x$</td><td style="padding:4px">Le coefficient $1$ ne s'ecrit pas</td></tr>
+</table>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Calculateur d'expression ====== -->
+<div class="interactive-box">
+<h4>Illustration : calculer une expression pour differentes valeurs de x</h4>
+<canvas id="cvExpr" width="650" height="160"></canvas>
+<div class="controls">
+<label>Expression : 3x + 5</label>
+<label style="margin-left:1.5rem">x = </label><input type="range" id="slX" min="-5" max="10" value="2" style="width:140px"><span id="valX">2</span>
+</div>
+<div class="result-text" id="resExpr"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvExpr'),ctx=cv.getContext('2d');
+function draw(){
+var x=+document.getElementById('slX').value;
+document.getElementById('valX').textContent=x;
+ctx.clearRect(0,0,650,160);
+var r=3*x+5;
+ctx.font='bold 22px Arial';ctx.textAlign='center';ctx.fillStyle='#2a5298';
+ctx.fillText('3x + 5',120,45);
+ctx.fillStyle='#333';ctx.font='18px Arial';
+ctx.fillText('Si x = '+x+' :',325,45);
+ctx.fillStyle='#333';ctx.font='16px Arial';ctx.textAlign='left';
+ctx.fillText('3 x '+x+' + 5',200,90);
+ctx.fillText('= '+(3*x)+' + 5',200,115);
+ctx.fillStyle='#27ae60';ctx.font='bold 18px Arial';
+ctx.fillText('= '+r,200,140);
+document.getElementById('resExpr').textContent='Pour x = '+x+', 3x + 5 = 3 x '+x+' + 5 = '+r+'.';
+}
+document.getElementById('slX').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>III. Tester une egalite</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour <strong>tester si une egalite est vraie</strong> pour une valeur donnee, on remplace la lettre par cette valeur dans chaque membre et on compare les resultats.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Est-ce que $2x + 3 = 11$ est vraie pour $x = 4$ ?</p>
+<p>Membre de gauche : $2 \times 4 + 3 = 8 + 3 = 11$.</p>
+<p>Membre de droite : $11$.</p>
+<p>$11 = 11$ : l'egalite est <strong>vraie</strong> pour $x = 4$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Testeur d'egalite ====== -->
+<div class="interactive-box">
+<h4>Illustration : tester l'egalite 2x + 3 = 11</h4>
+<canvas id="cvTest" width="650" height="120"></canvas>
+<div class="controls">
+<label>x = </label><input type="range" id="slT" min="0" max="8" value="4" style="width:140px"><span id="valT">4</span>
+</div>
+<div class="result-text" id="resTest"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvTest'),ctx=cv.getContext('2d');
+function draw(){
+var x=+document.getElementById('slT').value;
+document.getElementById('valT').textContent=x;
+ctx.clearRect(0,0,650,120);
+var g=2*x+3;
+ctx.font='18px Arial';ctx.textAlign='center';
+ctx.fillStyle='#2a5298';ctx.fillText('2x + 3',160,40);
+ctx.fillStyle='#333';ctx.fillText('=  ?  =',325,40);
+ctx.fillStyle='#d35400';ctx.fillText('11',490,40);
+ctx.fillStyle='#2a5298';ctx.font='bold 20px Arial';ctx.fillText(g,160,80);
+ctx.fillStyle='#d35400';ctx.font='bold 20px Arial';ctx.fillText('11',490,80);
+if(g===11){ctx.fillStyle='#27ae60';ctx.font='bold 22px Arial';ctx.fillText('= VRAI',325,80);}
+else{ctx.fillStyle='#c0392b';ctx.font='bold 22px Arial';ctx.fillText('FAUX',325,80);}
+document.getElementById('resTest').textContent='Pour x = '+x+' : 2x + 3 = '+g+(g===11?' = 11. L\'egalite est vraie.':'. Comme '+g+' est different de 11, l\'egalite est fausse.');
+}
+document.getElementById('slT').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>IV. Produire une expression</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemple : perimetre d'un rectangle</div>
+<p>Un rectangle a pour longueur $x$ et pour largeur $3$.</p>
+<p>Son perimetre est : $P = 2 \times (x + 3) = 2x + 6$.</p>
+<p>Si $x = 7$ cm, alors $P = 2 \times 7 + 6 = 20$ cm.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 3 : Rectangle avec perimetre variable ====== -->
+<div class="interactive-box">
+<h4>Illustration : perimetre du rectangle en fonction de x</h4>
+<canvas id="cvRect" width="650" height="200"></canvas>
+<div class="controls">
+<label>x = </label><input type="range" id="slR" min="1" max="12" value="7" style="width:140px"><span id="valR">7</span>
+</div>
+<div class="result-text" id="resRect"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvRect'),ctx=cv.getContext('2d');
+function draw(){
+var x=+document.getElementById('slR').value;
+document.getElementById('valR').textContent=x;
+ctx.clearRect(0,0,650,200);
+var scl=25,rw=x*scl,rh=3*scl;
+var rx=(650-rw)/2,ry=30;
+ctx.fillStyle='#eaf2fb';ctx.fillRect(rx,ry,rw,rh);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(rx,ry,rw,rh);
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('x = '+x+' cm',rx+rw/2,ry+rh+20);
+ctx.save();ctx.translate(rx-15,ry+rh/2);ctx.rotate(-Math.PI/2);ctx.fillText('3 cm',0,0);ctx.restore();
+var p=2*(x+3);
+ctx.fillStyle='#27ae60';ctx.font='bold 16px Arial';
+ctx.fillText('P = 2(x + 3) = 2('+x+' + 3) = 2 x '+(x+3)+' = '+p+' cm',325,ry+rh+50);
+document.getElementById('resRect').textContent='Perimetre = 2 x ('+x+' + 3) = '+p+' cm.';
+}
+document.getElementById('slR').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1 : simplifier les ecritures</h3>
+<p>Reecris sans le signe $\times$ : a) $4 \times a$ ; b) $a \times b$ ; c) $1 \times x$ ; d) $a \times a$ ; e) $2 \times x \times 3$.</p>
+
+<h3>Exercice 2 : calculer</h3>
+<p>Calcule pour $x = 3$ et $x = -2$ : a) $5x + 1$ ; b) $x^2 - 4$ ; c) $3x - 2x + 7$.</p>
+
+<h3>Exercice 3 : tester une egalite</h3>
+<p>L'egalite $4x - 1 = 19$ est-elle vraie pour $x = 5$ ? Pour $x = 3$ ?</p>
+
+<h3>Exercice 4 : probleme</h3>
+<p>Un triangle equilateral a pour cote $c$ cm. Exprime son perimetre $P$ en fonction de $c$. Calcule $P$ pour $c = 4{,}5$ cm.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> a) $4a$. b) $ab$. c) $x$. d) $a^2$. e) $6x$.</p>
+<p><strong>Ex. 2.</strong> Pour $x=3$ : a) $16$, b) $5$, c) $10$. Pour $x=-2$ : a) $-9$, b) $0$, c) $5$.</p>
+<p><strong>Ex. 3.</strong> $x=5$ : $4 \times 5 - 1 = 19$, vrai. $x=3$ : $4 \times 3 - 1 = 11 \neq 19$, faux.</p>
+<p><strong>Ex. 4.</strong> $P = 3c$. Pour $c = 4{,}5$ : $P = 3 \times 4{,}5 = 13{,}5$ cm.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="04-priorites-operatoires.html">&larr; Priorites operatoires</a><a href="06-fractions-comparer.html">Fractions : comparer &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

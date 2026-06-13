@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Addition de nombres relatifs . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{background:#2a5298;color:#fff;border:none;padding:5px 14px;border-radius:4px;cursor:pointer;font-size:.82rem}
+.controls button:hover{background:#1e3d72}
+.controls select,.controls input[type=range]{padding:3px 8px;border:1px solid #ccc;border-radius:3px;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Addition de nombres relatifs</h1>
+<p class="cours-sous-titre">Additionner deux nombres de meme signe ou de signes contraires</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappel : vocabulaire</h2>
+
+<div class="definition"><div class="encadre-titre">Signe et distance a zero</div>
+<p>Un nombre relatif possede un <strong>signe</strong> (+ ou -) et une <strong>distance a zero</strong> (sa valeur absolue).</p>
+<p>Exemples : pour $-7$, le signe est $-$ et la distance a zero est $7$. Pour $+3$, le signe est $+$ et la distance a zero est $3$.</p>
+</div>
+
+<h2>II. Addition de deux nombres de meme signe</h2>
+
+<div class="definition"><div class="encadre-titre">Regle</div>
+<p>Pour additionner deux nombres relatifs <strong>de meme signe</strong> :</p>
+<ol>
+<li>On garde le signe commun.</li>
+<li>On additionne les distances a zero.</li>
+</ol>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$(+3) + (+5) = +8$ : meme signe $+$, on additionne $3+5=8$.</p>
+<p>$(-4) + (-6) = -10$ : meme signe $-$, on additionne $4+6=10$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Droite graduee addition meme signe ====== -->
+<div class="interactive-box">
+<h4>Illustration : addition de deux positifs sur la droite graduee</h4>
+<canvas id="cvAddMeme" width="650" height="160"></canvas>
+<div class="controls">
+<label>a = </label><input type="range" id="slA1" min="1" max="8" value="3" style="width:100px"><span id="valA1">+3</span>
+<label style="margin-left:1rem">b = </label><input type="range" id="slB1" min="1" max="8" value="5" style="width:100px"><span id="valB1">+5</span>
+</div>
+<div class="result-text" id="resMeme"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvAddMeme'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slA1').value,b=+document.getElementById('slB1').value;
+document.getElementById('valA1').textContent='+'+a;
+document.getElementById('valB1').textContent='+'+b;
+var s=a+b;
+ctx.clearRect(0,0,650,160);
+var ox=40,y=80,w=570,minV=-2,maxV=Math.max(s+2,12);
+var sc=w/(maxV-minV);
+// axe
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+// graduations
+ctx.fillStyle='#333';ctx.font='12px Arial';ctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){
+var x=ox+(i-minV)*sc;
+ctx.beginPath();ctx.moveTo(x,y-5);ctx.lineTo(x,y+5);ctx.stroke();
+ctx.fillText(i,x,y+18);
+}
+// fleche a (0 -> a)
+var x0=ox+(0-minV)*sc, xa=ox+(a-minV)*sc, xab=ox+(s-minV)*sc;
+ctx.strokeStyle='#2a5298';ctx.lineWidth=3;
+ctx.beginPath();ctx.moveTo(x0,y-20);ctx.lineTo(xa,y-20);ctx.stroke();
+ctx.beginPath();ctx.moveTo(xa-6,y-26);ctx.lineTo(xa,y-20);ctx.lineTo(xa-6,y-14);ctx.stroke();
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.fillText('+'+a,((x0+xa)/2),y-28);
+// fleche b (a -> a+b)
+ctx.strokeStyle='#d35400';ctx.lineWidth=3;
+ctx.beginPath();ctx.moveTo(xa,y-40);ctx.lineTo(xab,y-40);ctx.stroke();
+ctx.beginPath();ctx.moveTo(xab-6,y-46);ctx.lineTo(xab,y-40);ctx.lineTo(xab-6,y-34);ctx.stroke();
+ctx.fillStyle='#d35400';ctx.font='bold 13px Arial';ctx.fillText('+'+b,((xa+xab)/2),y-48);
+// point resultat
+ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(xab,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#27ae60';ctx.font='bold 13px Arial';ctx.fillText('+'+s,xab,y+35);
+document.getElementById('resMeme').textContent='(+'+a+') + (+'+b+') = +'+s+'. On garde le signe + et on additionne '+a+' + '+b+' = '+s+'.';
+}
+['slA1','slB1'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>III. Addition de deux nombres de signes contraires</h2>
+
+<div class="definition"><div class="encadre-titre">Regle</div>
+<p>Pour additionner deux nombres relatifs <strong>de signes contraires</strong> :</p>
+<ol>
+<li>On prend le signe de celui qui a la plus grande distance a zero.</li>
+<li>On soustrait la plus petite distance a zero de la plus grande.</li>
+</ol>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$(+7) + (-3) = +4$ : $7>3$, signe $+$, et $7-3=4$.</p>
+<p>$(+2) + (-9) = -7$ : $9>2$, signe $-$, et $9-2=7$.</p>
+<p>$(+5) + (-5) = 0$ : deux nombres opposes, leur somme vaut $0$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Droite graduee addition signes contraires ====== -->
+<div class="interactive-box">
+<h4>Illustration : addition de signes contraires sur la droite graduee</h4>
+<canvas id="cvAddContr" width="650" height="180"></canvas>
+<div class="controls">
+<label>a = </label><input type="range" id="slA2" min="-9" max="9" value="7" style="width:120px"><span id="valA2">+7</span>
+<label style="margin-left:1rem">b = </label><input type="range" id="slB2" min="-9" max="9" value="-3" style="width:120px"><span id="valB2">-3</span>
+</div>
+<div class="result-text" id="resContr"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvAddContr'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slA2').value,b=+document.getElementById('slB2').value;
+document.getElementById('valA2').textContent=(a>=0?'+':'')+a;
+document.getElementById('valB2').textContent=(b>=0?'+':'')+b;
+var s=a+b;
+ctx.clearRect(0,0,650,180);
+var ox=40,y=100,w=570,minV=-12,maxV=12;
+var sc=w/(maxV-minV);
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+w,y);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=minV;i<=maxV;i++){
+var x=ox+(i-minV)*sc;
+ctx.beginPath();ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.stroke();
+if(i%2===0) ctx.fillText(i,x,y+16);
+}
+var x0=ox+(0-minV)*sc, xa=ox+(a-minV)*sc, xab=ox+(s-minV)*sc;
+// fleche a
+ctx.strokeStyle='#2a5298';ctx.lineWidth=3;
+ctx.beginPath();ctx.moveTo(x0,y-22);ctx.lineTo(xa,y-22);ctx.stroke();
+var da=a>0?-6:6;
+ctx.beginPath();ctx.moveTo(xa+da,y-28);ctx.lineTo(xa,y-22);ctx.lineTo(xa+da,y-16);ctx.stroke();
+ctx.fillStyle='#2a5298';ctx.font='bold 12px Arial';ctx.fillText((a>=0?'+':'')+a,(x0+xa)/2,y-30);
+// fleche b
+ctx.strokeStyle='#d35400';ctx.lineWidth=3;
+ctx.beginPath();ctx.moveTo(xa,y-44);ctx.lineTo(xab,y-44);ctx.stroke();
+var db=b>0?-6:6;
+ctx.beginPath();ctx.moveTo(xab+db,y-50);ctx.lineTo(xab,y-44);ctx.lineTo(xab+db,y-38);ctx.stroke();
+ctx.fillStyle='#d35400';ctx.font='bold 12px Arial';ctx.fillText((b>=0?'+':'')+b,(xa+xab)/2,y-52);
+// point resultat
+ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(xab,y,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#27ae60';ctx.font='bold 13px Arial';ctx.fillText((s>=0?'+':'')+s,xab,y+35);
+var txt='('+(a>=0?'+':'')+a+') + ('+(b>=0?'+':'')+b+') = '+(s>=0?'+':'')+s+'. ';
+if(a+b===0) txt+='Ce sont des opposes : leur somme vaut 0.';
+else{
+var aa=Math.abs(a),ab=Math.abs(b);
+txt+='On garde le signe '+(Math.abs(a)>=Math.abs(b)?(a>=0?'+':'-'):(b>=0?'+':'-'))+' (distance a zero la plus grande : '+Math.max(aa,ab)+') et on calcule '+Math.max(aa,ab)+' - '+Math.min(aa,ab)+' = '+Math.abs(s)+'.';
+}
+document.getElementById('resContr').textContent=txt;
+}
+['slA2','slB2'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>IV. Somme de plusieurs nombres relatifs</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour additionner plusieurs nombres relatifs, on peut :</p>
+<ol>
+<li>Additionner separement tous les positifs entre eux.</li>
+<li>Additionner separement tous les negatifs entre eux.</li>
+<li>Additionner les deux resultats (signes contraires).</li>
+</ol>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$(-3) + (+8) + (-5) + (+2) = ?$</p>
+<p>Positifs : $(+8)+(+2) = +10$.</p>
+<p>Negatifs : $(-3)+(-5) = -8$.</p>
+<p>Resultat : $(+10)+(-8) = +2$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 3 : Quiz interactif ====== -->
+<div class="interactive-box">
+<h4>Entrainement : calcule la somme</h4>
+<canvas id="cvQuiz" width="650" height="80"></canvas>
+<div class="controls">
+<button id="btnNewQ" onclick="newQuiz()">Nouveau calcul</button>
+<label>Ta reponse :</label>
+<input type="number" id="quizAns" style="width:60px;padding:4px;font-size:.9rem">
+<button onclick="checkQuiz()">Verifier</button>
+</div>
+<div class="result-text" id="resQuiz"></div>
+</div>
+<script>
+var qa,qb,qctx=document.getElementById('cvQuiz').getContext('2d');
+function newQuiz(){
+qa=Math.floor(Math.random()*19)-9;
+qb=Math.floor(Math.random()*19)-9;
+document.getElementById('quizAns').value='';
+document.getElementById('resQuiz').textContent='';
+qctx.clearRect(0,0,650,80);
+qctx.fillStyle='#2a5298';qctx.font='bold 22px Arial';qctx.textAlign='center';
+qctx.fillText('('+(qa>=0?'+':'')+qa+') + ('+(qb>=0?'+':'')+qb+') = ?',325,45);
+}
+function checkQuiz(){
+var rep=+document.getElementById('quizAns').value,s=qa+qb;
+if(rep===s) document.getElementById('resQuiz').textContent='Correct ! ('+(qa>=0?'+':'')+qa+') + ('+(qb>=0?'+':'')+qb+') = '+(s>=0?'+':'')+s+'.';
+else document.getElementById('resQuiz').textContent='Incorrect. La bonne reponse est '+(s>=0?'+':'')+s+'. Essaie le suivant !';
+}
+newQuiz();
+</script>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1 : additions de meme signe</h3>
+<ol>
+<li>$(+4) + (+9) = $</li>
+<li>$(-6) + (-3) = $</li>
+<li>$(-15) + (-7) = $</li>
+<li>$(+2{,}5) + (+1{,}5) = $</li>
+</ol>
+
+<h3>Exercice 2 : additions de signes contraires</h3>
+<ol>
+<li>$(+8) + (-3) = $</li>
+<li>$(+4) + (-11) = $</li>
+<li>$(-6) + (+6) = $</li>
+<li>$(-3{,}5) + (+7) = $</li>
+</ol>
+
+<h3>Exercice 3 : sommes de plusieurs termes</h3>
+<ol>
+<li>$(+5) + (-2) + (+3) + (-8) = $</li>
+<li>$(-1) + (-4) + (+6) + (+3) + (-7) = $</li>
+</ol>
+
+<h3>Exercice 4 : probleme</h3>
+<p>A midi, la temperature est de $+5$°C. Elle baisse de $8$°C dans la nuit. Quelle est la temperature le matin ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Exercice 1.</strong> a) $+13$. b) $-9$. c) $-22$. d) $+4$.</p>
+<p><strong>Exercice 2.</strong> a) $+5$. b) $-7$. c) $0$. d) $+3{,}5$.</p>
+<p><strong>Exercice 3.</strong> a) Positifs : $5+3=8$. Negatifs : $-2+(-8)=-10$. Total : $8+(-10)=-2$.</p>
+<p>b) Positifs : $6+3=9$. Negatifs : $-1+(-4)+(-7)=-12$. Total : $9+(-12)=-3$.</p>
+<p><strong>Exercice 4.</strong> $(+5)+(-8)=-3$. La temperature le matin est de $-3$°C.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="01-relatifs-reperage.html">&larr; Relatifs : reperage</a><a href="03-relatifs-soustraction.html">Relatifs : soustraction &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

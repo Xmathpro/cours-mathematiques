@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proportionnalite et coefficient . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Nombres et calculs</span><span>Lecon 16</span></div>
+<h1 class="cours-titre-principal">Proportionnalite et coefficient</h1>
+<p class="cours-sous-titre">Reconaitre, coefficient de proportionnalite, produit en croix</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Reconnaitre une situation de proportionnalite</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux grandeurs sont <strong>proportionnelles</strong> si l'on peut passer de l'une a l'autre en <strong>multipliant toujours par le meme nombre</strong>.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Le prix des pommes est proportionnel a la masse achetee :</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Masse (kg)</td><td style="padding:6px">1</td><td style="padding:6px">2</td><td style="padding:6px">3</td><td style="padding:6px">5</td></tr>
+<tr><td style="padding:4px">Prix (euros)</td><td style="padding:4px">2,50</td><td style="padding:4px">5,00</td><td style="padding:4px">7,50</td><td style="padding:4px">12,50</td></tr>
+</table>
+<p>On multiplie toujours la masse par $2{,}50$ pour obtenir le prix.</p>
+</div>
+
+<h2>II. Coefficient de proportionnalite</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Le nombre par lequel on multiplie pour passer d'une grandeur a l'autre s'appelle le <strong>coefficient de proportionnalite</strong>.</p>
+<p>Si $y$ est proportionnel a $x$, alors : $y = k \times x$ ou $k$ est le coefficient.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>Le coefficient se calcule par le quotient : $k = \dfrac{y}{x}$. Si ce quotient est constant pour tous les couples de valeurs, la situation est proportionnelle.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Testeur de proportionnalite ====== -->
+<div class="interactive-box">
+<h4>Illustration : coefficient de proportionnalite</h4>
+<canvas id="cvCoeff" width="650" height="300"></canvas>
+<div class="controls">
+<label>Coefficient k :</label><input type="range" id="slK" min="5" max="50" value="15" step="1"><span id="vK">1.5</span>
+</div>
+<div class="result-text" id="resCoeff"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvCoeff'),ctx=cv.getContext('2d');
+function draw(){
+var k10=+document.getElementById('slK').value;
+var k=k10/10;
+document.getElementById('vK').textContent=k.toFixed(1);
+ctx.clearRect(0,0,650,300);
+// Axes
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(60,260);ctx.lineTo(600,260);ctx.stroke();
+ctx.beginPath();ctx.moveTo(60,260);ctx.lineTo(60,20);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='center';
+ctx.fillText('x',620,265);
+ctx.save();ctx.translate(25,140);ctx.rotate(-Math.PI/2);ctx.fillText('y = k \u00D7 x',0,0);ctx.restore();
+// Graduations
+for(var i=1;i<=10;i++){
+var px=60+i*50;
+ctx.strokeStyle='#ddd';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,260);ctx.lineTo(px,20);ctx.stroke();
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.fillText(i,px,275);
+}
+for(var j=1;j<=5;j++){
+var py=260-j*45;
+ctx.strokeStyle='#ddd';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(60,py);ctx.lineTo(600,py);ctx.stroke();
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.textAlign='right';ctx.fillText(j,55,py+4);
+}
+ctx.textAlign='center';
+// Points et droite
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(60,260);
+var maxY=5;
+for(var x=0;x<=10;x+=0.1){
+var y=k*x;
+var px2=60+x*50,py2=260-y*45;
+if(py2<15) break;
+ctx.lineTo(px2,py2);
+}
+ctx.stroke();
+// Points entiers
+ctx.fillStyle='#c0392b';
+for(var xi=1;xi<=10;xi++){
+var yi=k*xi;
+if(yi>maxY) break;
+var ppx=60+xi*50,ppy=260-yi*45;
+ctx.beginPath();ctx.arc(ppx,ppy,4,0,2*Math.PI);ctx.fill();
+}
+// Coefficient
+ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='left';
+ctx.fillText('k = '+k.toFixed(1),420,50);
+ctx.font='14px Arial';ctx.fillStyle='#333';
+ctx.fillText('y = '+k.toFixed(1)+' \u00D7 x',420,75);
+document.getElementById('resCoeff').textContent='Coefficient k = '+k.toFixed(1)+'. Pour x = 2, y = '+k.toFixed(1)+' \u00D7 2 = '+(k*2).toFixed(1)+'. Pour x = 4, y = '+(k*4).toFixed(1)+'.';
+}
+document.getElementById('slK').addEventListener('input',draw);
+draw();
+})();
+</script>
+
+<h2>III. Produit en croix</h2>
+
+<div class="definition"><div class="encadre-titre">Propriete</div>
+<p>Dans un tableau de proportionnalite, les <strong>produits en croix</strong> sont egaux.</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr><td style="padding:4px;border:1px solid #999">$a$</td><td style="padding:4px;border:1px solid #999">$b$</td></tr>
+<tr><td style="padding:4px;border:1px solid #999">$c$</td><td style="padding:4px;border:1px solid #999">$d$</td></tr>
+</table>
+<p>Si le tableau est proportionnel : $a \times d = b \times c$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>3 kg de pommes coutent 7,50 euros. Combien coutent 5 kg ?</p>
+<p>$\frac{7{,}50}{3} = \frac{x}{5}$, donc $x = \frac{7{,}50 \times 5}{3} = 12{,}50$ euros.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Quiz proportionnalite ====== -->
+<div class="interactive-box">
+<h4>Quiz : trouver la quatrieme proportionnelle</h4>
+<canvas id="cvQuiz" width="650" height="200"></canvas>
+<div class="controls">
+<label>Reponse :</label><input type="number" id="inpResp" style="width:80px;padding:4px;font-size:.9rem" step="0.1">
+<button id="btnVerif" style="padding:4px 14px;background:#2a5298;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">Verifier</button>
+<button id="btnNew" style="padding:4px 14px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">Nouveau</button>
+</div>
+<div class="result-text" id="resQuiz"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvQuiz'),ctx=cv.getContext('2d');
+var a,b,c,d;
+function gen(){
+a=Math.floor(Math.random()*8)+2;
+c=Math.floor(Math.random()*8)+2;
+var k=Math.floor(Math.random()*4)+2;
+b=a*k;d=c*k;
+document.getElementById('inpResp').value='';
+document.getElementById('resQuiz').textContent='';
+drawQ();
+}
+function drawQ(){
+ctx.clearRect(0,0,650,200);
+ctx.fillStyle='#f8f8f8';ctx.fillRect(150,30,350,130);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(150,30,350,130);
+ctx.beginPath();ctx.moveTo(325,30);ctx.lineTo(325,160);ctx.stroke();
+ctx.beginPath();ctx.moveTo(150,95);ctx.lineTo(500,95);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='bold 18px Arial';ctx.textAlign='center';
+ctx.fillText(a,237,72);ctx.fillText(b,412,72);
+ctx.fillText(c,237,140);ctx.fillText('?',412,140);
+// Fleche croix
+ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+ctx.beginPath();ctx.moveTo(237,75);ctx.lineTo(412,135);ctx.stroke();
+ctx.setLineDash([]);
+}
+document.getElementById('btnVerif').addEventListener('click',function(){
+var rep=parseFloat(document.getElementById('inpResp').value);
+if(Math.abs(rep-d)<0.1){
+document.getElementById('resQuiz').textContent='Correct ! '+a+' \u00D7 '+d+' = '+b+' \u00D7 '+c+' = '+(a*d)+'. La quatrieme proportionnelle est '+d+'.';
+document.getElementById('resQuiz').style.color='#27ae60';
+}else{
+document.getElementById('resQuiz').textContent='Incorrect. Rappel : ? = ('+b+' \u00D7 '+c+') / '+a+' = '+d+'.';
+document.getElementById('resQuiz').style.color='#c0392b';
+}
+});
+document.getElementById('btnNew').addEventListener('click',function(){
+document.getElementById('resQuiz').style.color='#444';gen();
+});
+gen();
+})();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Le tableau suivant est-il un tableau de proportionnalite ? Justifier.</p>
+<table style="border-collapse:collapse;font-size:.9rem;margin:.5rem 0">
+<tr style="background:#f0f0f0"><td style="padding:4px;border:1px solid #999">$x$</td><td style="padding:4px;border:1px solid #999">3</td><td style="padding:4px;border:1px solid #999">6</td><td style="padding:4px;border:1px solid #999">9</td></tr>
+<tr><td style="padding:4px;border:1px solid #999">$y$</td><td style="padding:4px;border:1px solid #999">7,5</td><td style="padding:4px;border:1px solid #999">15</td><td style="padding:4px;border:1px solid #999">22,5</td></tr>
+</table>
+
+<h3>Exercice 2</h3>
+<p>5 cahiers coutent 8 euros. Combien coutent 12 cahiers ?</p>
+
+<h3>Exercice 3</h3>
+<p>Une voiture parcourt 180 km en 2 heures a vitesse constante. Quelle distance parcourt-elle en 3 h 30 min ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $\frac{7{,}5}{3}=2{,}5$, $\frac{15}{6}=2{,}5$, $\frac{22{,}5}{9}=2{,}5$. Le quotient est constant, c'est un tableau de proportionnalite de coefficient $k=2{,}5$.</p>
+<p><strong>Ex. 2.</strong> $\frac{8}{5}=1{,}6$ euros par cahier. Donc $12 \times 1{,}6 = 19{,}2$ euros.</p>
+<p><strong>Ex. 3.</strong> Vitesse : $\frac{180}{2}=90$ km/h. En 3 h 30 min = 3,5 h : $90 \times 3{,}5 = 315$ km.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="15-volumes-prisme-cylindre.html">&larr; Volumes</a><a href="17-statistiques-effectif.html">Statistiques &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

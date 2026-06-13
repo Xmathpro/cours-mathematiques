@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistiques : moyenne . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Organisation de donnees</span><span>Lecon 18</span></div>
+<h1 class="cours-titre-principal">Statistiques : moyenne</h1>
+<p class="cours-sous-titre">Moyenne simple, moyenne ponderee</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Moyenne simple</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>La <strong>moyenne</strong> d'une serie de $n$ valeurs $x_1, x_2, \ldots, x_n$ est :
+$$\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un eleve a obtenu les notes suivantes : 12, 15, 9, 14, 10.</p>
+<p>$\bar{x} = \frac{12+15+9+14+10}{5} = \frac{60}{5} = 12$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Calculateur de moyenne interactive ====== -->
+<div class="interactive-box">
+<h4>Illustration : moyenne de 5 notes</h4>
+<canvas id="cvMoy" width="650" height="300"></canvas>
+<div class="controls">
+<label>N1 :</label><input type="range" id="slN1" min="0" max="20" value="12"><span id="vN1">12</span>
+<label>N2 :</label><input type="range" id="slN2" min="0" max="20" value="15"><span id="vN2">15</span>
+<label>N3 :</label><input type="range" id="slN3" min="0" max="20" value="9"><span id="vN3">9</span>
+<label>N4 :</label><input type="range" id="slN4" min="0" max="20" value="14"><span id="vN4">14</span>
+<label>N5 :</label><input type="range" id="slN5" min="0" max="20" value="10"><span id="vN5">10</span>
+</div>
+<div class="result-text" id="resMoy"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvMoy'),ctx=cv.getContext('2d');
+var ids=['slN1','slN2','slN3','slN4','slN5'];
+var vids=['vN1','vN2','vN3','vN4','vN5'];
+var labels=['Note 1','Note 2','Note 3','Note 4','Note 5'];
+function draw(){
+var vals=[];
+for(var i=0;i<5;i++){
+vals[i]=+document.getElementById(ids[i]).value;
+document.getElementById(vids[i]).textContent=vals[i];
+}
+var sum=vals[0]+vals[1]+vals[2]+vals[3]+vals[4];
+var moy=sum/5;
+ctx.clearRect(0,0,650,300);
+// Axes
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(80,260);ctx.lineTo(550,260);ctx.stroke();
+ctx.beginPath();ctx.moveTo(80,260);ctx.lineTo(80,20);ctx.stroke();
+// Graduations y
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.textAlign='right';
+for(var g=0;g<=20;g+=5){
+var gy=260-g*11;
+ctx.fillText(g,72,gy+4);
+ctx.strokeStyle='#eee';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(80,gy);ctx.lineTo(550,gy);ctx.stroke();
+}
+// Barres
+var bw=60,x0=110;
+ctx.textAlign='center';
+for(var j=0;j<5;j++){
+var bh=vals[j]*11;
+var bx=x0+j*(bw+20);
+ctx.fillStyle='rgba(42,82,152,0.7)';ctx.fillRect(bx,260-bh,bw,bh);
+ctx.fillStyle='#333';ctx.font='bold 12px Arial';
+ctx.fillText(vals[j],bx+bw/2,260-bh-8);
+ctx.font='11px Arial';ctx.fillText(labels[j],bx+bw/2,278);
+}
+// Ligne moyenne
+var my=260-moy*11;
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.setLineDash([6,4]);
+ctx.beginPath();ctx.moveTo(80,my);ctx.lineTo(550,my);ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='left';
+ctx.fillText('Moyenne = '+moy.toFixed(1),460,my-8);
+document.getElementById('resMoy').textContent='Somme = '+sum+'. Moyenne = '+sum+' / 5 = '+moy.toFixed(1)+'.';
+}
+ids.forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Moyenne ponderee</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Lorsque les valeurs ont des <strong>coefficients</strong> (ou poids) differents, on calcule la <strong>moyenne ponderee</strong> :
+$$\bar{x} = \frac{x_1 \times c_1 + x_2 \times c_2 + \cdots + x_n \times c_n}{c_1 + c_2 + \cdots + c_n}$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un eleve a trois notes : 14 (coefficient 2), 10 (coefficient 1), 16 (coefficient 3).</p>
+<p>$\bar{x} = \frac{14\times 2 + 10\times 1 + 16\times 3}{2+1+3} = \frac{28+10+48}{6} = \frac{86}{6} \approx 14{,}3$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>La moyenne ponderee accorde plus d'importance aux valeurs ayant un coefficient eleve. C'est le cas du calcul de la moyenne trimestrielle quand les matieres ont des coefficients differents.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Quiz moyenne ====== -->
+<div class="interactive-box">
+<h4>Quiz : calculer la moyenne</h4>
+<canvas id="cvQuiz" width="650" height="180"></canvas>
+<div class="controls">
+<label>Reponse :</label><input type="number" id="inpMoy" style="width:80px;padding:4px;font-size:.9rem" step="0.1">
+<button id="btnVerif" style="padding:4px 14px;background:#2a5298;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">Verifier</button>
+<button id="btnNew" style="padding:4px 14px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">Nouveau</button>
+</div>
+<div class="result-text" id="resQuiz"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvQuiz'),ctx=cv.getContext('2d');
+var notes,n,somme,moy;
+function gen(){
+n=Math.floor(Math.random()*3)+4; // 4 a 6 notes
+notes=[];somme=0;
+for(var i=0;i<n;i++){
+var v=Math.floor(Math.random()*16)+5;
+notes.push(v);somme+=v;
+}
+moy=somme/n;
+document.getElementById('inpMoy').value='';
+document.getElementById('resQuiz').textContent='';
+drawQ();
+}
+function drawQ(){
+ctx.clearRect(0,0,650,180);
+ctx.fillStyle='#333';ctx.font='16px Arial';ctx.textAlign='left';
+ctx.fillText('Calculer la moyenne de ces '+n+' notes :',40,40);
+ctx.font='bold 18px Arial';ctx.fillStyle='#2a5298';
+var txt=notes.join(' ; ');
+ctx.fillText(txt,40,80);
+ctx.font='13px Arial';ctx.fillStyle='#666';
+ctx.fillText('Arrondir au dixieme si necessaire.',40,120);
+}
+document.getElementById('btnVerif').addEventListener('click',function(){
+var rep=parseFloat(document.getElementById('inpMoy').value);
+if(Math.abs(rep-moy)<0.15){
+document.getElementById('resQuiz').textContent='Correct ! Moyenne = '+somme+' / '+n+' = '+moy.toFixed(1)+'.';
+document.getElementById('resQuiz').style.color='#27ae60';
+}else{
+document.getElementById('resQuiz').textContent='Incorrect. Moyenne = ('+notes.join(' + ')+') / '+n+' = '+somme+' / '+n+' = '+moy.toFixed(1)+'.';
+document.getElementById('resQuiz').style.color='#c0392b';
+}
+});
+document.getElementById('btnNew').addEventListener('click',function(){
+document.getElementById('resQuiz').style.color='#444';gen();
+});
+gen();
+})();
+</script>
+
+<h2>III. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Calculer la moyenne de la serie : 8, 12, 15, 11, 14.</p>
+
+<h3>Exercice 2</h3>
+<p>Un eleve a obtenu les notes suivantes avec les coefficients indiques : 16 (coeff. 4), 12 (coeff. 2), 9 (coeff. 1). Calculer sa moyenne ponderee.</p>
+
+<h3>Exercice 3</h3>
+<p>La moyenne de 4 notes est 13. L'eleve obtient une cinquieme note de 18. Quelle est la nouvelle moyenne ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $\bar{x} = \frac{8+12+15+11+14}{5} = \frac{60}{5} = 12$.</p>
+<p><strong>Ex. 2.</strong> $\bar{x} = \frac{16\times4+12\times2+9\times1}{4+2+1} = \frac{64+24+9}{7} = \frac{97}{7} \approx 13{,}9$.</p>
+<p><strong>Ex. 3.</strong> Somme des 4 notes : $13 \times 4 = 52$. Nouvelle somme : $52 + 18 = 70$. Nouvelle moyenne : $\frac{70}{5} = 14$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="17-statistiques-effectif.html">&larr; Effectifs et frequences</a><a href="19-scratch-variables.html">Scratch et variables &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

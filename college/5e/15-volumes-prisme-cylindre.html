@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volumes : prisme droit et cylindre . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Lecon 15</span></div>
+<h1 class="cours-titre-principal">Volumes : prisme droit et cylindre</h1>
+<p class="cours-sous-titre">Formules, calculs, conversions</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Volume du prisme droit</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>prisme droit</strong> est un solide dont les deux bases sont des polygones superposables et dont les faces laterales sont des rectangles perpendiculaires aux bases.</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Formule</div>
+<p>Le volume d'un prisme droit est :
+$$V = \mathcal{A}_{\text{base}} \times h$$
+ou $\mathcal{A}_{\text{base}}$ est l'aire de la base et $h$ la hauteur du prisme.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un prisme droit a base triangulaire avec une base de triangle de $b = 6$ cm, $h_{\text{tri}} = 4$ cm, et une hauteur de prisme $h = 10$ cm :</p>
+<p>$\mathcal{A}_{\text{base}} = \frac{6 \times 4}{2} = 12$ cm$^2$, donc $V = 12 \times 10 = 120$ cm$^3$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Prisme droit interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : volume d'un prisme droit a base triangulaire</h4>
+<canvas id="cvPrisme" width="650" height="350"></canvas>
+<div class="controls">
+<label>Base b :</label><input type="range" id="slB" min="30" max="120" value="80"><span id="vB">80</span>
+<label style="margin-left:1rem">Hauteur prisme h :</label><input type="range" id="slHp" min="40" max="180" value="120"><span id="vHp">120</span>
+</div>
+<div class="result-text" id="resPrisme"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvPrisme'),ctx=cv.getContext('2d');
+var htri=60;
+function draw(){
+var b=+document.getElementById('slB').value,hp=+document.getElementById('slHp').value;
+document.getElementById('vB').textContent=b;document.getElementById('vHp').textContent=hp;
+ctx.clearRect(0,0,650,350);
+var ox=160,oy=310;
+var dx=40,dy=-20; // decalage perspective
+// Base inferieure (triangle)
+var ax=ox,ay=oy;
+var bx=ox+b,by=oy;
+var cx2=ox+b/2,cy2=oy-htri;
+// Base superieure (decalage vers haut-droite)
+var ax2=ax+dx,ay2=ay-hp+dy;
+var bx2=bx+dx,by2=by-hp+dy;
+var cx3=cx2+dx,cy3=cy2-hp+dy;
+// Faces laterales visibles
+ctx.fillStyle='rgba(42,82,152,0.08)';
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.lineTo(bx2,by2);ctx.lineTo(ax2,ay2);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;ctx.stroke();
+ctx.fillStyle='rgba(42,82,152,0.06)';
+ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(cx2,cy2);ctx.lineTo(cx3,cy3);ctx.lineTo(bx2,by2);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.stroke();
+// Arete cachee
+ctx.strokeStyle='#aaa';ctx.setLineDash([4,4]);
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(cx2,cy2);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ax2,ay2);ctx.lineTo(cx3,cy3);ctx.stroke();
+ctx.setLineDash([]);
+// Face superieure
+ctx.fillStyle='rgba(42,82,152,0.12)';
+ctx.beginPath();ctx.moveTo(ax2,ay2);ctx.lineTo(bx2,by2);ctx.lineTo(cx3,cy3);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Arete verticale devant
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax2,ay2);ctx.stroke();
+ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(bx2,by2);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx2,cy2);ctx.lineTo(cx3,cy3);ctx.stroke();
+// Cotes
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText('b = '+b+' px',ox+b/2,oy+20);
+ctx.save();ctx.translate(ox-18,oy-hp/2);ctx.rotate(-Math.PI/2);ctx.fillText('h = '+hp+' px',0,0);ctx.restore();
+// Formule
+var aBase=b*htri/2;
+var vol=aBase*hp;
+ctx.fillStyle='#333';ctx.font='14px Arial';ctx.textAlign='left';
+ctx.fillText('Aire base = '+b+' \u00D7 '+htri+' / 2 = '+aBase+' px\u00B2',380,100);
+ctx.fillText('Volume = '+aBase+' \u00D7 '+hp+' = '+vol+' px\u00B3',380,130);
+document.getElementById('resPrisme').textContent='Volume = Aire de la base \u00D7 hauteur = '+aBase+' \u00D7 '+hp+' = '+vol+' px\u00B3.';
+}
+['slB','slHp'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Volume du cylindre</h2>
+
+<div class="definition"><div class="encadre-titre">Formule</div>
+<p>Le volume d'un <strong>cylindre de revolution</strong> de rayon $r$ et de hauteur $h$ est :
+$$V = \pi \times r^2 \times h$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un cylindre de rayon $r = 4$ cm et de hauteur $h = 7$ cm a pour volume $V = \pi \times 4^2 \times 7 = 112\pi \approx 351{,}9$ cm$^3$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Cylindre interactif ====== -->
+<div class="interactive-box">
+<h4>Illustration : volume du cylindre</h4>
+<canvas id="cvCyl" width="650" height="350"></canvas>
+<div class="controls">
+<label>Rayon r :</label><input type="range" id="slRc" min="20" max="100" value="60"><span id="vRc">60</span>
+<label style="margin-left:1rem">Hauteur h :</label><input type="range" id="slHc" min="40" max="200" value="140"><span id="vHc">140</span>
+</div>
+<div class="result-text" id="resCyl"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvCyl'),ctx=cv.getContext('2d');
+function draw(){
+var r=+document.getElementById('slRc').value,h=+document.getElementById('slHc').value;
+document.getElementById('vRc').textContent=r;document.getElementById('vHc').textContent=h;
+ctx.clearRect(0,0,650,350);
+var cx0=220,cy0=320;
+var ey=r*0.35; // ecrasement ellipse
+// Face laterale
+ctx.fillStyle='rgba(42,82,152,0.08)';
+ctx.beginPath();ctx.moveTo(cx0-r,cy0);ctx.lineTo(cx0-r,cy0-h);
+ctx.ellipse(cx0,cy0-h,r,ey,0,Math.PI,0);
+ctx.lineTo(cx0+r,cy0);
+ctx.ellipse(cx0,cy0,r,ey,0,0,Math.PI);
+ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Ellipse base inferieure (partie cachee)
+ctx.strokeStyle='#aaa';ctx.setLineDash([4,4]);ctx.lineWidth=1;
+ctx.beginPath();ctx.ellipse(cx0,cy0,r,ey,0,Math.PI,2*Math.PI);ctx.stroke();
+ctx.setLineDash([]);
+// Ellipse superieure complete
+ctx.fillStyle='rgba(42,82,152,0.12)';
+ctx.beginPath();ctx.ellipse(cx0,cy0-h,r,ey,0,0,2*Math.PI);ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Rayon sur ellipse superieure
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx0,cy0-h);ctx.lineTo(cx0+r,cy0-h);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText('r = '+r,cx0+r/2,cy0-h-10);
+// Hauteur
+ctx.strokeStyle='#d35400';ctx.lineWidth=1.5;ctx.setLineDash([5,3]);
+ctx.beginPath();ctx.moveTo(cx0+r+20,cy0);ctx.lineTo(cx0+r+20,cy0-h);ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#d35400';ctx.fillText('h = '+h,cx0+r+50,cy0-h/2);
+// Centre
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx0,cy0-h,3,0,2*Math.PI);ctx.fill();
+// Formule
+var vol=Math.PI*r*r*h;
+ctx.fillStyle='#333';ctx.font='14px Arial';ctx.textAlign='left';
+ctx.fillText('V = \u03C0 \u00D7 '+r+'\u00B2 \u00D7 '+h,400,100);
+ctx.fillText('= \u03C0 \u00D7 '+(r*r)+' \u00D7 '+h,400,125);
+ctx.fillText('\u2248 '+vol.toFixed(1)+' px\u00B3',400,150);
+document.getElementById('resCyl').textContent='Volume = \u03C0 \u00D7 '+r+'\u00B2 \u00D7 '+h+' \u2248 '+vol.toFixed(1)+' px\u00B3.';
+}
+['slRc','slHc'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>III. Conversions de volumes</h2>
+
+<div class="definition"><div class="encadre-titre">Rappel</div>
+<p>Pour convertir des unites de volume, on utilise le facteur $\times 1000$ entre chaque unite :</p>
+<p>$1\;\text{m}^3 = 1\,000\;\text{dm}^3 = 1\,000\,000\;\text{cm}^3$</p>
+<p>$1\;\text{dm}^3 = 1\;\text{L}$ (litre)</p>
+</div>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Calculer le volume d'un prisme droit a base rectangulaire de dimensions $5$ cm $\times$ $3$ cm et de hauteur $8$ cm.</p>
+
+<h3>Exercice 2</h3>
+<p>Une bouteille cylindrique a un rayon de $4$ cm et une hauteur de $20$ cm. Calculer son volume en cm$^3$ puis en litres.</p>
+
+<h3>Exercice 3</h3>
+<p>Convertir : a) $2{,}5$ dm$^3$ en cm$^3$ ; b) $3\,400$ cm$^3$ en litres.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $\mathcal{A}_{\text{base}} = 5 \times 3 = 15$ cm$^2$. $V = 15 \times 8 = 120$ cm$^3$.</p>
+<p><strong>Ex. 2.</strong> $V = \pi \times 4^2 \times 20 = 320\pi \approx 1\,005{,}3$ cm$^3 \approx 1{,}005$ L.</p>
+<p><strong>Ex. 3.</strong> a) $2{,}5 \times 1\,000 = 2\,500$ cm$^3$. b) $3\,400$ cm$^3 = 3{,}4$ dm$^3 = 3{,}4$ L.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="14-aires-avancees.html">&larr; Aires avancees</a><a href="16-proportionnalite-coeff.html">Proportionnalite &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

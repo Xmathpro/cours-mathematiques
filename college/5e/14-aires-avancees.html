@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aires avancees . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Grandeurs et mesures</span><span>Lecon 14</span></div>
+<h1 class="cours-titre-principal">Aires avancees</h1>
+<p class="cours-sous-titre">Aire du disque, figures composees, conversions</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels</h2>
+
+<div class="definition"><div class="encadre-titre">Formules de base</div>
+<p>Aire du <strong>rectangle</strong> : $\mathcal{A} = L \times l$.</p>
+<p>Aire du <strong>triangle</strong> : $\mathcal{A} = \dfrac{b \times h}{2}$.</p>
+<p>Aire du <strong>parallelogramme</strong> : $\mathcal{A} = b \times h$, ou $h$ est la hauteur relative a la base $b$.</p>
+</div>
+
+<h2>II. Aire du disque</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>L'aire d'un <strong>disque</strong> de rayon $r$ est :
+$$\mathcal{A} = \pi \times r^2$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un disque de rayon $r = 3$ cm a pour aire $\mathcal{A} = \pi \times 3^2 = 9\pi \approx 28{,}3$ cm$^2$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Disque avec rayon variable ====== -->
+<div class="interactive-box">
+<h4>Illustration : aire du disque en fonction du rayon</h4>
+<canvas id="cvDisque" width="650" height="320"></canvas>
+<div class="controls">
+<label>Rayon r :</label><input type="range" id="slR" min="20" max="130" value="70"><span id="vR">70</span> px
+</div>
+<div class="result-text" id="resDisque"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvDisque'),ctx=cv.getContext('2d');
+var cx0=220,cy0=160;
+function draw(){
+var r=+document.getElementById('slR').value;
+document.getElementById('vR').textContent=r;
+ctx.clearRect(0,0,650,320);
+// Grille
+ctx.strokeStyle='#eee';ctx.lineWidth=1;
+for(var i=0;i<650;i+=20){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,320);ctx.stroke();}
+for(var j=0;j<320;j+=20){ctx.beginPath();ctx.moveTo(0,j);ctx.lineTo(650,j);ctx.stroke();}
+// Disque
+ctx.fillStyle='rgba(42,82,152,0.15)';
+ctx.beginPath();ctx.arc(cx0,cy0,r,0,2*Math.PI);ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Rayon
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx0,cy0);ctx.lineTo(cx0+r,cy0);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText('r = '+r+' px',cx0+r/2,cy0-10);
+// Centre
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx0,cy0,3,0,2*Math.PI);ctx.fill();
+ctx.fillText('O',cx0-12,cy0+4);
+// Formule
+var aire=Math.PI*r*r;
+ctx.fillStyle='#333';ctx.font='16px Arial';ctx.textAlign='left';
+ctx.fillText('Aire = \u03C0 \u00D7 r\u00B2',430,80);
+ctx.fillText('= \u03C0 \u00D7 '+r+'\u00B2',430,105);
+ctx.fillText('= '+aire.toFixed(1)+' px\u00B2',430,130);
+document.getElementById('resDisque').textContent='Pour r = '+r+' px, l\u0027aire du disque vaut \u03C0 \u00D7 '+r+'\u00B2 \u2248 '+aire.toFixed(1)+' px\u00B2.';
+}
+document.getElementById('slR').addEventListener('input',draw);
+draw();
+})();
+</script>
+
+<h2>III. Perimetre du cercle</h2>
+
+<div class="definition"><div class="encadre-titre">Rappel</div>
+<p>Le perimetre (la longueur) d'un <strong>cercle</strong> de rayon $r$ est :
+$$\mathcal{P} = 2\pi r$$</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>Si on connait le diametre $d = 2r$, alors $\mathcal{P} = \pi d$.</p>
+</div>
+
+<h2>IV. Figures composees</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour calculer l'aire d'une figure composee, on la <strong>decompose</strong> en figures simples (rectangles, triangles, disques ou demi-disques), on calcule chaque aire, puis on additionne (ou on soustrait si une partie est evidee).</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Figure composee interactive ====== -->
+<div class="interactive-box">
+<h4>Illustration : decomposition d'une figure en parties</h4>
+<canvas id="cvComp" width="650" height="300"></canvas>
+<div class="controls">
+<label>Largeur :</label><input type="range" id="slW" min="80" max="200" value="140"><span id="vW">140</span>
+<label style="margin-left:1rem">Hauteur :</label><input type="range" id="slHc" min="60" max="160" value="100"><span id="vHc">100</span>
+</div>
+<div class="result-text" id="resComp"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvComp'),ctx=cv.getContext('2d');
+function draw(){
+var w=+document.getElementById('slW').value,h=+document.getElementById('slHc').value;
+document.getElementById('vW').textContent=w;document.getElementById('vHc').textContent=h;
+ctx.clearRect(0,0,650,300);
+var x0=120,y0=250;
+// Rectangle
+ctx.fillStyle='rgba(42,82,152,0.12)';ctx.fillRect(x0,y0-h,w,h);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(x0,y0-h,w,h);
+// Demi-disque au-dessus
+var r=w/2;
+ctx.fillStyle='rgba(211,84,0,0.12)';
+ctx.beginPath();ctx.arc(x0+w/2,y0-h,r,Math.PI,0);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;ctx.stroke();
+// Cotes
+ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='center';
+ctx.fillText(w+' px',x0+w/2,y0+20);
+ctx.save();ctx.translate(x0-15,y0-h/2);ctx.rotate(-Math.PI/2);ctx.fillText(h+' px',0,0);ctx.restore();
+ctx.fillStyle='#d35400';ctx.fillText('r = '+Math.round(r)+' px',x0+w/2,y0-h-r/2-10);
+// Labels
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.fillText('Rectangle',x0+w/2,y0-h/2+5);
+ctx.fillStyle='#d35400';ctx.fillText('Demi-disque',x0+w/2,y0-h-20);
+// Calculs
+var aRect=w*h;
+var aDemi=Math.PI*r*r/2;
+var total=aRect+aDemi;
+ctx.fillStyle='#333';ctx.font='14px Arial';ctx.textAlign='left';
+ctx.fillText('Aire rectangle = '+w+' \u00D7 '+h+' = '+aRect+' px\u00B2',400,100);
+ctx.fillText('Aire demi-disque = \u03C0\u00D7'+Math.round(r)+'\u00B2/2 \u2248 '+aDemi.toFixed(1)+' px\u00B2',400,125);
+ctx.fillText('Aire totale \u2248 '+total.toFixed(1)+' px\u00B2',400,155);
+document.getElementById('resComp').textContent='Aire totale = aire du rectangle + aire du demi-disque = '+aRect+' + '+aDemi.toFixed(1)+' = '+total.toFixed(1)+' px\u00B2.';
+}
+['slW','slHc'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>V. Conversions d'aires</h2>
+
+<div class="definition"><div class="encadre-titre">Rappel</div>
+<p>Pour convertir des unites d'aire, on utilise le facteur $\times 100$ (et non $\times 10$) entre chaque unite :</p>
+<p>$1\;\text{m}^2 = 100\;\text{dm}^2 = 10\,000\;\text{cm}^2$</p>
+<p>$1\;\text{km}^2 = 1\,000\,000\;\text{m}^2$</p>
+</div>
+
+<h2>VI. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Calculer l'aire d'un disque de rayon $r = 5$ cm. Donner la valeur exacte et une valeur approchee au dixieme.</p>
+
+<h3>Exercice 2</h3>
+<p>Un terrain rectangulaire mesure 30 m sur 20 m. A une extremite, on ajoute un demi-disque de diametre 20 m. Calculer l'aire totale du terrain.</p>
+
+<h3>Exercice 3</h3>
+<p>Convertir : a) $3{,}5$ m$^2$ en cm$^2$ ; b) $45\,000$ cm$^2$ en m$^2$.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $\mathcal{A} = \pi \times 5^2 = 25\pi \approx 78{,}5$ cm$^2$.</p>
+<p><strong>Ex. 2.</strong> Aire du rectangle : $30 \times 20 = 600$ m$^2$. Aire du demi-disque : $\frac{\pi \times 10^2}{2} = 50\pi \approx 157{,}1$ m$^2$. Aire totale $\approx 757{,}1$ m$^2$.</p>
+<p><strong>Ex. 3.</strong> a) $3{,}5 \times 10\,000 = 35\,000$ cm$^2$. b) $45\,000 \div 10\,000 = 4{,}5$ m$^2$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="13-symetrie-centrale.html">&larr; Symetrie centrale</a><a href="15-volumes-prisme-cylindre.html">Volumes &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

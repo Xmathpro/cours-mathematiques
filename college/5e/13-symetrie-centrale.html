@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symetrie centrale . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Lecon 13</span></div>
+<h1 class="cours-titre-principal">Symetrie centrale</h1>
+<p class="cours-sous-titre">Symetrique d'un point, proprietes de conservation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Symetrique d'un point</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Le <strong>symetrique</strong> d'un point $A$ par rapport a un point $O$ (appele <strong>centre de symetrie</strong>) est le point $A'$ tel que $O$ est le <strong>milieu</strong> du segment $[AA']$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>Autrement dit, $A'$ est le point tel que $OA' = OA$ et les trois points $A$, $O$, $A'$ sont alignes, $O$ etant entre $A$ et $A'$.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Symetrique interactif d'un point ====== -->
+<div class="interactive-box">
+<h4>Illustration : symetrique d'un point par rapport a O</h4>
+<canvas id="cvSym" width="650" height="350"></canvas>
+<div class="controls">
+<label>Position x de A :</label><input type="range" id="slAx" min="80" max="300" value="180"><span id="vAx">180</span>
+<label style="margin-left:1rem">Position y de A :</label><input type="range" id="slAy" min="60" max="280" value="100"><span id="vAy">100</span>
+</div>
+<div class="result-text" id="resSym"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvSym'),ctx=cv.getContext('2d');
+var ox=325,oy=175;
+function draw(){
+var ax=+document.getElementById('slAx').value,ay=+document.getElementById('slAy').value;
+document.getElementById('vAx').textContent=ax;document.getElementById('vAy').textContent=ay;
+var apx=2*ox-ax,apy=2*oy-ay;
+ctx.clearRect(0,0,650,350);
+// Droite (AA')
+ctx.strokeStyle='#bbb';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(apx,apy);ctx.stroke();
+ctx.setLineDash([]);
+// Marques d'egalite
+var mx=(ax+ox)/2,my=(ay+oy)/2;
+var mx2=(ox+apx)/2,my2=(oy+apy)/2;
+ctx.strokeStyle='#27ae60';ctx.lineWidth=2;
+var dx=oy-ay,dy=ax-ox,len=Math.sqrt(dx*dx+dy*dy)||1;
+dx=dx/len*8;dy=dy/len*8;
+ctx.beginPath();ctx.moveTo(mx-dx,my-dy);ctx.lineTo(mx+dx,my+dy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(mx2-dx,my2-dy);ctx.lineTo(mx2+dx,my2+dy);ctx.stroke();
+// Points
+ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(ax,ay,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(ox,oy,6,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#d35400';ctx.beginPath();ctx.arc(apx,apy,6,0,2*Math.PI);ctx.fill();
+// Labels
+ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillStyle='#2a5298';ctx.fillText('A',ax-14,ay-10);
+ctx.fillStyle='#c0392b';ctx.fillText('O',ox+14,oy-10);
+ctx.fillStyle='#d35400';ctx.fillText("A'",apx+14,apy-10);
+var dist=Math.round(Math.sqrt((ax-ox)*(ax-ox)+(ay-oy)*(ay-oy)));
+document.getElementById('resSym').textContent='O est le milieu de [AA\u0027]. OA = OA\u0027 = '+dist+' pixels.';
+}
+['slAx','slAy'].forEach(function(id){document.getElementById(id).addEventListener('input',draw);});
+draw();
+})();
+</script>
+
+<h2>II. Construction du symetrique</h2>
+
+<div class="definition"><div class="encadre-titre">Methode</div>
+<p>Pour construire le symetrique $A'$ de $A$ par rapport a $O$ :</p>
+<ol>
+<li>Tracer la demi-droite $[AO)$ et la prolonger au-dela de $O$.</li>
+<li>Reporter la distance $OA$ de l'autre cote de $O$ a l'aide du compas.</li>
+<li>Le point obtenu est $A'$.</li>
+</ol>
+</div>
+
+<h2>III. Proprietes de conservation</h2>
+
+<div class="definition"><div class="encadre-titre">Proprietes</div>
+<p>La symetrie centrale <strong>conserve</strong> :</p>
+<ol>
+<li>Les <strong>longueurs</strong> : si $A'$ et $B'$ sont les symetriques de $A$ et $B$ par rapport a $O$, alors $A'B' = AB$.</li>
+<li>Les <strong>angles</strong> : $\widehat{A'B'C'} = \widehat{ABC}$.</li>
+<li>L'<strong>alignement</strong> : si $A$, $B$, $C$ sont alignes, leurs symetriques le sont aussi.</li>
+<li>Les <strong>aires</strong> : une figure et son image ont la meme aire.</li>
+</ol>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>La symetrie centrale conserve donc les figures : le symetrique d'un segment est un segment de meme longueur, le symetrique d'un cercle est un cercle de meme rayon, le symetrique d'un triangle est un triangle isometrique.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Symetrique d'un triangle ====== -->
+<div class="interactive-box">
+<h4>Illustration : symetrique d'un triangle par rapport a O</h4>
+<canvas id="cvTri" width="650" height="350"></canvas>
+<div class="controls">
+<label>Rotation :</label><input type="range" id="slRot" min="0" max="360" value="0"><span id="vRot">0</span>&deg;
+</div>
+<div class="result-text" id="resTri"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvTri'),ctx=cv.getContext('2d');
+var ox=325,oy=175;
+var baseA=[160,120],baseB=[280,120],baseC=[200,220];
+function rot(px,py,ang){
+var r=ang*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
+var dx=px-ox,dy=py-oy;
+return[ox+dx*c-dy*s,oy+dx*s+dy*c];
+}
+function draw(){
+var ang=+document.getElementById('slRot').value;
+document.getElementById('vRot').textContent=ang;
+ctx.clearRect(0,0,650,350);
+var a=rot(baseA[0],baseA[1],ang),b=rot(baseB[0],baseB[1],ang),c=rot(baseC[0],baseC[1],ang);
+var ap=[2*ox-a[0],2*oy-a[1]],bp=[2*ox-b[0],2*oy-b[1]],cp=[2*ox-c[0],2*oy-c[1]];
+// Liens pointilles
+ctx.strokeStyle='#bbb';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(ap[0],ap[1]);ctx.stroke();
+ctx.beginPath();ctx.moveTo(b[0],b[1]);ctx.lineTo(bp[0],bp[1]);ctx.stroke();
+ctx.beginPath();ctx.moveTo(c[0],c[1]);ctx.lineTo(cp[0],cp[1]);ctx.stroke();
+ctx.setLineDash([]);
+// Triangle original
+ctx.fillStyle='rgba(42,82,152,0.12)';
+ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.lineTo(c[0],c[1]);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.stroke();
+// Triangle image
+ctx.fillStyle='rgba(211,84,0,0.12)';
+ctx.beginPath();ctx.moveTo(ap[0],ap[1]);ctx.lineTo(bp[0],bp[1]);ctx.lineTo(cp[0],cp[1]);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#d35400';ctx.lineWidth=2;ctx.stroke();
+// Centre O
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(ox,oy,5,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText('O',ox+14,oy-10);
+// Labels
+ctx.font='bold 13px Arial';
+ctx.fillStyle='#2a5298';ctx.fillText('A',a[0]-12,a[1]-8);ctx.fillText('B',b[0]+12,b[1]-8);ctx.fillText('C',c[0]-12,c[1]+16);
+ctx.fillStyle='#d35400';ctx.fillText("A'",ap[0]+12,ap[1]+16);ctx.fillText("B'",bp[0]-12,bp[1]+16);ctx.fillText("C'",cp[0]+12,cp[1]-8);
+document.getElementById('resTri').textContent='Le triangle A\u0027B\u0027C\u0027 est le symetrique de ABC par rapport a O. Les longueurs et angles sont conserves.';
+}
+document.getElementById('slRot').addEventListener('input',draw);
+draw();
+})();
+</script>
+
+<h2>IV. Centre de symetrie d'une figure</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un point $O$ est un <strong>centre de symetrie</strong> d'une figure si la figure est sa propre image par la symetrie de centre $O$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>Le parallelogramme admet un centre de symetrie : l'intersection de ses diagonales. Le cercle admet un centre de symetrie : son centre. Le carre admet un centre de symetrie : l'intersection de ses diagonales.</p>
+</div>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>Placer un point $O$, un point $A$ et construire le symetrique $A'$ de $A$ par rapport a $O$. Verifier au compas que $OA = OA'$.</p>
+
+<h3>Exercice 2</h3>
+<p>ABCD est un parallelogramme de centre O. Quel est le symetrique de $A$ par rapport a $O$ ? De $B$ ? Justifier.</p>
+
+<h3>Exercice 3</h3>
+<p>Un segment $[AB]$ mesure 5 cm. On construit son image par la symetrie de centre $O$. Quelle est la longueur de $[A'B']$ ? Justifier.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> Construction au compas et a la regle. On prolonge [AO) et on reporte OA de l'autre cote.</p>
+<p><strong>Ex. 2.</strong> Le symetrique de $A$ par rapport a $O$ est $C$ (car $O$ est le milieu de $[AC]$). Le symetrique de $B$ est $D$ (car $O$ est le milieu de $[BD]$).</p>
+<p><strong>Ex. 3.</strong> $A'B' = AB = 5$ cm car la symetrie centrale conserve les longueurs.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="12-parallelogrammes.html">&larr; Parallelogrammes</a><a href="14-aires-avancees.html">Aires avancees &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

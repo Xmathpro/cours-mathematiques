@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angles alternes-internes . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Geometrie</span><span>Lecon 10</span></div>
+<h1 class="cours-titre-principal">Angles alternes-internes et correspondants</h1>
+<p class="cours-sous-titre">Reconnaitre et utiliser les angles formes par deux droites et une secante</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Configuration : deux droites coupees par une secante</h2>
+
+<div class="definition"><div class="encadre-titre">Situation</div>
+<p>Quand une droite $(d_3)$, appelee <strong>secante</strong>, coupe deux droites $(d_1)$ et $(d_2)$, elle forme 8 angles aux deux points d'intersection.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Deux paralleles et secante ====== -->
+<div class="interactive-box">
+<h4>Illustration : angles formes par deux droites paralleles et une secante</h4>
+<canvas id="cvAlt" width="650" height="350"></canvas>
+<div class="controls">
+<label>Angle :</label><input type="range" id="slAlt" min="20" max="160" value="55"><span id="valAlt">55</span>
+</div>
+<div class="result-text" id="resAlt"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvAlt'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slAlt').value;
+document.getElementById('valAlt').textContent=a+'deg';
+ctx.clearRect(0,0,650,350);
+var y1=120,y2=250,ar=a*Math.PI/180;
+// d1 et d2
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(50,y1);ctx.lineTo(600,y1);ctx.stroke();
+ctx.beginPath();ctx.moveTo(50,y2);ctx.lineTo(600,y2);ctx.stroke();
+ctx.fillStyle='#888';ctx.font='13px Arial';ctx.textAlign='left';
+ctx.fillText('(d1)',605,y1+4);ctx.fillText('(d2)',605,y2+4);
+// secante
+var sx1=325-200*Math.cos(ar),sy1=y1+200*Math.sin(ar);
+var sx2=325+200*Math.cos(ar),sy2=y1-200*Math.sin(ar);
+var diff=y2-y1,tx=325+diff/Math.tan(ar);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(sx1-80*Math.cos(ar),y1+80*Math.sin(ar)+50);ctx.lineTo(tx+80*Math.cos(ar),y2-80*Math.sin(ar)-50);ctx.stroke();
+// Points d'intersection
+var px1=325,py1=y1,px2=tx,py2=y2;
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(px1,py1,4,0,2*Math.PI);ctx.fill();
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(px2,py2,4,0,2*Math.PI);ctx.fill();
+// Angles alternes-internes colores
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(px1,py1,30,0,ar);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 12px Arial';ctx.textAlign='left';
+ctx.fillText(a+'deg',px1+35,py1+ar*15+5);
+ctx.strokeStyle='#c0392b';
+ctx.beginPath();ctx.arc(px2,py2,30,Math.PI,Math.PI+ar);ctx.stroke();
+ctx.fillText(a+'deg',px2-65,py2-ar*10);
+// Labels
+ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('Alternes-internes : egaux si (d1) // (d2)',325,330);
+document.getElementById('resAlt').textContent='Si (d1) est parallele a (d2), les angles alternes-internes sont egaux : '+a+'deg = '+a+'deg.';
+}
+document.getElementById('slAlt').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>II. Angles alternes-internes</h2>
+
+<div class="definition"><div class="encadre-titre">Definition et propriete</div>
+<p>Deux angles sont <strong>alternes-internes</strong> s'ils sont situes de part et d'autre de la secante, entre les deux droites.</p>
+<p><strong>Propriete :</strong> si deux droites sont paralleles, alors les angles alternes-internes sont <strong>egaux</strong>.</p>
+<p><strong>Reciproque :</strong> si deux angles alternes-internes sont egaux, alors les droites sont <strong>paralleles</strong>.</p>
+</div>
+
+<h2>III. Angles correspondants</h2>
+
+<div class="definition"><div class="encadre-titre">Definition et propriete</div>
+<p>Deux angles sont <strong>correspondants</strong> s'ils sont situes du meme cote de la secante, l'un entre les droites et l'autre a l'exterieur.</p>
+<p><strong>Propriete :</strong> si deux droites sont paralleles, alors les angles correspondants sont <strong>egaux</strong>.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Correspondants ====== -->
+<div class="interactive-box">
+<h4>Illustration : angles correspondants</h4>
+<canvas id="cvCorr" width="650" height="300"></canvas>
+<div class="controls">
+<label>Angle :</label><input type="range" id="slCorr" min="20" max="160" value="70"><span id="valCorr">70</span>
+</div>
+<div class="result-text" id="resCorr"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvCorr'),ctx=cv.getContext('2d');
+function draw(){
+var a=+document.getElementById('slCorr').value;
+document.getElementById('valCorr').textContent=a+'deg';
+ctx.clearRect(0,0,650,300);
+var y1=100,y2=210,ar=a*Math.PI/180;
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(50,y1);ctx.lineTo(600,y1);ctx.stroke();
+ctx.beginPath();ctx.moveTo(50,y2);ctx.lineTo(600,y2);ctx.stroke();
+var px1=280,px2=280+(y2-y1)/Math.tan(ar);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(px1-60*Math.cos(ar),y1+60*Math.sin(ar));ctx.lineTo(px2+60*Math.cos(ar),y2-60*Math.sin(ar));ctx.stroke();
+// Meme cote : angle en haut a droite de px1, angle en haut a droite de px2
+ctx.strokeStyle='#27ae60';ctx.lineWidth=2.5;
+ctx.beginPath();ctx.arc(px1,y1,25,-ar,0);ctx.stroke();
+ctx.beginPath();ctx.arc(px2,y2,25,-ar,0);ctx.stroke();
+ctx.fillStyle='#27ae60';ctx.font='bold 12px Arial';ctx.textAlign='left';
+ctx.fillText(a+'deg',px1+30,y1-8);
+ctx.fillText(a+'deg',px2+30,y2-8);
+ctx.fillStyle='#27ae60';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('Correspondants : egaux si (d1) // (d2)',325,280);
+document.getElementById('resCorr').textContent='Si les droites sont paralleles, les angles correspondants sont egaux : '+a+'deg = '+a+'deg.';
+}
+document.getElementById('slCorr').addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2>IV. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>$(d_1)$ et $(d_2)$ sont paralleles. Une secante forme un angle de $63$ avec $(d_1)$. Quelle est la mesure de l'angle alterne-interne ? De l'angle correspondant ?</p>
+
+<h3>Exercice 2</h3>
+<p>On mesure deux angles alternes-internes : $48$ et $48$. Peut-on affirmer que les droites sont paralleles ?</p>
+
+<h3>Exercice 3 : probleme</h3>
+<p>Dans la figure, $(AB) \parallel (CD)$. L'angle $\widehat{ABE} = 72$ et l'angle $\widehat{BEC} = ?$. Sachant que $\widehat{ABE}$ et $\widehat{DCE}$ sont alternes-internes, et que $\widehat{BEC}$ et $\widehat{DCE}$ sont supplementaires, calcule $\widehat{BEC}$.</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> Alterne-interne = $63$ (egaux car paralleles). Correspondant = $63$ (egaux car paralleles).</p>
+<p><strong>Ex. 2.</strong> Oui, par la reciproque de la propriete des angles alternes-internes.</p>
+<p><strong>Ex. 3.</strong> $\widehat{DCE} = 72$ (alternes-internes). $\widehat{BEC} = 180 - 72 = 108$ (supplementaires).</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="09-angles.html">&larr; Angles</a><a href="11-triangles.html">Triangles &rarr;</a></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

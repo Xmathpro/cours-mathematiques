@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch et variables . 5eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.scratch-block{font-family:'Courier New',monospace;background:#4C97FF;color:#fff;display:inline-block;padding:4px 10px;border-radius:6px;margin:2px;font-size:.85rem}
+.scratch-var{background:#FF8C1A}
+.scratch-op{background:#59C059}
+.scratch-ctrl{background:#FFAB19}
+.scratch-evt{background:#FFD500;color:#333}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>5eme</span><span>Algorithmique</span><span>Lecon 19</span></div>
+<h1 class="cours-titre-principal">Scratch et variables</h1>
+<p class="cours-sous-titre">Variables, affectation, boucles, conditions</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Qu'est-ce qu'une variable ?</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>En programmation, une <strong>variable</strong> est un espace de stockage qui porte un <strong>nom</strong> et qui contient une <strong>valeur</strong>. Cette valeur peut changer au cours du programme.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple dans Scratch</div>
+<p>On cree une variable appelee <span class="scratch-block scratch-var">score</span> et on lui donne la valeur 0 au debut du jeu. A chaque bonne reponse, on ajoute 1 a <span class="scratch-block scratch-var">score</span>.</p>
+</div>
+
+<h2>II. Operations sur les variables</h2>
+
+<div class="definition"><div class="encadre-titre">Blocs Scratch pour les variables</div>
+<p><span class="scratch-block scratch-var">mettre score a 0</span> : donne la valeur 0 a la variable.</p>
+<p><span class="scratch-block scratch-var">ajouter 1 a score</span> : augmente la valeur de 1.</p>
+<p><span class="scratch-block scratch-var">score</span> : lit la valeur actuelle.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarque</div>
+<p>On peut utiliser les variables dans des calculs. Par exemple, si <span class="scratch-block scratch-var">cote</span> contient 5, alors le bloc <span class="scratch-block scratch-op">cote * cote</span> donne 25 (l'aire du carre).</p>
+</div>
+
+<!-- ====== ILLUSTRATION 1 : Simulateur de variable ====== -->
+<div class="interactive-box">
+<h4>Illustration : simulateur de variable</h4>
+<canvas id="cvVar" width="650" height="280"></canvas>
+<div class="controls">
+<button id="btnInit" style="padding:4px 12px;background:#FF8C1A;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">mettre x a 0</button>
+<button id="btnAdd" style="padding:4px 12px;background:#59C059;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">ajouter 3 a x</button>
+<button id="btnMul" style="padding:4px 12px;background:#4C97FF;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">mettre x a x * 2</button>
+<button id="btnSub" style="padding:4px 12px;background:#c0392b;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem">ajouter -1 a x</button>
+</div>
+<div class="result-text" id="resVar"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvVar'),ctx=cv.getContext('2d');
+var x=0;
+var history=[];
+function addStep(label){
+history.push({label:label,val:x});
+if(history.length>8) history.shift();
+draw();
+}
+function draw(){
+ctx.clearRect(0,0,650,280);
+// Boite variable
+ctx.fillStyle='#FF8C1A';ctx.beginPath();
+ctx.moveTo(30,20);ctx.lineTo(180,20);ctx.lineTo(190,40);ctx.lineTo(180,60);ctx.lineTo(30,60);ctx.lineTo(20,40);ctx.closePath();ctx.fill();
+ctx.fillStyle='#fff';ctx.font='bold 18px Courier New';ctx.textAlign='center';
+ctx.fillText('x = '+x,105,46);
+// Historique
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='left';
+ctx.fillText('Historique :',30,95);
+ctx.font='12px Courier New';
+for(var i=0;i<history.length;i++){
+var h=history[i];
+ctx.fillStyle='#666';ctx.fillText(h.label,40,115+i*20);
+ctx.fillStyle='#2a5298';ctx.font='bold 12px Courier New';
+ctx.fillText('\u2192 x = '+h.val,320,115+i*20);
+ctx.font='12px Courier New';
+}
+// Barre visuelle
+var bw=Math.min(Math.max(x*15,0),400);
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(230,20,400,40);
+ctx.fillStyle='#2a5298';ctx.fillRect(230,20,bw,40);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.strokeRect(230,20,400,40);
+ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText(x,230+bw/2,45);
+document.getElementById('resVar').textContent='Valeur actuelle de x : '+x+'.';
+}
+document.getElementById('btnInit').addEventListener('click',function(){x=0;addStep('mettre x a 0');});
+document.getElementById('btnAdd').addEventListener('click',function(){x+=3;addStep('ajouter 3 a x');});
+document.getElementById('btnMul').addEventListener('click',function(){x=x*2;addStep('mettre x a x*2');});
+document.getElementById('btnSub').addEventListener('click',function(){x+=-1;addStep('ajouter -1 a x');});
+addStep('initialisation');
+})();
+</script>
+
+<h2>III. Boucles</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>boucle</strong> permet de repeter un bloc d'instructions plusieurs fois.</p>
+<p><span class="scratch-block scratch-ctrl">repeter 10 fois</span> : execute les instructions a l'interieur 10 fois.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Pour dessiner un carre de cote 100 :</p>
+<p><span class="scratch-block scratch-ctrl">repeter 4 fois</span></p>
+<p style="margin-left:2rem"><span class="scratch-block">avancer de 100</span></p>
+<p style="margin-left:2rem"><span class="scratch-block">tourner de 90 degres</span></p>
+</div>
+
+<h2>IV. Conditions</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>condition</strong> permet d'executer des instructions uniquement si un test est verifie.</p>
+<p><span class="scratch-block scratch-ctrl">si ... alors</span> : execute le bloc interieur seulement si la condition est vraie.</p>
+<p><span class="scratch-block scratch-ctrl">si ... alors ... sinon</span> : execute un bloc si la condition est vraie, un autre si elle est fausse.</p>
+</div>
+
+<!-- ====== ILLUSTRATION 2 : Simulateur boucle + condition ====== -->
+<div class="interactive-box">
+<h4>Illustration : boucle avec condition (compter les pairs)</h4>
+<canvas id="cvBoucle" width="650" height="280"></canvas>
+<div class="controls">
+<label>Nombre de repetitions :</label><input type="range" id="slN" min="1" max="20" value="10"><span id="vN">10</span>
+<button id="btnRun" style="padding:4px 14px;background:#4C97FF;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:.85rem;margin-left:1rem">Executer</button>
+</div>
+<div class="result-text" id="resBoucle"></div>
+</div>
+<script>
+(function(){
+var cv=document.getElementById('cvBoucle'),ctx=cv.getContext('2d');
+function run(){
+var n=+document.getElementById('slN').value;
+document.getElementById('vN').textContent=n;
+ctx.clearRect(0,0,650,280);
+// Programme
+ctx.fillStyle='#333';ctx.font='13px Courier New';ctx.textAlign='left';
+ctx.fillText('mettre compteur a 0',30,30);
+ctx.fillText('repeter '+n+' fois :',30,55);
+ctx.fillText('  ajouter 1 a i',30,75);
+ctx.fillText('  si (i modulo 2 = 0) alors',30,95);
+ctx.fillText('    ajouter 1 a compteur',30,115);
+ctx.fillText('Resultat : compteur',30,145);
+// Execution visuelle
+var compteur=0;
+var cols=[];
+for(var i=1;i<=n;i++){
+var pair=(i%2===0);
+if(pair) compteur++;
+cols.push({val:i,pair:pair});
+}
+// Dessiner les valeurs
+var x0=300,y0=30,bw=28,gap=4;
+ctx.font='bold 12px Arial';ctx.textAlign='center';
+for(var j=0;j<cols.length;j++){
+var row=Math.floor(j/10),col=j%10;
+var bx=x0+col*(bw+gap),by=y0+row*50;
+ctx.fillStyle=cols[j].pair?'#27ae60':'#e0e0e0';
+ctx.fillRect(bx,by,bw,bw);
+ctx.fillStyle=cols[j].pair?'#fff':'#666';
+ctx.fillText(cols[j].val,bx+bw/2,by+bw/2+4);
+}
+// Resultat
+ctx.fillStyle='#c0392b';ctx.font='bold 16px Arial';ctx.textAlign='left';
+ctx.fillText('compteur = '+compteur,300,160);
+ctx.fillStyle='#666';ctx.font='13px Arial';
+ctx.fillText('Les cases vertes sont les nombres pairs.',300,185);
+document.getElementById('resBoucle').textContent='De 1 a '+n+', il y a '+compteur+' nombre(s) pair(s).';
+}
+document.getElementById('slN').addEventListener('input',run);
+document.getElementById('btnRun').addEventListener('click',run);
+run();
+})();
+</script>
+
+<h2>V. Exercices</h2>
+
+<h3>Exercice 1</h3>
+<p>On execute le programme suivant : <span class="scratch-block scratch-var">mettre x a 5</span>, puis <span class="scratch-block scratch-var">ajouter 3 a x</span>, puis <span class="scratch-block scratch-var">mettre x a x * 2</span>. Quelle est la valeur finale de x ?</p>
+
+<h3>Exercice 2</h3>
+<p>Ecrire un programme Scratch qui demande un nombre a l'utilisateur et affiche "Pair" s'il est pair, "Impair" sinon.</p>
+
+<h3>Exercice 3</h3>
+<p>On execute une boucle "repeter 5 fois : ajouter 4 a somme" avec somme initialisee a 0. Quelle est la valeur finale de somme ?</p>
+
+<h3>Corriges</h3>
+<div class="exemple"><div class="encadre-titre">Corriges</div>
+<p><strong>Ex. 1.</strong> $x = 5$, puis $x = 5 + 3 = 8$, puis $x = 8 \times 2 = 16$. Valeur finale : $x = 16$.</p>
+<p><strong>Ex. 2.</strong> <span class="scratch-block scratch-evt">demander "Quel nombre ?"</span>. <span class="scratch-block scratch-ctrl">si (reponse modulo 2 = 0) alors</span> <span class="scratch-block">dire "Pair"</span> <span class="scratch-block scratch-ctrl">sinon</span> <span class="scratch-block">dire "Impair"</span>.</p>
+<p><strong>Ex. 3.</strong> $\text{somme} = 0 + 4 + 4 + 4 + 4 + 4 = 20$.</p>
+</div>
+
+</main>
+<nav class="cours-nav"><a href="18-statistiques-moyenne.html">&larr; Statistiques : moyenne</a><span style="color:#999">Fin du programme 5eme</span></nav>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
