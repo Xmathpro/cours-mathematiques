@@ -4,62 +4,122 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Progression annuelle . 5eme</title>
 <link rel="stylesheet" href="../../assets/style.css">
+<style>
+.planning{font-family:Arial,sans-serif;font-size:.82rem;width:100%;border-collapse:collapse;margin:1.5rem 0}
+.planning th{background:#2a5298;color:#fff;padding:8px 6px;text-align:left;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.planning td{padding:7px 6px;border-bottom:1px solid #e8e8e8;vertical-align:top}
+.planning tr:hover{background:#f5f7fb}
+.sem{font-weight:700;color:#2a5298;white-space:nowrap;width:55px}
+.dom{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600;color:#fff;margin-right:4px}
+.dom-nc{background:#2a5298}
+.dom-geo{background:#27ae60}
+.dom-gm{background:#d35400}
+.dom-od{background:#8e44ad}
+.dom-algo{background:#e67e22}
+.eval{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.72rem;font-weight:600;margin:1px 2px}
+.eval-ic{background:#fff3cd;color:#856404;border:1px solid #ffc107}
+.eval-ds{background:#f8d7da;color:#721c24;border:1px solid #dc3545}
+.eval-dm{background:#d4edda;color:#155724;border:1px solid #28a745}
+.eval-bilan{background:#2a5298;color:#fff}
+.trim-header td{background:#f0f0f0;font-weight:700;font-size:.9rem;color:#2a5298;padding:10px 6px;border-top:3px solid #2a5298}
+.legende{display:flex;flex-wrap:wrap;gap:12px;margin:1rem 0;font-size:.8rem;font-family:Arial,sans-serif}
+.legende-item{display:flex;align-items:center;gap:4px}
+.recap{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;margin:1.5rem 0;font-family:Arial,sans-serif;font-size:.85rem}
+.recap h3{margin:0 0 .5rem;color:#2a5298;font-size:1rem}
+.recap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.recap-card{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:8px;text-align:center}
+.recap-num{font-size:1.8rem;font-weight:700;color:#2a5298}
+.recap-label{font-size:.75rem;color:#666}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
 <div class="cours-header"><div class="cours-header-inner">
 <div class="cours-meta"><span>5eme</span><span>Programme BO 2015</span></div>
 <h1 class="cours-titre-principal">Progression annuelle</h1>
-<p class="cours-sous-titre">19 lecons, 36 semaines</p>
+<p class="cours-sous-titre">19 lecons . 36 semaines . 4 domaines</p>
 </div></div>
+
 <main class="cours-corps">
 
-<h2>Trimestre 1 (12 semaines)</h2>
+<div class="recap">
+<h3>Vue d'ensemble</h3>
+<div class="recap-grid">
+<div class="recap-card"><div class="recap-num">19</div><div class="recap-label">Lecons illustrees</div></div>
+<div class="recap-card"><div class="recap-num">57</div><div class="recap-label">Exercices (prof/eleve/corrige)</div></div>
+<div class="recap-card"><div class="recap-num">39</div><div class="recap-label">Interrogations courtes</div></div>
+<div class="recap-card"><div class="recap-num">18</div><div class="recap-label">Devoirs surveilles</div></div>
+<div class="recap-card"><div class="recap-num">24</div><div class="recap-label">Devoirs maison</div></div>
+<div class="recap-card"><div class="recap-num">9</div><div class="recap-label">Bilans trimestriels</div></div>
+<div class="recap-card"><div class="recap-num">4</div><div class="recap-label">Travaux pratiques</div></div>
+<div class="recap-card"><div class="recap-num">19</div><div class="recap-label">Fiches de seance</div></div>
+</div>
+</div>
 
-<table style="width:100%;border-collapse:collapse;font-size:.85rem">
-<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Semaine</td><td style="padding:6px">Lecon</td><td style="padding:6px">Domaine</td><td style="padding:6px">Evaluation</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S1-S2</td><td style="padding:4px">01 : Nombres relatifs : reperage</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px"></td></tr>
-<tr><td style="padding:4px">S3-S4</td><td style="padding:4px">02 : Addition de nombres relatifs</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 1</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S5</td><td style="padding:4px">03 : Soustraction de nombres relatifs</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 2</td></tr>
-<tr><td style="padding:4px">S6</td><td style="padding:4px">04 : Priorites operatoires</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">DS 1</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S7-S8</td><td style="padding:4px">05 : Expressions litterales</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 3</td></tr>
-<tr><td style="padding:4px">S9-S10</td><td style="padding:4px">06 : Comparer des fractions</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 4</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S11</td><td style="padding:4px">07 : Fractions : addition (meme denom.)</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">DS 2</td></tr>
-<tr><td style="padding:4px">S12</td><td style="padding:4px" colspan="3" style="text-align:center;font-weight:bold">Bilan Trimestre 1</td></tr>
+<div class="legende">
+<div class="legende-item"><span class="dom dom-nc">NC</span> Nombres et calculs</div>
+<div class="legende-item"><span class="dom dom-geo">GEO</span> Geometrie</div>
+<div class="legende-item"><span class="dom dom-gm">GM</span> Grandeurs et mesures</div>
+<div class="legende-item"><span class="dom dom-od">OD</span> Organisation de donnees</div>
+<div class="legende-item"><span class="dom dom-algo">ALGO</span> Algorithmique</div>
+<div class="legende-item"><span class="eval eval-ic">IC</span> Interro courte</div>
+<div class="legende-item"><span class="eval eval-ds">DS</span> Devoir surveille</div>
+<div class="legende-item"><span class="eval eval-dm">DM</span> Devoir maison</div>
+<div class="legende-item"><span class="eval eval-bilan">Bilan</span> Bilan trimestriel</div>
+</div>
+
+<table class="planning">
+<thead>
+<tr><th>Sem.</th><th>Lecon</th><th>Domaine</th><th>Duree</th><th>Evaluations</th></tr>
+</thead>
+<tbody>
+
+<tr class="trim-header"><td colspan="5">Trimestre 1 (semaines 1 a 12)</td></tr>
+
+<tr><td class="sem">S1-S2</td><td>01 : Nombres relatifs, reperage</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td></td></tr>
+<tr><td class="sem">S3-S4</td><td>02 : Addition de nombres relatifs</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 1</span> <span class="eval eval-dm">DM 1</span></td></tr>
+<tr><td class="sem">S5</td><td>03 : Soustraction de nombres relatifs</td><td><span class="dom dom-nc">NC</span></td><td>1 sem.</td><td><span class="eval eval-ic">IC 2</span></td></tr>
+<tr><td class="sem">S6</td><td>04 : Priorites operatoires</td><td><span class="dom dom-nc">NC</span></td><td>1 sem.</td><td><span class="eval eval-ds">DS 1</span></td></tr>
+<tr><td class="sem">S7-S8</td><td>05 : Expressions litterales</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 3</span> <span class="eval eval-dm">DM 2</span></td></tr>
+<tr><td class="sem">S9-S10</td><td>06 : Comparer des fractions</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 4</span></td></tr>
+<tr><td class="sem">S11</td><td>07 : Fractions, addition (meme denom.)</td><td><span class="dom dom-nc">NC</span></td><td>1 sem.</td><td><span class="eval eval-ds">DS 2</span> <span class="eval eval-dm">DM 3</span></td></tr>
+<tr><td class="sem">S12</td><td colspan="4" style="text-align:center"><span class="eval eval-bilan">Bilan Trimestre 1</span> TP 1 : Temperatures et relatifs</td></tr>
+
+<tr class="trim-header"><td colspan="5">Trimestre 2 (semaines 13 a 24)</td></tr>
+
+<tr><td class="sem">S13-S14</td><td>08 : Fractions, addition (denom. diff.)</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 5</span></td></tr>
+<tr><td class="sem">S15-S16</td><td>09 : Angles</td><td><span class="dom dom-geo">GEO</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 6</span> <span class="eval eval-dm">DM 4</span></td></tr>
+<tr><td class="sem">S17-S18</td><td>10 : Angles et paralleles</td><td><span class="dom dom-geo">GEO</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 7</span> <span class="eval eval-ds">DS 3</span></td></tr>
+<tr><td class="sem">S19-S20</td><td>11 : Triangles</td><td><span class="dom dom-geo">GEO</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 8</span></td></tr>
+<tr><td class="sem">S21-S22</td><td>12 : Parallelogrammes</td><td><span class="dom dom-geo">GEO</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 9</span> <span class="eval eval-ds">DS 4</span> <span class="eval eval-dm">DM 5</span></td></tr>
+<tr><td class="sem">S23-S24</td><td>13 : Symetrie centrale</td><td><span class="dom dom-geo">GEO</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 10</span> <span class="eval eval-dm">DM 6</span></td></tr>
+<tr><td class="sem">S24</td><td colspan="4" style="text-align:center"><span class="eval eval-bilan">Bilan Trimestre 2</span> TP 2 : Fractions et cuisine . TP 3 : Symetrie centrale</td></tr>
+
+<tr class="trim-header"><td colspan="5">Trimestre 3 (semaines 25 a 36)</td></tr>
+
+<tr><td class="sem">S25-S26</td><td>14 : Aires avancees</td><td><span class="dom dom-gm">GM</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 11</span></td></tr>
+<tr><td class="sem">S27-S28</td><td>15 : Volumes, prisme et cylindre</td><td><span class="dom dom-gm">GM</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 12</span> <span class="eval eval-ds">DS 5</span> <span class="eval eval-dm">DM 7</span></td></tr>
+<tr><td class="sem">S29-S30</td><td>16 : Proportionnalite et coefficient</td><td><span class="dom dom-nc">NC</span></td><td>2 sem.</td><td><span class="eval eval-ic">IC 13</span></td></tr>
+<tr><td class="sem">S31</td><td>17 : Statistiques, effectifs et frequences</td><td><span class="dom dom-od">OD</span></td><td>1 sem.</td><td></td></tr>
+<tr><td class="sem">S32</td><td>18 : Statistiques, moyenne</td><td><span class="dom dom-od">OD</span></td><td>1 sem.</td><td><span class="eval eval-ds">DS 6</span> <span class="eval eval-dm">DM 8</span></td></tr>
+<tr><td class="sem">S33-S34</td><td>19 : Scratch et variables</td><td><span class="dom dom-algo">ALGO</span></td><td>2 sem.</td><td></td></tr>
+<tr><td class="sem">S35</td><td colspan="4" style="text-align:center"><span class="eval eval-bilan">Bilan Trimestre 3</span> TP 4 : Scratch et polygones</td></tr>
+<tr><td class="sem">S36</td><td colspan="4" style="text-align:center;font-style:italic;color:#666">Revisions et remediations</td></tr>
+
+</tbody>
 </table>
 
-<h2>Trimestre 2 (12 semaines)</h2>
-
-<table style="width:100%;border-collapse:collapse;font-size:.85rem">
-<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Semaine</td><td style="padding:6px">Lecon</td><td style="padding:6px">Domaine</td><td style="padding:6px">Evaluation</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S13-S14</td><td style="padding:4px">08 : Fractions : addition (denom. diff.)</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 5</td></tr>
-<tr><td style="padding:4px">S15-S16</td><td style="padding:4px">09 : Angles</td><td style="padding:4px">Geometrie</td><td style="padding:4px">IC 6</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S17-S18</td><td style="padding:4px">10 : Angles et paralleles</td><td style="padding:4px">Geometrie</td><td style="padding:4px">IC 7, DS 3</td></tr>
-<tr><td style="padding:4px">S19-S20</td><td style="padding:4px">11 : Triangles</td><td style="padding:4px">Geometrie</td><td style="padding:4px">IC 8</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S21-S22</td><td style="padding:4px">12 : Parallelogrammes</td><td style="padding:4px">Geometrie</td><td style="padding:4px">IC 9, DS 4</td></tr>
-<tr><td style="padding:4px">S23-S24</td><td style="padding:4px">13 : Symetrie centrale</td><td style="padding:4px">Geometrie</td><td style="padding:4px">IC 10</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S24</td><td style="padding:4px" colspan="3" style="text-align:center;font-weight:bold">Bilan Trimestre 2</td></tr>
+<div class="recap">
+<h3>Repartition par domaine</h3>
+<table style="width:100%;border-collapse:collapse;font-size:.85rem;font-family:Arial,sans-serif">
+<tr style="background:#f0f0f0"><td style="padding:6px"><span class="dom dom-nc">NC</span> Nombres et calculs</td><td style="padding:6px;text-align:center">10 lecons</td><td style="padding:6px">Lecons 01-08, 16</td></tr>
+<tr><td style="padding:6px"><span class="dom dom-geo">GEO</span> Geometrie</td><td style="padding:6px;text-align:center">5 lecons</td><td style="padding:6px">Lecons 09-13</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:6px"><span class="dom dom-gm">GM</span> Grandeurs et mesures</td><td style="padding:6px;text-align:center">2 lecons</td><td style="padding:6px">Lecons 14-15</td></tr>
+<tr><td style="padding:6px"><span class="dom dom-od">OD</span> Organisation de donnees</td><td style="padding:6px;text-align:center">2 lecons</td><td style="padding:6px">Lecons 17-18</td></tr>
+<tr style="background:#f0f0f0"><td style="padding:6px"><span class="dom dom-algo">ALGO</span> Algorithmique</td><td style="padding:6px;text-align:center">1 lecon</td><td style="padding:6px">Lecon 19</td></tr>
 </table>
-
-<h2>Trimestre 3 (12 semaines)</h2>
-
-<table style="width:100%;border-collapse:collapse;font-size:.85rem">
-<tr style="background:#2a5298;color:#fff"><td style="padding:6px">Semaine</td><td style="padding:6px">Lecon</td><td style="padding:6px">Domaine</td><td style="padding:6px">Evaluation</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S25-S26</td><td style="padding:4px">14 : Aires avancees</td><td style="padding:4px">Grandeurs et mesures</td><td style="padding:4px">IC 11</td></tr>
-<tr><td style="padding:4px">S27-S28</td><td style="padding:4px">15 : Volumes : prisme et cylindre</td><td style="padding:4px">Grandeurs et mesures</td><td style="padding:4px">IC 12, DS 5</td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S29-S30</td><td style="padding:4px">16 : Proportionnalite et coefficient</td><td style="padding:4px">Nombres et calculs</td><td style="padding:4px">IC 13</td></tr>
-<tr><td style="padding:4px">S31</td><td style="padding:4px">17 : Statistiques : effectifs et frequences</td><td style="padding:4px">Organisation de donnees</td><td style="padding:4px"></td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S32</td><td style="padding:4px">18 : Statistiques : moyenne</td><td style="padding:4px">Organisation de donnees</td><td style="padding:4px">DS 6</td></tr>
-<tr><td style="padding:4px">S33-S34</td><td style="padding:4px">19 : Scratch et variables</td><td style="padding:4px">Algorithmique</td><td style="padding:4px"></td></tr>
-<tr style="background:#f0f0f0"><td style="padding:4px">S35</td><td style="padding:4px" colspan="3" style="text-align:center;font-weight:bold">Bilan Trimestre 3</td></tr>
-<tr><td style="padding:4px">S36</td><td style="padding:4px" colspan="3" style="text-align:center;font-style:italic">Revisions et remediations</td></tr>
-</table>
-
-<h2>Devoirs maison</h2>
-<p>8 DM repartis sur l'annee, a rendre toutes les 4-5 semaines environ : DM 1 (S3), DM 2 (S7), DM 3 (S11), DM 4 (S16), DM 5 (S21), DM 6 (S25), DM 7 (S29), DM 8 (S33).</p>
-
-<h2>Ressources par lecon</h2>
-<p>Chaque lecon dispose de : fiche de cours illustree (Canvas/JS), exercices (prof, eleve, corrige), et fiche de seance.</p>
+</div>
 
 </main>
 <footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
