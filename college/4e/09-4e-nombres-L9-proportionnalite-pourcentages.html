@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proportionnalite et pourcentages . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 9</span></div>
+<h1 class="cours-titre-principal">Proportionnalite et pourcentages</h1>
+<p class="cours-sous-titre">Appliquer un pourcentage, augmentation, reduction</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Appliquer un pourcentage</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Prendre $t\%$ d'une quantite $Q$, c'est calculer :</p>
+$$\frac{t}{100} \times Q$$
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<ul>
+<li>$25\%$ de 80 : $\dfrac{25}{100} \times 80 = 0{,}25 \times 80 = 20$.</li>
+<li>$15\%$ de 200 : $\dfrac{15}{100} \times 200 = 30$.</li>
+</ul>
+
+<h2>II. Augmentation en pourcentage</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Augmenter une quantite de $t\%$, c'est la multiplier par $\left(1 + \dfrac{t}{100}\right)$.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Un article coute 60 euros. Son prix augmente de 15%. Le nouveau prix est :</p>
+<p>$60 \times \left(1 + \dfrac{15}{100}\right) = 60 \times 1{,}15 = 69$ euros.</p>
+
+<h2>III. Reduction en pourcentage</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Diminuer une quantite de $t\%$, c'est la multiplier par $\left(1 - \dfrac{t}{100}\right)$.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Un article coute 80 euros. Il beneficie d'une remise de 30%. Le nouveau prix est :</p>
+<p>$80 \times \left(1 - \dfrac{30}{100}\right) = 80 \times 0{,}70 = 56$ euros.</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : pourcentage</h4>
+<canvas id="cvPct" width="600" height="280"></canvas>
+<div class="controls">
+<label>Prix initial :</label><input type="range" id="slPrix" min="10" max="200" value="80" step="10"><span id="vPrix">80</span> euros
+<label>Variation :</label><input type="range" id="slVar" min="-50" max="50" value="-30" step="5"><span id="vVar">-30</span>%
+</div>
+<div class="result-text" id="resPct"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvPct'),ctx=cvs.getContext('2d');
+var slP=document.getElementById('slPrix'),slV=document.getElementById('slVar');
+var vP=document.getElementById('vPrix'),vV=document.getElementById('vVar');
+var res=document.getElementById('resPct');
+function draw(){
+  var prix=parseInt(slP.value),vari=parseInt(slV.value);
+  vP.textContent=prix;vV.textContent=vari;
+  ctx.clearRect(0,0,600,280);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,280);
+  var coeff=1+vari/100;
+  var newPrix=Math.round(prix*coeff*100)/100;
+  var maxP=Math.max(prix,newPrix,1);
+  // Barre initiale
+  var bw=400,bh=40,bx=100,by1=60,by2=160;
+  var w1=prix/maxP*bw, w2=newPrix/maxP*bw;
+  ctx.fillStyle='rgba(52,152,219,0.5)';ctx.fillRect(bx,by1,w1,bh);
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.strokeRect(bx,by1,w1,bh);
+  ctx.fillStyle='#2980b9';ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText('Prix initial : '+prix+' euros',bx,by1-8);
+  ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(prix+' EUR',bx+w1/2,by1+bh/2+6);
+  // Barre finale
+  var col=vari>=0?'rgba(231,76,60,0.5)':'rgba(39,174,96,0.5)';
+  var colS=vari>=0?'#c0392b':'#27ae60';
+  ctx.fillStyle=col;ctx.fillRect(bx,by2,Math.max(w2,0),bh);
+  ctx.strokeStyle=colS;ctx.lineWidth=2;ctx.strokeRect(bx,by2,Math.max(w2,0),bh);
+  var lbl=vari>=0?'Apres augmentation de '+vari+'%':'Apres reduction de '+Math.abs(vari)+'%';
+  ctx.fillStyle=colS;ctx.font='bold 14px Arial';ctx.textAlign='left';
+  ctx.fillText(lbl,bx,by2-8);
+  ctx.fillStyle='#333';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  if(w2>0)ctx.fillText(newPrix+' EUR',bx+w2/2,by2+bh/2+6);
+  // Coefficient
+  ctx.fillStyle='#8e44ad';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('Coefficient multiplicateur : '+coeff,300,245);
+  ctx.fillText(prix+' x '+coeff+' = '+newPrix,300,268);
+  res.textContent=prix+' EUR '+(vari>=0?'+ '+vari:'- '+Math.abs(vari))+'% = '+newPrix+' EUR (coefficient : '+coeff+')';
+}
+[slP,slV].forEach(function(s){s.addEventListener('input',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Calculer.</p>
+<p>a) 20% de 150 &nbsp;&nbsp; b) 8% de 250 &nbsp;&nbsp; c) 75% de 120</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $0{,}20 \times 150 = 30$.</p>
+<p>b) $0{,}08 \times 250 = 20$.</p>
+<p>c) $0{,}75 \times 120 = 90$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Un velo coute 350 euros. Son prix augmente de 12%. Quel est le nouveau prix ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Nouveau prix : $350 \times 1{,}12 = 392$ euros.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Pendant les soldes, un pantalon a 60 euros beneficie d'une remise de 25%. Quel est le prix solde ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Prix solde : $60 \times 0{,}75 = 45$ euros.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Dans une classe de 28 eleves, 75% ont reussi un controle. Combien d'eleves ont reussi ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $0{,}75 \times 28 = 21$ eleves ont reussi.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Un article coute 120 euros apres une augmentation de 20%. Quel etait son prix initial ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Soit $x$ le prix initial. On a $x \times 1{,}20 = 120$, donc $x = \dfrac{120}{1{,}20} = 100$ euros.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

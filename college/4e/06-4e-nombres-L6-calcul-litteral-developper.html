@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcul litteral : developper . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 6</span></div>
+<h1 class="cours-titre-principal">Calcul litteral : developper</h1>
+<p class="cours-sous-titre">Simple distributivite, double distributivite</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Simple distributivite</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Pour tous nombres $k$, $a$ et $b$ :</p>
+$$k(a + b) = ka + kb \qquad k(a - b) = ka - kb$$
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<ul>
+<li>$3(x + 5) = 3x + 15$</li>
+<li>$-2(4x - 7) = -8x + 14$ (attention au signe moins devant le 2)</li>
+<li>$x(x + 3) = x^2 + 3x$</li>
+</ul>
+
+<div class="interactive-box">
+<h4>Illustration interactive : developper k(a + b)</h4>
+<canvas id="cvDev" width="600" height="260"></canvas>
+<div class="controls">
+<label>k =</label><input type="range" id="slK" min="1" max="6" value="3"><span id="vK">3</span>
+<label>a =</label><input type="range" id="slA" min="1" max="8" value="4"><span id="vA">4</span>
+<label>b =</label><input type="range" id="slB" min="1" max="8" value="2"><span id="vB">2</span>
+</div>
+<div class="result-text" id="resDev"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvDev'),ctx=cvs.getContext('2d');
+var slK=document.getElementById('slK'),slA=document.getElementById('slA'),slB=document.getElementById('slB');
+var vK=document.getElementById('vK'),vA=document.getElementById('vA'),vB=document.getElementById('vB');
+var res=document.getElementById('resDev');
+function draw(){
+  var k=parseInt(slK.value),a=parseInt(slA.value),b=parseInt(slB.value);
+  vK.textContent=k;vA.textContent=a;vB.textContent=b;
+  ctx.clearRect(0,0,600,260);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,260);
+  // Rectangle k x (a+b)
+  var sc=30,ox=50,oy=40;
+  var rw=(a+b)*sc,rh=k*sc;
+  // Partie k x a
+  ctx.fillStyle='rgba(52,152,219,0.35)';ctx.fillRect(ox,oy,a*sc,rh);
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.strokeRect(ox,oy,a*sc,rh);
+  // Partie k x b
+  ctx.fillStyle='rgba(231,76,60,0.35)';ctx.fillRect(ox+a*sc,oy,b*sc,rh);
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.strokeRect(ox+a*sc,oy,b*sc,rh);
+  // Labels
+  ctx.fillStyle='#333';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  // Largeur a
+  ctx.fillStyle='#2980b9';ctx.fillText('a = '+a,ox+a*sc/2,oy-8);
+  // Largeur b
+  ctx.fillStyle='#c0392b';ctx.fillText('b = '+b,ox+a*sc+b*sc/2,oy-8);
+  // Largeur totale
+  ctx.fillStyle='#333';ctx.fillText('a + b = '+(a+b),ox+rw/2,oy+rh+22);
+  // Hauteur k
+  ctx.save();ctx.translate(ox-12,oy+rh/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle='#333';ctx.fillText('k = '+k,0,0);ctx.restore();
+  // Formule
+  ctx.font='18px Arial';ctx.textAlign='left';ctx.fillStyle='#333';
+  var fx=ox+rw+40;
+  ctx.fillText(k+'('+a+' + '+b+') = ',fx,oy+40);
+  ctx.fillStyle='#2980b9';ctx.fillText(k+' x '+a,fx,oy+70);
+  ctx.fillStyle='#333';ctx.fillText(' + ',fx+50,oy+70);
+  ctx.fillStyle='#c0392b';ctx.fillText(k+' x '+b,fx+70,oy+70);
+  ctx.fillStyle='#333';ctx.font='bold 18px Arial';
+  ctx.fillText('= '+(k*a)+' + '+(k*b)+' = '+(k*(a+b)),fx,oy+105);
+  // Annotations dans les rectangles
+  ctx.font='13px Arial';ctx.textAlign='center';
+  ctx.fillStyle='#2980b9';ctx.fillText(k+'x'+a+'='+(k*a),ox+a*sc/2,oy+rh/2+5);
+  ctx.fillStyle='#c0392b';ctx.fillText(k+'x'+b+'='+(k*b),ox+a*sc+b*sc/2,oy+rh/2+5);
+  res.textContent=k+'('+a+' + '+b+') = '+k+'x'+a+' + '+k+'x'+b+' = '+(k*a)+' + '+(k*b)+' = '+(k*(a+b));
+}
+[slK,slA,slB].forEach(function(s){s.addEventListener('input',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>II. Double distributivite</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Pour tous nombres $a$, $b$, $c$ et $d$ :</p>
+$$(a + b)(c + d) = ac + ad + bc + bd$$
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<p>$(x + 3)(x + 5) = x \times x + x \times 5 + 3 \times x + 3 \times 5 = x^2 + 5x + 3x + 15 = x^2 + 8x + 15$</p>
+<p>$(2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4$</p>
+
+<h2>III. Reduire une expression</h2>
+
+<p class="cours-methode"><strong>Methode.</strong> Apres avoir developpe, on regroupe les termes de meme nature (les termes en $x^2$, les termes en $x$, les constantes).</p>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Developper et reduire.</p>
+<p>a) $5(2x + 3)$ &nbsp;&nbsp; b) $-3(x - 4)$ &nbsp;&nbsp; c) $x(2x - 7)$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $5(2x + 3) = 10x + 15$.</p>
+<p>b) $-3(x - 4) = -3x + 12$.</p>
+<p>c) $x(2x - 7) = 2x^2 - 7x$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Developper et reduire $(x + 2)(x + 6)$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $(x + 2)(x + 6) = x^2 + 6x + 2x + 12 = x^2 + 8x + 12$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Developper et reduire $(3x - 5)(2x + 1)$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $(3x - 5)(2x + 1) = 6x^2 + 3x - 10x - 5 = 6x^2 - 7x - 5$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Developper et reduire $A = 3(x + 4) - 2(x - 1)$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $A = 3x + 12 - 2x + 2 = x + 14$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Montrer que $(x + 3)^2 = x^2 + 6x + 9$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

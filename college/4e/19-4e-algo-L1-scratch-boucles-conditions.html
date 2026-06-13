@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch : boucles et conditions . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:crosshair}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.controls button{font-size:.85rem;padding:3px 10px;cursor:pointer}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.scratch-block{font-family:'Courier New',monospace;background:#fef9e7;border:1px solid #f0e68c;border-radius:4px;padding:.8rem;margin:.5rem 0;font-size:.9rem;line-height:1.8}
+.scratch-block .kw{color:#e67e22;font-weight:bold}
+.scratch-block .cond{color:#2980b9;font-weight:bold}
+.scratch-block .act{color:#27ae60}
+.scratch-block .indent{margin-left:1.5rem}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Algorithmique et programmation</span><span>Lecon 19</span></div>
+<h1 class="cours-titre-principal">Scratch : boucles et conditions</h1>
+<p class="cours-sous-titre">Repeter, repeter jusqu'a, si ... alors ... sinon</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. La boucle "repeter"</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> La boucle "repeter $n$ fois" execute un bloc d'instructions un nombre fixe de fois. On connait a l'avance le nombre de repetitions.</p>
+
+<div class="scratch-block">
+<span class="kw">repeter</span> 4 <span class="kw">fois</span><br>
+<span class="indent"><span class="act">avancer de 100</span></span><br>
+<span class="indent"><span class="act">tourner de 90 degres</span></span><br>
+<span class="kw">fin repeter</span>
+</div>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Ce programme trace un carre de cote 100. La boucle repete 4 fois les instructions "avancer" et "tourner".</p>
+
+<h2>II. La boucle "repeter jusqu'a"</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> La boucle "repeter jusqu'a (condition)" execute un bloc d'instructions tant que la condition n'est pas verifiee. Le nombre de repetitions n'est pas connu a l'avance.</p>
+
+<div class="scratch-block">
+<span class="kw">repeter jusqu'a</span> <span class="cond">&lt; touche le bord &gt;</span><br>
+<span class="indent"><span class="act">avancer de 10</span></span><br>
+<span class="kw">fin repeter</span>
+</div>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Le lutin avance de 10 pas a chaque iteration jusqu'a ce qu'il touche le bord de la scene.</p>
+
+<h2>III. L'instruction conditionnelle "si ... alors ... sinon"</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> L'instruction "si (condition) alors ... sinon ..." permet d'executer un bloc d'instructions si la condition est vraie, et un autre bloc si elle est fausse.</p>
+
+<div class="scratch-block">
+<span class="kw">si</span> <span class="cond">&lt; nombre &gt; 0 &gt;</span> <span class="kw">alors</span><br>
+<span class="indent"><span class="act">dire "positif"</span></span><br>
+<span class="kw">sinon</span><br>
+<span class="indent"><span class="act">dire "negatif ou nul"</span></span><br>
+<span class="kw">fin si</span>
+</div>
+
+<p class="cours-remarque"><strong>Remarque.</strong> On peut aussi utiliser "si ... alors" sans "sinon" : dans ce cas, si la condition est fausse, rien ne se passe.</p>
+
+<h2>IV. Combiner boucles et conditions</h2>
+
+<p>On peut imbriquer des conditions dans des boucles, ou des boucles dans des conditions.</p>
+
+<div class="scratch-block">
+<span class="kw">repeter</span> 10 <span class="kw">fois</span><br>
+<span class="indent"><span class="act">demander "Donne un nombre"</span></span><br>
+<span class="indent"><span class="kw">si</span> <span class="cond">&lt; reponse &gt; 5 &gt;</span> <span class="kw">alors</span></span><br>
+<span class="indent"><span class="indent"><span class="act">dire "Grand !"</span></span></span><br>
+<span class="indent"><span class="kw">sinon</span></span><br>
+<span class="indent"><span class="indent"><span class="act">dire "Petit !"</span></span></span><br>
+<span class="indent"><span class="kw">fin si</span></span><br>
+<span class="kw">fin repeter</span>
+</div>
+
+<div class="interactive-box">
+<h4>Illustration interactive : simulateur de boucle et condition</h4>
+<canvas id="cvScratch" width="600" height="400"></canvas>
+<div class="controls">
+<label>Programme :</label>
+<select id="selProg" style="font-size:.85rem;padding:2px 6px">
+<option value="carre">Carre (repeter 4 fois)</option>
+<option value="triangle">Triangle (repeter 3 fois)</option>
+<option value="hexagone">Hexagone (repeter 6 fois)</option>
+<option value="spirale">Spirale (repeter 36 fois)</option>
+<option value="etoile">Etoile (repeter 5 fois)</option>
+</select>
+<button id="btnExec">Executer</button>
+<button id="btnClear">Effacer</button>
+</div>
+<div class="result-text" id="resScratch"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvScratch'),ctx=cvs.getContext('2d');
+var selProg=document.getElementById('selProg');
+var btnExec=document.getElementById('btnExec'),btnClear=document.getElementById('btnClear');
+var res=document.getElementById('resScratch');
+var animId=null;
+function clearCanvas(){
+  if(animId)cancelAnimationFrame(animId);
+  ctx.clearRect(0,0,600,400);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,400);
+  res.textContent='Choisissez un programme et cliquez sur Executer.';
+}
+function execProg(){
+  if(animId)cancelAnimationFrame(animId);
+  ctx.clearRect(0,0,600,400);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,400);
+  var prog=selProg.value;
+  var steps=[];
+  var x=300,y=250,angle=0;
+  if(prog==='carre'){
+    for(var i=0;i<4;i++){steps.push({a:'avancer',v:100});steps.push({a:'tourner',v:90});}
+    res.textContent='Repeter 4 fois : avancer de 100, tourner de 90°. Resultat : un carre.';
+  } else if(prog==='triangle'){
+    for(var i=0;i<3;i++){steps.push({a:'avancer',v:120});steps.push({a:'tourner',v:120});}
+    res.textContent='Repeter 3 fois : avancer de 120, tourner de 120°. Resultat : un triangle equilateral.';
+  } else if(prog==='hexagone'){
+    for(var i=0;i<6;i++){steps.push({a:'avancer',v:70});steps.push({a:'tourner',v:60});}
+    res.textContent='Repeter 6 fois : avancer de 70, tourner de 60°. Resultat : un hexagone regulier.';
+  } else if(prog==='spirale'){
+    for(var i=0;i<36;i++){steps.push({a:'avancer',v:5+i*3});steps.push({a:'tourner',v:90});}
+    x=200;y=300;
+    res.textContent='Repeter 36 fois : avancer de (5+i*3), tourner de 90°. Resultat : une spirale carree.';
+  } else if(prog==='etoile'){
+    for(var i=0;i<5;i++){steps.push({a:'avancer',v:150});steps.push({a:'tourner',v:144});}
+    res.textContent='Repeter 5 fois : avancer de 150, tourner de 144°. Resultat : une etoile a 5 branches.';
+  }
+  // Animation
+  var idx=0,px=x,py=y,ang=angle;
+  var subStep=0,subTotal=20;
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(px,py);
+  function animate(){
+    if(idx>=steps.length)return;
+    var st=steps[idx];
+    if(st.a==='avancer'){
+      var dx=st.v/subTotal*Math.cos(ang*Math.PI/180);
+      var dy=st.v/subTotal*Math.sin(ang*Math.PI/180);
+      px+=dx;py+=dy;
+      ctx.lineTo(px,py);ctx.stroke();
+      subStep++;
+      if(subStep>=subTotal){subStep=0;idx++;}
+    } else if(st.a==='tourner'){
+      ang+=st.v;
+      idx++;
+    }
+    // Lutin (petit triangle)
+    ctx.save();
+    ctx.fillStyle='#e74c3c';
+    ctx.translate(px,py);ctx.rotate(ang*Math.PI/180);
+    ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-5,-5);ctx.lineTo(-5,5);ctx.closePath();ctx.fill();
+    ctx.restore();
+    animId=requestAnimationFrame(animate);
+  }
+  animate();
+}
+btnExec.addEventListener('click',execProg);
+btnClear.addEventListener('click',clearCanvas);
+clearCanvas();
+})();
+</script>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Ecrire un programme Scratch qui trace un pentagone regulier (5 cotes egaux). Preciser le nombre de repetitions et l'angle de rotation.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Repeter 5 fois : avancer de 80, tourner de $\frac{360}{5} = 72$ degres. L'angle de rotation est 72°.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Un lutin part du centre de la scene et avance de 10 pas a chaque iteration. Il tourne de 15 degres apres chaque avancee. Combien de repetitions faut-il pour qu'il fasse un tour complet ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Un tour complet represente $360°$. A chaque iteration le lutin tourne de $15°$. Il faut $\frac{360}{15} = 24$ repetitions.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Ecrire un algorithme qui demande un nombre a l'utilisateur et affiche "pair" si le nombre est pair, "impair" sinon. Utiliser l'instruction "si ... alors ... sinon".</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Demander "Donne un nombre". Si (reponse modulo 2 = 0) alors dire "pair", sinon dire "impair". En Scratch, on utilise le bloc "reste de (reponse) divise par 2" et on teste s'il vaut 0.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Un programme utilise une boucle "repeter jusqu'a (compteur = 10)". A chaque tour, le compteur augmente de 1 en partant de 0. Combien de fois le bloc est-il execute ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Le compteur vaut 0, 1, 2, ..., 9 pendant l'execution du bloc. Quand il atteint 10, la condition est verifiee et la boucle s'arrete. Le bloc est execute 10 fois.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Ecrire un programme qui trace des cercles concentriques de rayons 20, 40, 60, 80 et 100. Utiliser une boucle "repeter 5 fois" et une variable "rayon" qui augmente de 20 a chaque tour.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Mettre rayon a 20. Repeter 5 fois : aller a x=0, y=(-rayon). S'orienter a 90°. Stylo en position d'ecriture. Repeter 360 fois : avancer de ($2 \times \pi \times \text{rayon} / 360$), tourner de 1°. Relever le stylo. Ajouter 20 a rayon. Fin repeter. On obtient 5 cercles concentriques.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

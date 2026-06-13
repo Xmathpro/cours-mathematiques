@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triangles : droites remarquables . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:crosshair}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Geometrie</span><span>Lecon 15</span></div>
+<h1 class="cours-titre-principal">Triangles : droites remarquables</h1>
+<p class="cours-sous-titre">Mediatrices, hauteurs, medianes, bissectrices et points remarquables</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Mediatrice d'un segment</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> La mediatrice d'un segment est la droite perpendiculaire a ce segment et passant par son milieu.</p>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Les trois mediatrices d'un triangle sont concourantes en un point appele le centre du cercle circonscrit au triangle. Ce point est equidistant des trois sommets.</p>
+
+<h2>II. Hauteur d'un triangle</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Une hauteur d'un triangle est la droite passant par un sommet et perpendiculaire au cote oppose (ou a son prolongement).</p>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Les trois hauteurs d'un triangle sont concourantes en un point appele l'orthocentre du triangle (note $H$).</p>
+
+<h2>III. Mediane d'un triangle</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Une mediane d'un triangle est le segment reliant un sommet au milieu du cote oppose.</p>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Les trois medianes d'un triangle sont concourantes en un point appele le centre de gravite du triangle (note $G$). Ce point est situe aux deux tiers de chaque mediane a partir du sommet.</p>
+
+<h2>IV. Bissectrice d'un angle</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> La bissectrice d'un angle est la demi-droite qui partage cet angle en deux angles de meme mesure.</p>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Les trois bissectrices d'un triangle sont concourantes en un point appele le centre du cercle inscrit au triangle. Ce point est equidistant des trois cotes.</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : droites remarquables d'un triangle</h4>
+<canvas id="cvDroites" width="600" height="500"></canvas>
+<div class="controls">
+<label>Afficher :</label>
+<select id="selDroite" style="font-size:.85rem;padding:2px 6px">
+<option value="med">Mediatrices + cercle circonscrit</option>
+<option value="hau">Hauteurs + orthocentre</option>
+<option value="mdn">Medianes + centre de gravite</option>
+<option value="bis">Bissectrices + cercle inscrit</option>
+</select>
+<label>Sommet C :</label><input type="range" id="slCx" min="200" max="500" value="350" step="5"><input type="range" id="slCy" min="50" max="200" value="100" step="5">
+</div>
+<div class="result-text" id="resDroites"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvDroites'),ctx=cvs.getContext('2d');
+var sel=document.getElementById('selDroite');
+var slCx=document.getElementById('slCx'),slCy=document.getElementById('slCy');
+var res=document.getElementById('resDroites');
+var Ax=100,Ay=400,Bx=500,By=400;
+function mid(x1,y1,x2,y2){return[(x1+x2)/2,(y1+y2)/2]}
+function dist(x1,y1,x2,y2){return Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))}
+function lineInter(x1,y1,dx1,dy1,x2,y2,dx2,dy2){
+  var d=dx1*dy2-dy1*dx2;
+  if(Math.abs(d)<1e-10)return null;
+  var t=((x2-x1)*dy2-(y2-y1)*dx2)/d;
+  return[x1+t*dx1,y1+t*dy1];
+}
+function draw(){
+  var Cx=parseInt(slCx.value),Cy=parseInt(slCy.value);
+  var mode=sel.value;
+  ctx.clearRect(0,0,600,500);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,500);
+  // Triangle
+  ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Bx,By);ctx.lineTo(Cx,Cy);ctx.closePath();
+  ctx.fillStyle='rgba(52,152,219,0.1)';ctx.fill();
+  ctx.strokeStyle='#2c3e50';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#2c3e50';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('A',Ax-15,Ay+18);ctx.fillText('B',Bx+15,By+18);ctx.fillText('C',Cx,Cy-12);
+  if(mode==='med'){
+    // Mediatrices
+    var pts=[[Ax,Ay,Bx,By],[Bx,By,Cx,Cy],[Cx,Cy,Ax,Ay]];
+    var cols=['#e74c3c','#27ae60','#8e44ad'];
+    var mids=[];var dirs=[];
+    for(var i=0;i<3;i++){
+      var m=mid(pts[i][0],pts[i][1],pts[i][2],pts[i][3]);
+      mids.push(m);
+      var dx=pts[i][2]-pts[i][0],dy=pts[i][3]-pts[i][1];
+      dirs.push([-dy,dx]);
+      ctx.strokeStyle=cols[i];ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(m[0]-dirs[i][0]*2,m[1]-dirs[i][1]*2);ctx.lineTo(m[0]+dirs[i][0]*2,m[1]+dirs[i][1]*2);ctx.stroke();
+    }
+    // Centre du cercle circonscrit
+    var O=lineInter(mids[0][0],mids[0][1],dirs[0][0],dirs[0][1],mids[1][0],mids[1][1],dirs[1][0],dirs[1][1]);
+    if(O){
+      var r=dist(O[0],O[1],Ax,Ay);
+      ctx.strokeStyle='#3498db';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);
+      ctx.beginPath();ctx.arc(O[0],O[1],r,0,2*Math.PI);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.arc(O[0],O[1],5,0,2*Math.PI);ctx.fill();
+      ctx.fillStyle='#e74c3c';ctx.font='bold 13px Arial';ctx.fillText('O',O[0]+10,O[1]-8);
+      res.textContent='Les trois mediatrices se coupent en O, centre du cercle circonscrit de rayon '+r.toFixed(1).replace('.',',')+' px.';
+    }
+  } else if(mode==='hau'){
+    // Hauteurs
+    var sommets=[[Ax,Ay,Bx,By,Cx,Cy],[Bx,By,Ax,Ay,Cx,Cy],[Cx,Cy,Ax,Ay,Bx,By]];
+    var cols=['#e74c3c','#27ae60','#8e44ad'];
+    var hPts=[];var hDirs=[];
+    for(var i=0;i<3;i++){
+      var sx=sommets[i][0],sy=sommets[i][1];
+      var dx=sommets[i][4]-sommets[i][2],dy=sommets[i][5]-sommets[i][3];
+      // Direction perpendiculaire au cote oppose
+      hPts.push([sx,sy]);hDirs.push([-dy,dx]);
+      ctx.strokeStyle=cols[i];ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(sx-hDirs[i][0]*2,sy-hDirs[i][1]*2);ctx.lineTo(sx+hDirs[i][0]*2,sy+hDirs[i][1]*2);ctx.stroke();
+    }
+    var H=lineInter(hPts[0][0],hPts[0][1],hDirs[0][0],hDirs[0][1],hPts[1][0],hPts[1][1],hDirs[1][0],hDirs[1][1]);
+    if(H){
+      ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.arc(H[0],H[1],5,0,2*Math.PI);ctx.fill();
+      ctx.fillStyle='#e74c3c';ctx.font='bold 13px Arial';ctx.fillText('H',H[0]+10,H[1]-8);
+      res.textContent='Les trois hauteurs se coupent en H, l\'orthocentre du triangle.';
+    }
+  } else if(mode==='mdn'){
+    // Medianes
+    var sommets=[[Ax,Ay],[Bx,By],[Cx,Cy]];
+    var opp=[[1,2],[0,2],[0,1]];
+    var cols=['#e74c3c','#27ae60','#8e44ad'];
+    var mPts=[];var mDirs=[];
+    for(var i=0;i<3;i++){
+      var m=mid(sommets[opp[i][0]][0],sommets[opp[i][0]][1],sommets[opp[i][1]][0],sommets[opp[i][1]][1]);
+      ctx.strokeStyle=cols[i];ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(sommets[i][0],sommets[i][1]);ctx.lineTo(m[0],m[1]);ctx.stroke();
+      // Marquer le milieu
+      ctx.fillStyle=cols[i];ctx.beginPath();ctx.arc(m[0],m[1],3,0,2*Math.PI);ctx.fill();
+      mPts.push([sommets[i][0],sommets[i][1]]);
+      mDirs.push([m[0]-sommets[i][0],m[1]-sommets[i][1]]);
+    }
+    var G=lineInter(mPts[0][0],mPts[0][1],mDirs[0][0],mDirs[0][1],mPts[1][0],mPts[1][1],mDirs[1][0],mDirs[1][1]);
+    if(G){
+      ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.arc(G[0],G[1],5,0,2*Math.PI);ctx.fill();
+      ctx.fillStyle='#e74c3c';ctx.font='bold 13px Arial';ctx.fillText('G',G[0]+10,G[1]-8);
+      res.textContent='Les trois medianes se coupent en G, le centre de gravite. G est situe aux 2/3 de chaque mediane a partir du sommet.';
+    }
+  } else if(mode==='bis'){
+    // Bissectrices
+    var sommets=[[Ax,Ay],[Bx,By],[Cx,Cy]];
+    var cols=['#e74c3c','#27ae60','#8e44ad'];
+    var bPts=[];var bDirs=[];
+    for(var i=0;i<3;i++){
+      var j=(i+1)%3,k=(i+2)%3;
+      var d1x=sommets[j][0]-sommets[i][0],d1y=sommets[j][1]-sommets[i][1];
+      var d2x=sommets[k][0]-sommets[i][0],d2y=sommets[k][1]-sommets[i][1];
+      var l1=Math.sqrt(d1x*d1x+d1y*d1y),l2=Math.sqrt(d2x*d2x+d2y*d2y);
+      if(l1<1e-6||l2<1e-6)continue;
+      d1x/=l1;d1y/=l1;d2x/=l2;d2y/=l2;
+      var bx=d1x+d2x,by=d1y+d2y;
+      bPts.push([sommets[i][0],sommets[i][1]]);
+      bDirs.push([bx,by]);
+      ctx.strokeStyle=cols[i];ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(sommets[i][0],sommets[i][1]);ctx.lineTo(sommets[i][0]+bx*400,sommets[i][1]+by*400);ctx.stroke();
+    }
+    if(bPts.length>=2){
+      var I=lineInter(bPts[0][0],bPts[0][1],bDirs[0][0],bDirs[0][1],bPts[1][0],bPts[1][1],bDirs[1][0],bDirs[1][1]);
+      if(I){
+        // Distance de I au cote AB
+        var abx=Bx-Ax,aby=By-Ay,abl=Math.sqrt(abx*abx+aby*aby);
+        var rIn=Math.abs((I[0]-Ax)*aby-(I[1]-Ay)*abx)/abl;
+        ctx.strokeStyle='#f39c12';ctx.lineWidth=1.5;ctx.setLineDash([5,5]);
+        ctx.beginPath();ctx.arc(I[0],I[1],rIn,0,2*Math.PI);ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.arc(I[0],I[1],5,0,2*Math.PI);ctx.fill();
+        ctx.fillStyle='#e74c3c';ctx.font='bold 13px Arial';ctx.fillText('I',I[0]+10,I[1]-8);
+        res.textContent='Les trois bissectrices se coupent en I, centre du cercle inscrit de rayon '+rIn.toFixed(1).replace('.',',')+' px.';
+      }
+    }
+  }
+}
+[sel,slCx,slCy].forEach(function(s){s.addEventListener('input',draw);s.addEventListener('change',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Construire un triangle $ABC$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 5$ cm. Tracer les trois mediatrices et verifier qu'elles se coupent en un meme point $O$. Tracer le cercle circonscrit.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> On construit le triangle aux dimensions donnees. On trace la mediatrice de chaque cote (perpendiculaire passant par le milieu). Les trois droites se coupent en $O$. Le cercle de centre $O$ passant par $A$ passe aussi par $B$ et $C$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Dans un triangle rectangle en $A$, ou se trouve l'orthocentre ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> L'orthocentre coincide avec le sommet de l'angle droit, donc $H = A$. En effet, les deux cotes de l'angle droit sont deja des hauteurs.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Dans un triangle $ABC$, la mediane issue de $A$ coupe $[BC]$ en son milieu $M$. Si $AM = 6$ cm, calculer $AG$ ou $G$ est le centre de gravite.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Le centre de gravite est situe aux deux tiers de la mediane a partir du sommet. $AG = \frac{2}{3} \times AM = \frac{2}{3} \times 6 = 4$ cm.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Construire un triangle $DEF$ avec $\widehat{D} = 80°$. Tracer la bissectrice de l'angle $\widehat{D}$. Quel angle forme chacune des deux demi-droites obtenues avec les cotes $[DE)$ et $[DF)$ ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> La bissectrice partage l'angle en deux angles egaux. Chaque demi-angle vaut $80° \div 2 = 40°$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Dans un triangle equilateral, montrer que les quatre points remarquables (centre du cercle circonscrit, orthocentre, centre de gravite et centre du cercle inscrit) sont confondus en un seul point.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Dans un triangle equilateral, par symetrie, chaque mediatrice est aussi hauteur, mediane et bissectrice. Elles passent toutes par le centre du triangle. Les quatre points remarquables sont donc confondus.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

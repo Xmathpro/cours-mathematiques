@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equations du premier degre . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 8</span></div>
+<h1 class="cours-titre-principal">Equations du premier degre</h1>
+<p class="cours-sous-titre">Resoudre une equation, mise en equation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Vocabulaire</h2>
+
+<p class="cours-definition"><strong>Definition.</strong> Une equation est une egalite comportant un nombre inconnu, note souvent $x$. Resoudre une equation, c'est trouver la (ou les) valeur(s) de $x$ qui rendent l'egalite vraie. Cette valeur s'appelle la solution.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> L'equation $2x + 3 = 11$ a pour solution $x = 4$ car $2 \times 4 + 3 = 11$.</p>
+
+<h2>II. Resoudre une equation du premier degre</h2>
+
+<p class="cours-propriete"><strong>Proprietes.</strong></p>
+<ul>
+<li>On peut ajouter ou soustraire un meme nombre aux deux membres d'une equation.</li>
+<li>On peut multiplier ou diviser les deux membres par un meme nombre non nul.</li>
+</ul>
+
+<p class="cours-methode"><strong>Methode.</strong> Pour resoudre $ax + b = c$ :</p>
+<p>1. On isole le terme en $x$ en soustrayant $b$ : $ax = c - b$.</p>
+<p>2. On divise par le coefficient de $x$ : $x = \dfrac{c - b}{a}$.</p>
+
+<p class="cours-exemple"><strong>Exemple detaille.</strong> Resoudre $3x - 7 = 8$.</p>
+<p>$3x - 7 = 8$</p>
+<p>$3x = 8 + 7 = 15$</p>
+<p>$x = \dfrac{15}{3} = 5$</p>
+<p>Verification : $3 \times 5 - 7 = 15 - 7 = 8$. C'est correct.</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : balance et equation</h4>
+<canvas id="cvEq" width="600" height="300"></canvas>
+<div class="controls">
+<label>Equation : ax + b = c</label>
+<label>a =</label><input type="range" id="slA" min="1" max="6" value="2"><span id="vA">2</span>
+<label>b =</label><input type="range" id="slBe" min="-10" max="10" value="3"><span id="vB">3</span>
+<label>c =</label><input type="range" id="slC" min="-10" max="20" value="11"><span id="vC">11</span>
+</div>
+<div class="result-text" id="resEq"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvEq'),ctx=cvs.getContext('2d');
+var slA=document.getElementById('slA'),slB=document.getElementById('slBe'),slC=document.getElementById('slC');
+var vA=document.getElementById('vA'),vB=document.getElementById('vB'),vC=document.getElementById('vC');
+var res=document.getElementById('resEq');
+function draw(){
+  var a=parseInt(slA.value),b=parseInt(slB.value),c=parseInt(slC.value);
+  vA.textContent=a;vB.textContent=b;vC.textContent=c;
+  ctx.clearRect(0,0,600,300);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,300);
+  var sol=(c-b)/a;var isSol=Number.isInteger(sol*100)/100===Math.round(sol*100)/100;
+  // Balance
+  var bx=300,by=200,bw=400;
+  // Pied
+  ctx.fillStyle='#8B4513';ctx.fillRect(bx-5,by,10,60);
+  ctx.beginPath();ctx.moveTo(bx-40,by+60);ctx.lineTo(bx+40,by+60);ctx.lineTo(bx+30,by+70);ctx.lineTo(bx-30,by+70);ctx.closePath();ctx.fill();
+  // Barre
+  var tilt=0;
+  ctx.strokeStyle='#555';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(bx-bw/2,by+tilt);ctx.lineTo(bx+bw/2,by-tilt);ctx.stroke();
+  // Plateau gauche (ax + b)
+  var px1=bx-bw/2,py1=by+tilt;
+  ctx.fillStyle='#ddd';ctx.fillRect(px1-30,py1,60,8);
+  ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  var lbl=a+'x'+(b>=0?' + '+b:' - '+Math.abs(b));
+  ctx.fillText(lbl,px1,py1-10);
+  // Plateau droit (c)
+  var px2=bx+bw/2,py2=by-tilt;
+  ctx.fillStyle='#ddd';ctx.fillRect(px2-30,py2,60,8);
+  ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';
+  ctx.fillText(c,px2,py2-10);
+  // Resolution
+  ctx.font='16px Arial';ctx.textAlign='left';ctx.fillStyle='#333';
+  var step1=a+'x'+(b>=0?' + '+b:' - '+Math.abs(b))+' = '+c;
+  var step2=a+'x = '+c+(b>=0?' - '+b:' + '+Math.abs(b))+' = '+(c-b);
+  var step3='x = '+(c-b)+' / '+a+' = '+Math.round(sol*100)/100;
+  ctx.fillText(step1,30,40);
+  ctx.fillStyle='#2a5298';ctx.fillText(step2,30,65);
+  ctx.fillStyle='#27ae60';ctx.font='bold 16px Arial';ctx.fillText(step3,30,90);
+  res.textContent='Solution : x = '+Math.round(sol*100)/100;
+}
+[slA,slB,slC].forEach(function(s){s.addEventListener('input',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>III. Equations avec x dans les deux membres</h2>
+
+<p class="cours-methode"><strong>Methode.</strong> On regroupe tous les termes en $x$ d'un cote et les constantes de l'autre.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong> Resoudre $5x + 2 = 3x + 10$.</p>
+<p>$5x - 3x = 10 - 2$</p>
+<p>$2x = 8$</p>
+<p>$x = 4$</p>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Resoudre les equations suivantes.</p>
+<p>a) $4x + 5 = 21$ &nbsp;&nbsp; b) $7x - 3 = 25$ &nbsp;&nbsp; c) $-2x + 9 = 1$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $4x = 21 - 5 = 16$, donc $x = 4$.</p>
+<p>b) $7x = 25 + 3 = 28$, donc $x = 4$.</p>
+<p>c) $-2x = 1 - 9 = -8$, donc $x = \dfrac{-8}{-2} = 4$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Resoudre $6x - 1 = 2x + 11$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $6x - 2x = 11 + 1$, donc $4x = 12$, donc $x = 3$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Resoudre $3(x + 2) = 5x - 4$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> On developpe : $3x + 6 = 5x - 4$. Donc $6 + 4 = 5x - 3x$, soit $10 = 2x$, donc $x = 5$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> La somme de trois nombres entiers consecutifs est 42. Quels sont ces nombres ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Soit $x$ le plus petit. Les trois nombres sont $x$, $x + 1$ et $x + 2$. On a $x + (x + 1) + (x + 2) = 42$, soit $3x + 3 = 42$, donc $3x = 39$ et $x = 13$. Les trois nombres sont 13, 14 et 15.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Un rectangle a un perimetre de 34 cm. Sa longueur depasse sa largeur de 5 cm. Quelles sont ses dimensions ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Soit $x$ la largeur. La longueur est $x + 5$. Le perimetre vaut $2(x + x + 5) = 34$, soit $2(2x + 5) = 34$, donc $4x + 10 = 34$, $4x = 24$ et $x = 6$. La largeur est 6 cm et la longueur est 11 cm.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

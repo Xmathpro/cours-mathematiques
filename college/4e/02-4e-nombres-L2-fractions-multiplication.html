@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplication de fractions . 4eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:100px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>4eme</span><span>Nombres et calculs</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Multiplication de fractions</h1>
+<p class="cours-sous-titre">Produit de deux fractions, simplification</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Produit de deux fractions</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Pour multiplier deux fractions, on multiplie les numerateurs entre eux et les denominateurs entre eux :</p>
+$$\frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}$$
+
+<p class="cours-exemple"><strong>Exemples.</strong></p>
+<p>$\dfrac{3}{5} \times \dfrac{2}{7} = \dfrac{3 \times 2}{5 \times 7} = \dfrac{6}{35}$</p>
+<p>$\dfrac{4}{9} \times \dfrac{3}{8} = \dfrac{4 \times 3}{9 \times 8} = \dfrac{12}{72} = \dfrac{1}{6}$</p>
+
+<div class="interactive-box">
+<h4>Illustration interactive : produit de fractions</h4>
+<canvas id="cvFrac" width="600" height="320"></canvas>
+<div class="controls">
+<label>a/b :</label>
+<input type="range" id="slN1" min="1" max="6" value="2"><span>/</span><input type="range" id="slD1" min="2" max="8" value="3">
+<label style="margin-left:1rem">c/d :</label>
+<input type="range" id="slN2" min="1" max="6" value="3"><span>/</span><input type="range" id="slD2" min="2" max="8" value="4">
+</div>
+<div class="result-text" id="resFrac"></div>
+<script>
+(function(){
+var cvs=document.getElementById('cvFrac'),ctx=cvs.getContext('2d');
+var sN1=document.getElementById('slN1'),sD1=document.getElementById('slD1');
+var sN2=document.getElementById('slN2'),sD2=document.getElementById('slD2');
+var res=document.getElementById('resFrac');
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t;}return a;}
+function draw(){
+  var n1=parseInt(sN1.value),d1=parseInt(sD1.value),n2=parseInt(sN2.value),d2=parseInt(sD2.value);
+  if(n1>d1)n1=d1;sN1.value=n1;
+  if(n2>d2)n2=d2;sN2.value=n2;
+  ctx.clearRect(0,0,600,320);ctx.fillStyle='#f9f9f9';ctx.fillRect(0,0,600,320);
+  // Rectangle 1 : a/b (colonnes)
+  var rw=180,rh=180,rx=30,ry=30;
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.strokeRect(rx,ry,rw,rh);
+  var cw=rw/d1;
+  for(var i=0;i<d1;i++){
+    ctx.fillStyle=i<n1?'rgba(52,152,219,0.4)':'#fff';
+    ctx.fillRect(rx+i*cw,ry,cw,rh);
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.strokeRect(rx+i*cw,ry,cw,rh);
+  }
+  ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(n1+'/'+d1,rx+rw/2,ry+rh+24);
+  // Symbole x
+  ctx.fillStyle='#333';ctx.font='bold 24px Arial';ctx.fillText('x',rx+rw+25,ry+rh/2+6);
+  // Rectangle 2 : c/d (lignes)
+  var rx2=rx+rw+50;
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.strokeRect(rx2,ry,rw,rh);
+  var ch=rh/d2;
+  for(var j=0;j<d2;j++){
+    ctx.fillStyle=j<n2?'rgba(231,76,60,0.4)':'#fff';
+    ctx.fillRect(rx2,ry+j*ch,rw,ch);
+    ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.strokeRect(rx2,ry+j*ch,rw,ch);
+  }
+  ctx.fillStyle='#c0392b';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  ctx.fillText(n2+'/'+d2,rx2+rw/2,ry+rh+24);
+  // Symbole =
+  ctx.fillStyle='#333';ctx.font='bold 24px Arial';ctx.fillText('=',rx2+rw+25,ry+rh/2+6);
+  // Produit (grille d1 x d2)
+  var rx3=rx2+rw+50,gw=rw/d1,gh=rh/d2;
+  ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.strokeRect(rx3,ry,rw,rh);
+  for(var i=0;i<d1;i++){for(var j=0;j<d2;j++){
+    ctx.fillStyle=(i<n1&&j<n2)?'rgba(142,68,173,0.5)':'#fff';
+    ctx.fillRect(rx3+i*gw,ry+j*gh,gw,gh);
+    ctx.strokeStyle='#ccc';ctx.lineWidth=0.5;ctx.strokeRect(rx3+i*gw,ry+j*gh,gw,gh);
+  }}
+  var nr=n1*n2,dr=d1*d2,g=gcd(nr,dr);
+  ctx.fillStyle='#8e44ad';ctx.font='bold 16px Arial';ctx.textAlign='center';
+  var txt=nr+'/'+dr;
+  if(g>1)txt+=' = '+(nr/g)+'/'+(dr/g);
+  ctx.fillText(txt,rx3+rw/2,ry+rh+24);
+  res.textContent=n1+'/'+d1+' x '+n2+'/'+d2+' = '+nr+'/'+dr+(g>1?' = '+(nr/g)+'/'+(dr/g):'');
+}
+[sN1,sD1,sN2,sD2].forEach(function(s){s.addEventListener('input',draw);});
+draw();
+})();
+</script>
+</div>
+
+<h2>II. Simplifier avant de multiplier</h2>
+
+<p class="cours-methode"><strong>Methode.</strong> Avant de multiplier, il est souvent plus simple de simplifier "en croix" : on divise un numerateur et un denominateur par un diviseur commun.</p>
+
+<p class="cours-exemple"><strong>Exemple.</strong></p>
+$$\frac{4}{9} \times \frac{3}{8} = \frac{\cancel{4}^1}{9} \times \frac{3}{\cancel{8}_2} = \frac{1 \times 3}{9 \times 2} = \frac{3}{18} = \frac{1}{6}$$
+<p>On a simplifie 4 et 8 par 4, puis $\frac{3}{18}$ par 3.</p>
+
+<h2>III. Produit d'un entier par une fraction</h2>
+
+<p class="cours-propriete"><strong>Propriete.</strong> Un entier $n$ s'ecrit $\dfrac{n}{1}$, donc :</p>
+$$n \times \frac{a}{b} = \frac{n \times a}{b}$$
+
+<p class="cours-exemple"><strong>Exemple.</strong> $3 \times \dfrac{5}{7} = \dfrac{3 \times 5}{7} = \dfrac{15}{7}$.</p>
+
+<h2>Exercices</h2>
+
+<div class="cours-exercice">
+<p><strong>Exercice 1.</strong> Calculer et simplifier si possible.</p>
+<p>a) $\dfrac{3}{4} \times \dfrac{5}{7}$ &nbsp;&nbsp; b) $\dfrac{2}{5} \times \dfrac{10}{3}$ &nbsp;&nbsp; c) $\dfrac{7}{12} \times \dfrac{4}{21}$</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong></p>
+<p>a) $\dfrac{3}{4} \times \dfrac{5}{7} = \dfrac{15}{28}$.</p>
+<p>b) $\dfrac{2}{5} \times \dfrac{10}{3} = \dfrac{20}{15} = \dfrac{4}{3}$.</p>
+<p>c) $\dfrac{7}{12} \times \dfrac{4}{21} = \dfrac{28}{252}$. On simplifie : $28 = 4 \times 7$ et $252 = 4 \times 63 = 4 \times 9 \times 7$, donc $\dfrac{28}{252} = \dfrac{1}{9}$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 2.</strong> Calculer $A = \dfrac{5}{6} \times \dfrac{9}{10} \times \dfrac{4}{3}$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $A = \dfrac{5 \times 9 \times 4}{6 \times 10 \times 3} = \dfrac{180}{180} = 1$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 3.</strong> Un rectangle a pour longueur $\dfrac{7}{3}$ cm et pour largeur $\dfrac{3}{5}$ cm. Calculer son aire.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Aire $= \dfrac{7}{3} \times \dfrac{3}{5} = \dfrac{21}{15} = \dfrac{7}{5}$ cm$^2$ (soit 1,4 cm$^2$).</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 4.</strong> Calculer $\left(\dfrac{2}{3}\right)^3$.</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> $\left(\dfrac{2}{3}\right)^3 = \dfrac{2}{3} \times \dfrac{2}{3} \times \dfrac{2}{3} = \dfrac{8}{27}$.</p>
+</div>
+
+<div class="cours-exercice">
+<p><strong>Exercice 5.</strong> Les $\dfrac{2}{5}$ d'une classe de 30 eleves pratiquent un sport. Parmi eux, $\dfrac{3}{4}$ font du football. Combien d'eleves font du football ?</p>
+</div>
+<div class="cours-correction">
+<p><strong>Correction.</strong> Nombre de sportifs : $\dfrac{2}{5} \times 30 = 12$. Nombre de footballeurs : $\dfrac{3}{4} \times 12 = 9$. On peut aussi calculer directement : $\dfrac{3}{4} \times \dfrac{2}{5} \times 30 = \dfrac{6}{20} \times 30 = \dfrac{180}{20} = 9$ eleves.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
