@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometrie : sinus et tangente . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.controls select{padding:2px 6px;border-radius:3px;border:1px solid #ccc}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 4</span></div>
+<h1 class="cours-titre-principal">Trigonometrie : sinus et tangente</h1>
+<p class="cours-sous-titre">Les trois rapports trigonometriques dans le triangle rectangle</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Sinus d'un angle aigu</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Dans un triangle rectangle :</p>
+<p>$$\sin(\widehat{\alpha}) = \frac{\text{cote oppose a } \widehat{\alpha}}{\text{hypotenuse}}$$</p>
+</div>
+
+<h2>II. Tangente d'un angle aigu</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Dans un triangle rectangle :</p>
+<p>$$\tan(\widehat{\alpha}) = \frac{\text{cote oppose a } \widehat{\alpha}}{\text{cote adjacent a } \widehat{\alpha}}$$</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Moyen mnemotechnique</div>
+<p><strong>SOH-CAH-TOA</strong> : Sinus = Oppose / Hypotenuse, Cosinus = Adjacent / Hypotenuse, Tangente = Oppose / Adjacent.</p>
+</div>
+
+<h2>III. Les trois rapports en resume</h2>
+
+<div class="propriete"><div class="encadre-titre">Tableau recapitulatif</div>
+<p>Pour un angle aigu $\widehat{\alpha}$ dans un triangle rectangle :</p>
+<p>$\cos(\widehat{\alpha}) = \dfrac{\text{adjacent}}{\text{hypotenuse}}$ , $\sin(\widehat{\alpha}) = \dfrac{\text{oppose}}{\text{hypotenuse}}$ , $\tan(\widehat{\alpha}) = \dfrac{\text{oppose}}{\text{adjacent}}$</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Relation fondamentale</div>
+<p>Pour tout angle aigu $\widehat{\alpha}$ : $\cos^2(\widehat{\alpha}) + \sin^2(\widehat{\alpha}) = 1$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : les trois rapports trigonometriques</h4>
+<canvas id="cvTrig" width="700" height="400"></canvas>
+<div class="controls">
+<label>Angle :</label>
+<input type="range" id="slA" min="10" max="80" value="35" step="1">
+<span id="vA">35</span>°
+<label style="margin-left:1rem">Rapport :</label>
+<select id="selR"><option value="cos">cosinus</option><option value="sin">sinus</option><option value="tan">tangente</option></select>
+</div>
+<div class="result-text" id="resTrig"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvTrig'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slA'),sp=document.getElementById('vA'),sel=document.getElementById('selR'),res=document.getElementById('resTrig');
+function draw(){
+var a=parseInt(sl.value);sp.textContent=a;var r=sel.value;
+ctx.clearRect(0,0,700,400);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,400);
+var rad=a*Math.PI/180,hyp=280;
+var adj=hyp*Math.cos(rad),opp=hyp*Math.sin(rad);
+var ox=100,oy=350;
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+adj,oy);ctx.lineTo(ox+adj,oy-opp);ctx.closePath();ctx.stroke();
+// angle droit
+var sq=14;ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;ctx.strokeRect(ox+adj-sq,oy-sq,sq,sq);
+// arc
+ctx.beginPath();ctx.arc(ox,oy,35,0,-rad,true);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.textAlign='left';ctx.fillText(a+'°',ox+40,oy-8);
+// highlight
+var colH='#999',colA='#999',colO='#999';
+if(r==='cos'){colA='#2a5298';colH='#c0392b';}
+if(r==='sin'){colO='#2a5298';colH='#c0392b';}
+if(r==='tan'){colO='#2a5298';colA='#c0392b';}
+ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillStyle=colA;ctx.fillText('Adjacent = '+adj.toFixed(1),ox+adj/2,oy+25);
+ctx.fillStyle=colO;ctx.save();ctx.translate(ox+adj+25,oy-opp/2);ctx.rotate(-Math.PI/2);ctx.fillText('Oppose = '+opp.toFixed(1),0,0);ctx.restore();
+ctx.fillStyle=colH;ctx.save();ctx.translate(ox+adj/2-20,oy-opp/2-15);ctx.rotate(-rad);ctx.fillText('Hyp = '+hyp,0,0);ctx.restore();
+// points
+ctx.fillStyle='#333';ctx.font='bold 15px Arial';ctx.textAlign='left';
+ctx.fillText('A',ox-20,oy+5);ctx.fillText('B',ox+adj+8,oy+5);ctx.fillText('C',ox+adj+8,oy-opp-8);
+var val,formula;
+if(r==='cos'){val=Math.cos(rad);formula='cos('+a+'°) = adj / hyp = '+adj.toFixed(1)+' / '+hyp+' = <strong>'+val.toFixed(4)+'</strong>';}
+else if(r==='sin'){val=Math.sin(rad);formula='sin('+a+'°) = opp / hyp = '+opp.toFixed(1)+' / '+hyp+' = <strong>'+val.toFixed(4)+'</strong>';}
+else{val=Math.tan(rad);formula='tan('+a+'°) = opp / adj = '+opp.toFixed(1)+' / '+adj.toFixed(1)+' = <strong>'+val.toFixed(4)+'</strong>';}
+var verif=Math.cos(rad)*Math.cos(rad)+Math.sin(rad)*Math.sin(rad);
+res.innerHTML=formula+'<br>Verification : cos&sup2; + sin&sup2; = '+Math.cos(rad).toFixed(4)+'&sup2; + '+Math.sin(rad).toFixed(4)+'&sup2; = '+verif.toFixed(4);
+}
+sl.addEventListener('input',draw);sel.addEventListener('change',draw);draw()})();
+</script>
+
+<h2>IV. Choisir le bon rapport</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>1. Reperer l'angle droit, l'angle connu (ou cherche), et les cotes connus.</p>
+<p>2. Identifier les cotes par rapport a l'angle : oppose, adjacent, hypotenuse.</p>
+<p>3. Choisir le rapport qui utilise les deux cotes en jeu (le connu et l'inconnu).</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$ABC$ rectangle en $B$. $\widehat{A} = 54°$, $AB = 6$ cm. Calculer $BC$.</p>
+<p>$BC$ est oppose a $\widehat{A}$, $AB$ est adjacent. On utilise la tangente.</p>
+<p>$\tan(54°) = \dfrac{BC}{AB} = \dfrac{BC}{6}$ donc $BC = 6 \times \tan(54°) \approx 6 \times 1{,}3764 \approx 8{,}3$ cm.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>$ABC$ rectangle en $B$. $\widehat{A} = 37°$ et $AC = 12$ cm. Calculer $BC$ (arrondir au dixieme).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$BC$ est oppose a $\widehat{A}$. $\sin(37°) = \dfrac{BC}{AC} = \dfrac{BC}{12}$ donc $BC = 12 \times \sin(37°) \approx 12 \times 0{,}6018 \approx 7{,}2$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>$DEF$ rectangle en $E$. $DE = 5$ cm, $EF = 9$ cm. Calculer $\widehat{D}$ (arrondir au degre).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$EF$ est oppose a $\widehat{D}$, $DE$ est adjacent. $\tan(\widehat{D}) = \dfrac{EF}{DE} = \dfrac{9}{5} = 1{,}8$.</p>
+<p>$\widehat{D} = \arctan(1{,}8) \approx 61°$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>$MNP$ rectangle en $N$. $\widehat{M} = 63°$ et $MN = 4$ cm. Calculer $NP$ et $MP$ (arrondir au dixieme).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$NP$ oppose, $MN$ adjacent : $\tan(63°) = \dfrac{NP}{4}$ donc $NP = 4 \times \tan(63°) \approx 4 \times 1{,}9626 \approx 7{,}9$ cm.</p>
+<p>$MN$ adjacent, $MP$ hypotenuse : $\cos(63°) = \dfrac{4}{MP}$ donc $MP = \dfrac{4}{\cos(63°)} \approx \dfrac{4}{0{,}4540} \approx 8{,}8$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Un drone s'eleve verticalement a 120 m au-dessus du sol. Un observateur situe a 200 m du pied de la verticale regarde le drone. Quel angle son regard forme-t-il avec l'horizontale ? (arrondir au degre)</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Hauteur (oppose) = 120 m, distance au sol (adjacent) = 200 m.</p>
+<p>$\tan(\widehat{\alpha}) = \dfrac{120}{200} = 0{,}6$. $\widehat{\alpha} = \arctan(0{,}6) \approx 31°$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Verifier que $\cos^2(25°) + \sin^2(25°) = 1$ a l'aide de la calculatrice.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\cos(25°) \approx 0{,}9063$ et $\sin(25°) \approx 0{,}4226$.</p>
+<p>$0{,}9063^2 + 0{,}4226^2 \approx 0{,}8214 + 0{,}1786 = 1{,}0000$. La relation est verifiee.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

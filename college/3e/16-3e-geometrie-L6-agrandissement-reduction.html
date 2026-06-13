@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agrandissement et reduction . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 6</span></div>
+<h1 class="cours-titre-principal">Agrandissement et reduction</h1>
+<p class="cours-sous-titre">Coefficient, effet sur les longueurs, les aires et les volumes</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Coefficient d'agrandissement ou de reduction</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Lorsqu'on multiplie toutes les longueurs d'une figure par un meme nombre positif $k$, on realise un <strong>agrandissement</strong> si $k > 1$ ou une <strong>reduction</strong> si $0 < k < 1$. Le nombre $k$ est le <strong>coefficient</strong>.</p>
+</div>
+
+<h2>II. Effet sur les aires</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Lorsque les longueurs sont multipliees par $k$, les aires sont multipliees par $k^2$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un rectangle de 3 cm sur 5 cm a pour aire $15 \text{ cm}^2$. Avec $k = 2$, le rectangle image mesure 6 cm sur 10 cm, et son aire est $60 \text{ cm}^2 = 4 \times 15 = 2^2 \times 15$.</p>
+</div>
+
+<h2>III. Effet sur les volumes</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Lorsque les longueurs sont multipliees par $k$, les volumes sont multiplies par $k^3$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Un cube d'arete 2 cm a pour volume $8 \text{ cm}^3$. Avec $k = 3$, le cube image a une arete de 6 cm et un volume de $216 \text{ cm}^3 = 27 \times 8 = 3^3 \times 8$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : effet du coefficient sur longueur, aire, volume</h4>
+<canvas id="cvAR" width="700" height="380"></canvas>
+<div class="controls">
+<label>Coefficient k :</label>
+<input type="range" id="slK" min="0.2" max="3" value="1" step="0.1">
+<span id="vK">1.0</span>
+</div>
+<div class="result-text" id="resAR"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvAR'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slK'),sp=document.getElementById('vK'),res=document.getElementById('resAR');
+var base=60;
+function draw(){
+var k=parseFloat(sl.value);sp.textContent=k.toFixed(1);
+ctx.clearRect(0,0,700,380);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,380);
+var s=base*k;
+// barre longueur
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText('Longueur',120,25);
+ctx.fillStyle='rgba(42,82,152,0.15)';ctx.fillRect(120-base/2,35,base,20);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.strokeRect(120-base/2,35,base,20);
+ctx.fillStyle='rgba(42,82,152,0.3)';ctx.fillRect(120-s/2,65,s,20);
+ctx.strokeStyle='#2a5298';ctx.strokeRect(120-s/2,65,s,20);
+ctx.fillStyle='#2a5298';ctx.fillText('x '+k.toFixed(1),120,105);
+// carre aire
+ctx.fillStyle='#27ae60';ctx.font='bold 13px Arial';
+ctx.fillText('Aire',350,25);
+var ab=50;
+ctx.fillStyle='rgba(39,174,96,0.15)';ctx.fillRect(350-ab/2,35,ab,ab);
+ctx.strokeStyle='#27ae60';ctx.lineWidth=1;ctx.strokeRect(350-ab/2,35,ab,ab);
+var as=ab*k;if(as>200)as=200;
+ctx.fillStyle='rgba(39,174,96,0.3)';ctx.fillRect(350-as/2,95,as,as);
+ctx.strokeStyle='#27ae60';ctx.strokeRect(350-as/2,95,as,as);
+ctx.fillStyle='#27ae60';ctx.fillText('x '+(k*k).toFixed(2),350,as+115);
+// cube volume
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';
+ctx.fillText('Volume',580,25);
+var cb=35;
+function drawCube(cx,cy,sz,col,fill){
+ctx.fillStyle=fill;ctx.strokeStyle=col;ctx.lineWidth=1;
+var off=sz*0.35;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+sz,cy);ctx.lineTo(cx+sz,cy+sz);ctx.lineTo(cx,cy+sz);ctx.closePath();ctx.fill();ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+off,cy-off);ctx.lineTo(cx+sz+off,cy-off);ctx.lineTo(cx+sz,cy);ctx.closePath();ctx.fill();ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx+sz,cy);ctx.lineTo(cx+sz+off,cy-off);ctx.lineTo(cx+sz+off,cy+sz-off);ctx.lineTo(cx+sz,cy+sz);ctx.closePath();ctx.fill();ctx.stroke();
+}
+drawCube(580-cb/2,40,cb,'#c0392b','rgba(192,57,43,0.15)');
+var cs=cb*k;if(cs>120)cs=120;
+drawCube(580-cs/2,100,cs,'#c0392b','rgba(192,57,43,0.25)');
+ctx.fillStyle='#c0392b';ctx.fillText('x '+(k*k*k).toFixed(2),580,cs+100+cs*0.35+25);
+res.innerHTML='Coefficient k = '+k.toFixed(1)+'. Longueurs : x '+k.toFixed(1)+'. Aires : x '+(k*k).toFixed(2)+' = k&sup2;. Volumes : x '+(k*k*k).toFixed(2)+' = k&sup3;.';
+}
+sl.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>IV. Tableau recapitulatif</h2>
+
+<div class="propriete"><div class="encadre-titre">Resume</div>
+<p>Si le coefficient est $k$ :</p>
+<p>Longueurs multipliees par $k$, aires multipliees par $k^2$, volumes multiplies par $k^3$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>On agrandit un triangle avec un coefficient $k = 3$. Le triangle initial a un perimetre de 12 cm et une aire de 6 cm$^2$. Calculer le perimetre et l'aire du triangle image.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Perimetre image : $3 \times 12 = 36$ cm. Aire image : $3^2 \times 6 = 9 \times 6 = 54$ cm$^2$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Une maquette est realisee a l'echelle $\dfrac{1}{50}$. La facade reelle mesure 15 m. Quelle est la longueur sur la maquette ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$k = \dfrac{1}{50}$. Longueur maquette : $\dfrac{15}{50} = 0{,}3$ m = 30 cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un solide a un volume de 24 cm$^3$. On le reduit avec un coefficient $k = 0{,}5$. Calculer le volume du solide reduit.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$V' = k^3 \times V = 0{,}5^3 \times 24 = 0{,}125 \times 24 = 3$ cm$^3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Une sphere a une aire de 100 cm$^2$. Apres agrandissement, l'aire de la sphere image est 400 cm$^2$. Determiner le coefficient $k$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$k^2 = \dfrac{400}{100} = 4$ donc $k = 2$. Le coefficient est 2.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

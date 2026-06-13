@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sphere et boule . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Espace</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Sphere et boule</h1>
+<p class="cours-sous-titre">Definitions, sections, aire et volume</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definitions</h2>
+
+<div class="definition"><div class="encadre-titre">Sphere</div>
+<p>La <strong>sphere</strong> de centre $O$ et de rayon $r$ est l'ensemble des points de l'espace situes a la distance $r$ du point $O$. C'est une surface.</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Boule</div>
+<p>La <strong>boule</strong> de centre $O$ et de rayon $r$ est l'ensemble des points situes a une distance inferieure ou egale a $r$ du point $O$. C'est un solide.</p>
+</div>
+
+<h2>II. Section d'une sphere par un plan</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>La section d'une sphere de centre $O$ et de rayon $R$ par un plan est un <strong>cercle</strong>. Si la distance du centre $O$ au plan est $d$ (avec $d \leq R$), alors le rayon $r$ de la section verifie : $r = \sqrt{R^2 - d^2}$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Cas particulier</div>
+<p>Si le plan passe par le centre ($d = 0$), la section est un <strong>grand cercle</strong> de rayon $R$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : section d'une sphere par un plan</h4>
+<canvas id="cvSph" width="700" height="420"></canvas>
+<div class="controls">
+<label>Distance d :</label>
+<input type="range" id="slD" min="0" max="1" value="0.4" step="0.05">
+<span id="vD">0.40</span> x R
+</div>
+<div class="result-text" id="resSph"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvSph'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slD'),sp=document.getElementById('vD'),res=document.getElementById('resSph');
+var R=150,cx=350,cy=210;
+function draw(){
+var dFrac=parseFloat(sl.value);sp.textContent=dFrac.toFixed(2);
+var d=dFrac*R;
+ctx.clearRect(0,0,700,420);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,420);
+// sphere (cercle)
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+// equateur pointille
+ctx.setLineDash([4,4]);ctx.strokeStyle='#aaa';ctx.lineWidth=1;
+ctx.beginPath();ctx.ellipse(cx,cy,R,R*0.25,0,0,Math.PI*2);ctx.stroke();
+ctx.setLineDash([]);
+// plan de section (horizontal a distance d du centre)
+var planY=cy-d;
+var r=Math.sqrt(R*R-d*d);
+// section cercle (ellipse)
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.ellipse(cx,planY,r,r*0.2,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+// ligne du plan
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1;ctx.setLineDash([5,3]);
+ctx.beginPath();ctx.moveTo(cx-R-40,planY);ctx.lineTo(cx+R+40,planY);ctx.stroke();
+ctx.setLineDash([]);
+// distance d
+ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx,planY);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='left';
+ctx.fillText('d',cx+5,(cy+planY)/2);
+// rayon section
+ctx.strokeStyle='#27ae60';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(cx,planY);ctx.lineTo(cx+r,planY);ctx.stroke();
+ctx.fillStyle='#27ae60';ctx.fillText('r',cx+r/2,planY-8);
+// rayon sphere
+ctx.strokeStyle='#333';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r,planY);ctx.stroke();
+ctx.fillStyle='#333';ctx.fillText('R',(cx+cx+r)/2-15,(cy+planY)/2-5);
+// centre
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 14px Arial';ctx.textAlign='right';ctx.fillText('O',cx-8,cy+5);
+var rVal=Math.sqrt(1-dFrac*dFrac);
+res.innerHTML='d = '+dFrac.toFixed(2)+' x R. Rayon de la section : r = R x sqrt(1 - (d/R)&sup2;) = <strong>'+rVal.toFixed(3)+' x R</strong>. '+(dFrac===0?'Grand cercle (section maximale).':'');
+}
+sl.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>III. Aire de la sphere</h2>
+
+<div class="propriete"><div class="encadre-titre">Formule</div>
+<p>$$\mathcal{A}_{\text{sphere}} = 4\pi R^2$$</p>
+</div>
+
+<h2>IV. Volume de la boule</h2>
+
+<div class="propriete"><div class="encadre-titre">Formule</div>
+<p>$$\mathcal{V}_{\text{boule}} = \frac{4}{3}\pi R^3$$</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Une boule de rayon 6 cm : $\mathcal{A} = 4\pi \times 6^2 = 144\pi \approx 452{,}4$ cm$^2$. $\mathcal{V} = \dfrac{4}{3}\pi \times 6^3 = 288\pi \approx 904{,}8$ cm$^3$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Calculer l'aire et le volume d'une boule de rayon 5 cm (arrondir au dixieme).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = 4\pi \times 5^2 = 100\pi \approx 314{,}2$ cm$^2$. $\mathcal{V} = \dfrac{4}{3}\pi \times 5^3 = \dfrac{500\pi}{3} \approx 523{,}6$ cm$^3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Une sphere de rayon 10 cm est coupee par un plan situe a 6 cm du centre. Calculer le rayon de la section circulaire.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$r = \sqrt{R^2 - d^2} = \sqrt{100 - 36} = \sqrt{64} = 8$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Le volume d'une boule est $288\pi$ cm$^3$. Determiner son rayon.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\dfrac{4}{3}\pi R^3 = 288\pi$ donc $R^3 = \dfrac{288 \times 3}{4} = 216$. $R = \sqrt[3]{216} = 6$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>La Terre a un rayon d'environ 6 371 km. Calculer son aire en km$^2$ (arrondir a l'unite de million).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\mathcal{A} = 4\pi \times 6\,371^2 \approx 4\pi \times 40\,589\,641 \approx 510\,065\,622$ km$^2$, soit environ 510 millions de km$^2$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

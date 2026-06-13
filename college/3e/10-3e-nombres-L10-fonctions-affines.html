@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonctions affines . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:crosshair}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 10</span></div>
+<h1 class="cours-titre-principal">Fonctions affines</h1>
+<p class="cours-sous-titre">Definition, coefficient directeur, ordonnee a l'origine, droite representative</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>fonction affine</strong> est une fonction de la forme $f : x \mapsto ax + b$ ou $a$ et $b$ sont deux nombres fixes.</p>
+<p>$a$ est le <strong>coefficient directeur</strong> et $b$ est l'<strong>ordonnee a l'origine</strong>.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Cas particuliers</div>
+<p>Si $b = 0$ : $f(x) = ax$, c'est une fonction <strong>lineaire</strong>.</p>
+<p>Si $a = 0$ : $f(x) = b$, c'est une fonction <strong>constante</strong>.</p>
+</div>
+
+<h2>II. Representation graphique</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>La representation graphique d'une fonction affine $f : x \mapsto ax + b$ est une <strong>droite</strong>.</p>
+<p>Elle passe par le point $(0\,;\,b)$ (intersection avec l'axe des ordonnees).</p>
+<p>Le coefficient directeur $a$ represente la « pente » de la droite : $a = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1}$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : droite d'une fonction affine f(x) = ax + b</h4>
+<canvas id="cvAff" width="700" height="450"></canvas>
+<div class="controls">
+<label>a =</label><input type="range" id="slA2" min="-3" max="3" value="2" step="0.25"><span id="vA2">2</span>
+<label>b =</label><input type="range" id="slB2" min="-5" max="5" value="-1" step="0.5"><span id="vB2">-1</span>
+</div>
+<div class="result-text" id="resAff"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvAff'),ctx=cv.getContext('2d');
+var slA=document.getElementById('slA2'),slB=document.getElementById('slB2');
+var vA=document.getElementById('vA2'),vB=document.getElementById('vB2'),res=document.getElementById('resAff');
+var ox=350,oy=225,sc=35;
+function draw(){
+var a=parseFloat(slA.value),b=parseFloat(slB.value);
+vA.textContent=a;vB.textContent=b;
+ctx.clearRect(0,0,700,450);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,450);
+ctx.strokeStyle='#e8e8e8';ctx.lineWidth=1;
+for(var i=-10;i<=10;i++){var px=ox+i*sc;if(px>0&&px<700){ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,450);ctx.stroke()}}
+for(var j=-6;j<=6;j++){var py=oy-j*sc;if(py>0&&py<450){ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(700,py);ctx.stroke()}}
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(700,oy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,450);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=-9;i<=9;i++){if(i!==0)ctx.fillText(i,ox+i*sc,oy+14)}
+ctx.textAlign='right';
+for(var j=-5;j<=5;j++){if(j!==0)ctx.fillText(j,ox-5,oy-j*sc+4)}
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;
+var x1=-10,x2=10,y1=a*x1+b,y2=a*x2+b;
+ctx.beginPath();ctx.moveTo(ox+x1*sc,oy-y1*sc);ctx.lineTo(ox+x2*sc,oy-y2*sc);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(ox,oy-b*sc,5,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='12px Arial';ctx.textAlign='left';
+ctx.fillText('(0 ; '+b+')',ox+8,oy-b*sc-8);
+if(a!==0){
+var px0=ox+1*sc,py0=oy-(a+b)*sc,pyb=oy-b*sc;
+ctx.strokeStyle='rgba(46,125,50,0.5)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+ctx.beginPath();ctx.moveTo(ox,pyb);ctx.lineTo(px0,pyb);ctx.lineTo(px0,py0);ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#2e7d32';ctx.font='11px Arial';ctx.fillText('1',ox+sc/2-5,pyb+14);
+ctx.fillText('a='+a,px0+5,(pyb+py0)/2+4);
+}
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='left';
+var bstr=b>=0?' + '+b:' - '+Math.abs(b);
+if(b===0)bstr='';
+ctx.fillText('f(x) = '+a+'x'+bstr,15,25);
+var sens=a>0?'croissante':a<0?'decroissante':'constante';
+res.innerHTML='Coefficient directeur : <strong>a = '+a+'</strong>. Ordonnee a l\'origine : <strong>b = '+b+'</strong>. Fonction <strong>'+sens+'</strong>.';
+}
+slA.addEventListener('input',draw);slB.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>III. Determiner une fonction affine</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>Si on connait deux points $A(x_A\,;\,y_A)$ et $B(x_B\,;\,y_B)$ de la droite :</p>
+<p>$a = \dfrac{y_B - y_A}{x_B - x_A}$ puis $b = y_A - a \times x_A$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>La droite passe par $A(1\,;\,5)$ et $B(3\,;\,11)$.</p>
+<p>$a = \dfrac{11 - 5}{3 - 1} = \dfrac{6}{2} = 3$. $b = 5 - 3 \times 1 = 2$. Donc $f(x) = 3x + 2$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Soit $f : x \mapsto -2x + 5$. a) Calculer $f(0)$, $f(3)$ et $f(-1)$. b) Donner le coefficient directeur et l'ordonnee a l'origine.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $f(0) = 5$, $f(3) = -1$, $f(-1) = 7$. b) Coefficient directeur : $a = -2$. Ordonnee a l'origine : $b = 5$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Determiner la fonction affine $f$ dont la droite representative passe par $A(2\,;\,7)$ et $B(5\,;\,1)$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$a = \dfrac{1 - 7}{5 - 2} = \dfrac{-6}{3} = -2$. $b = 7 - (-2) \times 2 = 7 + 4 = 11$. Donc $f(x) = -2x + 11$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un electricien facture 40 euros de deplacement plus 35 euros par heure de travail. a) Exprimer le cout total $C$ en fonction du nombre d'heures $h$. b) Quelle est la nature de cette fonction ? c) Calculer le cout pour 3 heures. d) Pour quel nombre d'heures le cout depasse-t-il 200 euros ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $C(h) = 35h + 40$. b) C'est une fonction affine de coefficient directeur 35 et d'ordonnee a l'origine 40.</p>
+<p>c) $C(3) = 35 \times 3 + 40 = 145$ euros.</p>
+<p>d) $35h + 40 > 200$ soit $35h > 160$ soit $h > \dfrac{160}{35} \approx 4{,}57$. A partir de 5 heures.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>$f$ est affine avec $f(2) = 3$ et $f(5) = -6$. Determiner $f(x)$ puis calculer $f(0)$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$a = \dfrac{-6 - 3}{5 - 2} = \dfrac{-9}{3} = -3$. $b = 3 - (-3) \times 2 = 3 + 6 = 9$. Donc $f(x) = -3x + 9$.</p>
+<p>$f(0) = 9$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

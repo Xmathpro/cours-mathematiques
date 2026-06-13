@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theoreme de Thales (reciproque) . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Theoreme de Thales (reciproque)</h1>
+<p class="cours-sous-titre">Demontrer que deux droites sont paralleles</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Reciproque du theoreme de Thales</h2>
+
+<div class="propriete"><div class="encadre-titre">Theoreme (reciproque de Thales)</div>
+<p>Si les points $A$, $M$, $B$ et $A$, $N$, $C$ sont alignes dans le meme ordre et si $\dfrac{AM}{AB} = \dfrac{AN}{AC}$ alors les droites $(MN)$ et $(BC)$ sont <strong>paralleles</strong>.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Attention</div>
+<p>Il faut verifier que les points sont alignes <strong>dans le meme ordre</strong> (meme cote du point $A$). Sinon, la reciproque ne s'applique pas.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : tester le parallelisme</h4>
+<canvas id="cvRecip" width="700" height="380"></canvas>
+<div class="controls">
+<button onclick="newConfig()">Nouvelle configuration</button>
+<button onclick="showAnswer2()">Verifier</button>
+</div>
+<div class="result-text" id="resRecip"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvRecip'),ctx=cv.getContext('2d');
+var res=document.getElementById('resRecip');
+var configs=[
+{AM:3,AB:9,AN:2,AC:6,par:true},{AM:4,AB:10,AN:6,AC:15,par:true},
+{AM:5,AB:12,AN:3,AC:8,par:false},{AM:6,AB:18,AN:4,AC:12,par:true},
+{AM:3,AB:7,AN:5,AC:11,par:false},{AM:2,AB:8,AN:3,AC:12,par:true}
+];
+var idx=0;
+function draw(){
+var c=configs[idx];
+ctx.clearRect(0,0,700,380);ctx.fillStyle='#f8f8ff';ctx.fillRect(0,0,700,380);
+var Ax=100,Ay=50,Bx=200,By=340,Cx=520,Cy=340;
+var k1=c.AM/c.AB,k2=c.AN/c.AC;
+var Mx=Ax+k1*(Bx-Ax),My=Ay+k1*(By-Ay);
+var Nx=Ax+k2*(Cx-Ax),Ny=Ay+k2*(Cy-Ay);
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Bx,By);ctx.stroke();
+ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Cx,Cy);ctx.stroke();
+ctx.strokeStyle=c.par?'#2a5298':'#c0392b';ctx.lineWidth=2;ctx.setLineDash([]);
+ctx.beginPath();ctx.moveTo(Mx,My);ctx.lineTo(Nx,Ny);ctx.stroke();
+ctx.strokeStyle='#888';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(Bx,By);ctx.lineTo(Cx,Cy);ctx.stroke();
+function dot(x,y,label,dx,dy){
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 13px Arial';ctx.fillText(label,x+dx,y+dy);
+}
+dot(Ax,Ay,'A',-20,-5);dot(Mx,My,'M',-25,5);dot(Nx,Ny,'N',8,5);dot(Bx,By,'B',-20,18);dot(Cx,Cy,'C',8,18);
+ctx.fillStyle='#333';ctx.font='13px Arial';ctx.textAlign='left';
+ctx.fillText('AM = '+c.AM+', AB = '+c.AB,400,30);
+ctx.fillText('AN = '+c.AN+', AC = '+c.AC,400,50);
+res.innerHTML='Donnees : AM = '+c.AM+', AB = '+c.AB+', AN = '+c.AN+', AC = '+c.AC+'. Les droites (MN) et (BC) sont-elles paralleles ?';
+}
+window.newConfig=function(){idx=(idx+1)%configs.length;draw()};
+window.showAnswer2=function(){
+var c=configs[idx];
+var r1=(c.AM/c.AB).toFixed(4),r2=(c.AN/c.AC).toFixed(4);
+var ans=c.par?'Les rapports sont egaux : <strong>(MN) // (BC)</strong> (reciproque de Thales).':'Les rapports sont differents : <strong>(MN) n\'est pas parallele a (BC)</strong>.';
+res.innerHTML='AM/AB = '+c.AM+'/'+c.AB+' = '+r1+'. AN/AC = '+c.AN+'/'+c.AC+' = '+r2+'. '+ans;
+};
+draw()})();
+</script>
+
+<h2>II. Methode de redaction</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>1. Identifier les points alignes et verifier l'ordre (meme cote du sommet).</p>
+<p>2. Calculer les deux rapports $\dfrac{AM}{AB}$ et $\dfrac{AN}{AC}$.</p>
+<p>3. Comparer : s'ils sont egaux, conclure par la reciproque de Thales ; sinon, conclure que les droites ne sont pas paralleles.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Dans le triangle $ABC$, $M \in [AB]$ et $N \in [AC]$ avec $AM = 4$, $AB = 12$, $AN = 3$, $AC = 9$. Les droites $(MN)$ et $(BC)$ sont-elles paralleles ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\dfrac{AM}{AB} = \dfrac{4}{12} = \dfrac{1}{3}$ et $\dfrac{AN}{AC} = \dfrac{3}{9} = \dfrac{1}{3}$.</p>
+<p>Les rapports sont egaux et les points sont dans le meme ordre. Par la reciproque de Thales, $(MN) \parallel (BC)$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>$R$, $S$, $T$ sont alignes et $R$, $U$, $V$ sont alignes. $RS = 5$, $RT = 15$, $RU = 7$, $RV = 20$. Les droites $(SU)$ et $(TV)$ sont-elles paralleles ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\dfrac{RS}{RT} = \dfrac{5}{15} = \dfrac{1}{3}$ et $\dfrac{RU}{RV} = \dfrac{7}{20} = 0{,}35$.</p>
+<p>$\dfrac{1}{3} \neq 0{,}35$. Les rapports ne sont pas egaux. Les droites $(SU)$ et $(TV)$ ne sont pas paralleles.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>$ABCD$ est un quadrilatere. $E$ est le milieu de $[AB]$ et $F$ est un point de $[CD]$ tel que $CF = \dfrac{1}{3}CD$. Les droites $(AC)$ et $(EF)$ sont-elles paralleles ? Justifier.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Dans le triangle $ABD$ (ou $ACD$), on ne peut pas appliquer directement la reciproque de Thales car $E$ et $F$ ne sont pas sur deux cotes du meme triangle avec les memes rapports. En effet, $\dfrac{AE}{AB} = \dfrac{1}{2}$ et $\dfrac{CF}{CD} = \dfrac{1}{3}$. Les rapports etant differents, on ne peut pas conclure au parallelisme par cette methode. Les droites $(AC)$ et $(EF)$ ne sont pas necessairement paralleles.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Sur une carte, on mesure $OA = 3{,}6$ cm, $OB = 5{,}4$ cm, $OA' = 4{,}8$ cm, $OB' = 7{,}2$ cm. Les points $A, O, A'$ sont alignes et $B, O, B'$ sont alignes. Montrer que $(AB) \parallel (A'B')$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\dfrac{OA}{OA'} = \dfrac{3{,}6}{4{,}8} = \dfrac{3}{4}$ et $\dfrac{OB}{OB'} = \dfrac{5{,}4}{7{,}2} = \dfrac{3}{4}$.</p>
+<p>Les rapports sont egaux et les points sont dans le meme ordre (de part et d'autre de $O$). Par la reciproque de Thales, $(AB) \parallel (A'B')$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

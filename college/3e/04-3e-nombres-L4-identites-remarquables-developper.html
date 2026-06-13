@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identites remarquables : developper . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 4</span></div>
+<h1 class="cours-titre-principal">Identites remarquables : developper</h1>
+<p class="cours-sous-titre">Carre d'une somme, carre d'une difference, produit somme-difference</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Carre d'une somme</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Pour tous nombres $a$ et $b$ : $(a + b)^2 = a^2 + 2ab + b^2$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Preuve</div>
+<p>$(a + b)^2 = (a + b)(a + b) = a \times a + a \times b + b \times a + b \times b = a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Interpretation geometrique : (a + b)^2</h4>
+<canvas id="cvSomme" width="700" height="400"></canvas>
+<div class="controls">
+<label>a =</label><input type="range" id="slA1" min="1" max="8" value="4" step="0.5"><span id="vA1">4</span>
+<label>b =</label><input type="range" id="slB1" min="1" max="6" value="3" step="0.5"><span id="vB1">3</span>
+</div>
+<div class="result-text" id="resSomme"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvSomme'),ctx=cv.getContext('2d');
+var slA=document.getElementById('slA1'),slB=document.getElementById('slB1');
+var vA=document.getElementById('vA1'),vB=document.getElementById('vB1'),res=document.getElementById('resSomme');
+function draw(){
+var a=parseFloat(slA.value),b=parseFloat(slB.value);vA.textContent=a;vB.textContent=b;
+ctx.clearRect(0,0,700,400);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,400);
+var sc=30,ox=50,oy=50,sa=a*sc,sb=b*sc,tot=sa+sb;
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(ox,oy,sa,sa);
+ctx.fillStyle='rgba(42,82,152,0.12)';ctx.fillRect(ox+sa,oy,sb,sa);
+ctx.fillStyle='rgba(42,82,152,0.12)';ctx.fillRect(ox,oy+sa,sa,sb);
+ctx.fillStyle='rgba(192,57,43,0.15)';ctx.fillRect(ox+sa,oy+sa,sb,sb);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(ox,oy,tot,tot);
+ctx.strokeStyle='#999';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+ctx.beginPath();ctx.moveTo(ox+sa,oy);ctx.lineTo(ox+sa,oy+tot);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox,oy+sa);ctx.lineTo(ox+tot,oy+sa);ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('a\u00b2',ox+sa/2,oy+sa/2+5);
+ctx.fillStyle='#666';ctx.fillText('ab',ox+sa+sb/2,oy+sa/2+5);
+ctx.fillText('ab',ox+sa/2,oy+sa+sb/2+5);
+ctx.fillStyle='#c0392b';ctx.fillText('b\u00b2',ox+sa+sb/2,oy+sa+sb/2+5);
+ctx.fillStyle='#333';ctx.font='13px Arial';
+ctx.fillText('a = '+a,ox+sa/2,oy-10);ctx.fillText('b = '+b,ox+sa+sb/2,oy-10);
+ctx.textAlign='right';ctx.fillText('a = '+a,ox-8,oy+sa/2+5);ctx.fillText('b = '+b,ox-8,oy+sa+sb/2+5);
+ctx.textAlign='left';
+var r=a*a+2*a*b+b*b;
+res.innerHTML='('+a+' + '+b+')\u00b2 = '+a+'\u00b2 + 2 x '+a+' x '+b+' + '+b+'\u00b2 = '+(a*a)+' + '+(2*a*b)+' + '+(b*b)+' = <strong>'+r+'</strong>';
+}
+slA.addEventListener('input',draw);slB.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>II. Carre d'une difference</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Pour tous nombres $a$ et $b$ : $(a - b)^2 = a^2 - 2ab + b^2$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples de developpement</div>
+<p>$(x + 5)^2 = x^2 + 2 \times x \times 5 + 5^2 = x^2 + 10x + 25$.</p>
+<p>$(3x - 4)^2 = (3x)^2 - 2 \times 3x \times 4 + 4^2 = 9x^2 - 24x + 16$.</p>
+</div>
+
+<h2>III. Produit somme-difference</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Pour tous nombres $a$ et $b$ : $(a + b)(a - b) = a^2 - b^2$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$(x + 7)(x - 7) = x^2 - 49$.</p>
+<p>$(2x + 3)(2x - 3) = 4x^2 - 9$.</p>
+</div>
+
+<h2>IV. Applications au calcul mental</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$101^2 = (100 + 1)^2 = 10000 + 200 + 1 = 10201$.</p>
+<p>$99^2 = (100 - 1)^2 = 10000 - 200 + 1 = 9801$.</p>
+<p>$52 \times 48 = (50 + 2)(50 - 2) = 2500 - 4 = 2496$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Developper et reduire : a) $(x + 3)^2$ ; b) $(2x - 1)^2$ ; c) $(x + 4)(x - 4)$ ; d) $(5x + 2)^2$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $(x + 3)^2 = x^2 + 6x + 9$.</p>
+<p>b) $(2x - 1)^2 = 4x^2 - 4x + 1$.</p>
+<p>c) $(x + 4)(x - 4) = x^2 - 16$.</p>
+<p>d) $(5x + 2)^2 = 25x^2 + 20x + 4$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Developper et reduire : a) $(3x + 2y)^2$ ; b) $(x - 5)(x + 5) + (x + 3)^2$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $(3x + 2y)^2 = 9x^2 + 12xy + 4y^2$.</p>
+<p>b) $(x - 5)(x + 5) + (x + 3)^2 = x^2 - 25 + x^2 + 6x + 9 = 2x^2 + 6x - 16$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Calculer mentalement en utilisant une identite remarquable : a) $103^2$ ; b) $97^2$ ; c) $31 \times 29$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $103^2 = (100 + 3)^2 = 10000 + 600 + 9 = 10609$.</p>
+<p>b) $97^2 = (100 - 3)^2 = 10000 - 600 + 9 = 9409$.</p>
+<p>c) $31 \times 29 = (30 + 1)(30 - 1) = 900 - 1 = 899$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Developper et reduire : $(2x + 3)^2 - (2x - 3)^2$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$(2x + 3)^2 = 4x^2 + 12x + 9$ et $(2x - 3)^2 = 4x^2 - 12x + 9$.</p>
+<p>$(2x + 3)^2 - (2x - 3)^2 = 4x^2 + 12x + 9 - 4x^2 + 12x - 9 = 24x$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Montrer que pour tout nombre $x$ : $(x + 1)^2 - (x - 1)^2 = 4x$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$(x + 1)^2 - (x - 1)^2 = (x^2 + 2x + 1) - (x^2 - 2x + 1) = x^2 + 2x + 1 - x^2 + 2x - 1 = 4x$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

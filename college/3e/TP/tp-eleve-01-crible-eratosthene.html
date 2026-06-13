@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP01 : Crible d'Eratosthene . 3eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres</span><span>Travaux pratiques</span></div>
+<h1 class="cours-titre-principal">TP01 : Crible d'Eratosthene</h1>
+<p class="cours-sous-titre">Feuille eleve</p>
+</div></div>
+<main class="cours-corps">
+
+<div class="definition"><div class="encadre-titre">Objectif</div>
+<p>Trouver tous les nombres premiers de 2 a 100 a l'aide du crible d'Eratosthene.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Materiel</div>
+<p>Grille des nombres de 1 a 100. Crayons de couleur (4 couleurs).</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Etape 1</div>
+<p>Barrer 1 (ce n'est pas un nombre premier). Entourer 2 en rouge, puis barrer tous les multiples de 2 (4, 6, 8, ..., 100).</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Etape 2</div>
+<p>Entourer 3 en bleu, puis barrer tous les multiples de 3 non encore barres (9, 15, 21, ...).</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Etape 3</div>
+<p>Entourer 5 en vert (4 est deja barre), puis barrer les multiples de 5 restants (25, 35, ...).</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Etape 4</div>
+<p>Entourer 7 en orange, barrer les multiples de 7 restants (49, 77, 91).</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Questions</div>
+<p>1. Pourquoi n'est-il pas necessaire de continuer au-dela de 7 pour trouver les premiers jusqu'a 100 ?</p>
+<p>2. Combien de nombres premiers y a-t-il entre 1 et 100 ? Les lister.</p>
+<p>3. Existe-t-il deux nombres premiers consecutifs (autre que 2 et 3) ? Pourquoi ?</p>
+<p>4. Les nombres premiers jumeaux sont des nombres premiers dont la difference vaut 2 (par exemple 11 et 13). Lister tous les couples de nombres premiers jumeaux entre 1 et 100.</p>
+</div>
+
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

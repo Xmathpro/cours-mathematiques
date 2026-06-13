@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices : Arithmetique : PGCD . 3eme</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../index.html">Accueil</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres</span><span>Corrige</span></div>
+<h1 class="cours-titre-principal">Exercices : Arithmetique : PGCD</h1>
+<p class="cours-sous-titre">Corriges detailles</p>
+</div></div>
+<main class="cours-corps">
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Calculer le PGCD de 168 et 294 par l'algorithme d'Euclide.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 1</div>
+<p>$294 = 1 \times 168 + 126$. $168 = 1 \times 126 + 42$. $126 = 3 \times 42 + 0$. PGCD(168, 294) = 42.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Les nombres 85 et 136 sont-ils premiers entre eux ? Justifier.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 2</div>
+<p>$136 = 1 \times 85 + 51$. $85 = 1 \times 51 + 34$. $51 = 1 \times 34 + 17$. $34 = 2 \times 17 + 0$. PGCD = 17 $\neq$ 1 : ils ne sont pas premiers entre eux.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Simplifier la fraction $\dfrac{462}{546}$ en utilisant l'algorithme d'Euclide.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 3</div>
+<p>$546 = 1 \times 462 + 84$. $462 = 5 \times 84 + 42$. $84 = 2 \times 42 + 0$. PGCD = 42.</p><p>$\dfrac{462}{546} = \dfrac{462 \div 42}{546 \div 42} = \dfrac{11}{13}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>On decoupe un rectangle de 195 cm sur 130 cm en carres les plus grands possibles. Quel est le cote de chaque carre ? Combien de carres obtient-on ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 4</div>
+<p>Le cote est le PGCD de 195 et 130. $195 = 1 \times 130 + 65$. $130 = 2 \times 65 + 0$. PGCD = 65 cm.</p><p>Nombre de carres : $\dfrac{195}{65} \times \dfrac{130}{65} = 3 \times 2 = 6$ carres.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Trouver deux entiers $a$ et $b$ tels que $a + b = 77$ et PGCD($a$, $b$) = 7.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 5</div>
+<p>Si PGCD = 7, alors $a = 7a'$ et $b = 7b'$ avec PGCD($a'$, $b'$) = 1. $7(a' + b') = 77$ donc $a' + b' = 11$. On cherche $a'$ et $b'$ premiers entre eux avec somme 11 : par exemple $a' = 4$, $b' = 7$. Donc $a = 28$, $b = 49$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 6</div>
+<p>Montrer que si $n$ est un entier naturel, les nombres $2n+1$ et $2n+3$ sont premiers entre eux.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige 6</div>
+<p>Soit $d$ un diviseur commun. $d$ divise $(2n+3) - (2n+1) = 2$. Comme $2n+1$ est impair, $d$ ne peut pas etre 2. Donc $d = 1$ et les nombres sont premiers entre eux.</p>
+</div>
+
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

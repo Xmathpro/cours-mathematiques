@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homothetie . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 5</span></div>
+<h1 class="cours-titre-principal">Homothetie</h1>
+<p class="cours-sous-titre">Definition, image de figures, proprietes</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Homothetie</div>
+<p>Soit $O$ un point et $k$ un nombre non nul. L'homothetie de centre $O$ et de rapport $k$ est la transformation qui, a tout point $M$, associe le point $M'$ tel que $\overrightarrow{OM'} = k \times \overrightarrow{OM}$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Cas particuliers</div>
+<p>Si $k > 0$ : $M'$ est du meme cote que $M$ par rapport a $O$.</p>
+<p>Si $k < 0$ : $M'$ est du cote oppose a $M$ par rapport a $O$.</p>
+<p>Si $|k| > 1$ : agrandissement. Si $|k| < 1$ : reduction.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : homothetie d'un triangle</h4>
+<canvas id="cvHom" width="700" height="450"></canvas>
+<div class="controls">
+<label>Rapport k :</label>
+<input type="range" id="slK" min="-2" max="2" value="1.5" step="0.1">
+<span id="vK">1.5</span>
+</div>
+<div class="result-text" id="resHom"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvHom'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slK'),sp=document.getElementById('vK'),res=document.getElementById('resHom');
+var Ox=350,Oy=225;
+var Ax=180,Ay=300,Bx=280,By=150,Cx=320,Cy=300;
+function draw(){
+var k=parseFloat(sl.value);sp.textContent=k;
+ctx.clearRect(0,0,700,450);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,450);
+// grille legere
+ctx.strokeStyle='#eee';ctx.lineWidth=0.5;
+for(var i=0;i<=700;i+=50){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,450);ctx.stroke();}
+for(var j=0;j<=450;j+=50){ctx.beginPath();ctx.moveTo(0,j);ctx.lineTo(700,j);ctx.stroke();}
+// images
+var Apx=Ox+k*(Ax-Ox),Apy=Oy+k*(Ay-Oy);
+var Bpx=Ox+k*(Bx-Ox),Bpy=Oy+k*(By-Oy);
+var Cpx=Ox+k*(Cx-Ox),Cpy=Oy+k*(Cy-Oy);
+// rayons
+ctx.strokeStyle='#ccc';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+ctx.beginPath();ctx.moveTo(Ox,Oy);ctx.lineTo(Apx,Apy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(Ox,Oy);ctx.lineTo(Bpx,Bpy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(Ox,Oy);ctx.lineTo(Cpx,Cpy);ctx.stroke();
+ctx.setLineDash([]);
+// triangle original
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.fillStyle='rgba(42,82,152,0.1)';
+ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Bx,By);ctx.lineTo(Cx,Cy);ctx.closePath();ctx.fill();ctx.stroke();
+// triangle image
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.fillStyle='rgba(192,57,43,0.1)';
+ctx.beginPath();ctx.moveTo(Apx,Apy);ctx.lineTo(Bpx,Bpy);ctx.lineTo(Cpx,Cpy);ctx.closePath();ctx.fill();ctx.stroke();
+// points
+function dot(x,y,label,col,dx,dy){
+ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 14px Arial';ctx.fillText(label,x+dx,y+dy);
+}
+dot(Ox,Oy,'O','#333',-18,-8);
+dot(Ax,Ay,'A','#2a5298',-20,15);dot(Bx,By,'B','#2a5298',-20,-8);dot(Cx,Cy,'C','#2a5298',8,15);
+dot(Apx,Apy,'A\'','#c0392b',-20,15);dot(Bpx,Bpy,'B\'','#c0392b',-20,-8);dot(Cpx,Cpy,'C\'','#c0392b',8,15);
+var info='k = '+k.toFixed(1)+'. ';
+if(Math.abs(k)>1)info+='Agrandissement (|k| > 1). ';
+else if(Math.abs(k)<1&&k!==0)info+='Reduction (|k| < 1). ';
+else if(Math.abs(k)===1)info+='Conservation des dimensions. ';
+if(k<0)info+='k negatif : l\'image est de l\'autre cote de O.';
+else if(k>0)info+='k positif : l\'image est du meme cote que la figure.';
+res.innerHTML=info;
+}
+sl.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>II. Proprietes</h2>
+
+<div class="propriete"><div class="encadre-titre">Conservation des formes</div>
+<p>L'homothetie conserve les angles et les alignements. L'image d'une droite est une droite parallele. L'image d'un segment de longueur $\ell$ est un segment de longueur $|k| \times \ell$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Image d'un cercle</div>
+<p>L'image d'un cercle de centre $C$ et de rayon $r$ est un cercle de centre $C'$ (image de $C$) et de rayon $|k| \times r$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Par l'homothetie de centre $O$, de rapport $k = 2$, l'image d'un triangle de cotes 3 cm, 4 cm, 5 cm est un triangle de cotes 6 cm, 8 cm, 10 cm. Les angles sont conserves.</p>
+</div>
+
+<h2>III. Construire l'image d'un point</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>Pour construire l'image $M'$ de $M$ par l'homothetie de centre $O$ et de rapport $k$ :</p>
+<p>1. Tracer la demi-droite $[OM)$.</p>
+<p>2. Placer $M'$ sur cette demi-droite (ou son prolongement si $k < 0$) tel que $OM' = |k| \times OM$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>$O$ est le centre d'une homothetie de rapport $k = 3$. Si $OM = 2$ cm, calculer $OM'$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$OM' = |k| \times OM = 3 \times 2 = 6$ cm. $M'$ est sur la demi-droite $[OM)$ a 6 cm de $O$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Par une homothetie de centre $O$ et de rapport $k = -0{,}5$, un segment $[AB]$ de 8 cm a pour image $[A'B']$. Quelle est la longueur de $[A'B']$ ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$A'B' = |k| \times AB = 0{,}5 \times 8 = 4$ cm. Le rapport est negatif donc $A'$ et $B'$ sont de l'autre cote de $O$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un cercle de centre $C$ et de rayon 5 cm est transforme par une homothetie de centre $O$ et de rapport $k = 2$. Quel est le rayon du cercle image ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Le rayon image est $|k| \times r = 2 \times 5 = 10$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Par une homothetie de rapport $k$, un triangle de perimetre 15 cm a pour image un triangle de perimetre 45 cm. Determiner $|k|$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Le perimetre est multiplie par $|k|$ : $|k| \times 15 = 45$ donc $|k| = 3$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

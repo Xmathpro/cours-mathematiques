@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistiques approfondissement . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{padding:4px 12px;border-radius:4px;border:1px solid #2a5298;background:#fff;color:#2a5298;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#2a5298;color:#fff}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Donnees</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Statistiques : approfondissement</h1>
+<p class="cours-sous-titre">Mediane, quartiles, etendue, diagramme en boite</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels : moyenne et etendue</h2>
+
+<div class="definition"><div class="encadre-titre">Moyenne</div>
+<p>$\bar{x} = \dfrac{\text{somme des valeurs}}{\text{effectif total}}$. Pour une serie groupee : $\bar{x} = \dfrac{\sum n_i \times x_i}{N}$.</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Etendue</div>
+<p>$e = x_{\max} - x_{\min}$. L'etendue mesure la dispersion globale de la serie.</p>
+</div>
+
+<h2>II. Mediane</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>La <strong>mediane</strong> est la valeur qui partage la serie ordonnee en deux groupes de meme effectif. Au moins 50 % des valeurs sont inferieures ou egales a la mediane, et au moins 50 % sont superieures ou egales.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>On ordonne les $N$ valeurs. Si $N$ est impair, la mediane est la valeur de rang $\dfrac{N+1}{2}$. Si $N$ est pair, la mediane est la moyenne des valeurs de rangs $\dfrac{N}{2}$ et $\dfrac{N}{2} + 1$.</p>
+</div>
+
+<h2>III. Quartiles</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Le <strong>premier quartile</strong> $Q_1$ est la plus petite valeur telle qu'au moins 25 % des valeurs lui sont inferieures ou egales.</p>
+<p>Le <strong>troisieme quartile</strong> $Q_3$ est la plus petite valeur telle qu'au moins 75 % des valeurs lui sont inferieures ou egales.</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Ecart interquartile</div>
+<p>$\text{EIQ} = Q_3 - Q_1$. Il contient au moins 50 % des valeurs de la serie.</p>
+</div>
+
+<h2>IV. Diagramme en boite</h2>
+
+<div class="propriete"><div class="encadre-titre">Construction</div>
+<p>Le diagramme en boite (ou « boite a moustaches ») represente sur un axe gradue : le minimum, $Q_1$, la mediane, $Q_3$, le maximum. La « boite » va de $Q_1$ a $Q_3$, un trait marque la mediane, et les « moustaches » relient la boite aux extremes.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : diagramme en boite interactif</h4>
+<canvas id="cvBox" width="700" height="300"></canvas>
+<div class="controls">
+<button id="btnNew">Nouvelle serie</button>
+</div>
+<div class="result-text" id="resBox"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvBox'),ctx=cv.getContext('2d');
+var btn=document.getElementById('btnNew'),res=document.getElementById('resBox');
+function genData(){
+var d=[];var n=15+Math.floor(Math.random()*10);
+for(var i=0;i<n;i++)d.push(Math.floor(Math.random()*40)+5);
+d.sort(function(a,b){return a-b;});return d;
+}
+function median(arr){
+var n=arr.length;
+if(n%2===1)return arr[(n-1)/2];
+return(arr[n/2-1]+arr[n/2])/2;
+}
+function quartile(arr,q){
+var pos=q*(arr.length+1)/4;
+var lo=Math.floor(pos)-1,hi=Math.ceil(pos)-1;
+if(lo<0)lo=0;if(hi>=arr.length)hi=arr.length-1;
+if(lo===hi)return arr[lo];
+return arr[lo]+(pos-Math.floor(pos))*(arr[hi]-arr[lo]);
+}
+var data;
+function draw(){
+data=genData();
+ctx.clearRect(0,0,700,300);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,300);
+var mn=data[0],mx=data[data.length-1];
+var med=median(data);
+var q1=quartile(data,1),q3=quartile(data,3);
+var mean=data.reduce(function(a,b){return a+b;},0)/data.length;
+// axe
+var ax=60,aw=580,ay=200;
+var scale=function(v){return ax+(v-mn)/(mx-mn)*aw;};
+ctx.strokeStyle='#333';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(ax-10,ay+50);ctx.lineTo(ax+aw+10,ay+50);ctx.stroke();
+// graduations
+for(var v=mn;v<=mx;v+=5){
+var x=scale(v);
+ctx.beginPath();ctx.moveTo(x,ay+46);ctx.lineTo(x,ay+54);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='12px Arial';ctx.textAlign='center';ctx.fillText(v,x,ay+68);
+}
+// points
+ctx.fillStyle='#ccc';
+for(var i=0;i<data.length;i++){
+ctx.beginPath();ctx.arc(scale(data[i]),ay+30,3,0,Math.PI*2);ctx.fill();
+}
+// boite
+var bh=50,by=ay-bh;
+var x1=scale(q1),x3=scale(q3),xmed=scale(med),xmn=scale(mn),xmx=scale(mx);
+// moustaches
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(xmn,ay-bh/2);ctx.lineTo(x1,ay-bh/2);ctx.stroke();
+ctx.beginPath();ctx.moveTo(x3,ay-bh/2);ctx.lineTo(xmx,ay-bh/2);ctx.stroke();
+// extremes
+ctx.beginPath();ctx.moveTo(xmn,by+10);ctx.lineTo(xmn,ay-10);ctx.stroke();
+ctx.beginPath();ctx.moveTo(xmx,by+10);ctx.lineTo(xmx,ay-10);ctx.stroke();
+// boite
+ctx.fillStyle='rgba(42,82,152,0.15)';ctx.fillRect(x1,by,x3-x1,bh);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(x1,by,x3-x1,bh);
+// mediane
+ctx.strokeStyle='#c0392b';ctx.lineWidth=3;
+ctx.beginPath();ctx.moveTo(xmed,by);ctx.lineTo(xmed,ay);ctx.stroke();
+// labels
+ctx.font='bold 12px Arial';ctx.textAlign='center';
+ctx.fillStyle='#333';ctx.fillText('Min='+mn,xmn,by-8);
+ctx.fillStyle='#2a5298';ctx.fillText('Q1='+q1.toFixed(1),x1,by-8);
+ctx.fillStyle='#c0392b';ctx.fillText('Med='+med.toFixed(1),xmed,by-22);
+ctx.fillStyle='#2a5298';ctx.fillText('Q3='+q3.toFixed(1),x3,by-8);
+ctx.fillStyle='#333';ctx.fillText('Max='+mx,xmx,by-8);
+res.innerHTML='Serie de '+data.length+' valeurs. Moyenne = '+mean.toFixed(1)+'. Min = '+mn+', Q1 = '+q1.toFixed(1)+', Mediane = '+med.toFixed(1)+', Q3 = '+q3.toFixed(1)+', Max = '+mx+'. Etendue = '+(mx-mn)+'. EIQ = '+(q3-q1).toFixed(1)+'.';
+}
+btn.addEventListener('click',draw);draw()})();
+</script>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Voici les notes de 11 eleves : 5, 8, 9, 10, 11, 11, 12, 14, 15, 16, 18. Determiner la mediane, $Q_1$, $Q_3$ et l'etendue.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>11 valeurs, rang de la mediane : $\dfrac{11+1}{2} = 6$. La 6e valeur est 11 : mediane = 11.</p>
+<p>$Q_1$ : rang $\dfrac{11+1}{4} = 3$. La 3e valeur est 9 : $Q_1 = 9$.</p>
+<p>$Q_3$ : rang $\dfrac{3(11+1)}{4} = 9$. La 9e valeur est 15 : $Q_3 = 15$. Etendue : $18 - 5 = 13$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Les durees (en min) de 8 trajets sont : 12, 15, 18, 20, 22, 25, 28, 35. Calculer la mediane et l'ecart interquartile.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>8 valeurs. Mediane = moyenne des 4e et 5e : $\dfrac{20+22}{2} = 21$ min.</p>
+<p>$Q_1$ : rang 2,25, donc $Q_1 = 15 + 0{,}25 \times (18-15) = 15{,}75$. $Q_3$ : rang 6,75, donc $Q_3 = 25 + 0{,}75 \times (28-25) = 27{,}25$. EIQ = $27{,}25 - 15{,}75 = 11{,}5$ min.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Construire le diagramme en boite pour la serie : 3, 5, 7, 8, 10, 12, 14, 15, 18, 20.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>10 valeurs. Min = 3, Max = 20. Mediane = $\dfrac{10+12}{2} = 11$. $Q_1$ : rang 2,75, $Q_1 = 5 + 0{,}75 \times 2 = 6{,}5$. $Q_3$ : rang 8,25, $Q_3 = 15 + 0{,}25 \times 3 = 15{,}75$.</p>
+<p>Diagramme : moustache de 3 a 6,5, boite de 6,5 a 15,75 avec trait a 11, moustache de 15,75 a 20.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Deux classes ont les resultats suivants. Classe A : mediane 12, EIQ = 4. Classe B : mediane 13, EIQ = 8. Comparer les resultats des deux classes.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>La classe B a une mediane legerement superieure (13 contre 12), mais un ecart interquartile deux fois plus grand (8 contre 4). Les resultats de la classe B sont donc plus disperses. La classe A est plus homogene.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

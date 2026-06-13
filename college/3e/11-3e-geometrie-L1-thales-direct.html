@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theoreme de Thales (direct) . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Theoreme de Thales (direct)</h1>
+<p class="cours-sous-titre">Enonce, configuration, calcul de longueurs</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Configuration de Thales</h2>
+
+<div class="definition"><div class="encadre-titre">Configuration</div>
+<p>On considere deux droites $(d_1)$ et $(d_2)$ secantes en un point $A$. Deux droites paralleles $(BB')$ et $(CC')$ coupent $(d_1)$ en $B$ et $C$ et $(d_2)$ en $B'$ et $C'$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Theoreme de Thales</div>
+<p>Si $(BB') \parallel (CC')$ alors : $\dfrac{AB}{AC} = \dfrac{AB'}{AC'} = \dfrac{BB'}{CC'}$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : theoreme de Thales</h4>
+<canvas id="cvThales" width="700" height="420"></canvas>
+<div class="controls">
+<label>Position de B :</label>
+<input type="range" id="slK" min="0.2" max="0.8" value="0.5" step="0.05">
+<span id="vK">0.5</span>
+</div>
+<div class="result-text" id="resThales"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvThales'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slK'),sp=document.getElementById('vK'),res=document.getElementById('resThales');
+function draw(){
+var k=parseFloat(sl.value);sp.textContent=k;
+ctx.clearRect(0,0,700,420);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,420);
+var Ax=100,Ay=50;
+var Cx=250,Cy=380,Cpx=550,Cpy=380;
+var Bx=Ax+k*(Cx-Ax),By=Ay+k*(Cy-Ay);
+var Bpx=Ax+k*(Cpx-Ax),Bpy=Ay+k*(Cpy-Ay);
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Cx,Cy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(Ax,Ay);ctx.lineTo(Cpx,Cpy);ctx.stroke();
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(Bx-50,Bpy);ctx.lineTo(Bpx+50,Bpy);ctx.stroke();
+ctx.strokeStyle='#c0392b';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(Cx-50,Cy);ctx.lineTo(Cpx+50,Cpy);ctx.stroke();
+function dot(x,y,label,col,dx,dy){
+ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 14px Arial';ctx.fillText(label,x+dx,y+dy);
+}
+dot(Ax,Ay,'A','#333',-20,-5);
+dot(Bx,By,'B','#2a5298',-25,5);dot(Bpx,Bpy,'B\'','#2a5298',8,5);
+dot(Cx,Cy,'C','#c0392b',-25,5);dot(Cpx,Cpy,'C\'','#c0392b',8,5);
+var AB=Math.sqrt((Bx-Ax)*(Bx-Ax)+(By-Ay)*(By-Ay));
+var AC=Math.sqrt((Cx-Ax)*(Cx-Ax)+(Cy-Ay)*(Cy-Ay));
+var ABp=Math.sqrt((Bpx-Ax)*(Bpx-Ax)+(Bpy-Ay)*(Bpy-Ay));
+var ACp=Math.sqrt((Cpx-Ax)*(Cpx-Ax)+(Cpy-Ay)*(Cpy-Ay));
+var BBp=Math.sqrt((Bpx-Bx)*(Bpx-Bx)+(Bpy-By)*(Bpy-By));
+var CCp=Math.sqrt((Cpx-Cx)*(Cpx-Cx)+(Cpy-Cy)*(Cpy-Cy));
+ctx.fillStyle='#2a5298';ctx.font='13px Arial';ctx.textAlign='center';
+ctx.fillText('(BB\') // (CC\')',350,20);
+res.innerHTML='AB/AC = '+(AB/AC).toFixed(3)+' ; AB\'/AC\' = '+(ABp/ACp).toFixed(3)+' ; BB\'/CC\' = '+(BBp/CCp).toFixed(3)+'. <strong>Les trois rapports sont egaux (= '+k.toFixed(2)+').</strong>';
+}
+sl.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>II. Methode de calcul</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>1. Identifier la configuration de Thales (point d'intersection, droites paralleles).</p>
+<p>2. Ecrire les rapports egaux.</p>
+<p>3. Utiliser le produit en croix pour calculer la longueur inconnue.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Dans un triangle $ABC$, $M \in [AB]$ et $N \in [AC]$ avec $(MN) \parallel (BC)$. On donne $AM = 3$, $AB = 5$, $AN = 4{,}2$ et $BC = 7$.</p>
+<p>D'apres le theoreme de Thales : $\dfrac{AM}{AB} = \dfrac{AN}{AC} = \dfrac{MN}{BC}$.</p>
+<p>$\dfrac{3}{5} = \dfrac{4{,}2}{AC}$ donne $AC = \dfrac{5 \times 4{,}2}{3} = 7$.</p>
+<p>$\dfrac{3}{5} = \dfrac{MN}{7}$ donne $MN = \dfrac{3 \times 7}{5} = 4{,}2$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Sur la figure, $(MN) \parallel (BC)$. $AM = 4$ cm, $AB = 10$ cm, $AC = 15$ cm. Calculer $AN$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>D'apres le theoreme de Thales : $\dfrac{AM}{AB} = \dfrac{AN}{AC}$ soit $\dfrac{4}{10} = \dfrac{AN}{15}$.</p>
+<p>$AN = \dfrac{4 \times 15}{10} = 6$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Deux droites $(d_1)$ et $(d_2)$ se coupent en $O$. $(AB) \parallel (CD)$ avec $A, C \in (d_1)$ et $B, D \in (d_2)$. $OA = 3$ cm, $OC = 8$ cm, $OB = 4{,}5$ cm, $AB = 6$ cm. Calculer $OD$ et $CD$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\dfrac{OA}{OC} = \dfrac{OB}{OD} = \dfrac{AB}{CD}$ soit $\dfrac{3}{8} = \dfrac{4{,}5}{OD} = \dfrac{6}{CD}$.</p>
+<p>$OD = \dfrac{8 \times 4{,}5}{3} = 12$ cm. $CD = \dfrac{8 \times 6}{3} = 16$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un arbre projette une ombre de 12 m sur le sol. Au meme moment, un piquet de 1,5 m projette une ombre de 2 m. Calculer la hauteur de l'arbre.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Les rayons du soleil sont paralleles. Par le theoreme de Thales : $\dfrac{h}{1{,}5} = \dfrac{12}{2}$.</p>
+<p>$h = \dfrac{1{,}5 \times 12}{2} = 9$ m. L'arbre mesure 9 m.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Dans le triangle $RST$, $E \in [RS]$ et $F \in [RT]$ avec $(EF) \parallel (ST)$. $RE = 6$, $ES = 4$, $RF = 9$. Calculer $FT$ et $RS$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$RS = RE + ES = 6 + 4 = 10$. Par Thales : $\dfrac{RE}{RS} = \dfrac{RF}{RT}$ soit $\dfrac{6}{10} = \dfrac{9}{RT}$.</p>
+<p>$RT = \dfrac{10 \times 9}{6} = 15$. Donc $FT = RT - RF = 15 - 9 = 6$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

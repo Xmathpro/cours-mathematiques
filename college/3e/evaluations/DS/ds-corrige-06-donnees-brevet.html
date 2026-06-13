@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DS06 : Donnees et revision brevet (L19-L22) . 3eme</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../../index.html">Accueil</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Donnees</span><span>Corrige</span></div>
+<h1 class="cours-titre-principal">DS06 : Donnees et revision brevet (L19-L22)</h1>
+<p class="cours-sous-titre">Corrige du devoir surveille</p>
+</div></div>
+<main class="cours-corps">
+
+<div class="exercice"><div class="encadre-titre">Exercice 1 : Statistiques (5 pts)</div>
+<p>Notes d'une classe de 20 eleves : 4, 5, 6, 7, 8, 9, 9, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 16, 17, 19.</p><p>1. (1 pt) Calculer la moyenne.</p><p>2. (2 pts) Determiner la mediane, $Q_1$, $Q_3$.</p><p>3. (2 pts) Calculer l'EIQ et representer le diagramme en boite.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. Somme = 230. Moyenne = $\dfrac{230}{20} = 11{,}5$.</p><p>2. Mediane = $\dfrac{11 + 12}{2} = 11{,}5$. $Q_1$ (rang 5) = 8. $Q_3$ (rang 15) = 15.</p><p>3. EIQ = $15 - 8 = 7$. Diagramme : min = 4, $Q_1 = 8$, Med = 11,5, $Q_3 = 15$, max = 19.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2 : Probabilites (5 pts)</div>
+<p>Une urne contient 3 boules rouges, 5 boules vertes et 2 boules jaunes.</p><p>1. (1 pt) On tire une boule. Calculer $P(\text{verte})$.</p><p>2. (2 pts) On tire deux boules successivement sans remise. Construire un arbre et calculer $P(\text{2 vertes})$.</p><p>3. (2 pts) Calculer $P(\text{au moins une rouge})$ lors de 2 tirages sans remise.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $P(V) = \dfrac{5}{10} = \dfrac{1}{2}$.</p><p>2. $P(VV) = \dfrac{5}{10} \times \dfrac{4}{9} = \dfrac{20}{90} = \dfrac{2}{9}$.</p><p>3. $P(\text{aucune rouge}) = \dfrac{7}{10} \times \dfrac{6}{9} = \dfrac{42}{90} = \dfrac{7}{15}$. $P(\text{au moins 1 rouge}) = 1 - \dfrac{7}{15} = \dfrac{8}{15}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3 : Algorithmique (3 pts)</div>
+<p>Un programme de calcul : choisir un nombre $n$, ajouter 4, elever au carre, soustraire $n^2$, soustraire 16.</p><p>1. (1 pt) Tester avec $n = 5$.</p><p>2. (2 pts) Montrer que le resultat est toujours $8n$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $5 \to 9 \to 81 \to 56 \to 40 = 8 \times 5$. Resultat : 40.</p><p>2. $n \to n + 4 \to (n+4)^2 = n^2 + 8n + 16 \to 8n + 16 \to 8n$. Le resultat est $8n$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4 : Exercice type Brevet (7 pts)</div>
+<p>Soit $f(x) = (2x - 1)^2 - (x + 3)^2$.</p><p>1. (2 pts) Developper et reduire $f(x)$.</p><p>2. (2 pts) Factoriser $f(x)$.</p><p>3. (1 pt) Resoudre $f(x) = 0$.</p><p>4. (2 pts) Calculer $f(\sqrt{3})$ et donner le resultat sous la forme $a + b\sqrt{3}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $f(x) = (4x^2 - 4x + 1) - (x^2 + 6x + 9) = 3x^2 - 10x - 8$.</p><p>2. $f(x) = [(2x-1) + (x+3)][(2x-1) - (x+3)] = (3x + 2)(x - 4)$.</p><p>3. $(3x+2)(x-4) = 0$ : $x = -\dfrac{2}{3}$ ou $x = 4$.</p><p>4. $f(\sqrt{3}) = 3 \times 3 - 10\sqrt{3} - 8 = 1 - 10\sqrt{3}$.</p>
+</div>
+
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

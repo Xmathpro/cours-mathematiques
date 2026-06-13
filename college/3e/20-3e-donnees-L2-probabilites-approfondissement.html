@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probabilites approfondissement . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls button{padding:4px 12px;border-radius:4px;border:1px solid #2a5298;background:#fff;color:#2a5298;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#2a5298;color:#fff}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Donnees</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Probabilites : approfondissement</h1>
+<p class="cours-sous-titre">Experiences a deux epreuves, arbres de probabilites</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels</h2>
+
+<div class="definition"><div class="encadre-titre">Probabilite d'un evenement</div>
+<p>Si toutes les issues sont equiprobables, la probabilite d'un evenement $A$ est :</p>
+<p>$$P(A) = \frac{\text{nombre d'issues favorables}}{\text{nombre total d'issues}}$$</p>
+<p>$0 \leq P(A) \leq 1$. $P(\text{certain}) = 1$ et $P(\text{impossible}) = 0$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Evenement contraire</div>
+<p>$P(\bar{A}) = 1 - P(A)$.</p>
+</div>
+
+<h2>II. Experience a deux epreuves</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une experience composee est formee de plusieurs epreuves successives. On represente l'ensemble des issues a l'aide d'un <strong>arbre de probabilites</strong>.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Regles de calcul</div>
+<p>La probabilite d'un chemin est le <strong>produit</strong> des probabilites rencontrees le long de ce chemin.</p>
+<p>La probabilite d'un evenement est la <strong>somme</strong> des probabilites des chemins qui le realisent.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Simulation : lancer de deux des</h4>
+<canvas id="cvProb" width="700" height="380"></canvas>
+<div class="controls">
+<button id="btnLance">Lancer 100 fois</button>
+<button id="btnReset">Reinitialiser</button>
+</div>
+<div class="result-text" id="resProb"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvProb'),ctx=cv.getContext('2d');
+var btnL=document.getElementById('btnLance'),btnR=document.getElementById('btnReset'),res=document.getElementById('resProb');
+var freq=new Array(13).fill(0);var total=0;
+function draw(){
+ctx.clearRect(0,0,700,380);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,380);
+var maxF=Math.max.apply(null,freq.slice(2))||1;
+var bw=40,gap=10,ox=60,oy=340;
+ctx.strokeStyle='#333';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(ox,30);ctx.lineTo(ox,oy);ctx.lineTo(680,oy);ctx.stroke();
+for(var s=2;s<=12;s++){
+var x=ox+(s-2)*(bw+gap);
+var h=(freq[s]/maxF)*280;
+ctx.fillStyle='#2a5298';ctx.fillRect(x,oy-h,bw,h);
+ctx.strokeStyle='#1a3a6a';ctx.strokeRect(x,oy-h,bw,h);
+ctx.fillStyle='#333';ctx.font='12px Arial';ctx.textAlign='center';
+ctx.fillText(s,x+bw/2,oy+16);
+if(freq[s]>0){ctx.fillStyle='#2a5298';ctx.fillText(freq[s],x+bw/2,oy-h-5);}
+}
+// theorie
+ctx.font='bold 13px Arial';ctx.fillStyle='#333';ctx.textAlign='left';
+ctx.fillText('Frequence des sommes de deux des ('+total+' lancers)',ox,22);
+// probabilites theoriques
+if(total>0){
+var info='Somme 7 : freq = '+(freq[7]/total*100).toFixed(1)+'% (theorie : 16,7%). ';
+info+='Somme 2 : freq = '+(freq[2]/total*100).toFixed(1)+'% (theorie : 2,8%). ';
+info+='Somme 12 : freq = '+(freq[12]/total*100).toFixed(1)+'% (theorie : 2,8%).';
+res.innerHTML=info;
+}else{res.innerHTML='Cliquez sur "Lancer 100 fois" pour simuler.';}
+}
+btnL.addEventListener('click',function(){
+for(var i=0;i<100;i++){
+var d1=Math.floor(Math.random()*6)+1;
+var d2=Math.floor(Math.random()*6)+1;
+freq[d1+d2]++;total++;
+}
+draw();
+});
+btnR.addEventListener('click',function(){freq=new Array(13).fill(0);total=0;draw();});
+draw()})();
+</script>
+
+<h2>III. Arbre de probabilites</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>On tire une carte dans un jeu de 4 cartes (2 rouges, 2 noires), on note la couleur, puis on tire une seconde carte (sans remise).</p>
+<p>P(RR) = $\dfrac{2}{4} \times \dfrac{1}{3} = \dfrac{2}{12} = \dfrac{1}{6}$.</p>
+<p>P(au moins une rouge) = $1 - P(NN) = 1 - \dfrac{2}{4} \times \dfrac{1}{3} = 1 - \dfrac{1}{6} = \dfrac{5}{6}$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>On lance deux des equilibres. Calculer la probabilite d'obtenir une somme egale a 7.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Issues favorables : (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), soit 6 issues. Total : 36 issues.</p>
+<p>$P(S=7) = \dfrac{6}{36} = \dfrac{1}{6} \approx 0{,}167$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Un sac contient 3 boules vertes et 2 boules rouges. On tire deux boules successivement sans remise. Calculer la probabilite de tirer deux boules vertes.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$P(VV) = \dfrac{3}{5} \times \dfrac{2}{4} = \dfrac{6}{20} = \dfrac{3}{10} = 0{,}3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>On lance une piece deux fois. Construire l'arbre et calculer la probabilite d'obtenir au moins un Pile.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Arbre : PP, PF, FP, FF. $P(\text{au moins un P}) = 1 - P(FF) = 1 - \dfrac{1}{2} \times \dfrac{1}{2} = 1 - \dfrac{1}{4} = \dfrac{3}{4}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Dans une classe, 60 % des eleves aiment le sport. Parmi ceux qui aiment le sport, 40 % pratiquent la natation. Quelle est la probabilite qu'un eleve choisi au hasard aime le sport et pratique la natation ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$P(\text{sport et natation}) = 0{,}60 \times 0{,}40 = 0{,}24 = 24\%$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>On lance un de equilibre puis on tire une carte dans un jeu de 4 cartes (A, B, C, D). Combien y a-t-il d'issues au total ? Quelle est la probabilite d'obtenir un 6 et la carte A ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$6 \times 4 = 24$ issues au total. $P(6 \text{ et } A) = \dfrac{1}{6} \times \dfrac{1}{4} = \dfrac{1}{24} \approx 0{,}042$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

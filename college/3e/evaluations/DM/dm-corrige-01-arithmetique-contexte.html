@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DM01 : Arithmetique en contexte . 3eme</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../../../index.html">Accueil</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres</span><span>Corrige</span></div>
+<h1 class="cours-titre-principal">DM01 : Arithmetique en contexte</h1>
+<p class="cours-sous-titre">Corrige du devoir maison</p>
+</div></div>
+<main class="cours-corps">
+
+<div class="exercice"><div class="encadre-titre">Exercice 1 : Pave de carrelage</div>
+<p>Un sol rectangulaire mesure 360 cm sur 480 cm. On veut le carreler avec des carreaux carres les plus grands possibles, sans decoupe.</p><p>1. Determiner la taille des carreaux.</p><p>2. Combien de carreaux faut-il ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. Cote = PGCD(360, 480). $480 = 1 \times 360 + 120$. $360 = 3 \times 120$. PGCD = 120 cm.</p><p>2. $\dfrac{360}{120} \times \dfrac{480}{120} = 3 \times 4 = 12$ carreaux.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2 : Repartition equitable</div>
+<p>Un organisateur dispose de 156 livres de fiction et 234 livres documentaires. Il veut constituer des lots identiques contenant le maximum de livres.</p><p>1. Combien de lots peut-il faire ?</p><p>2. Composition de chaque lot ?</p><p>3. Rendre irreductible $\dfrac{156}{234}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. PGCD(156, 234). $234 = 1 \times 156 + 78$. $156 = 2 \times 78$. PGCD = 78 lots.</p><p>2. $156 \div 78 = 2$ fictions et $234 \div 78 = 3$ documentaires par lot.</p><p>3. $\dfrac{156}{234} = \dfrac{156 \div 78}{234 \div 78} = \dfrac{2}{3}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3 : Nombres premiers et cryptographie</div>
+<p>Le produit de deux nombres premiers $p$ et $q$ donne 1 517. Sachant que $p < q$, trouver $p$ et $q$.</p><p>(Indication : tester les nombres premiers jusqu'a $\sqrt{1\,517} \approx 39$.)</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>On teste : 1517/2 non, /3 non, /5 non, /7 non, /11 non, /13 non, /17 non, /19 non, /23 non, /29 non, /31 non, /37 = 41. Donc $p = 37$ et $q = 41$.</p>
+</div>
+
+</main>
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

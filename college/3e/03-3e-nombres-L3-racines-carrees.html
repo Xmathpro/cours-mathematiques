@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Racines carrees . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:160px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#1e3d6f}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 3</span></div>
+<h1 class="cours-titre-principal">Racines carrees</h1>
+<p class="cours-sous-titre">Definition, proprietes, simplification, operations</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Soit $a$ un nombre positif. La <strong>racine carree</strong> de $a$, notee $\sqrt{a}$, est le nombre <strong>positif</strong> dont le carre est egal a $a$.</p>
+<p>Autrement dit : $\sqrt{a} \geq 0$ et $\left(\sqrt{a}\right)^2 = a$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarques</div>
+<p>$\sqrt{a}$ n'existe que si $a \geq 0$. On ne peut pas calculer la racine carree d'un nombre negatif.</p>
+<p>$\sqrt{0} = 0$, $\sqrt{1} = 1$, $\sqrt{4} = 2$, $\sqrt{9} = 3$, $\sqrt{16} = 4$, $\sqrt{25} = 5$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : racine carree et aire d'un carre</h4>
+<canvas id="cvSqrt" width="700" height="350"></canvas>
+<div class="controls">
+<label>Aire du carre :</label>
+<input type="range" id="slAire" min="1" max="100" value="25" step="1">
+<span id="valAire">25</span>
+</div>
+<div class="result-text" id="resSqrt"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvSqrt'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slAire'),sp=document.getElementById('valAire'),res=document.getElementById('resSqrt');
+sl.addEventListener('input',function(){sp.textContent=sl.value;draw()});
+function draw(){
+var a=parseInt(sl.value),s=Math.sqrt(a);
+ctx.clearRect(0,0,700,350);
+ctx.fillStyle='#fdf8f0';ctx.fillRect(0,0,700,350);
+var maxPx=240,scale=maxPx/10,side=s*scale;
+var ox=100,oy=300-side;
+ctx.fillStyle='rgba(42,82,152,0.15)';ctx.fillRect(ox,oy,side,side);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;ctx.strokeRect(ox,oy,side,side);
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('cote = '+s.toFixed(4),ox+side/2,oy+side+22);
+ctx.textAlign='left';
+ctx.fillText('Aire = '+a,ox+side+15,oy+side/2+5);
+var px=420,py=50;
+ctx.fillStyle='#333';ctx.font='16px Arial';
+ctx.fillText('Carres parfaits :',px,py);
+ctx.font='14px Arial';
+var parfaits=[1,4,9,16,25,36,49,64,81,100];
+for(var i=0;i<parfaits.length;i++){
+ctx.fillText(parfaits[i]+' = '+Math.sqrt(parfaits[i])+'^2',px+10,py+25+i*22);
+}
+res.innerHTML='L\'aire du carre est '+a+'. Le cote mesure sqrt('+a+') = <strong>'+s.toFixed(4)+'</strong>.';
+}
+draw()})();
+</script>
+
+<h2>II. Proprietes</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete : produit</div>
+<p>Pour tous nombres positifs $a$ et $b$ : $\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete : quotient</div>
+<p>Pour $a \geq 0$ et $b > 0$ : $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Attention</div>
+<p>Il n'existe <strong>aucune</strong> formule pour $\sqrt{a + b}$. En general, $\sqrt{a+b} \neq \sqrt{a} + \sqrt{b}$.</p>
+<p>Exemple : $\sqrt{9 + 16} = \sqrt{25} = 5$ mais $\sqrt{9} + \sqrt{16} = 3 + 4 = 7$.</p>
+</div>
+
+<h2>III. Simplification de racines carrees</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>Pour simplifier $\sqrt{n}$, on cherche le plus grand carre parfait qui divise $n$.</p>
+<p>$\sqrt{n} = \sqrt{k^2 \times m} = k\sqrt{m}$ ou $m$ ne contient plus de facteur carre.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$\sqrt{50} = \sqrt{25 \times 2} = \sqrt{25} \times \sqrt{2} = 5\sqrt{2}$.</p>
+<p>$\sqrt{72} = \sqrt{36 \times 2} = 6\sqrt{2}$.</p>
+<p>$\sqrt{48} = \sqrt{16 \times 3} = 4\sqrt{3}$.</p>
+<p>$\sqrt{200} = \sqrt{100 \times 2} = 10\sqrt{2}$.</p>
+</div>
+
+<h2>IV. Operations avec des racines carrees</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>On peut additionner ou soustraire des racines carrees uniquement si elles ont le <strong>meme radicande</strong> (le meme nombre sous la racine).</p>
+<p>$a\sqrt{n} + b\sqrt{n} = (a+b)\sqrt{n}$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$3\sqrt{5} + 7\sqrt{5} = 10\sqrt{5}$.</p>
+<p>$\sqrt{12} + \sqrt{27} = 2\sqrt{3} + 3\sqrt{3} = 5\sqrt{3}$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Simplifier : a) $\sqrt{75}$ ; b) $\sqrt{98}$ ; c) $\sqrt{128}$ ; d) $\sqrt{180}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $\sqrt{75} = \sqrt{25 \times 3} = 5\sqrt{3}$.</p>
+<p>b) $\sqrt{98} = \sqrt{49 \times 2} = 7\sqrt{2}$.</p>
+<p>c) $\sqrt{128} = \sqrt{64 \times 2} = 8\sqrt{2}$.</p>
+<p>d) $\sqrt{180} = \sqrt{36 \times 5} = 6\sqrt{5}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Calculer : a) $\sqrt{3} \times \sqrt{12}$ ; b) $\dfrac{\sqrt{50}}{\sqrt{2}}$ ; c) $\sqrt{5} \times \sqrt{20}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $\sqrt{3} \times \sqrt{12} = \sqrt{3 \times 12} = \sqrt{36} = 6$.</p>
+<p>b) $\dfrac{\sqrt{50}}{\sqrt{2}} = \sqrt{\dfrac{50}{2}} = \sqrt{25} = 5$.</p>
+<p>c) $\sqrt{5} \times \sqrt{20} = \sqrt{100} = 10$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Ecrire sous la forme $a\sqrt{b}$ avec $b$ le plus petit possible : $\sqrt{45} + \sqrt{20} - \sqrt{80}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\sqrt{45} = 3\sqrt{5}$, $\sqrt{20} = 2\sqrt{5}$, $\sqrt{80} = 4\sqrt{5}$.</p>
+<p>$3\sqrt{5} + 2\sqrt{5} - 4\sqrt{5} = (3 + 2 - 4)\sqrt{5} = \sqrt{5}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Developper et simplifier : $(3 + \sqrt{2})^2$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$(3 + \sqrt{2})^2 = 3^2 + 2 \times 3 \times \sqrt{2} + (\sqrt{2})^2 = 9 + 6\sqrt{2} + 2 = 11 + 6\sqrt{2}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Un carre a pour aire 288 cm$^2$. Exprimer la longueur de son cote sous la forme $a\sqrt{b}$ avec $b$ entier le plus petit possible.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Le cote mesure $\sqrt{288}$ cm. $288 = 144 \times 2$. Donc $\sqrt{288} = \sqrt{144 \times 2} = 12\sqrt{2}$ cm.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

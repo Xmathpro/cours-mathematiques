@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equations : approfondissement . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#1e3d6f}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 6</span></div>
+<h1 class="cours-titre-principal">Equations : approfondissement</h1>
+<p class="cours-sous-titre">Equations produit, equations avec quotients, mise en equation de problemes</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappels : equations du premier degre</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Une equation du premier degre a une inconnue $ax + b = 0$ (avec $a \neq 0$) possede une unique solution : $x = -\dfrac{b}{a}$.</p>
+</div>
+
+<h2>II. Equations produit</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Un produit de facteurs est nul si et seulement si l'un au moins des facteurs est nul.</p>
+<p>$A \times B = 0 \iff A = 0$ ou $B = 0$.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Methode : resoudre une equation produit</div>
+<p>1. Mettre l'equation sous la forme $A \times B = 0$.</p>
+<p>2. Resoudre $A = 0$ et $B = 0$ separement.</p>
+<p>3. L'ensemble des solutions est la reunion des solutions trouvees.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Resoudre $(2x - 6)(3x + 9) = 0$.</p>
+<p>$2x - 6 = 0$ donne $x = 3$.</p>
+<p>$3x + 9 = 0$ donne $x = -3$.</p>
+<p>L'equation a deux solutions : $x = 3$ et $x = -3$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualisation : solutions d'une equation produit</h4>
+<canvas id="cvProd" width="700" height="300"></canvas>
+<div class="controls">
+<button onclick="newEq()">Nouvelle equation</button>
+</div>
+<div class="result-text" id="resProd"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvProd'),ctx=cv.getContext('2d'),res=document.getElementById('resProd');
+var eqs=[
+{a1:2,b1:-6,a2:3,b2:9},{a1:1,b1:-5,a2:4,b2:8},{a1:3,b1:12,a2:2,b2:-10},
+{a1:5,b1:-15,a2:1,b2:7},{a1:1,b1:-4,a2:1,b2:-4}
+];
+var idx=0;
+function sign(n){return n>=0?'+':'-'}
+function abs(n){return Math.abs(n)}
+function draw(){
+var e=eqs[idx];ctx.clearRect(0,0,700,300);
+ctx.fillStyle='#f0f4ff';ctx.fillRect(0,0,700,300);
+var s1=-e.b1/e.a1,s2=-e.b2/e.a2;
+ctx.fillStyle='#2a5298';ctx.font='bold 15px Arial';ctx.textAlign='center';
+var t1=e.a1+'x '+(e.b1>=0?'+ ':'')+e.b1;
+var t2=e.a2+'x '+(e.b2>=0?'+ ':'')+e.b2;
+ctx.fillText('('+t1+')('+t2+') = 0',350,35);
+var ox=60,w=580,cy=180,minX=Math.min(s1,s2)-3,maxX=Math.max(s1,s2)+3;
+ctx.strokeStyle='#ccc';ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(ox,cy);ctx.lineTo(ox+w,cy);ctx.stroke();
+for(var i=Math.ceil(minX);i<=Math.floor(maxX);i++){
+var px=ox+(i-minX)/(maxX-minX)*w;
+ctx.beginPath();ctx.moveTo(px,cy-5);ctx.lineTo(px,cy+5);ctx.stroke();
+ctx.fillStyle='#888';ctx.font='11px Arial';ctx.fillText(i,px,cy+18);
+}
+function plotSol(s,label,color){
+var px=ox+(s-minX)/(maxX-minX)*w;
+ctx.fillStyle=color;ctx.beginPath();ctx.arc(px,cy,8,0,Math.PI*2);ctx.fill();
+ctx.fillStyle=color;ctx.font='bold 13px Arial';ctx.fillText(label,px,cy-18);
+ctx.font='12px Arial';ctx.fillText('x = '+s.toFixed(2),px,cy+38);
+}
+if(s1===s2){plotSol(s1,'solution double','#c0392b')}
+else{plotSol(s1,'x\u2081','#2a5298');plotSol(s2,'x\u2082','#c0392b')}
+var sols=s1===s2?'L\'equation a une solution double : x = '+s1.toFixed(2):'Solutions : x = '+s1.toFixed(2)+' et x = '+s2.toFixed(2);
+res.innerHTML=sols;
+}
+window.newEq=function(){idx=(idx+1)%eqs.length;draw()};
+draw()})();
+</script>
+
+<h2>III. Equations avec quotients</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Un quotient est nul si et seulement si le numerateur est nul (et le denominateur non nul).</p>
+<p>$\dfrac{A}{B} = 0 \iff A = 0$ et $B \neq 0$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Resoudre $\dfrac{2x - 8}{x + 3} = 0$.</p>
+<p>Condition : $x + 3 \neq 0$ soit $x \neq -3$.</p>
+<p>Numerateur nul : $2x - 8 = 0$ donne $x = 4$. Comme $4 \neq -3$, la solution est $x = 4$.</p>
+</div>
+
+<h2>IV. Mise en equation</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>1. Choisir l'inconnue et preciser ce qu'elle represente.</p>
+<p>2. Mettre le probleme en equation.</p>
+<p>3. Resoudre l'equation.</p>
+<p>4. Verifier la solution et conclure dans le contexte du probleme.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Resoudre : a) $(x - 7)(2x + 4) = 0$ ; b) $(3x + 6)(5x - 10) = 0$ ; c) $x(x - 8) = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $x - 7 = 0$ ou $2x + 4 = 0$. Solutions : $x = 7$ ou $x = -2$.</p>
+<p>b) $3x + 6 = 0$ ou $5x - 10 = 0$. Solutions : $x = -2$ ou $x = 2$.</p>
+<p>c) $x = 0$ ou $x - 8 = 0$. Solutions : $x = 0$ ou $x = 8$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Resoudre $(x + 3)^2 - 16 = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$(x + 3)^2 - 16 = (x + 3)^2 - 4^2 = (x + 3 + 4)(x + 3 - 4) = (x + 7)(x - 1) = 0$.</p>
+<p>Solutions : $x = -7$ ou $x = 1$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Resoudre $\dfrac{5x - 15}{x - 2} = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Condition : $x - 2 \neq 0$, donc $x \neq 2$.</p>
+<p>$5x - 15 = 0$ donne $x = 3$. Comme $3 \neq 2$, la solution est $x = 3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Resoudre $4x^2 - 25 = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$4x^2 - 25 = (2x)^2 - 5^2 = (2x + 5)(2x - 5) = 0$.</p>
+<p>$2x + 5 = 0$ donne $x = -\dfrac{5}{2}$. $2x - 5 = 0$ donne $x = \dfrac{5}{2}$.</p>
+<p>Solutions : $x = -\dfrac{5}{2}$ ou $x = \dfrac{5}{2}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>La somme de deux nombres entiers consecutifs vaut 157. Quels sont ces deux nombres ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Soit $n$ le plus petit des deux nombres. Le suivant est $n + 1$.</p>
+<p>$n + (n + 1) = 157$ soit $2n + 1 = 157$ soit $2n = 156$ soit $n = 78$.</p>
+<p>Les deux nombres sont 78 et 79. Verification : $78 + 79 = 157$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

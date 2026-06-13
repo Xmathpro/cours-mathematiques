@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning annuel . 3eme . Mathematiques</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+.planning-container{max-width:1100px;margin:2rem auto;padding:0 1rem}
+.planning-grid{display:grid;gap:6px}
+.period-title{background:var(--couleur-principale,#2c3e50);color:#fff;padding:10px 14px;font-weight:700;font-size:1rem;border-radius:4px;margin-top:1rem}
+.week-row{display:grid;grid-template-columns:80px 1fr 200px;gap:6px;align-items:stretch}
+.week-num{background:#f0f0f0;padding:8px;text-align:center;font-weight:600;font-size:0.85rem;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.week-content{padding:8px 12px;border-radius:4px;font-size:0.88rem;line-height:1.4;cursor:pointer;transition:transform 0.1s}
+.week-content:hover{transform:scale(1.01)}
+.week-eval{padding:8px 10px;border-radius:4px;font-size:0.82rem;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.cat-nombres{background:#e8f4fd;border-left:4px solid #3498db}
+.cat-geometrie{background:#fef9e7;border-left:4px solid #f39c12}
+.cat-espace{background:#f5eef8;border-left:4px solid #9b59b6}
+.cat-donnees{background:#eafaf1;border-left:4px solid #27ae60}
+.cat-algo{background:#fdedec;border-left:4px solid #e74c3c}
+.cat-methode{background:#fdf2e9;border-left:4px solid #e67e22}
+.cat-vacances{background:#d5dbdb;border-left:4px solid #7f8c8d;font-style:italic;color:#666}
+.eval-ic{background:#d4efdf;color:#1e8449}
+.eval-ds{background:#fadbd8;color:#c0392b}
+.eval-dm{background:#d6eaf8;color:#2471a3}
+.eval-bilan{background:#fdebd0;color:#ca6f1e}
+.eval-tp{background:#e8daef;color:#7d3c98}
+.eval-none{background:#f8f9f9;color:#aaa}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:1.5rem 0;padding:12px;background:#f9f9f9;border-radius:6px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:0.82rem}
+.legend-dot{width:14px;height:14px;border-radius:3px}
+.stats-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:1rem 0}
+.stat-box{text-align:center;padding:10px;border-radius:6px;font-size:0.85rem}
+.stat-box strong{display:block;font-size:1.4rem;margin-bottom:2px}
+.filter-bar{display:flex;gap:8px;margin:1rem 0;flex-wrap:wrap}
+.filter-btn{padding:6px 14px;border:2px solid #ddd;border-radius:20px;cursor:pointer;font-size:0.82rem;background:#fff;transition:all 0.2s}
+.filter-btn.active{border-color:#2c3e50;background:#2c3e50;color:#fff}
+@media(max-width:700px){.week-row{grid-template-columns:60px 1fr;}.week-eval{display:none}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a></nav></div></header>
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Progression</span><span>Annee scolaire</span></div>
+<h1 class="cours-titre-principal">Planning annuel de 3eme</h1>
+<p class="cours-sous-titre">22 lecons, 12 IC, 6 DS, 8 DM, 3 bilans, 6 TP</p>
+</div></div>
+
+<div class="planning-container">
+
+<div class="stats-bar">
+<div class="stat-box cat-nombres"><strong>10</strong>Nombres</div>
+<div class="stat-box cat-geometrie"><strong>6</strong>Geometrie</div>
+<div class="stat-box cat-espace"><strong>2</strong>Espace</div>
+<div class="stat-box cat-donnees"><strong>2</strong>Donnees</div>
+<div class="stat-box cat-algo"><strong>1</strong>Algo</div>
+<div class="stat-box cat-methode"><strong>1</strong>Methode</div>
+</div>
+
+<div class="legend">
+<div class="legend-item"><div class="legend-dot" style="background:#3498db"></div>Nombres</div>
+<div class="legend-item"><div class="legend-dot" style="background:#f39c12"></div>Geometrie</div>
+<div class="legend-item"><div class="legend-dot" style="background:#9b59b6"></div>Espace</div>
+<div class="legend-item"><div class="legend-dot" style="background:#27ae60"></div>Donnees</div>
+<div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>Algo</div>
+<div class="legend-item"><div class="legend-dot" style="background:#e67e22"></div>Methode</div>
+<div class="legend-item"><div class="legend-dot eval-ic" style="width:14px;height:14px"></div>IC</div>
+<div class="legend-item"><div class="legend-dot eval-ds" style="width:14px;height:14px"></div>DS</div>
+<div class="legend-item"><div class="legend-dot eval-dm" style="width:14px;height:14px"></div>DM</div>
+<div class="legend-item"><div class="legend-dot eval-bilan" style="width:14px;height:14px"></div>Bilan</div>
+<div class="legend-item"><div class="legend-dot eval-tp" style="width:14px;height:14px"></div>TP</div>
+</div>
+
+<div class="filter-bar">
+<button class="filter-btn active" data-cat="all">Tout</button>
+<button class="filter-btn" data-cat="nombres">Nombres</button>
+<button class="filter-btn" data-cat="geometrie">Geometrie</button>
+<button class="filter-btn" data-cat="espace">Espace</button>
+<button class="filter-btn" data-cat="donnees">Donnees</button>
+<button class="filter-btn" data-cat="algo">Algo</button>
+</div>
+
+<div class="planning-grid" id="planning">
+
+<div class="period-title">Periode 1 : septembre - octobre</div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S1-S2</div><div class="week-content cat-nombres"><strong>L01</strong> Arithmetique : divisibilite (2 seances)<br>Diviseurs, multiples, nombres premiers, decomposition</div><div class="week-eval eval-tp">TP01 Crible</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S3-S4</div><div class="week-content cat-nombres"><strong>L02</strong> Arithmetique : PGCD (2 seances)<br>Algorithme d'Euclide, fractions irreductibles</div><div class="week-eval eval-ic">IC01 Arithm.</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S5-S6-S7</div><div class="week-content cat-nombres"><strong>L03</strong> Racines carrees (3 seances)<br>Definition, simplification, operations, rationalisation</div><div class="week-eval eval-ic">IC02 Racines</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S7</div><div class="week-content cat-nombres" style="text-align:center;font-weight:600">Devoir surveille DS01 : Arithmetique et racines carrees</div><div class="week-eval eval-ds">DS01</div></div>
+
+<div class="week-row" data-cat="vacances"><div class="week-num">Vac.</div><div class="week-content cat-vacances">Vacances de la Toussaint</div><div class="week-eval eval-dm">DM01 Arithm.</div></div>
+
+<div class="period-title">Periode 2 : novembre - decembre</div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S8-S9</div><div class="week-content cat-nombres"><strong>L04</strong> Identites remarquables : developper (2 seances)<br>$(a+b)^2$, $(a-b)^2$, $(a+b)(a-b)$</div><div class="week-eval eval-tp">TP02 IR geom.</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S10-S11</div><div class="week-content cat-nombres"><strong>L05</strong> Identites remarquables : factoriser (2 seances)<br>Reconnaissance et factorisation</div><div class="week-eval eval-ic">IC03 IR</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S12-S13</div><div class="week-content cat-nombres"><strong>L06</strong> Equations : approfondissement (2 seances)<br>Equations produit, quotient, mise en equation</div><div class="week-eval eval-dm">DM02 Racines+IR</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S14-S15</div><div class="week-content cat-nombres"><strong>L07</strong> Inequations (2 seances)<br>Regles, resolution, representation</div><div class="week-eval eval-ic">IC04 Eq/Ineq</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S15</div><div class="week-content cat-nombres" style="text-align:center;font-weight:600">Devoir surveille DS02 : Identites, equations, inequations</div><div class="week-eval eval-ds">DS02</div></div>
+
+<div class="week-row" data-cat="vacances"><div class="week-num">Vac.</div><div class="week-content cat-vacances">Vacances de Noel</div><div class="week-eval eval-dm">DM03 Mise eq.</div></div>
+
+<div class="period-title">Periode 3 : janvier - fevrier</div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S16-S17</div><div class="week-content cat-nombres"><strong>L08</strong> Notion de fonction (2 seances)<br>Image, antecedent, lecture graphique</div><div class="week-eval eval-ic">IC05 Fonctions</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S18-S19</div><div class="week-content cat-nombres"><strong>L09</strong> Fonctions lineaires (2 seances)<br>Coefficient, proportionnalite, droite par l'origine</div><div class="week-eval eval-none"></div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S20-S21</div><div class="week-content cat-nombres"><strong>L10</strong> Fonctions affines (2 seances)<br>Coefficient directeur, ordonnee a l'origine, intersection</div><div class="week-eval eval-ic">IC06 Lin/Aff</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S21</div><div class="week-content cat-nombres" style="text-align:center;font-weight:600">Devoir surveille DS03 : Fonctions</div><div class="week-eval eval-ds">DS03</div></div>
+
+<div class="week-row" data-cat="nombres"><div class="week-num">S21</div><div class="week-content cat-nombres" style="font-weight:600">Bilan 1 : Nombres et calculs (L1-L7)</div><div class="week-eval eval-bilan">Bilan 1</div></div>
+
+<div class="week-row" data-cat="vacances"><div class="week-num">Vac.</div><div class="week-content cat-vacances">Vacances de fevrier</div><div class="week-eval eval-dm">DM04 Fonctions</div></div>
+
+<div class="period-title">Periode 4 : mars - avril</div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S22-S23</div><div class="week-content cat-geometrie"><strong>L11</strong> Theoreme de Thales (direct) (2 seances)<br>Configuration, calcul de longueurs</div><div class="week-eval eval-tp">TP04 Mesure ind.</div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S24</div><div class="week-content cat-geometrie"><strong>L12</strong> Theoreme de Thales (reciproque) (1 seance)<br>Demontrer un parallelisme</div><div class="week-eval eval-ic">IC07 Thales</div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S25-S26</div><div class="week-content cat-geometrie"><strong>L13</strong> Trigonometrie : cosinus (2 seances)<br>Cote adjacent / hypotenuse</div><div class="week-eval eval-dm">DM05 Thales</div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S27-S28</div><div class="week-content cat-geometrie"><strong>L14</strong> Trigonometrie : sinus et tangente (2 seances)<br>SOH-CAH-TOA, choix du rapport</div><div class="week-eval eval-ic">IC08 Trigo</div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S28</div><div class="week-content cat-geometrie" style="text-align:center;font-weight:600">Devoir surveille DS04 : Thales et trigonometrie</div><div class="week-eval eval-ds">DS04</div></div>
+
+<div class="week-row" data-cat="vacances"><div class="week-num">Vac.</div><div class="week-content cat-vacances">Vacances de printemps</div><div class="week-eval eval-dm">DM06 Trigo</div></div>
+
+<div class="period-title">Periode 5 : mai - juin</div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S29-S30</div><div class="week-content cat-geometrie"><strong>L15</strong> Homothetie (2 seances)<br>Centre, rapport, image de figures</div><div class="week-eval eval-none"></div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S31</div><div class="week-content cat-geometrie"><strong>L16</strong> Agrandissement et reduction (1 seance)<br>Coefficient sur longueurs, aires, volumes</div><div class="week-eval eval-ic">IC09 Homoth.</div></div>
+
+<div class="week-row" data-cat="espace"><div class="week-num">S32-S33</div><div class="week-content cat-espace"><strong>L17</strong> Sections de solides (2 seances)<br>Pave, cylindre, cone, pyramide</div><div class="week-eval eval-none"></div></div>
+
+<div class="week-row" data-cat="espace"><div class="week-num">S34-S35</div><div class="week-content cat-espace"><strong>L18</strong> Sphere et boule (2 seances)<br>Aire, volume, sections</div><div class="week-eval eval-ic">IC10 Espace</div></div>
+
+<div class="week-row" data-cat="espace"><div class="week-num">S35</div><div class="week-content cat-espace" style="text-align:center;font-weight:600">Devoir surveille DS05 : Geometrie et espace</div><div class="week-eval eval-ds">DS05</div></div>
+
+<div class="week-row" data-cat="geometrie"><div class="week-num">S35</div><div class="week-content cat-geometrie" style="font-weight:600">Bilan 2 : Fonctions et geometrie (L8-L16)</div><div class="week-eval eval-bilan">Bilan 2</div></div>
+
+<div class="week-row" data-cat="donnees"><div class="week-num">S36-S37</div><div class="week-content cat-donnees"><strong>L19</strong> Statistiques : approfondissement (2 seances)<br>Mediane, quartiles, EIQ, diagramme en boite</div><div class="week-eval eval-tp">TP05 Stats tabl.</div></div>
+
+<div class="week-row" data-cat="donnees"><div class="week-num">S38-S39</div><div class="week-content cat-donnees"><strong>L20</strong> Probabilites : approfondissement (2 seances)<br>2 epreuves, arbres, avec/sans remise</div><div class="week-eval eval-ic">IC11 Stats/Proba</div></div>
+
+<div class="week-row" data-cat="algo"><div class="week-num">S40-S41</div><div class="week-content cat-algo"><strong>L21</strong> Scratch : fonctions et variables (2 seances)<br>Variables, blocs personnalises</div><div class="week-eval eval-tp">TP06 Scratch</div></div>
+
+<div class="week-row" data-cat="algo"><div class="week-num">S41</div><div class="week-content cat-algo eval-ic" style="text-align:center;font-weight:600">IC12 Algorithmique</div><div class="week-eval eval-ic">IC12</div></div>
+
+<div class="week-row" data-cat="donnees"><div class="week-num">S42</div><div class="week-content cat-donnees" style="text-align:center;font-weight:600">Devoir surveille DS06 : Donnees et revision brevet</div><div class="week-eval eval-ds">DS06</div></div>
+
+<div class="week-row" data-cat="donnees"><div class="week-num">S42</div><div class="week-content cat-donnees eval-dm" style="font-weight:600">DM07 Stats/Proba en contexte</div><div class="week-eval eval-dm">DM07</div></div>
+
+<div class="period-title">Revision Brevet : juin</div>
+
+<div class="week-row" data-cat="methode"><div class="week-num">S43-S45</div><div class="week-content cat-methode"><strong>L22</strong> Preparation au Brevet (3 seances)<br>Formulaire, methodes, sujets types</div><div class="week-eval eval-dm">DM08 Brevet</div></div>
+
+<div class="week-row" data-cat="methode"><div class="week-num">S45</div><div class="week-content cat-methode" style="font-weight:600">Bilan 3 : Espace, donnees et bilan annuel (L17-L22)</div><div class="week-eval eval-bilan">Bilan 3</div></div>
+
+<div class="week-row" data-cat="methode"><div class="week-num">Fin</div><div class="week-content cat-methode" style="text-align:center;font-weight:700;font-size:1rem">BREVET DES COLLEGES</div><div class="week-eval eval-ds" style="background:#c0392b;color:#fff">BREVET</div></div>
+
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.week-row').forEach(row => {
+            if (cat === 'all' || row.dataset.cat === cat || row.dataset.cat === 'vacances') {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

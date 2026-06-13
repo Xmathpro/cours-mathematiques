@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmetique : divisibilite . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#1e3d6f}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Arithmetique : divisibilite</h1>
+<p class="cours-sous-titre">Diviseurs, multiples, nombres premiers, decomposition en facteurs premiers</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Diviseurs et multiples</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Soient $a$ et $b$ deux entiers naturels avec $b \neq 0$. On dit que $b$ <strong>divise</strong> $a$ (ou que $a$ est un <strong>multiple</strong> de $b$, ou que $b$ est un <strong>diviseur</strong> de $a$) s'il existe un entier naturel $k$ tel que $a = b \times k$.</p>
+<p>On note $b \mid a$ (se lit « $b$ divise $a$ »).</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$3 \mid 12$ car $12 = 3 \times 4$. Donc 3 est un diviseur de 12 et 12 est un multiple de 3.</p>
+<p>$7 \mid 63$ car $63 = 7 \times 9$. Donc 7 divise 63.</p>
+<p>$5$ ne divise pas $23$ car il n'existe aucun entier $k$ tel que $23 = 5 \times k$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete : criteres de divisibilite</div>
+<p>Un entier naturel est divisible :</p>
+<p>par <strong>2</strong> si son chiffre des unites est 0, 2, 4, 6 ou 8 ;</p>
+<p>par <strong>3</strong> si la somme de ses chiffres est divisible par 3 ;</p>
+<p>par <strong>5</strong> si son chiffre des unites est 0 ou 5 ;</p>
+<p>par <strong>9</strong> si la somme de ses chiffres est divisible par 9.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : diviseurs d'un entier</h4>
+<canvas id="cvDiv" width="700" height="320"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<input type="range" id="slN" min="2" max="120" value="36">
+<span id="valN">36</span>
+<button onclick="drawDiv()">Actualiser</button>
+</div>
+<div class="result-text" id="resDiv"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvDiv'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slN'),sp=document.getElementById('valN'),res=document.getElementById('resDiv');
+sl.addEventListener('input',function(){sp.textContent=sl.value;drawDiv()});
+function diviseurs(n){var d=[];for(var i=1;i<=n;i++){if(n%i===0)d.push(i)}return d}
+window.drawDiv=function(){
+var n=parseInt(sl.value),divs=diviseurs(n);
+ctx.clearRect(0,0,700,320);
+ctx.fillStyle='#f0f4ff';ctx.fillRect(0,0,700,320);
+ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';
+ctx.fillText('Diviseurs de '+n,20,30);
+var cols=10,sz=50,gap=8,ox=30,oy=55;
+for(var i=0;i<divs.length;i++){
+var r=Math.floor(i/cols),c=i%cols;
+var x=ox+c*(sz+gap),y=oy+r*(sz+gap);
+ctx.fillStyle='#2a5298';ctx.beginPath();ctx.arc(x+sz/2,y+sz/2,sz/2-2,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='#fff';ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+ctx.fillText(divs[i],x+sz/2,y+sz/2);
+}
+ctx.textAlign='left';
+res.innerHTML='Le nombre '+n+' possede <strong>'+divs.length+'</strong> diviseur(s) : '+divs.join(', ')+'.';
+if(divs.length===2) res.innerHTML+=' C\'est un <strong>nombre premier</strong>.';
+};drawDiv()})();
+</script>
+
+<h2>II. Nombres premiers</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>nombre premier</strong> est un entier naturel qui possede exactement <strong>deux diviseurs</strong> : 1 et lui-meme.</p>
+</div>
+
+<div class="remarque"><div class="encadre-titre">Remarques</div>
+<p>0 et 1 ne sont pas des nombres premiers. 0 a une infinite de diviseurs et 1 n'en possede qu'un seul (lui-meme).</p>
+<p>2 est le seul nombre premier pair.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Les nombres premiers inferieurs a 50 sont : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47.</p>
+</div>
+
+<h2>III. Decomposition en facteurs premiers</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete (theoreme fondamental de l'arithmetique)</div>
+<p>Tout entier naturel superieur ou egal a 2 peut s'ecrire comme un <strong>produit de nombres premiers</strong>. Cette ecriture est unique (a l'ordre pres des facteurs).</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Methode : decomposer en facteurs premiers</div>
+<p>On divise le nombre par le plus petit nombre premier possible, puis on recommence avec le quotient obtenu, jusqu'a obtenir 1.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple : decomposition de 360</div>
+<p>$360 = 2 \times 180 = 2 \times 2 \times 90 = 2 \times 2 \times 2 \times 45 = 2 \times 2 \times 2 \times 3 \times 15 = 2 \times 2 \times 2 \times 3 \times 3 \times 5$</p>
+<p>Donc $360 = 2^3 \times 3^2 \times 5$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : decomposition en facteurs premiers</h4>
+<canvas id="cvDec" width="700" height="300"></canvas>
+<div class="controls">
+<label>Nombre :</label>
+<input type="range" id="slDec" min="2" max="500" value="180">
+<span id="valDec">180</span>
+<button onclick="drawDec()">Decomposer</button>
+</div>
+<div class="result-text" id="resDec"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvDec'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slDec'),sp=document.getElementById('valDec'),res=document.getElementById('resDec');
+sl.addEventListener('input',function(){sp.textContent=sl.value;drawDec()});
+function decompose(n){var f=[],d=2;while(n>1){while(n%d===0){f.push(d);n=n/d}d++}return f}
+window.drawDec=function(){
+var n=parseInt(sl.value),facs=decompose(n);
+ctx.clearRect(0,0,700,300);
+ctx.fillStyle='#f8f6ff';ctx.fillRect(0,0,700,300);
+ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='left';
+ctx.fillText('Decomposition de '+n,20,30);
+var x=30,y=70,cur=n;
+ctx.font='14px Arial';
+for(var i=0;i<facs.length;i++){
+ctx.fillStyle='#333';ctx.textAlign='right';
+ctx.fillText(cur,x+60,y);
+ctx.strokeStyle='#2a5298';ctx.beginPath();ctx.moveTo(x+70,y-14);ctx.lineTo(x+70,y+4);ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.textAlign='left';ctx.font='bold 14px Arial';
+ctx.fillText(facs[i],x+80,y);
+ctx.font='14px Arial';
+cur=cur/facs[i];y+=26;
+if(y>280){x+=160;y=70}
+}
+ctx.fillStyle='#333';ctx.textAlign='right';ctx.fillText('1',x+60,y);
+var counts={};facs.forEach(function(f){counts[f]=(counts[f]||0)+1});
+var parts=[];for(var p in counts){parts.push(counts[p]>1?p+'^'+counts[p]:p)}
+res.innerHTML=n+' = '+facs.join(' x ')+' = <strong>'+parts.join(' x ')+'</strong>';
+};drawDec()})();
+</script>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Determiner la liste de tous les diviseurs de 72.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>On cherche systematiquement : $72 = 1 \times 72 = 2 \times 36 = 3 \times 24 = 4 \times 18 = 6 \times 12 = 8 \times 9$.</p>
+<p>Les diviseurs de 72 sont : 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Parmi les nombres suivants, lesquels sont premiers ? 37, 51, 67, 91, 97.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$37$ : on teste 2, 3, 5 (car $7^2 = 49 > 37$). Aucun ne divise 37. Donc 37 est premier.</p>
+<p>$51 = 3 \times 17$ : 51 n'est pas premier.</p>
+<p>$67$ : on teste 2, 3, 5, 7 (car $8^2 = 64 < 67 < 81 = 9^2$). Aucun ne divise 67. Donc 67 est premier.</p>
+<p>$91 = 7 \times 13$ : 91 n'est pas premier.</p>
+<p>$97$ : on teste 2, 3, 5, 7 (car $9^2 = 81 < 97 < 100 = 10^2$). Aucun ne divise 97. Donc 97 est premier.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Donner la decomposition en facteurs premiers de 504.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$504 = 2 \times 252 = 2 \times 2 \times 126 = 2 \times 2 \times 2 \times 63 = 2 \times 2 \times 2 \times 3 \times 21 = 2 \times 2 \times 2 \times 3 \times 3 \times 7$.</p>
+<p>Donc $504 = 2^3 \times 3^2 \times 7$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Un fleuriste dispose de 84 roses et 60 tulipes. Il veut composer des bouquets identiques en utilisant toutes les fleurs. Quel est le nombre maximal de bouquets qu'il peut realiser ? Combien de roses et de tulipes y aura-t-il dans chaque bouquet ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Le nombre maximal de bouquets est le PGCD de 84 et 60.</p>
+<p>$84 = 2^2 \times 3 \times 7$ et $60 = 2^2 \times 3 \times 5$.</p>
+<p>$\text{PGCD}(84, 60) = 2^2 \times 3 = 12$.</p>
+<p>Il peut realiser 12 bouquets. Chaque bouquet contiendra $84 \div 12 = 7$ roses et $60 \div 12 = 5$ tulipes.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Demontrer que le produit de trois entiers naturels consecutifs est toujours divisible par 6.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Soient $n$, $n+1$ et $n+2$ trois entiers consecutifs.</p>
+<p>Parmi trois entiers consecutifs, l'un au moins est divisible par 2 (il y a toujours au moins un nombre pair) et l'un au moins est divisible par 3 (car les restes dans la division par 3 de trois entiers consecutifs sont 0, 1, 2 dans un certain ordre).</p>
+<p>Donc le produit $n(n+1)(n+2)$ est divisible a la fois par 2 et par 3. Comme 2 et 3 sont premiers entre eux, le produit est divisible par $2 \times 3 = 6$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

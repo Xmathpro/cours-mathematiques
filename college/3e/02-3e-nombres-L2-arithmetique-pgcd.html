@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmetique : PGCD . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.controls input[type=number]{width:70px;padding:3px 6px;border:1px solid #ccc;border-radius:3px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#1e3d6f}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 2</span></div>
+<h1 class="cours-titre-principal">Arithmetique : PGCD</h1>
+<p class="cours-sous-titre">Plus grand commun diviseur, fractions irreductibles, algorithme d'Euclide</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. PGCD de deux entiers</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Le <strong>PGCD</strong> (Plus Grand Commun Diviseur) de deux entiers naturels $a$ et $b$ non nuls est le plus grand entier qui divise a la fois $a$ et $b$.</p>
+<p>On le note $\text{PGCD}(a, b)$.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Methode 1 : par la liste des diviseurs</div>
+<p>On dresse la liste des diviseurs de $a$ et de $b$, puis on identifie le plus grand diviseur commun.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Diviseurs de 48 : 1, 2, 3, 4, 6, 8, 12, 16, 24, 48.</p>
+<p>Diviseurs de 36 : 1, 2, 3, 4, 6, 9, 12, 18, 36.</p>
+<p>Diviseurs communs : 1, 2, 3, 4, 6, 12. Donc $\text{PGCD}(48, 36) = 12$.</p>
+</div>
+
+<h2>II. Algorithme d'Euclide</h2>
+
+<div class="methode"><div class="encadre-titre">Methode 2 : algorithme d'Euclide</div>
+<p>On effectue des divisions euclidiennes successives. Le PGCD est le dernier reste non nul.</p>
+<p>$a = b \times q + r$. Si $r = 0$ alors $\text{PGCD}(a, b) = b$. Sinon on recommence avec $b$ et $r$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple : PGCD(252, 198)</div>
+<p>$252 = 198 \times 1 + 54$</p>
+<p>$198 = 54 \times 3 + 36$</p>
+<p>$54 = 36 \times 1 + 18$</p>
+<p>$36 = 18 \times 2 + 0$</p>
+<p>Le dernier reste non nul est 18. Donc $\text{PGCD}(252, 198) = 18$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : algorithme d'Euclide pas a pas</h4>
+<canvas id="cvEuclide" width="700" height="350"></canvas>
+<div class="controls">
+<label>a =</label><input type="number" id="inA" value="252" min="1" max="9999">
+<label>b =</label><input type="number" id="inB" value="198" min="1" max="9999">
+<button onclick="drawEuclide()">Calculer</button>
+</div>
+<div class="result-text" id="resEuclide"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvEuclide'),ctx=cv.getContext('2d');
+window.drawEuclide=function(){
+var a=Math.max(parseInt(document.getElementById('inA').value)||1,1);
+var b=Math.max(parseInt(document.getElementById('inB').value)||1,1);
+if(a<b){var t=a;a=b;b=t}
+ctx.clearRect(0,0,700,350);
+ctx.fillStyle='#f0f8f0';ctx.fillRect(0,0,700,350);
+ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='left';
+ctx.fillText('Algorithme d\'Euclide : PGCD('+a+', '+b+')',20,28);
+var y=60,steps=[],aa=a,bb=b;
+while(bb>0){var q=Math.floor(aa/bb),r=aa-bb*q;steps.push({a:aa,b:bb,q:q,r:r});aa=bb;bb=r}
+ctx.font='14px Arial';
+for(var i=0;i<steps.length;i++){
+var s=steps[i];
+ctx.fillStyle='#333';ctx.fillText(s.a+' = '+s.b+' x '+s.q+' + '+s.r,40,y);
+if(s.r===0){ctx.fillStyle='#c0392b';ctx.font='bold 14px Arial';ctx.fillText('<-- reste nul',350,y);ctx.font='14px Arial'}
+y+=28;if(y>340)break;
+}
+var pgcd=steps[steps.length-1].b;
+document.getElementById('resEuclide').innerHTML='PGCD('+a+', '+b+') = <strong>'+pgcd+'</strong>';
+};drawEuclide()})();
+</script>
+
+<h2>III. Nombres premiers entre eux</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Deux entiers naturels sont <strong>premiers entre eux</strong> si leur PGCD est egal a 1.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$\text{PGCD}(15, 28) = 1$ donc 15 et 28 sont premiers entre eux.</p>
+<p>$\text{PGCD}(12, 18) = 6 \neq 1$ donc 12 et 18 ne sont pas premiers entre eux.</p>
+</div>
+
+<h2>IV. Fractions irreductibles</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une fraction $\dfrac{a}{b}$ est <strong>irreductible</strong> si $a$ et $b$ sont premiers entre eux, c'est-a-dire si $\text{PGCD}(a, b) = 1$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Pour rendre une fraction $\dfrac{a}{b}$ irreductible, on divise $a$ et $b$ par $\text{PGCD}(a, b)$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Rendre irreductible $\dfrac{84}{126}$.</p>
+<p>$\text{PGCD}(84, 126)$ : $126 = 84 \times 1 + 42$ puis $84 = 42 \times 2 + 0$. Donc $\text{PGCD}(84, 126) = 42$.</p>
+<p>$\dfrac{84}{126} = \dfrac{84 \div 42}{126 \div 42} = \dfrac{2}{3}$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Calculer $\text{PGCD}(180, 126)$ par l'algorithme d'Euclide.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$180 = 126 \times 1 + 54$</p>
+<p>$126 = 54 \times 2 + 18$</p>
+<p>$54 = 18 \times 3 + 0$</p>
+<p>$\text{PGCD}(180, 126) = 18$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Rendre irreductible la fraction $\dfrac{156}{234}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$234 = 156 \times 1 + 78$ puis $156 = 78 \times 2 + 0$. Donc $\text{PGCD}(156, 234) = 78$.</p>
+<p>$\dfrac{156}{234} = \dfrac{156 \div 78}{234 \div 78} = \dfrac{2}{3}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Les nombres 91 et 52 sont-ils premiers entre eux ? Justifier.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$91 = 52 \times 1 + 39$ puis $52 = 39 \times 1 + 13$ puis $39 = 13 \times 3 + 0$.</p>
+<p>$\text{PGCD}(91, 52) = 13 \neq 1$. Donc 91 et 52 ne sont pas premiers entre eux.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>On dispose de 120 bonbons a la menthe et de 90 bonbons au citron. On veut faire des sachets identiques contenant les deux parfums, en utilisant tous les bonbons. Quel est le nombre maximal de sachets ? Quelle est la composition de chaque sachet ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$120 = 90 \times 1 + 30$ puis $90 = 30 \times 3 + 0$. Donc $\text{PGCD}(120, 90) = 30$.</p>
+<p>On peut faire 30 sachets. Chaque sachet contient $120 \div 30 = 4$ bonbons a la menthe et $90 \div 30 = 3$ bonbons au citron.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Calculer $\text{PGCD}(323, 187)$ et en deduire la fraction irreductible egale a $\dfrac{187}{323}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$323 = 187 \times 1 + 136$ puis $187 = 136 \times 1 + 51$ puis $136 = 51 \times 2 + 34$ puis $51 = 34 \times 1 + 17$ puis $34 = 17 \times 2 + 0$.</p>
+<p>$\text{PGCD}(323, 187) = 17$.</p>
+<p>$\dfrac{187}{323} = \dfrac{187 \div 17}{323 \div 17} = \dfrac{11}{19}$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

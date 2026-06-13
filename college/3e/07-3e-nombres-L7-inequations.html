@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inequations . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:120px}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 7</span></div>
+<h1 class="cours-titre-principal">Inequations</h1>
+<p class="cours-sous-titre">Definition, resolution, representation sur une droite graduee</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>inequation</strong> est une inegalite dans laquelle figure un nombre inconnu, designe par une lettre. <strong>Resoudre</strong> une inequation, c'est trouver toutes les valeurs de l'inconnue pour lesquelles l'inegalite est vraie.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$2x + 3 > 7$ est une inequation d'inconnue $x$. La valeur $x = 5$ est solution car $2 \times 5 + 3 = 13 > 7$. La valeur $x = 1$ n'est pas solution car $2 \times 1 + 3 = 5$, et 5 n'est pas superieur a 7.</p>
+</div>
+
+<h2>II. Regles de resolution</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete 1</div>
+<p>On peut ajouter ou soustraire un meme nombre aux deux membres d'une inequation <strong>sans changer le sens</strong> de l'inegalite.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete 2</div>
+<p>On peut multiplier ou diviser les deux membres d'une inequation par un meme nombre <strong>strictement positif</strong> sans changer le sens de l'inegalite.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete 3 (attention)</div>
+<p>Si on multiplie ou divise les deux membres d'une inequation par un nombre <strong>strictement negatif</strong>, on doit <strong>changer le sens</strong> de l'inegalite.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Visualisation : solutions d'une inequation sur la droite graduee</h4>
+<canvas id="cvIneq" width="700" height="200"></canvas>
+<div class="controls">
+<label>a =</label><input type="range" id="slA" min="-5" max="5" value="2" step="1"><span id="vA">2</span>
+<label>b =</label><input type="range" id="slB" min="-20" max="20" value="-6" step="1"><span id="vB">-6</span>
+<label>Signe :</label>
+<select id="selSign"><option value="gt">&gt;</option><option value="gte">&ge;</option><option value="lt">&lt;</option><option value="lte">&le;</option></select>
+</div>
+<div class="result-text" id="resIneq"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvIneq'),ctx=cv.getContext('2d');
+var slA=document.getElementById('slA'),slB=document.getElementById('slB'),sel=document.getElementById('selSign');
+var vA=document.getElementById('vA'),vB=document.getElementById('vB'),res=document.getElementById('resIneq');
+function draw(){
+var a=parseInt(slA.value),b=parseInt(slB.value),sign=sel.value;
+vA.textContent=a;vB.textContent=b;
+ctx.clearRect(0,0,700,200);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,200);
+if(a===0){
+res.innerHTML=b>0?(sign==='gt'||sign==='gte'?'Aucune solution':'Tout nombre est solution'):(b===0?(sign==='gte'||sign==='lte'?'Tout nombre est solution':'Aucune solution'):(sign==='gt'||sign==='gte'?'Tout nombre est solution':'Aucune solution'));
+return;
+}
+var sol=-b/a;
+var flip=a<0;
+var effSign=sign;
+if(flip){if(sign==='gt')effSign='lt';else if(sign==='lt')effSign='gt';else if(sign==='gte')effSign='lte';else effSign='gte'}
+var ox=50,w=600,cy=100,minX=sol-8,maxX=sol+8;
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(ox,cy);ctx.lineTo(ox+w,cy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox+w-8,cy-5);ctx.lineTo(ox+w,cy);ctx.lineTo(ox+w-8,cy+5);ctx.fill();
+for(var i=Math.ceil(minX);i<=Math.floor(maxX);i++){
+var px=ox+(i-minX)/(maxX-minX)*w;
+ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,cy-4);ctx.lineTo(px,cy+4);ctx.stroke();
+ctx.fillStyle='#666';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText(i,px,cy+18);
+}
+var sx=ox+(sol-minX)/(maxX-minX)*w;
+var incl=(effSign==='gte'||effSign==='lte');
+if(effSign==='gt'||effSign==='gte'){
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(sx,cy-20,ox+w-sx,40);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(sx,cy,6,0,Math.PI*2);if(incl)ctx.fill();ctx.stroke();
+}else{
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.fillRect(ox,cy-20,sx-ox,40);
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.arc(sx,cy,6,0,Math.PI*2);if(incl)ctx.fill();ctx.stroke();
+}
+ctx.fillStyle='#c0392b';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText(sol%1===0?sol:sol.toFixed(2),sx,cy-28);
+var symbols={'gt':'>','gte':'\u2265','lt':'<','lte':'\u2264'};
+var txt=a+'x '+(b>=0?'+ ':'')+b+' '+symbols[sign]+' 0';
+var solTxt='x '+symbols[effSign]+' '+(sol%1===0?sol:sol.toFixed(2));
+if(flip) solTxt+=' (inversion du sens car division par '+a+' < 0)';
+res.innerHTML=txt+' &rarr; <strong>'+solTxt+'</strong>';
+}
+slA.addEventListener('input',draw);slB.addEventListener('input',draw);sel.addEventListener('change',draw);draw()})();
+</script>
+
+<h2>III. Exemples de resolution</h2>
+
+<div class="exemple"><div class="encadre-titre">Exemple 1</div>
+<p>Resoudre $3x - 7 \leq 5$.</p>
+<p>$3x \leq 12$ (on ajoute 7 aux deux membres)</p>
+<p>$x \leq 4$ (on divise par 3, positif : le sens est conserve)</p>
+<p>L'ensemble des solutions est $]-\infty\,;\,4]$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple 2</div>
+<p>Resoudre $-2x + 5 > 1$.</p>
+<p>$-2x > -4$ (on soustrait 5)</p>
+<p>$x < 2$ (on divise par $-2$, negatif : <strong>on change le sens</strong>)</p>
+<p>L'ensemble des solutions est $]-\infty\,;\,2[$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Resoudre et representer les solutions sur une droite graduee : a) $2x + 5 > 11$ ; b) $-3x + 9 \leq 0$ ; c) $4x - 1 < 2x + 7$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $2x > 6$ soit $x > 3$. Solutions : $]3\,;\,+\infty[$.</p>
+<p>b) $-3x \leq -9$ soit $x \geq 3$ (division par $-3$, changement de sens). Solutions : $[3\,;\,+\infty[$.</p>
+<p>c) $4x - 2x < 7 + 1$ soit $2x < 8$ soit $x < 4$. Solutions : $]-\infty\,;\,4[$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Resoudre $5(x - 2) \geq 3(x + 4)$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$5x - 10 \geq 3x + 12$ soit $2x \geq 22$ soit $x \geq 11$. Solutions : $[11\,;\,+\infty[$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un cinema propose deux tarifs. Tarif A : 9 euros la seance. Tarif B : abonnement de 30 euros puis 5 euros la seance. A partir de combien de seances le tarif B est-il plus avantageux ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Soit $n$ le nombre de seances. Tarif A : $9n$. Tarif B : $30 + 5n$.</p>
+<p>Le tarif B est plus avantageux quand $30 + 5n < 9n$ soit $30 < 4n$ soit $n > 7{,}5$.</p>
+<p>Comme $n$ est un entier, le tarif B est plus avantageux a partir de 8 seances.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Determiner les entiers naturels $n$ tels que $3n - 5 \leq 2n + 12$ et $n > 4$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$3n - 5 \leq 2n + 12$ donne $n \leq 17$. Avec $n > 4$, on obtient $4 < n \leq 17$.</p>
+<p>Les entiers naturels solutions sont : 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

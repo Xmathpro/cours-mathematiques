@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparation au Brevet . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls button{padding:4px 12px;border-radius:4px;border:1px solid #2a5298;background:#fff;color:#2a5298;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#2a5298;color:#fff}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Methode</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Preparation au Brevet</h1>
+<p class="cours-sous-titre">Methodologie, formules essentielles, exercices type</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. L'epreuve de mathematiques au Brevet</h2>
+
+<div class="definition"><div class="encadre-titre">Format</div>
+<p>L'epreuve dure 2 heures et est notee sur 100 points. Elle comporte entre 5 et 7 exercices independants, portant sur l'ensemble du programme. Au moins un exercice porte sur l'algorithmique (Scratch). La presentation, la redaction et la rigueur du raisonnement comptent.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Conseils de methode</div>
+<p>1. Lire tous les exercices avant de commencer, choisir l'ordre strategiquement.</p>
+<p>2. Rediger soigneusement : citer les theoremes utilises, ecrire les hypotheses, justifier chaque etape.</p>
+<p>3. Verifier les resultats (calculs, unites, coherence).</p>
+<p>4. Gerer le temps : environ 20 minutes par exercice, garder 10 minutes pour la relecture.</p>
+</div>
+
+<h2>II. Formulaire essentiel</h2>
+
+<div class="propriete"><div class="encadre-titre">Arithmetique</div>
+<p>Nombres premiers, decomposition en facteurs premiers, PGCD, fractions irreductibles.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Calcul litteral</div>
+<p>$(a+b)^2 = a^2 + 2ab + b^2$, $(a-b)^2 = a^2 - 2ab + b^2$, $(a+b)(a-b) = a^2 - b^2$.</p>
+<p>$\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$, $\sqrt{a^2} = |a|$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Equations et inequations</div>
+<p>Equation produit : $A \times B = 0 \Leftrightarrow A = 0 \text{ ou } B = 0$.</p>
+<p>Inequation : on change le sens de l'inegalite quand on multiplie ou divise par un nombre negatif.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Fonctions</div>
+<p>Fonction lineaire : $f(x) = ax$, passe par l'origine.</p>
+<p>Fonction affine : $f(x) = ax + b$, $a$ est le coefficient directeur, $b$ l'ordonnee a l'origine.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Geometrie</div>
+<p>Thales : $\dfrac{AB}{AC} = \dfrac{AB'}{AC'} = \dfrac{BB'}{CC'}$.</p>
+<p>Trigonometrie : SOH-CAH-TOA. $\cos^2 + \sin^2 = 1$.</p>
+<p>Pythagore : $BC^2 = AB^2 + AC^2$ (triangle rectangle en $A$).</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Espace</div>
+<p>Volume de la boule : $\dfrac{4}{3}\pi R^3$. Aire de la sphere : $4\pi R^2$.</p>
+<p>Volume du cone : $\dfrac{1}{3}\pi r^2 h$. Volume de la pyramide : $\dfrac{1}{3} \times \text{aire base} \times h$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Statistiques et probabilites</div>
+<p>Mediane, quartiles, ecart interquartile, diagramme en boite.</p>
+<p>Probabilite : $P(A) = \dfrac{\text{cas favorables}}{\text{cas possibles}}$, $P(\bar{A}) = 1 - P(A)$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Quiz : formules du Brevet</h4>
+<canvas id="cvQuiz" width="700" height="320"></canvas>
+<div class="controls">
+<button id="btnQ">Question suivante</button>
+<button id="btnShow">Voir la reponse</button>
+</div>
+<div class="result-text" id="resQuiz"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvQuiz'),ctx=cv.getContext('2d');
+var btnQ=document.getElementById('btnQ'),btnS=document.getElementById('btnShow'),res=document.getElementById('resQuiz');
+var questions=[
+{q:'Volume de la boule de rayon R ?',a:'V = (4/3) x pi x R^3'},
+{q:'Aire de la sphere de rayon R ?',a:'A = 4 x pi x R^2'},
+{q:'Developpement de (a+b)^2 ?',a:'a^2 + 2ab + b^2'},
+{q:'Developpement de (a-b)^2 ?',a:'a^2 - 2ab + b^2'},
+{q:'Developpement de (a+b)(a-b) ?',a:'a^2 - b^2'},
+{q:'Cosinus d\'un angle aigu ?',a:'cos = adjacent / hypotenuse'},
+{q:'Sinus d\'un angle aigu ?',a:'sin = oppose / hypotenuse'},
+{q:'Tangente d\'un angle aigu ?',a:'tan = oppose / adjacent'},
+{q:'Theoreme de Thales : egalite des rapports ?',a:'AB/AC = AB\'/AC\' = BB\'/CC\''},
+{q:'Probabilite de l\'evenement contraire ?',a:'P(A barre) = 1 - P(A)'},
+{q:'Volume du cone ?',a:'V = (1/3) x pi x r^2 x h'},
+{q:'Propriete des racines carrees : sqrt(a x b) ?',a:'sqrt(a) x sqrt(b)'},
+{q:'Equation produit A x B = 0 ?',a:'A = 0 ou B = 0'},
+{q:'Fonction lineaire f(x) = ?',a:'f(x) = a x (droite passant par O)'},
+{q:'Fonction affine f(x) = ?',a:'f(x) = ax + b'}
+];
+var idx=0,shown=false;
+function draw(){
+ctx.clearRect(0,0,700,320);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,320);
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='left';
+ctx.fillText('Question '+(idx+1)+' / '+questions.length,20,30);
+ctx.fillStyle='#333';ctx.font='18px Arial';ctx.textAlign='center';
+var q=questions[idx].q;
+ctx.fillText(q,350,120);
+if(shown){
+ctx.fillStyle='#c0392b';ctx.font='bold 20px Arial';
+ctx.fillText(questions[idx].a,350,200);
+}else{
+ctx.fillStyle='#aaa';ctx.font='italic 14px Arial';
+ctx.fillText('Cliquez sur "Voir la reponse"',350,200);
+}
+res.innerHTML='Question '+(idx+1)+' sur '+questions.length+'.';
+}
+btnQ.addEventListener('click',function(){idx=(idx+1)%questions.length;shown=false;draw();});
+btnS.addEventListener('click',function(){shown=true;draw();});
+draw()})();
+</script>
+
+<h2>III. Exercices type Brevet</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1 (Arithmetique, 6 points)</div>
+<p>1. Decomposer 360 et 450 en produit de facteurs premiers.</p>
+<p>2. En deduire le PGCD de 360 et 450.</p>
+<p>3. Simplifier la fraction $\dfrac{360}{450}$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $360 = 2^3 \times 3^2 \times 5$ et $450 = 2 \times 3^2 \times 5^2$.</p>
+<p>2. PGCD = $2^1 \times 3^2 \times 5^1 = 2 \times 9 \times 5 = 90$.</p>
+<p>3. $\dfrac{360}{450} = \dfrac{360 \div 90}{450 \div 90} = \dfrac{4}{5}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2 (Calcul litteral, 8 points)</div>
+<p>On considere $E = (3x - 5)^2 - (3x - 5)(x + 1)$.</p>
+<p>1. Developper et reduire $E$.</p>
+<p>2. Factoriser $E$.</p>
+<p>3. Resoudre $E = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $E = 9x^2 - 30x + 25 - (3x^2 + 3x - 5x - 5) = 9x^2 - 30x + 25 - 3x^2 + 2x + 5 = 6x^2 - 28x + 30$.</p>
+<p>2. $E = (3x-5)[(3x-5) - (x+1)] = (3x-5)(2x-6) = 2(3x-5)(x-3)$.</p>
+<p>3. $E = 0$ : $3x - 5 = 0$ ou $x - 3 = 0$, soit $x = \dfrac{5}{3}$ ou $x = 3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3 (Thales et trigonometrie, 8 points)</div>
+<p>Dans le triangle $ABC$, $M \in [AB]$, $N \in [AC]$, $(MN) \parallel (BC)$. $AM = 4$ cm, $AB = 10$ cm, $AN = 3$ cm, $BC = 12$ cm.</p>
+<p>1. Calculer $AC$ et $MN$.</p>
+<p>2. Le triangle $ABC$ est rectangle en $A$. Calculer $\widehat{B}$ (arrondir au degre).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. Par Thales : $\dfrac{AM}{AB} = \dfrac{AN}{AC} = \dfrac{MN}{BC}$ soit $\dfrac{4}{10} = \dfrac{3}{AC}$. $AC = \dfrac{3 \times 10}{4} = 7{,}5$ cm. $MN = \dfrac{4 \times 12}{10} = 4{,}8$ cm.</p>
+<p>2. $\cos(\widehat{B}) = \dfrac{AB}{BC} = \dfrac{10}{12} \approx 0{,}833$. Attention : rectangle en $A$, donc $BC$ est l'hypotenuse. $\cos(\widehat{B}) = \dfrac{AB}{BC} = \dfrac{10}{12}$. $\widehat{B} = \arccos(0{,}833) \approx 34°$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4 (Probabilites, 6 points)</div>
+<p>Un sac contient 4 boules bleues, 3 boules rouges et 2 boules vertes. On tire une boule au hasard.</p>
+<p>1. Quelle est la probabilite de tirer une boule rouge ?</p>
+<p>2. Quelle est la probabilite de ne pas tirer une boule verte ?</p>
+<p>3. On tire deux boules successivement sans remise. Quelle est la probabilite de tirer deux boules bleues ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $P(\text{rouge}) = \dfrac{3}{9} = \dfrac{1}{3}$.</p>
+<p>2. $P(\overline{\text{verte}}) = 1 - \dfrac{2}{9} = \dfrac{7}{9}$.</p>
+<p>3. $P(BB) = \dfrac{4}{9} \times \dfrac{3}{8} = \dfrac{12}{72} = \dfrac{1}{6}$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5 (Fonctions, 6 points)</div>
+<p>On considere la fonction $f$ definie par $f(x) = 2x - 3$.</p>
+<p>1. Calculer $f(0)$, $f(4)$ et l'antecedent de 7 par $f$.</p>
+<p>2. La fonction $f$ est-elle lineaire ou affine ? Justifier.</p>
+<p>3. Determiner le coefficient directeur et l'ordonnee a l'origine. Tracer la droite representative.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. $f(0) = -3$. $f(4) = 2 \times 4 - 3 = 5$. $f(x) = 7$ donne $2x - 3 = 7$, $x = 5$.</p>
+<p>2. $f(x) = 2x - 3$ est de la forme $ax + b$ avec $b \neq 0$ : c'est une fonction affine (non lineaire).</p>
+<p>3. Coefficient directeur $a = 2$, ordonnee a l'origine $b = -3$. La droite passe par $(0 ; -3)$ et $(4 ; 5)$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

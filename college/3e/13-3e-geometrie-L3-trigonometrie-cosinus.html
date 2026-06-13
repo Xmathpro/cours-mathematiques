@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometrie : cosinus . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Geometrie</span><span>Lecon 3</span></div>
+<h1 class="cours-titre-principal">Trigonometrie : cosinus</h1>
+<p class="cours-sous-titre">Cosinus d'un angle aigu dans un triangle rectangle</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Vocabulaire dans le triangle rectangle</h2>
+
+<div class="definition"><div class="encadre-titre">Cotes d'un triangle rectangle</div>
+<p>Dans un triangle rectangle, le cote le plus long, oppose a l'angle droit, s'appelle l'<strong>hypotenuse</strong>.</p>
+<p>Pour un angle aigu donne, on distingue le <strong>cote adjacent</strong> (qui forme cet angle avec l'hypotenuse) et le <strong>cote oppose</strong> (qui ne touche pas cet angle).</p>
+</div>
+
+<h2>II. Cosinus d'un angle aigu</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Dans un triangle rectangle, le cosinus d'un angle aigu est le quotient :</p>
+<p>$$\cos(\widehat{\alpha}) = \frac{\text{cote adjacent a } \widehat{\alpha}}{\text{hypotenuse}}$$</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>Pour tout angle aigu $\widehat{\alpha}$ : $0 &lt; \cos(\widehat{\alpha}) &lt; 1$.</p>
+<p>$\cos(0°) = 1$ et $\cos(90°) = 0$. Plus l'angle augmente, plus le cosinus diminue.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : cosinus dans le triangle rectangle</h4>
+<canvas id="cvCos" width="700" height="400"></canvas>
+<div class="controls">
+<label>Angle :</label>
+<input type="range" id="slAngle" min="10" max="80" value="40" step="1">
+<span id="vAngle">40</span>°
+</div>
+<div class="result-text" id="resCos"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvCos'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slAngle'),sp=document.getElementById('vAngle'),res=document.getElementById('resCos');
+function draw(){
+var a=parseInt(sl.value);sp.textContent=a;
+ctx.clearRect(0,0,700,400);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,400);
+var rad=a*Math.PI/180;
+var hyp=300;
+var adj=hyp*Math.cos(rad);
+var opp=hyp*Math.sin(rad);
+var ox=120,oy=340;
+ctx.strokeStyle='#333';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+adj,oy);ctx.lineTo(ox+adj,oy-opp);ctx.closePath();ctx.stroke();
+ctx.fillStyle='rgba(42,82,152,0.1)';ctx.fill();
+// angle droit
+var sq=15;
+ctx.strokeStyle='#2a5298';ctx.lineWidth=1.5;
+ctx.strokeRect(ox+adj-sq,oy-sq,sq,sq);
+// arc angle
+ctx.beginPath();ctx.arc(ox,oy,40,0,-rad,true);ctx.strokeStyle='#c0392b';ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle='#c0392b';ctx.font='bold 16px Arial';ctx.textAlign='left';
+ctx.fillText(a+'°',ox+45,oy-10);
+// labels
+ctx.fillStyle='#2a5298';ctx.font='bold 14px Arial';ctx.textAlign='center';
+ctx.fillText('Adjacent = '+adj.toFixed(1),ox+adj/2,oy+25);
+ctx.save();ctx.translate(ox+adj+20,oy-opp/2);ctx.rotate(-Math.PI/2);
+ctx.fillText('Oppose = '+opp.toFixed(1),0,0);ctx.restore();
+ctx.save();ctx.translate(ox+adj/2-15,oy-opp/2-15);ctx.rotate(-rad);
+ctx.fillStyle='#333';ctx.fillText('Hyp = '+hyp.toFixed(0),0,0);ctx.restore();
+// points
+ctx.fillStyle='#333';ctx.font='bold 15px Arial';ctx.textAlign='left';
+ctx.fillText('A',ox-20,oy+5);
+ctx.fillText('B',ox+adj+8,oy+5);
+ctx.fillText('C',ox+adj+8,oy-opp-8);
+var cosVal=Math.cos(rad);
+res.innerHTML='cos('+a+'°) = adjacent / hypotenuse = '+adj.toFixed(1)+' / '+hyp+' = <strong>'+cosVal.toFixed(4)+'</strong>';
+}
+sl.addEventListener('input',draw);draw()})();
+</script>
+
+<h2>III. Calculer une longueur</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>1. Identifier l'angle, le cote adjacent et l'hypotenuse.</p>
+<p>2. Ecrire $\cos(\widehat{\alpha}) = \frac{\text{adjacent}}{\text{hypotenuse}}$.</p>
+<p>3. Resoudre pour trouver la longueur inconnue.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple 1 : trouver le cote adjacent</div>
+<p>$ABC$ rectangle en $B$, $\widehat{A} = 35°$, $AC = 8$ cm. Calculer $AB$.</p>
+<p>$\cos(35°) = \dfrac{AB}{AC} = \dfrac{AB}{8}$ donc $AB = 8 \times \cos(35°) \approx 8 \times 0{,}8192 \approx 6{,}55$ cm.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple 2 : trouver l'hypotenuse</div>
+<p>$EFG$ rectangle en $F$, $\widehat{E} = 50°$, $EF = 6$ cm. Calculer $EG$.</p>
+<p>$\cos(50°) = \dfrac{EF}{EG} = \dfrac{6}{EG}$ donc $EG = \dfrac{6}{\cos(50°)} \approx \dfrac{6}{0{,}6428} \approx 9{,}33$ cm.</p>
+</div>
+
+<h2>IV. Calculer un angle</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>Si $\cos(\widehat{\alpha}) = k$, alors $\widehat{\alpha} = \arccos(k)$. On utilise la touche $\cos^{-1}$ ou ACOS de la calculatrice.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>$MNP$ rectangle en $N$, $MN = 5$ cm, $MP = 9$ cm. Calculer $\widehat{M}$.</p>
+<p>$\cos(\widehat{M}) = \dfrac{MN}{MP} = \dfrac{5}{9} \approx 0{,}5556$. Donc $\widehat{M} = \arccos(0{,}5556) \approx 56{,}3°$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>$ABC$ rectangle en $B$. $\widehat{A} = 42°$ et $AC = 10$ cm. Calculer $AB$ (arrondir au dixieme).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\cos(42°) = \dfrac{AB}{AC} = \dfrac{AB}{10}$ donc $AB = 10 \times \cos(42°) \approx 10 \times 0{,}7431 \approx 7{,}4$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>$DEF$ rectangle en $E$. $\widehat{D} = 58°$ et $DE = 7$ cm. Calculer $DF$ (arrondir au dixieme).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\cos(58°) = \dfrac{DE}{DF} = \dfrac{7}{DF}$ donc $DF = \dfrac{7}{\cos(58°)} \approx \dfrac{7}{0{,}5299} \approx 13{,}2$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>$RST$ rectangle en $S$. $RS = 8$ cm et $RT = 11$ cm. Calculer $\widehat{R}$ (arrondir au degre).</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\cos(\widehat{R}) = \dfrac{RS}{RT} = \dfrac{8}{11} \approx 0{,}7273$. $\widehat{R} = \arccos(0{,}7273) \approx 43°$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Une echelle de 5 m est appuyee contre un mur. Le pied de l'echelle est a 1,8 m du mur. Quel angle forme l'echelle avec le sol ? (arrondir au degre)</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$\cos(\widehat{\alpha}) = \dfrac{1{,}8}{5} = 0{,}36$. $\widehat{\alpha} = \arccos(0{,}36) \approx 69°$. L'echelle forme un angle d'environ 69° avec le sol.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion de fonction . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:crosshair}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls select,.controls input[type=range]{font-size:.85rem}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 8</span></div>
+<h1 class="cours-titre-principal">Notion de fonction</h1>
+<p class="cours-sous-titre">Definition, image, antecedent, representation graphique, lecture graphique</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Definition</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>fonction</strong> $f$ est un procede qui, a chaque nombre $x$, associe un unique nombre note $f(x)$.</p>
+<p>On note $f : x \mapsto f(x)$ (se lit « $f$ est la fonction qui a $x$ associe $f(x)$ »).</p>
+</div>
+
+<div class="definition"><div class="encadre-titre">Vocabulaire</div>
+<p>$x$ est un nombre du domaine de la fonction. $f(x)$ est l'<strong>image</strong> de $x$ par la fonction $f$.</p>
+<p>Si $f(a) = b$, on dit que $a$ est un <strong>antecedent</strong> de $b$ par $f$.</p>
+<p>Un nombre peut avoir plusieurs antecedents, mais il a une seule image.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Soit $f : x \mapsto 2x + 3$.</p>
+<p>L'image de 4 par $f$ est $f(4) = 2 \times 4 + 3 = 11$.</p>
+<p>L'antecedent de 9 par $f$ : on resout $2x + 3 = 9$, soit $x = 3$. L'antecedent de 9 est 3.</p>
+</div>
+
+<h2>II. Representation graphique</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>La <strong>representation graphique</strong> (ou <strong>courbe representative</strong>) d'une fonction $f$ est l'ensemble des points de coordonnees $(x\,;\,f(x))$.</p>
+</div>
+
+<div class="propriete"><div class="encadre-titre">Lecture graphique</div>
+<p>Sur la courbe representative de $f$ :</p>
+<p>l'<strong>image</strong> de $a$ se lit en ordonnee du point d'abscisse $a$ sur la courbe ;</p>
+<p>les <strong>antecedents</strong> de $b$ se lisent en abscisse des points d'ordonnee $b$ sur la courbe.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : courbe d'une fonction, image et antecedent</h4>
+<canvas id="cvFunc" width="700" height="450"></canvas>
+<div class="controls">
+<label>Fonction :</label>
+<select id="selFunc">
+<option value="0">f(x) = 2x + 1</option>
+<option value="1">f(x) = x^2 - 4</option>
+<option value="2">f(x) = -x^2 + 3</option>
+<option value="3">f(x) = 0.5x^2 - 2x + 1</option>
+</select>
+</div>
+<div class="result-text" id="resFunc">Deplacez la souris sur le graphique pour lire image et antecedent.</div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvFunc'),ctx=cv.getContext('2d');
+var sel=document.getElementById('selFunc'),res=document.getElementById('resFunc');
+var funcs=[
+function(x){return 2*x+1},
+function(x){return x*x-4},
+function(x){return -x*x+3},
+function(x){return 0.5*x*x-2*x+1}
+];
+var labels=['f(x) = 2x + 1','f(x) = x\u00b2 - 4','f(x) = -x\u00b2 + 3','f(x) = 0.5x\u00b2 - 2x + 1'];
+var ox=350,oy=250,sc=30,mx=null,my=null;
+function draw(){
+var fi=parseInt(sel.value),f=funcs[fi];
+ctx.clearRect(0,0,700,450);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,450);
+ctx.strokeStyle='#ddd';ctx.lineWidth=1;
+for(var i=-10;i<=10;i++){var px=ox+i*sc;ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,450);ctx.stroke()}
+for(var j=-8;j<=8;j++){var py=oy-j*sc;ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(700,py);ctx.stroke()}
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(700,oy);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,450);ctx.stroke();
+ctx.fillStyle='#333';ctx.font='11px Arial';ctx.textAlign='center';
+for(var i=-10;i<=10;i++){if(i!==0)ctx.fillText(i,ox+i*sc,oy+15)}
+ctx.textAlign='right';
+for(var j=-7;j<=7;j++){if(j!==0)ctx.fillText(j,ox-5,oy-j*sc+4)}
+ctx.strokeStyle='#2a5298';ctx.lineWidth=2.5;ctx.beginPath();
+for(var px=0;px<700;px++){
+var x=(px-ox)/sc,y=f(x),py=oy-y*sc;
+if(py>-50&&py<500){if(px===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+}
+ctx.stroke();
+ctx.fillStyle='#2a5298';ctx.font='bold 13px Arial';ctx.textAlign='left';
+ctx.fillText(labels[fi],10,20);
+if(mx!==null){
+var xm=(mx-ox)/sc,ym=f(xm),pym=oy-ym*sc;
+ctx.strokeStyle='rgba(192,57,43,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+ctx.beginPath();ctx.moveTo(mx,oy);ctx.lineTo(mx,pym);ctx.stroke();
+ctx.beginPath();ctx.moveTo(ox,pym);ctx.lineTo(mx,pym);ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(mx,pym,5,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='#c0392b';ctx.font='12px Arial';ctx.textAlign='left';
+ctx.fillText('('+xm.toFixed(1)+' ; '+ym.toFixed(2)+')',mx+10,pym-10);
+res.innerHTML='x = '+xm.toFixed(1)+' &rarr; f(x) = <strong>'+ym.toFixed(2)+'</strong>';
+}
+}
+cv.addEventListener('mousemove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;draw()});
+cv.addEventListener('mouseleave',function(){mx=null;my=null;draw()});
+sel.addEventListener('change',draw);draw()})();
+</script>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Soit $f : x \mapsto 3x - 5$. Calculer : a) $f(4)$ ; b) $f(-2)$ ; c) $f(0)$. d) Determiner l'antecedent de 7 par $f$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $f(4) = 3 \times 4 - 5 = 7$. b) $f(-2) = 3 \times (-2) - 5 = -11$. c) $f(0) = -5$.</p>
+<p>d) $3x - 5 = 7$ soit $3x = 12$ soit $x = 4$. L'antecedent de 7 est 4.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Soit $g : x \mapsto x^2 - 1$. a) Calculer $g(3)$ et $g(-3)$. b) Le nombre 8 a-t-il un antecedent par $g$ ? Si oui, le(s) determiner.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $g(3) = 9 - 1 = 8$. $g(-3) = 9 - 1 = 8$. Les images sont egales.</p>
+<p>b) $x^2 - 1 = 8$ soit $x^2 = 9$ soit $x = 3$ ou $x = -3$. Le nombre 8 a deux antecedents : 3 et $-3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Soit $h : x \mapsto -2x + 6$. Pour quelle valeur de $x$ a-t-on $h(x) = 0$ ? Pour quelles valeurs de $x$ a-t-on $h(x) > 0$ ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$h(x) = 0$ : $-2x + 6 = 0$ soit $x = 3$.</p>
+<p>$h(x) > 0$ : $-2x + 6 > 0$ soit $-2x > -6$ soit $x < 3$ (changement de sens). Solutions : $x < 3$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>La courbe ci-dessous represente une fonction $f$ definie sur $[-5\,;\,5]$. Lire graphiquement : a) $f(2)$ ; b) $f(-3)$ ; c) les antecedents de 0 par $f$ ; d) les antecedents de 4 par $f$.</p>
+<p>(On prendra $f : x \mapsto x^2 - 4$ pour les lectures.)</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $f(2) = 4 - 4 = 0$. b) $f(-3) = 9 - 4 = 5$.</p>
+<p>c) $f(x) = 0$ : $x^2 - 4 = 0$ soit $x = 2$ ou $x = -2$. Les antecedents de 0 sont $-2$ et 2.</p>
+<p>d) $f(x) = 4$ : $x^2 = 8$ soit $x = 2\sqrt{2} \approx 2{,}83$ ou $x = -2\sqrt{2} \approx -2{,}83$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identites remarquables : factoriser . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.controls button{background:#2a5298;color:#fff;border:none;padding:.4rem .9rem;border-radius:4px;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#1e3d6f}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Nombres et calculs</span><span>Lecon 5</span></div>
+<h1 class="cours-titre-principal">Identites remarquables : factoriser</h1>
+<p class="cours-sous-titre">Reconnaitre et utiliser les identites dans le sens de la factorisation</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Rappel des trois identites</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete : identites remarquables (sens factorisation)</div>
+<p>$a^2 + 2ab + b^2 = (a + b)^2$</p>
+<p>$a^2 - 2ab + b^2 = (a - b)^2$</p>
+<p>$a^2 - b^2 = (a + b)(a - b)$</p>
+</div>
+
+<h2>II. Factoriser avec $a^2 - b^2$</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>On repere une <strong>difference de deux carres</strong> : on identifie $a$ et $b$ tels que l'expression s'ecrive $a^2 - b^2$, puis on factorise en $(a + b)(a - b)$.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$x^2 - 9 = x^2 - 3^2 = (x + 3)(x - 3)$.</p>
+<p>$4x^2 - 25 = (2x)^2 - 5^2 = (2x + 5)(2x - 5)$.</p>
+<p>$16x^2 - 49y^2 = (4x)^2 - (7y)^2 = (4x + 7y)(4x - 7y)$.</p>
+</div>
+
+<h2>III. Factoriser avec $(a + b)^2$ ou $(a - b)^2$</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>On repere un <strong>trinome carre parfait</strong> : trois termes dont le premier et le dernier sont des carres parfaits et le terme du milieu est le double produit.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemples</div>
+<p>$x^2 + 6x + 9 = x^2 + 2 \times x \times 3 + 3^2 = (x + 3)^2$.</p>
+<p>$9x^2 - 30x + 25 = (3x)^2 - 2 \times 3x \times 5 + 5^2 = (3x - 5)^2$.</p>
+</div>
+
+<div class="interactive-box">
+<h4>Entrainement : reconnaitre l'identite</h4>
+<canvas id="cvQuiz" width="700" height="280"></canvas>
+<div class="controls">
+<button onclick="newQuiz()">Nouvelle expression</button>
+<button onclick="showAnswer()">Voir la reponse</button>
+</div>
+<div class="result-text" id="resQuiz"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvQuiz'),ctx=cv.getContext('2d'),res=document.getElementById('resQuiz');
+var quizzes=[
+{expr:'x\u00b2 - 16',ans:'(x + 4)(x - 4)',type:'a\u00b2 - b\u00b2'},
+{expr:'x\u00b2 + 10x + 25',ans:'(x + 5)\u00b2',type:'(a + b)\u00b2'},
+{expr:'x\u00b2 - 14x + 49',ans:'(x - 7)\u00b2',type:'(a - b)\u00b2'},
+{expr:'9x\u00b2 - 1',ans:'(3x + 1)(3x - 1)',type:'a\u00b2 - b\u00b2'},
+{expr:'4x\u00b2 + 12x + 9',ans:'(2x + 3)\u00b2',type:'(a + b)\u00b2'},
+{expr:'25x\u00b2 - 36',ans:'(5x + 6)(5x - 6)',type:'a\u00b2 - b\u00b2'},
+{expr:'x\u00b2 - 8x + 16',ans:'(x - 4)\u00b2',type:'(a - b)\u00b2'},
+{expr:'49x\u00b2 - 4',ans:'(7x + 2)(7x - 2)',type:'a\u00b2 - b\u00b2'},
+{expr:'16x\u00b2 + 40x + 25',ans:'(4x + 5)\u00b2',type:'(a + b)\u00b2'},
+{expr:'x\u00b2 - 100',ans:'(x + 10)(x - 10)',type:'a\u00b2 - b\u00b2'}
+];
+var cur=0;
+function drawQ(){
+ctx.clearRect(0,0,700,280);ctx.fillStyle='#f5f0ff';ctx.fillRect(0,0,700,280);
+ctx.fillStyle='#2a5298';ctx.font='bold 16px Arial';ctx.textAlign='center';
+ctx.fillText('Factoriser l\'expression suivante :',350,40);
+ctx.font='bold 28px Arial';ctx.fillStyle='#333';
+ctx.fillText(quizzes[cur].expr,350,120);
+ctx.font='14px Arial';ctx.fillStyle='#888';
+ctx.fillText('Identifiez le type d\'identite remarquable, puis factorisez.',350,180);
+res.innerHTML='';
+}
+window.newQuiz=function(){cur=(cur+1)%quizzes.length;drawQ()};
+window.showAnswer=function(){
+res.innerHTML='Identite utilisee : <strong>'+quizzes[cur].type+'</strong>. Resultat : <strong>'+quizzes[cur].ans+'</strong>';
+};
+drawQ()})();
+</script>
+
+<h2>IV. Factorisation en plusieurs etapes</h2>
+
+<div class="methode"><div class="encadre-titre">Methode</div>
+<p>Parfois, on doit d'abord mettre un facteur commun en evidence, puis appliquer une identite remarquable.</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple</div>
+<p>Factoriser $3x^2 - 27$.</p>
+<p>$3x^2 - 27 = 3(x^2 - 9) = 3(x + 3)(x - 3)$.</p>
+</div>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Factoriser : a) $x^2 - 81$ ; b) $x^2 + 12x + 36$ ; c) $4x^2 - 1$ ; d) $x^2 - 22x + 121$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $x^2 - 81 = (x + 9)(x - 9)$.</p>
+<p>b) $x^2 + 12x + 36 = (x + 6)^2$.</p>
+<p>c) $4x^2 - 1 = (2x + 1)(2x - 1)$.</p>
+<p>d) $x^2 - 22x + 121 = (x - 11)^2$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Factoriser : a) $2x^2 - 50$ ; b) $5x^2 + 30x + 45$ ; c) $12x^2 - 75$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>a) $2x^2 - 50 = 2(x^2 - 25) = 2(x + 5)(x - 5)$.</p>
+<p>b) $5x^2 + 30x + 45 = 5(x^2 + 6x + 9) = 5(x + 3)^2$.</p>
+<p>c) $12x^2 - 75 = 3(4x^2 - 25) = 3(2x + 5)(2x - 5)$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Factoriser $(x + 3)^2 - (2x - 1)^2$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>On pose $A = (x + 3)$ et $B = (2x - 1)$. C'est de la forme $A^2 - B^2 = (A + B)(A - B)$.</p>
+<p>$A + B = (x + 3) + (2x - 1) = 3x + 2$.</p>
+<p>$A - B = (x + 3) - (2x - 1) = x + 3 - 2x + 1 = -x + 4$.</p>
+<p>$(x + 3)^2 - (2x - 1)^2 = (3x + 2)(-x + 4)$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Montrer que $997^2 - 3^2$ est divisible par 1000.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$997^2 - 3^2 = (997 + 3)(997 - 3) = 1000 \times 994$.</p>
+<p>Donc $997^2 - 3^2 = 1000 \times 994$ est bien divisible par 1000.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 5</div>
+<p>Factoriser $A = (3x + 1)^2 - (x - 5)^2$ puis resoudre $A = 0$.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$A = [(3x + 1) + (x - 5)][(3x + 1) - (x - 5)] = (4x - 4)(2x + 6) = 2(2x - 2)(2x + 6)$.</p>
+<p>On peut simplifier : $A = (4x - 4)(2x + 6) = 2(2x - 2) \times 2(x + 3) = 4(2x - 2)(x + 3)$.</p>
+<p>$A = 0$ quand $4x - 4 = 0$ ou $2x + 6 = 0$, soit $x = 1$ ou $x = -3$.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

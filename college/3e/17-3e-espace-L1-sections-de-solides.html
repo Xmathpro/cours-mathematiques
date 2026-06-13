@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sections de solides . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=range]{width:140px}
+.controls select{padding:2px 6px;border-radius:3px;border:1px solid #ccc}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Espace</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Sections de solides</h1>
+<p class="cours-sous-titre">Sections planes d'un pave droit, d'un cylindre, d'un cone et d'une pyramide</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Section d'un pave droit par un plan parallele a une face</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>La section d'un pave droit par un plan parallele a une face est un rectangle de memes dimensions que cette face.</p>
+</div>
+
+<h2>II. Section d'un cylindre</h2>
+
+<div class="propriete"><div class="encadre-titre">Proprietes</div>
+<p>La section d'un cylindre de revolution par un plan parallele a sa base est un <strong>cercle</strong> de meme rayon que la base.</p>
+<p>La section d'un cylindre par un plan contenant l'axe est un <strong>rectangle</strong> de largeur egale au diametre et de hauteur egale a la hauteur du cylindre.</p>
+</div>
+
+<h2>III. Section d'un cone par un plan parallele a la base</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>La section d'un cone de revolution par un plan parallele a la base est un <strong>cercle</strong>. Si le plan coupe l'axe a une fraction $k$ de la hauteur depuis le sommet, alors le rayon de la section est $k \times r$ (ou $r$ est le rayon de la base).</p>
+</div>
+
+<h2>IV. Section d'une pyramide par un plan parallele a la base</h2>
+
+<div class="propriete"><div class="encadre-titre">Propriete</div>
+<p>La section d'une pyramide par un plan parallele a la base est une figure de meme nature que la base, reduite dans le rapport $k$ (ou $k$ est le rapport des distances du sommet au plan de section et du sommet a la base).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Exploration : section d'un cone et d'une pyramide</h4>
+<canvas id="cvSec" width="700" height="420"></canvas>
+<div class="controls">
+<label>Solide :</label>
+<select id="selS"><option value="cone">Cone</option><option value="pyr">Pyramide</option></select>
+<label style="margin-left:1rem">Hauteur de la section :</label>
+<input type="range" id="slH" min="0.1" max="0.9" value="0.5" step="0.05">
+<span id="vH">0.50</span>
+</div>
+<div class="result-text" id="resSec"></div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvSec'),ctx=cv.getContext('2d');
+var sl=document.getElementById('slH'),sp=document.getElementById('vH'),sel=document.getElementById('selS'),res=document.getElementById('resSec');
+function draw(){
+var k=parseFloat(sl.value);sp.textContent=k.toFixed(2);
+var solid=sel.value;
+ctx.clearRect(0,0,700,420);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,420);
+var cx=350,sy=50,by=370,h=by-sy;
+var baseR=140;
+if(solid==='cone'){
+var secY=sy+k*h;
+var secR=k*baseR;
+// cone
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx-baseR,by);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx+baseR,by);ctx.stroke();
+// base ellipse
+ctx.beginPath();ctx.ellipse(cx,by,baseR,25,0,0,Math.PI*2);ctx.strokeStyle='#333';ctx.stroke();
+// section ellipse
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.ellipse(cx,secY,secR,secR*25/baseR,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+// sommet
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx,sy,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText('S',cx,sy-10);
+// labels
+ctx.fillStyle='#2a5298';ctx.font='13px Arial';
+ctx.fillText('r\' = '+k.toFixed(2)+' x r',cx,secY-secR*25/baseR-10);
+res.innerHTML='Section a k = '+k.toFixed(2)+' de la hauteur depuis le sommet. Rayon de la section : k x r = '+k.toFixed(2)+' x r. Aire de la section : k&sup2; x aire de la base = '+(k*k).toFixed(3)+' x aire de la base.';
+}else{
+var secY=sy+k*h;
+var secW=k*baseR;
+// pyramide (base carree vue de face)
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx-baseR,by);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx,sy);ctx.lineTo(cx+baseR,by);ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx-baseR,by);ctx.lineTo(cx+baseR,by);ctx.stroke();
+// perspective top
+ctx.setLineDash([3,3]);
+ctx.beginPath();ctx.moveTo(cx-baseR,by);ctx.lineTo(cx-baseR*0.6,by-30);ctx.lineTo(cx+baseR*0.6,by-30);ctx.lineTo(cx+baseR,by);ctx.stroke();
+ctx.setLineDash([]);
+// section
+ctx.fillStyle='rgba(42,82,152,0.2)';ctx.strokeStyle='#2a5298';ctx.lineWidth=2;
+ctx.beginPath();ctx.moveTo(cx-secW,secY);ctx.lineTo(cx+secW,secY);ctx.stroke();
+ctx.fillRect(cx-secW,secY-3,secW*2,6);
+// perspective section
+var pw=secW*0.6;
+ctx.setLineDash([3,3]);ctx.strokeStyle='#2a5298';
+ctx.beginPath();ctx.moveTo(cx-secW,secY);ctx.lineTo(cx-pw,secY-secW*30/baseR);ctx.lineTo(cx+pw,secY-secW*30/baseR);ctx.lineTo(cx+secW,secY);ctx.closePath();ctx.fillStyle='rgba(42,82,152,0.15)';ctx.fill();ctx.stroke();
+ctx.setLineDash([]);
+ctx.fillStyle='#333';ctx.beginPath();ctx.arc(cx,sy,4,0,Math.PI*2);ctx.fill();
+ctx.font='bold 14px Arial';ctx.textAlign='center';ctx.fillText('S',cx,sy-10);
+res.innerHTML='Section a k = '+k.toFixed(2)+' de la hauteur depuis le sommet. Cotes de la section : k x cote de la base. Aire : k&sup2; = '+(k*k).toFixed(3)+' x aire de la base.';
+}
+}
+sl.addEventListener('input',draw);sel.addEventListener('change',draw);draw()})();
+</script>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Un cone a un rayon de base de 6 cm et une hauteur de 10 cm. On le coupe par un plan parallele a la base situe a 4 cm du sommet. Calculer le rayon de la section.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$k = \dfrac{4}{10} = 0{,}4$. Le rayon de la section est $0{,}4 \times 6 = 2{,}4$ cm.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Une pyramide a base carree de cote 8 cm et de hauteur 12 cm est coupee par un plan parallele a la base a mi-hauteur. Quelle est l'aire de la section ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$k = \dfrac{6}{12} = 0{,}5$. Le cote de la section est $0{,}5 \times 8 = 4$ cm. L'aire est $4^2 = 16$ cm$^2$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Un cylindre de rayon 5 cm et de hauteur 12 cm est coupe par un plan contenant son axe. Decrire et donner les dimensions de la section.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>La section est un rectangle de largeur $2 \times 5 = 10$ cm (diametre) et de hauteur 12 cm. Aire : $10 \times 12 = 120$ cm$^2$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Un cone de hauteur 15 cm est coupe a 5 cm du sommet. La section obtenue a un rayon de 3 cm. Quel est le rayon de la base du cone ?</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$k = \dfrac{5}{15} = \dfrac{1}{3}$. On a $k \times r = 3$ donc $r = \dfrac{3}{1/3} = 9$ cm.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch : fonctions et variables . 3eme</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.interactive-box{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:1.5rem 0}
+.interactive-box h4{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#2a5298;margin-bottom:.75rem}
+canvas{display:block;margin:0 auto;border:1px solid #e8e8e8;border-radius:4px;max-width:100%;cursor:pointer}
+.controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;font-family:Arial,sans-serif;font-size:.85rem;color:#444}
+.controls label{font-weight:bold}
+.controls input[type=number]{width:60px;padding:2px 4px;border:1px solid #ccc;border-radius:3px}
+.controls button{padding:4px 12px;border-radius:4px;border:1px solid #2a5298;background:#fff;color:#2a5298;cursor:pointer;font-size:.85rem}
+.controls button:hover{background:#2a5298;color:#fff}
+.result-text{font-family:Arial,sans-serif;font-size:.85rem;color:#444;margin-top:.5rem;min-height:1.2em;line-height:1.7}
+.scratch-block{font-family:'Courier New',monospace;background:#4C97FF;color:#fff;padding:6px 12px;border-radius:6px;display:inline-block;margin:3px 0;font-size:.85rem}
+.scratch-block.event{background:#FFBF00;color:#333}
+.scratch-block.control{background:#FFAB19;color:#333}
+.scratch-block.var{background:#FF8C1A;color:#fff}
+.scratch-block.operator{background:#59C059;color:#fff}
+.scratch-block.looks{background:#9966FF;color:#fff}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header-inner"><div class="site-titre">Cours de <span>mathematiques</span></div><nav class="site-nav"><a href="../../index.html">Accueil</a><a href="../progression-chaines.html">Progression</a></nav></div></header>
+
+<div class="cours-header"><div class="cours-header-inner">
+<div class="cours-meta"><span>3eme</span><span>Algorithmique</span><span>Lecon 1</span></div>
+<h1 class="cours-titre-principal">Scratch : fonctions et variables</h1>
+<p class="cours-sous-titre">Variables, blocs personnalises, algorithmes avec entrees et sorties</p>
+</div></div>
+
+<main class="cours-corps">
+
+<h2>I. Variables</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Une <strong>variable</strong> est un espace memoire dans lequel on stocke une valeur (nombre, texte). En Scratch, on cree une variable avec le menu « Variables » et on peut la modifier avec les blocs « mettre [variable] a ... » et « ajouter ... a [variable] ».</p>
+</div>
+
+<div class="exemple"><div class="encadre-titre">Exemple : compteur</div>
+<p><span class="scratch-block event">Quand drapeau vert clique</span></p>
+<p><span class="scratch-block var">mettre [compteur] a [0]</span></p>
+<p><span class="scratch-block control">repeter [10] fois</span></p>
+<p style="padding-left:2rem"><span class="scratch-block var">ajouter [1] a [compteur]</span></p>
+<p style="padding-left:2rem"><span class="scratch-block looks">dire (compteur)</span></p>
+</div>
+
+<h2>II. Entrees utilisateur</h2>
+
+<div class="definition"><div class="encadre-titre">Bloc « demander »</div>
+<p>Le bloc « demander [...] et attendre » pose une question a l'utilisateur. La reponse est stockee dans le capteur « reponse ».</p>
+</div>
+
+<h2>III. Blocs personnalises (fonctions)</h2>
+
+<div class="definition"><div class="encadre-titre">Definition</div>
+<p>Un <strong>bloc personnalise</strong> (ou fonction) est un groupe d'instructions auquel on donne un nom. On peut lui associer des <strong>parametres</strong> (entrees). Cela evite de repeter du code et rend le programme plus lisible.</p>
+</div>
+
+<div class="methode"><div class="encadre-titre">Creation</div>
+<p>Menu « Mes blocs », cliquer « Creer un bloc », nommer le bloc (par exemple « calculer aire »), ajouter des parametres si necessaire.</p>
+</div>
+
+<h2>IV. Algorithmes fondamentaux</h2>
+
+<div class="propriete"><div class="encadre-titre">Structures</div>
+<p>Trois structures de base : la <strong>sequence</strong> (instructions les unes apres les autres), la <strong>condition</strong> (si ... alors ... sinon ...), la <strong>boucle</strong> (repeter ... fois, repeter jusqu'a ...).</p>
+</div>
+
+<div class="interactive-box">
+<h4>Simulateur : programme de calcul</h4>
+<canvas id="cvAlgo" width="700" height="300"></canvas>
+<div class="controls">
+<label>Nombre de depart :</label>
+<input type="number" id="inN" value="5">
+<button id="btnRun">Executer</button>
+</div>
+<div class="result-text" id="resAlgo">Programme : prendre un nombre, le multiplier par 3, ajouter 7, multiplier par 2, soustraire 6 fois le nombre de depart.</div>
+</div>
+
+<script>
+(function(){
+var cv=document.getElementById('cvAlgo'),ctx=cv.getContext('2d');
+var inp=document.getElementById('inN'),btn=document.getElementById('btnRun'),res=document.getElementById('resAlgo');
+function run(){
+var n=parseFloat(inp.value)||0;
+ctx.clearRect(0,0,700,300);ctx.fillStyle='#fafafa';ctx.fillRect(0,0,700,300);
+var steps=[
+{label:'Depart',val:n},
+{label:'x 3',val:n*3},
+{label:'+ 7',val:n*3+7},
+{label:'x 2',val:(n*3+7)*2},
+{label:'- 6n',val:(n*3+7)*2-6*n}
+];
+var bw=100,gap=30,ox=40,oy=100;
+for(var i=0;i<steps.length;i++){
+var x=ox+i*(bw+gap);
+// boite
+ctx.fillStyle=i===steps.length-1?'rgba(192,57,43,0.15)':'rgba(42,82,152,0.1)';
+ctx.fillRect(x,oy,bw,60);
+ctx.strokeStyle=i===steps.length-1?'#c0392b':'#2a5298';
+ctx.lineWidth=2;ctx.strokeRect(x,oy,bw,60);
+// label
+ctx.fillStyle='#333';ctx.font='bold 13px Arial';ctx.textAlign='center';
+ctx.fillText(steps[i].label,x+bw/2,oy-10);
+// value
+ctx.fillStyle=i===steps.length-1?'#c0392b':'#2a5298';ctx.font='bold 18px Arial';
+ctx.fillText(steps[i].val,x+bw/2,oy+38);
+// fleche
+if(i<steps.length-1){
+ctx.strokeStyle='#333';ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(x+bw+5,oy+30);ctx.lineTo(x+bw+gap-5,oy+30);ctx.stroke();
+ctx.beginPath();ctx.moveTo(x+bw+gap-10,oy+25);ctx.lineTo(x+bw+gap-5,oy+30);ctx.lineTo(x+bw+gap-10,oy+35);ctx.stroke();
+}
+}
+var final_val=(n*3+7)*2-6*n;
+res.innerHTML='n = '+n+'. Resultat : ('+n+' x 3 + 7) x 2 - 6 x '+n+' = <strong>'+final_val+'</strong>. Conjecture : le resultat est toujours 14, quel que soit n. Preuve : $(3n+7) \\times 2 - 6n = 6n + 14 - 6n = 14$.';
+if(typeof MathJax!=='undefined'&&MathJax.typesetPromise)MathJax.typesetPromise([res]);
+}
+btn.addEventListener('click',run);run()})();
+</script>
+
+<h2>Exercices</h2>
+
+<div class="exercice"><div class="encadre-titre">Exercice 1</div>
+<p>Ecrire un programme Scratch qui demande un nombre a l'utilisateur, calcule son carre, et affiche le resultat.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p><span class="scratch-block event">Quand drapeau vert clique</span></p>
+<p><span class="scratch-block">demander [Quel nombre ?] et attendre</span></p>
+<p><span class="scratch-block var">mettre [resultat] a [(reponse) * (reponse)]</span></p>
+<p><span class="scratch-block looks">dire (regrouper [Le carre est ] et (resultat))</span></p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 2</div>
+<p>Programme de calcul : choisir un nombre, lui ajouter 4, multiplier par le nombre de depart, ajouter 4. Tester avec $n = 3$ et $n = 5$, puis prouver que le resultat est toujours un carre parfait.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>$n = 3$ : $(3+4) \times 3 + 4 = 21 + 4 = 25 = 5^2$. $n = 5$ : $(5+4) \times 5 + 4 = 45 + 4 = 49 = 7^2$.</p>
+<p>Preuve : $(n+4) \times n + 4 = n^2 + 4n + 4 = (n+2)^2$. Le resultat est toujours le carre de $(n+2)$.</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 3</div>
+<p>Ecrire un algorithme qui teste si un nombre entre par l'utilisateur est premier. Decrire les etapes en pseudo-code.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>1. Demander n. 2. Si $n \leq 1$, dire « non premier ». 3. Mettre diviseur a 2, premier a VRAI. 4. Tant que diviseur $\leq \sqrt{n}$ : si le reste de n / diviseur = 0, mettre premier a FAUX. Ajouter 1 a diviseur. 5. Si premier = VRAI, dire « premier », sinon dire « non premier ».</p>
+</div>
+
+<div class="exercice"><div class="encadre-titre">Exercice 4</div>
+<p>Creer un bloc personnalise « perimetre rectangle (L) (l) » qui calcule et affiche $2 \times (L + l)$. Utiliser ce bloc pour afficher le perimetre d'un rectangle de 8 cm sur 5 cm.</p>
+</div>
+
+<div class="corrige"><div class="encadre-titre">Corrige</div>
+<p>Definition du bloc : <span class="scratch-block">definir perimetre rectangle (L) (l)</span></p>
+<p><span class="scratch-block looks">dire (regrouper [Perimetre = ] et ((L + l) * 2))</span></p>
+<p>Appel : <span class="scratch-block">perimetre rectangle (8) (5)</span> affiche « Perimetre = 26 ».</p>
+</div>
+
+</main>
+
+<footer class="site-footer">M.V. . Cours de mathematiques . 2012-2026</footer>
+</body>
+</html>
